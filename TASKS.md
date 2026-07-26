@@ -40,6 +40,13 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 - [hecho] B1. Instalar Lenis (smooth scroll global) en el layout raíz
 - [hecho] B2. Hero → micro-animación de entrada con Motion (fade/slide de
       H1, subtítulo, botón)
+
+- [ ] B2.5. Hero — diagrama SVG de 4 nodos en loop circular ("Infraestructura
+         Comercial" en el centro), conectados por paths curvos. Efecto de luz
+         viajando en bucle infinito sobre el trazado (GSAP, repeat: -1, ease: none),
+         no una animación de una sola vez. Se activa al cargar la página, después
+         de la animación de texto del Hero (B2).
+               
 - [hecho] B3. "El problema" → Motion simple, aparece con `whileInView`
 - [hecho] B4. "La solución" → Motion, mismo patrón que B3
 - [SIGUIENTE] B5. "Educación del concepto" → GSAP + ScrollTrigger + SplitText
