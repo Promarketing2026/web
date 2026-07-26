@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Animación de "El problema" (B3) completada. Próximo paso: animación de "La solución" (B4).
+Animación de "La solución" (B4) completada. Próximo paso: Educación con GSAP (B5).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,8 +41,8 @@ Animación de "El problema" (B3) completada. Próximo paso: animación de "La so
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se agregó Motion a la sección "El problema" con `whileInView`.
-El título y el párrafo principal entran una sola vez con fade y slide sutil desde abajo.
-B3 queda completada; B4 animación de "La solución" pasa a ser la siguiente tarea.
+2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
+Título, párrafos y dimensiones entran con fade/slide; la lista de dimensiones usa `staggerChildren`.
+B4 queda completada; B5 Educación con GSAP pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

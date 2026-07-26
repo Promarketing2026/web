@@ -1,3 +1,9 @@
+"use client";
+
+import { motion } from "motion/react";
+
+import { fadeUpVariant } from "@/lib/animations";
+
 const auditDimensions = [
   "Claridad",
   "Lógica",
@@ -5,6 +11,9 @@ const auditDimensions = [
   "Relación",
   "Optimización",
 ];
+
+const solutionItem = fadeUpVariant();
+const dimensionItem = fadeUpVariant({ y: 16, duration: 0.45 });
 
 export function Solution() {
   return (
@@ -15,51 +24,107 @@ export function Solution() {
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-12">
         <div className="max-w-3xl space-y-6">
-          <h2
+          <motion.h2
             id="solution-title"
             className="text-3xl leading-tight font-semibold text-foreground sm:text-4xl"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
           >
             Diagnosticamos antes de intervenir.
-          </h2>
-          <p className="text-lg leading-8 text-muted-foreground">
+          </motion.h2>
+          <motion.p
+            className="text-lg leading-8 text-muted-foreground"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.12}
+          >
             La intervención de Promarketing nunca empieza ejecutando tácticas o
             campañas, sino diagnosticando la arquitectura comercial.
-          </p>
-          <p className="text-lg leading-8 text-muted-foreground">
+          </motion.p>
+          <motion.p
+            className="text-lg leading-8 text-muted-foreground"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.24}
+          >
             El método principal para esto es la Auditoría C.L.A.R.O., que evalúa
             cinco dimensiones.
-          </p>
+          </motion.p>
         </div>
 
-        <ul aria-label="Dimensiones de la Auditoría C.L.A.R.O." className="max-w-3xl border-t border-border">
+        <motion.ul
+          aria-label="Dimensiones de la Auditoría C.L.A.R.O."
+          className="max-w-3xl border-t border-border"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
           {auditDimensions.map((dimension) => (
-            <li
+            <motion.li
               key={dimension}
               className="border-b border-border py-4 text-lg font-medium text-foreground"
+              variants={dimensionItem}
+              custom={0}
             >
               {dimension}
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <div className="max-w-3xl space-y-8">
-          <p className="text-lg leading-8 text-muted-foreground">
+          <motion.p
+            className="text-lg leading-8 text-muted-foreground"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+          >
             A través de esta auditoría, Promarketing mapea tu operación real
             para identificar las fricciones, las pérdidas de información y las
             desconexiones exactas entre tus herramientas, el equipo de marketing
             y el de ventas.
-          </p>
-          <p className="text-lg leading-8 text-muted-foreground">
+          </motion.p>
+          <motion.p
+            className="text-lg leading-8 text-muted-foreground"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.12}
+          >
             Una vez hecho el diagnóstico y conectada la infraestructura, el
             resultado tangible que recibes es un ecosistema digital integrado,
             medible y ordenado.
-          </p>
-          <p className="text-2xl leading-tight font-semibold text-foreground sm:text-3xl">
+          </motion.p>
+          <motion.p
+            className="text-2xl leading-tight font-semibold text-foreground sm:text-3xl"
+            variants={solutionItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.24}
+          >
             El mayor valor de esta entrega es la independencia operativa:
             obtienes un sistema que tu equipo comprende, puede auditar y logra
             sostener por sí mismo, sin depender permanentemente de Promarketing
             para que funcione.
-          </p>
+          </motion.p>
         </div>
       </div>
     </section>
