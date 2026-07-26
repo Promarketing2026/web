@@ -23,7 +23,7 @@
 - Layout de texto + posible ilustración simple
 - Sin animación todavía
 
-## [SIGUIENTE] 5. Componente "Educación del concepto" (bloque 3 — el diferenciador)
+## [hecho] 5. Componente "Educación del concepto" (bloque 3 — el diferenciador)
 - Estructura de scroll-story (texto que se revela con el scroll)
 - Integrar GSAP + ScrollTrigger + SplitText aquí
 - Este es el bloque más complejo — dividir en sub-tareas cuando se llegue
@@ -33,7 +33,7 @@
 - Cinco dimensiones en elementos individuales, preparadas para animación futura
 - Sin animación en esta fase
 
-## 7. Instalar Lenis (smooth scroll global)
+## [SIGUIENTE] 7. Instalar Lenis (smooth scroll global)
 - Configurar en el layout raíz
 - Verificar que no rompe el comportamiento de ScrollTrigger (requiere sincronizar ambos)
 

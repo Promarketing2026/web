@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sección "La solución" (A6) completada. Próximo paso: Educación del concepto (A5).
+Sección "Educación del concepto" (A5) completada. Próximo paso: instalar Lenis.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Sección "La solución" (A6) completada. Próximo paso: Educación del concepto 
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó la sección estática "La solución" con el contenido de la Auditoría C.L.A.R.O.
-Las cinco dimensiones son elementos de lista independientes, listos para animarse individualmente más adelante.
-Se corrigió el orden de tareas: A5 Educación del concepto queda pendiente y A6 La solución queda completada.
+2026-07-26 — Se creó la sección estática "Educación del concepto" con sus dos párrafos y frase de cierre.
+Cada párrafo se renderiza como un elemento de DOM independiente, preparado para una animación futura con GSAP ScrollTrigger.
+Se mantuvo sin animación ni dependencias nuevas; A5 queda completada y Lenis pasa a ser la siguiente tarea.

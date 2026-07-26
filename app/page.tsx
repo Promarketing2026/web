@@ -1,3 +1,4 @@
+import { Education } from "@/components/education";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
 import { Solution } from "@/components/solution";
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Hero />
       <Problem />
+      <Education />
       <Solution />
     </>
   );
