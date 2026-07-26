@@ -10,7 +10,7 @@ const navItems = [
 
 export function Navbar() {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 px-6 sm:px-10">
+    <div className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 px-6 backdrop-blur-md sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
         <a
           href="#inicio"

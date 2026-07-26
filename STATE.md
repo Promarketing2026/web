@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Animación de "La solución" (B4) completada. Próximo paso: Educación con GSAP (B5).
+Sistema visual B4.5 completado. Próximo paso: Educación con GSAP (B5).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,8 +41,8 @@ Animación de "La solución" (B4) completada. Próximo paso: Educación con GSAP
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
-Título, párrafos y dimensiones entran con fade/slide; la lista de dimensiones usa `staggerChildren`.
-B4 queda completada; B5 Educación con GSAP pasa a ser la siguiente tarea.
+2026-07-26 — Se agregó jerarquía visual alternada: "La solución" y CTA final pasan a bloques centrados oscuros.
+Se definió `.section-dark` con tokens neutros invertidos y separadores tipo muesca con `clip-path`.
+B4.5 queda completada; B5 Educación con GSAP sigue siendo la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

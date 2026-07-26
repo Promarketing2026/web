@@ -41,7 +41,7 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 - [hecho] B2. Hero → micro-animación de entrada con Motion (fade/slide de
       H1, subtítulo, botón)
 
-- [ ] B2.5. Hero — diagrama SVG de 4 nodos en loop circular ("Infraestructura
+- [hecho] B2.5. Hero — diagrama SVG de 4 nodos en loop circular ("Infraestructura
          Comercial" en el centro), conectados por paths curvos. Efecto de luz
          viajando en bucle infinito sobre el trazado (GSAP, repeat: -1, ease: none),
          no una animación de una sola vez. Se activa al cargar la página, después
@@ -49,6 +49,13 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
                
 - [hecho] B3. "El problema" → Motion simple, aparece con `whileInView`
 - [hecho] B4. "La solución" → Motion, mismo patrón que B3
+
+- [hecho] B4.5. Sistema de jerarquía visual: (1) alternar alineación entre
+      secciones (columna dividida vs. bloque centrado), (2) separadores
+      tipo "muesca" con clip-path entre secciones, (3) definir variante
+      de sección oscura invirtiendo tokens neutros existentes
+      (--background/--foreground), aplicar a 2-3 secciones alternadas
+
 - [SIGUIENTE] B5. "Educación del concepto" → GSAP + ScrollTrigger + SplitText
       (el bloque más complejo — dividir en sub-tareas cuando se llegue)
 - [ ] B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente

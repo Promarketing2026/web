@@ -7,9 +7,9 @@ export function FinalCta() {
     <section
       id="contacto"
       aria-labelledby="final-cta-title"
-      className="scroll-mt-16 border-t border-border bg-muted/40 px-6 py-24 sm:px-10 sm:py-32"
+      className="section-dark section-notch-top scroll-mt-16 px-6 py-28 sm:px-10 sm:py-36"
     >
-      <div className="mx-auto flex max-w-5xl flex-col items-start gap-8">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
         <h2
           id="final-cta-title"
           className="max-w-4xl text-3xl leading-tight font-semibold text-foreground sm:text-4xl"

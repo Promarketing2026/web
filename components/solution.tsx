@@ -20,10 +20,10 @@ export function Solution() {
     <section
       id="solucion"
       aria-labelledby="solution-title"
-      className="scroll-mt-16 px-6 py-24 sm:px-10 sm:py-32"
+      className="section-dark section-notch-both scroll-mt-16 px-6 py-28 sm:px-10 sm:py-36"
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-12">
-        <div className="max-w-3xl space-y-6">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-12 text-center">
+        <div className="mx-auto max-w-3xl space-y-6">
           <motion.h2
             id="solution-title"
             className="text-3xl leading-tight font-semibold text-foreground sm:text-4xl"
@@ -61,7 +61,7 @@ export function Solution() {
 
         <motion.ul
           aria-label="Dimensiones de la Auditoría C.L.A.R.O."
-          className="max-w-3xl border-t border-border"
+          className="w-full max-w-3xl border-t border-border"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
