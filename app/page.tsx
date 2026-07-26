@@ -1,6 +1,7 @@
 import { Education } from "@/components/education";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
+import { SocialProof } from "@/components/social-proof";
 import { Solution } from "@/components/solution";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Problem />
       <Education />
       <Solution />
+      <SocialProof />
     </>
   );
 }

@@ -33,21 +33,33 @@
 - Cinco dimensiones en elementos individuales, preparadas para animación futura
 - Sin animación en esta fase
 
-## [SIGUIENTE] 7. Instalar Lenis (smooth scroll global)
-- Configurar en el layout raíz
-- Verificar que no rompe el comportamiento de ScrollTrigger (requiere sincronizar ambos)
+## [hecho] A7. Componente "Prueba social" (bloque 5)
+- Caso de éxito con cifras
+- Estructura estática primero
 
-## 8. Formulario de contacto
+## [SIGUIENTE] A8. Componente "Objeciones/FAQ" (bloque 6)
+- FAQ corto
+- Estructura estática primero
+
+## A9. CTA final (bloque 7)
+- Estructura estática primero
+
+## A10. Formulario de contacto
 - Server Action de Next.js
 - Conexión a HubSpot Forms API (requiere API key de HubSpot — pendiente que el usuario la genere)
 
-## 9. Setup de Sanity
+## A11. Setup de Sanity
 - `pnpm create sanity@latest`
 - Definir schema mínimo: artículo de blog, término de glosario, caso de éxito
 
 ---
+## Fase B (no empezar hasta completar la Fase A)
+## B1. Instalar Lenis (smooth scroll global)
+- Configurar en el layout raíz
+- Verificar que no rompe el comportamiento de ScrollTrigger (requiere sincronizar ambos)
+
+---
 ## Backlog (no empezar aún)
-- Componentes "Solución", "Prueba social", "Objeciones/FAQ", "CTA final"
 - Páginas de servicio individuales
 - Glosario (colección completa)
 - SEO técnico: sitemap.xml, robots.txt, JSON-LD, llms.txt

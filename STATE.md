@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sección "Educación del concepto" (A5) completada. Próximo paso: instalar Lenis.
+Sección "Prueba social" (A7) completada. Próximo paso: Objeciones/FAQ (A8).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Sección "Educación del concepto" (A5) completada. Próximo paso: instalar Leni
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó la sección estática "Educación del concepto" con sus dos párrafos y frase de cierre.
-Cada párrafo se renderiza como un elemento de DOM independiente, preparado para una animación futura con GSAP ScrollTrigger.
-Se mantuvo sin animación ni dependencias nuevas; A5 queda completada y Lenis pasa a ser la siguiente tarea.
+2026-07-26 — Se creó la prueba social estática del caso EMILIMA con situación, intervención y resultado.
+El resultado se presenta como una tarjeta de estadística con la conversión lograda y su contexto anterior.
+A7 queda completada; A8 es la siguiente tarea y B1 Lenis sigue pendiente hasta completar la Fase A.
