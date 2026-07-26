@@ -1,11 +1,13 @@
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
+import { Solution } from "@/components/solution";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Problem />
+      <Solution />
     </>
   );
 }

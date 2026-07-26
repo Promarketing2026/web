@@ -28,15 +28,20 @@
 - Integrar GSAP + ScrollTrigger + SplitText aquí
 - Este es el bloque más complejo — dividir en sub-tareas cuando se llegue
 
-## 6. Instalar Lenis (smooth scroll global)
+## [hecho] 6. Componente "La solución" (bloque 4)
+- Estructura estática de la Auditoría C.L.A.R.O.
+- Cinco dimensiones en elementos individuales, preparadas para animación futura
+- Sin animación en esta fase
+
+## 7. Instalar Lenis (smooth scroll global)
 - Configurar en el layout raíz
 - Verificar que no rompe el comportamiento de ScrollTrigger (requiere sincronizar ambos)
 
-## 7. Formulario de contacto
+## 8. Formulario de contacto
 - Server Action de Next.js
 - Conexión a HubSpot Forms API (requiere API key de HubSpot — pendiente que el usuario la genere)
 
-## 8. Setup de Sanity
+## 9. Setup de Sanity
 - `pnpm create sanity@latest`
 - Definir schema mínimo: artículo de blog, término de glosario, caso de éxito
 

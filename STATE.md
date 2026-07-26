@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sección "El problema" completada. Próximo paso: Educación del concepto.
+Sección "La solución" (A6) completada. Próximo paso: Educación del concepto (A5).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Sección "El problema" completada. Próximo paso: Educación del concepto.
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó la sección estática "El problema" con su título, cuerpo y frase de cierre destacada.
-Se integró como banda visual neutra después del Hero, usando los tokens CSS existentes.
-No se añadieron animaciones ni dependencias de scroll; ese trabajo queda reservado para Educación del concepto.
+2026-07-26 — Se creó la sección estática "La solución" con el contenido de la Auditoría C.L.A.R.O.
+Las cinco dimensiones son elementos de lista independientes, listos para animarse individualmente más adelante.
+Se corrigió el orden de tareas: A5 Educación del concepto queda pendiente y A6 La solución queda completada.
