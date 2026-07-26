@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sección "Objeciones/FAQ" (A8) completada. Próximo paso: CTA final (A9).
+CTA final (A9) completado. Próximo paso: Formulario de contacto (A10).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Sección "Objeciones/FAQ" (A8) completada. Próximo paso: CTA final (A9).
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó la sección FAQ estática con cuatro preguntas y respuestas sobre la intervención de Promarketing.
-Cada pregunta y respuesta se renderiza en elementos de DOM separados, preparados para animación futura y marcado FAQPage.
-No se añadió JSON-LD todavía; queda reservado para la tarea de SEO técnico. A9 CTA final es la siguiente tarea.
+2026-07-26 — Se creó el CTA final estático con la frase de cierre, botón y micro-copy definidos.
+Reutiliza el componente `Button` de shadcn/ui y la misma configuración visual del CTA del Hero.
+A9 queda completada; A10 Formulario de contacto pasa a ser la siguiente tarea de la Fase A.

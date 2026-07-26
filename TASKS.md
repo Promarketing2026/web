@@ -41,10 +41,10 @@
 - FAQ corto
 - Estructura estática primero
 
-## [SIGUIENTE] A9. CTA final (bloque 7)
+## [hecho] A9. CTA final (bloque 7)
 - Estructura estática primero
 
-## A10. Formulario de contacto
+## [SIGUIENTE] A10. Formulario de contacto
 - Server Action de Next.js
 - Conexión a HubSpot Forms API (requiere API key de HubSpot — pendiente que el usuario la genere)
 
