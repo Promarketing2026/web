@@ -19,11 +19,11 @@
 - Copy: placeholder hasta tener texto real
 - Luego: micro-animación de entrada con Motion
 
-## [SIGUIENTE] 4. Componente "El problema" (bloque 2)
+## [hecho] 4. Componente "El problema" (bloque 2)
 - Layout de texto + posible ilustración simple
 - Sin animación todavía
 
-## 5. Componente "Educación del concepto" (bloque 3 — el diferenciador)
+## [SIGUIENTE] 5. Componente "Educación del concepto" (bloque 3 — el diferenciador)
 - Estructura de scroll-story (texto que se revela con el scroll)
 - Integrar GSAP + ScrollTrigger + SplitText aquí
 - Este es el bloque más complejo — dividir en sub-tareas cuando se llegue

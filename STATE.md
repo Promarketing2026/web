@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Hero estático completado. Próximo paso: componente "El problema".
+Sección "El problema" completada. Próximo paso: Educación del concepto.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Hero estático completado. Próximo paso: componente "El problema".
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó el Hero estático con el H1, subtítulo, CTA y micro-copy definidos.
-El CTA usa el botón de shadcn/ui y enlaza a la futura ancla `#contacto`.
-No se añadió animación; los estilos usan los tokens neutros existentes y el componente es reutilizable.
+2026-07-26 — Se creó la sección estática "El problema" con su título, cuerpo y frase de cierre destacada.
+Se integró como banda visual neutra después del Hero, usando los tokens CSS existentes.
+No se añadieron animaciones ni dependencias de scroll; ese trabajo queda reservado para Educación del concepto.
