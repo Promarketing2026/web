@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Footer (A11) completado. Próximo paso: Lenis global (B1).
+Lenis global (B1) completado. Próximo paso: Hero con Motion (B2).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,8 +41,8 @@ Footer (A11) completado. Próximo paso: Lenis global (B1).
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó el Footer estático con contacto, WhatsApp, ubicación, redes sociales y copyright.
-Todos los enlaces externos del Footer abren en nueva pestaña con `noopener noreferrer`.
-A11 queda completada; B1 Lenis global pasa a ser la siguiente tarea.
+2026-07-26 — Se configuró Lenis global en un componente cliente que envuelve el contenido principal.
+El smooth scroll usa `requestAnimationFrame` y el CSS base de Lenis importado en `globals.css`.
+B1 queda completada; B2 Hero con Motion pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
