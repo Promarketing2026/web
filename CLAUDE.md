@@ -1,0 +1,27 @@
+# Instrucciones para cualquier agente (Codex, Claude Code, u otro)
+
+Antes de escribir una sola línea de código:
+
+1. Lee `STATE.md` completo — ahí está el stack, las decisiones de diseño y qué
+   fase del proyecto es.
+2. Lee `TASKS.md` y trabaja SOLO en la tarea marcada `[SIGUIENTE]`. No hagas
+   tareas del backlog ni adelantes pasos futuros sin que se te pida.
+3. No preguntes por contexto que ya está en estos dos archivos. Si algo no
+   está cubierto, pregunta específicamente eso, no pidas "el contexto completo".
+
+## Reglas fijas del proyecto (no negociables sin aprobación explícita)
+- No usar daisyUI (ya se decidió shadcn/ui + Radix, son sistemas incompatibles).
+- No usar el paquete `framer-motion` — usar `motion/react`.
+- No usar colores hardcodeados. Todo color va en variables CSS/Tailwind config,
+  incluso los placeholders neutros temporales.
+- No inventar ni sugerir una paleta de marca final — está pendiente a propósito.
+- pnpm como gestor de paquetes, no npm ni yarn.
+
+## Al terminar una tarea
+1. Verifica que el proyecto sigue corriendo (`pnpm dev` sin errores).
+2. Actualiza `STATE.md`: mueve la fecha, agrega 2-3 líneas de qué se hizo.
+3. Marca la tarea como `[hecho]` en `TASKS.md` y marca la siguiente como `[SIGUIENTE]`.
+4. Haz commit con mensaje corto y descriptivo.
+
+No hace falta explicar el proyecto de nuevo en cada sesión — estos archivos
+son la única fuente de verdad.
