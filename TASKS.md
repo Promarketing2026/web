@@ -40,8 +40,8 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 - [hecho] B1. Instalar Lenis (smooth scroll global) en el layout raíz
 - [hecho] B2. Hero → micro-animación de entrada con Motion (fade/slide de
       H1, subtítulo, botón)
-- [SIGUIENTE] B3. "El problema" → Motion simple, aparece con `whileInView`
-- [ ] B4. "La solución" → Motion, mismo patrón que B3
+- [hecho] B3. "El problema" → Motion simple, aparece con `whileInView`
+- [SIGUIENTE] B4. "La solución" → Motion, mismo patrón que B3
 - [ ] B5. "Educación del concepto" → GSAP + ScrollTrigger + SplitText
       (el bloque más complejo — dividir en sub-tareas cuando se llegue)
 - [ ] B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente

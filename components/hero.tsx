@@ -4,19 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
+import { fadeUpVariant } from "@/lib/animations";
 
-const heroItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay,
-      duration: 0.55,
-      ease: "easeOut",
-    },
-  }),
-};
+const heroItem = fadeUpVariant();
 
 export function Hero() {
   return (

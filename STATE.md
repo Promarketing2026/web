@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Hero con Motion (B2) completado. Próximo paso: animación de "El problema" (B3).
+Animación de "El problema" (B3) completada. Próximo paso: animación de "La solución" (B4).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,8 +41,8 @@ Hero con Motion (B2) completado. Próximo paso: animación de "El problema" (B3)
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se agregó la animación de entrada del Hero con `motion/react`.
-H1, subtítulo, CTA y micro-copy entran una sola vez con fade y slide desde abajo, en secuencia escalonada.
-B2 queda completada; B3 animación de "El problema" pasa a ser la siguiente tarea.
+2026-07-26 — Se agregó Motion a la sección "El problema" con `whileInView`.
+El título y el párrafo principal entran una sola vez con fade y slide sutil desde abajo.
+B3 queda completada; B4 animación de "La solución" pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

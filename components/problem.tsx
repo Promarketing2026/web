@@ -1,3 +1,11 @@
+"use client";
+
+import { motion } from "motion/react";
+
+import { fadeUpVariant } from "@/lib/animations";
+
+const problemItem = fadeUpVariant({ y: 18, duration: 0.5 });
+
 export function Problem() {
   return (
     <section
@@ -6,13 +14,25 @@ export function Problem() {
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
         <div className="max-w-3xl space-y-6">
-          <h2
+          <motion.h2
             id="problem-title"
             className="text-3xl leading-tight font-semibold text-foreground sm:text-4xl"
+            variants={problemItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
           >
             No ejecutamos actividad táctica aislada.
-          </h2>
-          <p className="text-lg leading-8 text-muted-foreground">
+          </motion.h2>
+          <motion.p
+            className="text-lg leading-8 text-muted-foreground"
+            variants={problemItem}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0.12}
+          >
             El problema más común que enfrentan no es la falta de publicidad o
             de herramientas, sino la fragmentación operativa y la desconexión
             estructural. En la práctica, esto significa que las organizaciones
@@ -22,7 +42,7 @@ export function Problem() {
             separados, los datos se dispersan, se pierde la trazabilidad de qué
             acciones generan ventas reales y las decisiones se terminan tomando
             con información incompleta.
-          </p>
+          </motion.p>
         </div>
 
         <p className="max-w-3xl text-2xl leading-tight font-semibold text-foreground sm:text-3xl">
