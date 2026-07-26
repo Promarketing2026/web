@@ -4,12 +4,12 @@
 > futuras. Al terminar, mover el check a `[hecho]` y actualizar STATE.md.
 > Una tarea = un componente o una configuración, nunca "la página completa".
 
-## [SIGUIENTE] 1. Inicializar el proyecto
+## [hecho] 1. Inicializar el proyecto
 - `pnpm create next-app@latest` (App Router, TypeScript, Tailwind, sí a todo lo estándar)
 - Instalar shadcn/ui: `pnpm dlx shadcn@latest init`
 - Confirmar que el proyecto corre en local (`pnpm dev`)
 
-## 2. Layout base
+## [SIGUIENTE] 2. Layout base
 - Crear `app/layout.tsx` con estructura mínima (header vacío, footer vacío, main)
 - Configurar fuente (definir cuál — pendiente de BRAND.md)
 - Variables CSS placeholder en `globals.css` (colores neutros temporales)

@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Planificación completada. Aún no hay código escrito. Próximo paso: `npx create-next-app`.
+Proyecto Next.js inicializado. Próximo paso: layout base.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,4 +41,6 @@ Planificación completada. Aún no hay código escrito. Próximo paso: `npx crea
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Creación inicial del archivo, fin de fase de planificación.
+2026-07-26 — Se inicializó Next.js 16 con App Router, TypeScript, Tailwind v4 y pnpm.
+Se instaló e inicializó shadcn/ui con Radix UI (`radix-nova`) y base neutral.
+`pnpm dev` arrancó correctamente; Next usó `http://localhost:3001` porque el puerto 3000 estaba ocupado.
