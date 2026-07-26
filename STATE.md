@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-B5a (SVG estático de Educación) completada. Próximo paso: Educación con GSAP (B5b).
+B5b (Educación con GSAP ScrollTrigger) completada. Próximo paso: Motion en bloques finales (B6).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -45,6 +45,7 @@ B5a (SVG estático de Educación) completada. Próximo paso: Educación con GSAP
 Título, párrafos y dimensiones entran con fade/slide; la lista de dimensiones usa `staggerChildren`.
 B4.5 agregó alternancia de secciones, separadores tipo muesca y variante `.section-dark` para secciones oscuras.
 B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y resultado medible.
-B5b Educación con GSAP pasa a ser la siguiente tarea.
+B5b agregó `ScrollTrigger` con pin, scrub y crossfade entre las 3 etapas del SVG durante `+=200%`.
+B6 Motion en Prueba social, Objeciones y CTA final pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

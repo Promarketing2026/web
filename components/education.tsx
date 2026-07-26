@@ -1,8 +1,54 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { EducationInfrastructureDiagram } from "@/components/education-infrastructure-diagram";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Education() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) {
+      return;
+    }
+
+    const context = gsap.context(() => {
+      const stages = gsap.utils.toArray<SVGGElement>("[data-education-stage]");
+
+      gsap.set(stages, { opacity: 0 });
+      gsap.set(stages[0], { opacity: 1 });
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=200%",
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      timeline
+        .to(stages[0], { opacity: 0, duration: 0.5, ease: "none" }, 0)
+        .to(stages[1], { opacity: 1, duration: 0.5, ease: "none" }, 0)
+        .to(stages[1], { opacity: 0, duration: 0.5, ease: "none" }, 0.5)
+        .to(stages[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5);
+    }, section);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       aria-labelledby="education-title"
       className="px-6 py-24 sm:px-10 sm:py-32"
     >

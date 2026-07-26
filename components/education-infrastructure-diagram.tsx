@@ -49,7 +49,7 @@ export function EducationInfrastructureDiagram() {
       >
         <title>De la fragmentación a la infraestructura conectada</title>
 
-        <g aria-label="Etapa 1: El problema">
+        <g aria-label="Etapa 1: El problema" data-education-stage="1">
           <text
             x="150"
             y="34"
@@ -103,7 +103,7 @@ export function EducationInfrastructureDiagram() {
           />
         </g>
 
-        <g aria-label="Etapa 2: La solución">
+        <g aria-label="Etapa 2: La solución" data-education-stage="2">
           <text
             x="480"
             y="34"
@@ -132,7 +132,7 @@ export function EducationInfrastructureDiagram() {
           ))}
         </g>
 
-        <g aria-label="Etapa 3: El resultado">
+        <g aria-label="Etapa 3: El resultado" data-education-stage="3">
           <text
             x="800"
             y="34"
