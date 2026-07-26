@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sección "Prueba social" (A7) completada. Próximo paso: Objeciones/FAQ (A8).
+Sección "Objeciones/FAQ" (A8) completada. Próximo paso: CTA final (A9).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Sección "Prueba social" (A7) completada. Próximo paso: Objeciones/FAQ (A8).
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó la prueba social estática del caso EMILIMA con situación, intervención y resultado.
-El resultado se presenta como una tarjeta de estadística con la conversión lograda y su contexto anterior.
-A7 queda completada; A8 es la siguiente tarea y B1 Lenis sigue pendiente hasta completar la Fase A.
+2026-07-26 — Se creó la sección FAQ estática con cuatro preguntas y respuestas sobre la intervención de Promarketing.
+Cada pregunta y respuesta se renderiza en elementos de DOM separados, preparados para animación futura y marcado FAQPage.
+No se añadió JSON-LD todavía; queda reservado para la tarea de SEO técnico. A9 CTA final es la siguiente tarea.

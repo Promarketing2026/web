@@ -1,4 +1,5 @@
 import { Education } from "@/components/education";
+import { Faq } from "@/components/faq";
 import { Hero } from "@/components/hero";
 import { Problem } from "@/components/problem";
 import { SocialProof } from "@/components/social-proof";
@@ -12,6 +13,7 @@ export default function Home() {
       <Education />
       <Solution />
       <SocialProof />
+      <Faq />
     </>
   );
 }

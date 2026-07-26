@@ -37,11 +37,11 @@
 - Caso de éxito con cifras
 - Estructura estática primero
 
-## [SIGUIENTE] A8. Componente "Objeciones/FAQ" (bloque 6)
+## [hecho] A8. Componente "Objeciones/FAQ" (bloque 6)
 - FAQ corto
 - Estructura estática primero
 
-## A9. CTA final (bloque 7)
+## [SIGUIENTE] A9. CTA final (bloque 7)
 - Estructura estática primero
 
 ## A10. Formulario de contacto
