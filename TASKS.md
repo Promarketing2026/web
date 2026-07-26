@@ -26,10 +26,13 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 - [ ] A7. Componente "Prueba social" / caso de éxito — estático
 - [ ] A8. Componente "Objeciones / FAQ" — estático
 - [ ] A9. Componente "CTA final" — estático
-- [ ] A10. Formulario de contacto (Server Action + HubSpot Forms API —
-      requiere API key de HubSpot, pendiente que el usuario la genere)
-- [ ] A11. Setup de Sanity (`pnpm create sanity@latest`, schema mínimo:
-      artículo de blog, término de glosario, caso de éxito)
+- [ ] A10. Navbar (fijo arriba, fuera de la narrativa de scroll) — logo,
+      anchors a secciones clave (Servicios/Solución, Recursos, Contacto),
+      botón "Solicitar Auditoría C.L.A.R.O." también aquí, sin animación
+- [ ] A11. Footer — Contacto, Sobre nosotros, Legal/redes (ver sitemap
+      original), sin animación
+- (A12 y A13 se movieron después de Fase B — no afectan la narrativa
+  animable, así que no bloquean el avance a las animaciones. Ver abajo.)
 
 ## FASE B — Animación (no empezar hasta terminar TODA la Fase A)
 
@@ -45,8 +48,20 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 - [ ] B7. Verificar que Lenis no rompe ScrollTrigger (requiere sincronizar
       ambos — es un paso técnico conocido, no improvisar)
 
+## DESPUÉS DE FASE B (retomar cuando se tenga la API key de HubSpot)
+
+- [ ] A12. Formulario de contacto (Server Action + HubSpot Forms API —
+      requiere API key de HubSpot, pendiente que el usuario la genere)
+- [ ] A13. Setup de Sanity (`pnpm create sanity@latest`, schema mínimo:
+      artículo de blog, término de glosario, caso de éxito)
+
 ---
 ## Backlog (no empezar aún)
-- Páginas de servicio individuales
+- Páginas de servicio individuales — CONTENIDO YA DISPONIBLE: los 7 sistemas
+  de la oferta (Diseño y Gestión de Marca, Infraestructura Web, Ecommerce y
+  Conversión, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial, Tracking
+  y Trazabilidad), implementados en orden lógico según evidencia de la
+  Auditoría C.L.A.R.O. — pendiente de estructurar cuando se planifiquen
+  estas páginas.
 - Glosario (colección completa)
 - SEO técnico: sitemap.xml, robots.txt, JSON-LD, llms.txt
