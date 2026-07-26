@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 export function FinalCta() {
   return (
     <section
+      id="contacto"
       aria-labelledby="final-cta-title"
-      className="border-t border-border bg-muted/40 px-6 py-24 sm:px-10 sm:py-32"
+      className="scroll-mt-16 border-t border-border bg-muted/40 px-6 py-24 sm:px-10 sm:py-32"
     >
       <div className="mx-auto flex max-w-5xl flex-col items-start gap-8">
         <h2

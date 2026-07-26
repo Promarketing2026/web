@@ -8,7 +8,11 @@ const auditDimensions = [
 
 export function Solution() {
   return (
-    <section aria-labelledby="solution-title" className="px-6 py-24 sm:px-10 sm:py-32">
+    <section
+      id="solucion"
+      aria-labelledby="solution-title"
+      className="scroll-mt-16 px-6 py-24 sm:px-10 sm:py-32"
+    >
       <div className="mx-auto flex max-w-5xl flex-col gap-12">
         <div className="max-w-3xl space-y-6">
           <h2

@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="px-6 py-24 sm:px-10 sm:py-32">
+    <section
+      id="inicio"
+      aria-labelledby="hero-title"
+      className="px-6 pt-40 pb-24 sm:px-10 sm:pt-48 sm:pb-32"
+    >
       <div className="mx-auto flex max-w-5xl flex-col items-start gap-8">
         <div className="max-w-4xl space-y-6">
           <h1

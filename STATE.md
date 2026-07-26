@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-CTA final (A9) completado. Próximo paso: Formulario de contacto (A10).
+Footer (A11) completado. Próximo paso: Lenis global (B1).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,8 @@ CTA final (A9) completado. Próximo paso: Formulario de contacto (A10).
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se creó el CTA final estático con la frase de cierre, botón y micro-copy definidos.
-Reutiliza el componente `Button` de shadcn/ui y la misma configuración visual del CTA del Hero.
-A9 queda completada; A10 Formulario de contacto pasa a ser la siguiente tarea de la Fase A.
+2026-07-26 — Se creó el Footer estático con contacto, WhatsApp, ubicación, redes sociales y copyright.
+Todos los enlaces externos del Footer abren en nueva pestaña con `noopener noreferrer`.
+A11 queda completada; B1 Lenis global pasa a ser la siguiente tarea.
+## Dependencias de Fase B
+Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
