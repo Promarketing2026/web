@@ -1,3 +1,5 @@
+import { EducationInfrastructureDiagram } from "@/components/education-infrastructure-diagram";
+
 export function Education() {
   return (
     <section
@@ -29,6 +31,7 @@ export function Education() {
             parcial.
           </p>
         </div>
+        <EducationInfrastructureDiagram />
       </div>
     </section>
   );

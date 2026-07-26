@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-B4.5 (jerarquía visual: alternancia, muescas, secciones oscuras) completada. Próximo paso: Educación con GSAP (B5).
+B5a (SVG estático de Educación) completada. Próximo paso: Educación con GSAP (B5b).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -44,6 +44,7 @@ B4.5 (jerarquía visual: alternancia, muescas, secciones oscuras) completada. Pr
 2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
 Título, párrafos y dimensiones entran con fade/slide; la lista de dimensiones usa `staggerChildren`.
 B4.5 agregó alternancia de secciones, separadores tipo muesca y variante `.section-dark` para secciones oscuras.
-B4 queda completada; B5 Educación con GSAP pasa a ser la siguiente tarea.
+B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y resultado medible.
+B5b Educación con GSAP pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
