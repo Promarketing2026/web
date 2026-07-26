@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Database, Megaphone, TrendingUp, Zap } from "lucide-react";
 import gsap from "gsap";
 
@@ -21,19 +21,31 @@ const connectorPaths = [
   "M 70 150 C 70 88 118 48 200 48",
 ];
 
+const nodeDescriptions = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
+  "Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+  "Duis aute irure dolor in reprehenderit in voluptate velit.",
+];
+
 export function HeroInfrastructureDiagram() {
+  const [activeNodeIndex, setActiveNodeIndex] = useState(0);
   const lightPathRef = useRef<SVGPathElement>(null);
   const glowPointRef = useRef<SVGCircleElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const activeNodeIndexRef = useRef(0);
 
   useEffect(() => {
     const lightPath = lightPathRef.current;
     const glowPoint = glowPointRef.current;
+    const description = descriptionRef.current;
 
-    if (!lightPath || !glowPoint) {
+    if (!lightPath || !glowPoint || !description) {
       return;
     }
 
     const pathLength = lightPath.getTotalLength();
+    const segmentLength = pathLength / nodes.length;
     const lightLength = 88;
     const progress = { distance: 0 };
 
@@ -46,6 +58,37 @@ export function HeroInfrastructureDiagram() {
           cy: point.y,
         },
       });
+    }
+
+    function setActiveNode(index: number) {
+      if (index === activeNodeIndexRef.current) {
+        return;
+      }
+
+      activeNodeIndexRef.current = index;
+
+      gsap.to(description, {
+        opacity: 0,
+        duration: 0.15,
+        ease: "power1.out",
+        onComplete: () => {
+          setActiveNodeIndex(index);
+          gsap.to(description, {
+            opacity: 1,
+            duration: 0.15,
+            ease: "power1.in",
+          });
+        },
+      });
+    }
+
+    function syncActiveNode(distance: number) {
+      const normalizedDistance = distance % pathLength;
+      const index = Math.floor(
+        (normalizedDistance + segmentLength * 0.08) / segmentLength,
+      ) % nodes.length;
+
+      setActiveNode(index);
     }
 
     gsap.set(lightPath, {
@@ -85,7 +128,11 @@ export function HeroInfrastructureDiagram() {
           duration: 4.2,
           ease: "none",
           repeat: -1,
-          onUpdate: () => moveGlowPoint(progress.distance),
+          onUpdate: () => {
+            moveGlowPoint(progress.distance);
+            syncActiveNode(progress.distance);
+          },
+          onRepeat: () => setActiveNode(0),
         },
         0,
       );
@@ -99,8 +146,11 @@ export function HeroInfrastructureDiagram() {
   return (
     <div
       aria-label="Diagrama de Infraestructura Comercial"
-      className="w-full max-w-lg"
+      className="w-full max-w-lg space-y-4"
     >
+      <p className="text-center text-xs font-semibold tracking-[0.24em] text-muted-foreground uppercase">
+        ASÍ SE CONECTA TU OPERACIÓN
+      </p>
       <svg
         role="img"
         viewBox="0 0 400 300"
@@ -112,10 +162,10 @@ export function HeroInfrastructureDiagram() {
             key={path}
             d={path}
             fill="none"
-          stroke="var(--accent-foreground)"
-          strokeOpacity="0.34"
-          strokeLinecap="round"
-          strokeWidth="4"
+            stroke="var(--accent-foreground)"
+            strokeOpacity="0.34"
+            strokeLinecap="round"
+            strokeWidth="4"
           />
         ))}
         <path
@@ -187,6 +237,12 @@ export function HeroInfrastructureDiagram() {
           </g>
         ))}
       </svg>
+      <p
+        ref={descriptionRef}
+        className="mx-auto min-h-12 max-w-sm text-center text-sm leading-6 text-muted-foreground"
+      >
+        {nodeDescriptions[activeNodeIndex]}
+      </p>
     </div>
   );
 }
