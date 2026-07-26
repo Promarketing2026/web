@@ -14,12 +14,12 @@
 - Configurar fuente (definir cuál — pendiente de BRAND.md)
 - Variables CSS placeholder en `globals.css` (colores neutros temporales)
 
-## [SIGUIENTE] 3. Componente Hero (bloque 1 de la narrativa)
+## [hecho] 3. Componente Hero (bloque 1 de la narrativa)
 - Estructura estática primero (sin animación)
 - Copy: placeholder hasta tener texto real
 - Luego: micro-animación de entrada con Motion
 
-## 4. Componente "El problema" (bloque 2)
+## [SIGUIENTE] 4. Componente "El problema" (bloque 2)
 - Layout de texto + posible ilustración simple
 - Sin animación todavía
 

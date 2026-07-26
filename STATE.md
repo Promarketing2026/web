@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Layout base completado. Próximo paso: componente Hero.
+Hero estático completado. Próximo paso: componente "El problema".
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Layout base completado. Próximo paso: componente Hero.
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se configuró el layout raíz con `header`, `main` y `footer` semánticos.
-Se aplicó Inter mediante `next/font/google` como fuente temporal y reemplazable.
-Los tokens CSS se mantienen neutros y centralizados en `globals.css`; se retiró el starter visual de Next.js.
+2026-07-26 — Se creó el Hero estático con el H1, subtítulo, CTA y micro-copy definidos.
+El CTA usa el botón de shadcn/ui y enlaza a la futura ancla `#contacto`.
+No se añadió animación; los estilos usan los tokens neutros existentes y el componente es reutilizable.
