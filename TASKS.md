@@ -9,12 +9,12 @@
 - Instalar shadcn/ui: `pnpm dlx shadcn@latest init`
 - Confirmar que el proyecto corre en local (`pnpm dev`)
 
-## [SIGUIENTE] 2. Layout base
+## [hecho] 2. Layout base
 - Crear `app/layout.tsx` con estructura mínima (header vacío, footer vacío, main)
 - Configurar fuente (definir cuál — pendiente de BRAND.md)
 - Variables CSS placeholder en `globals.css` (colores neutros temporales)
 
-## 3. Componente Hero (bloque 1 de la narrativa)
+## [SIGUIENTE] 3. Componente Hero (bloque 1 de la narrativa)
 - Estructura estática primero (sin animación)
 - Copy: placeholder hasta tener texto real
 - Luego: micro-animación de entrada con Motion

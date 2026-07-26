@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Proyecto Next.js inicializado. Próximo paso: layout base.
+Layout base completado. Próximo paso: componente Hero.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,6 +41,6 @@ Proyecto Next.js inicializado. Próximo paso: layout base.
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se inicializó Next.js 16 con App Router, TypeScript, Tailwind v4 y pnpm.
-Se instaló e inicializó shadcn/ui con Radix UI (`radix-nova`) y base neutral.
-`pnpm dev` arrancó correctamente; Next usó `http://localhost:3001` porque el puerto 3000 estaba ocupado.
+2026-07-26 — Se configuró el layout raíz con `header`, `main` y `footer` semánticos.
+Se aplicó Inter mediante `next/font/google` como fuente temporal y reemplazable.
+Los tokens CSS se mantienen neutros y centralizados en `globals.css`; se retiró el starter visual de Next.js.
