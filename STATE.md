@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Lenis global (B1) completado. Próximo paso: Hero con Motion (B2).
+Hero con Motion (B2) completado. Próximo paso: animación de "El problema" (B3).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -41,8 +41,8 @@ Lenis global (B1) completado. Próximo paso: Hero con Motion (B2).
 - Contenido real de servicios y casos de éxito
 
 ## Última actualización
-2026-07-26 — Se configuró Lenis global en un componente cliente que envuelve el contenido principal.
-El smooth scroll usa `requestAnimationFrame` y el CSS base de Lenis importado en `globals.css`.
-B1 queda completada; B2 Hero con Motion pasa a ser la siguiente tarea.
+2026-07-26 — Se agregó la animación de entrada del Hero con `motion/react`.
+H1, subtítulo, CTA y micro-copy entran una sola vez con fade y slide desde abajo, en secuencia escalonada.
+B2 queda completada; B3 animación de "El problema" pasa a ser la siguiente tarea.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
