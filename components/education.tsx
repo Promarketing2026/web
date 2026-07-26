@@ -20,9 +20,12 @@ export function Education() {
 
     const context = gsap.context(() => {
       const stages = gsap.utils.toArray<SVGGElement>("[data-education-stage]");
+      const textItems = gsap.utils.toArray<HTMLElement>("[data-education-item]");
 
       gsap.set(stages, { opacity: 0 });
       gsap.set(stages[0], { opacity: 1 });
+      gsap.set(textItems, { opacity: 0.28 });
+      gsap.set(textItems[0], { opacity: 1 });
 
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -37,8 +40,12 @@ export function Education() {
       timeline
         .to(stages[0], { opacity: 0, duration: 0.5, ease: "none" }, 0)
         .to(stages[1], { opacity: 1, duration: 0.5, ease: "none" }, 0)
+        .to(textItems[0], { opacity: 0.28, duration: 0.5, ease: "none" }, 0)
+        .to(textItems[1], { opacity: 1, duration: 0.5, ease: "none" }, 0)
         .to(stages[1], { opacity: 0, duration: 0.5, ease: "none" }, 0.5)
-        .to(stages[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5);
+        .to(stages[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5)
+        .to(textItems[1], { opacity: 0.28, duration: 0.5, ease: "none" }, 0.5)
+        .to(textItems[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5);
     }, section);
 
     return () => {

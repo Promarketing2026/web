@@ -60,6 +60,8 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       fragmentación, solución conectada y resultado medible
 - [hecho] B5b. "Educación del concepto" → GSAP + ScrollTrigger + SplitText
       sobre el SVG y los párrafos existentes
+- [hecho] B5c. "Educación del concepto" → sincronizar textos existentes
+      con las 3 etapas del SVG en el mismo ScrollTrigger
 - [SIGUIENTE] B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente
       con B3/B4
 - [ ] B7. Verificar que Lenis no rompe ScrollTrigger (requiere sincronizar
