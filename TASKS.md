@@ -91,8 +91,10 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 
 ## PRIORIDAD ACTUAL (decisión del usuario: avanzar con el blog)
 
-- [SIGUIENTE] A13. Setup de Sanity (`pnpm create sanity@latest`, schema
+- [hecho] A13. Setup de Sanity (`pnpm create sanity@latest`, schema
       mínimo: artículo de blog, término de glosario, caso de éxito)
+- [SIGUIENTE] A14. Crear páginas frontend para blog/glosario/casos usando
+      contenido de Sanity, sin inventar contenido real.
 
 ---
 ## Backlog (no empezar aún)

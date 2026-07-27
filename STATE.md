@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-B5c (textos sincronizados con ScrollTrigger) completada. Próximo paso: Motion en bloques finales (B6).
+A13 (Sanity CMS embebido) completada. Próximo paso: definir páginas frontend de blog/glosario/casos cuando se priorice.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -48,5 +48,8 @@ B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y 
 B5b agregó `ScrollTrigger` con pin, scrub y crossfade entre las 3 etapas del SVG durante `+=200%`.
 B5c sincronizó los tres textos existentes con las etapas del SVG reutilizando el mismo timeline y ScrollTrigger.
 B6 Motion en Prueba social, Objeciones y CTA final pasa a ser la siguiente tarea.
+2026-07-26 — A13 configuró Sanity Studio embebido en `/studio` con `next-sanity`.
+Se agregaron schemas mínimos para `post`, `glosarioTermino` y `casoDeExito`, parametrizados por variables `NEXT_PUBLIC_SANITY_*`.
+No se crearon páginas frontend del blog; quedan para una tarea posterior.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
