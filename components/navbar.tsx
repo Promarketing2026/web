@@ -1,11 +1,23 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Solución", href: "#solucion" },
   { label: "Contacto", href: "#contacto" },
+];
+
+const resourceItems = [
+  { label: "Blog", href: "/blog" },
+  { label: "Glosario", href: "/glosario" },
+  { label: "Casos de Éxito", href: "/casos-de-exito" },
 ];
 
 export function Navbar() {
@@ -32,6 +44,19 @@ export function Navbar() {
               {item.label}
             </a>
           ))}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">
+              Recursos
+              <ChevronDown aria-hidden="true" className="size-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              {resourceItems.map((item) => (
+                <DropdownMenuItem key={item.href} asChild>
+                  <a href={item.href}>{item.label}</a>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         <Button asChild size="lg" className="h-11 w-full px-4 text-sm sm:w-fit">

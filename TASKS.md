@@ -105,6 +105,8 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       `casoDeExito` de Sanity, sin inventar contenido real.
 - [hecho] A14. Crear páginas frontend para blog/glosario/casos usando
       contenido de Sanity, sin inventar contenido real.
+- [hecho] NAV-1. Agregar dropdown "Recursos" al Navbar con links a Blog,
+      Glosario y Casos de Éxito.
 
 ---
 ## Backlog (no empezar aún)

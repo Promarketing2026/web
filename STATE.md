@@ -60,5 +60,7 @@ No se crearon páginas individuales por término.
 2026-07-26 — A14c creó `/casos-de-exito` conectado a Sanity con GROQ.
 La página lista `casoDeExito` en tarjetas y reutiliza la tarjeta de resultado extraída desde la sección Prueba social.
 No se crearon páginas individuales por caso.
+2026-07-26 — Navbar actualizado con dropdown estático "Recursos".
+El dropdown usa shadcn/Radix y enlaza a `/blog`, `/glosario` y `/casos-de-exito` manteniendo Inicio, Solución y Contacto.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
