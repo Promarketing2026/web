@@ -31,21 +31,24 @@ export function Education() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=200%",
+          end: "+=400%",
           scrub: true,
           pin: true,
         },
       });
 
       timeline
-        .to(stages[0], { opacity: 0, duration: 0.5, ease: "none" }, 0)
-        .to(stages[1], { opacity: 1, duration: 0.5, ease: "none" }, 0)
-        .to(textItems[0], { opacity: 0.28, duration: 0.5, ease: "none" }, 0)
-        .to(textItems[1], { opacity: 1, duration: 0.5, ease: "none" }, 0)
-        .to(stages[1], { opacity: 0, duration: 0.5, ease: "none" }, 0.5)
-        .to(stages[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5)
-        .to(textItems[1], { opacity: 0.28, duration: 0.5, ease: "none" }, 0.5)
-        .to(textItems[2], { opacity: 1, duration: 0.5, ease: "none" }, 0.5);
+        .to({}, { duration: 1 })
+        .to(stages[0], { opacity: 0, duration: 0.35, ease: "none" })
+        .to(stages[1], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to(textItems[0], { opacity: 0.28, duration: 0.35, ease: "none" }, "<")
+        .to(textItems[1], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to({}, { duration: 1 })
+        .to(stages[1], { opacity: 0, duration: 0.35, ease: "none" })
+        .to(stages[2], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to(textItems[1], { opacity: 0.28, duration: 0.35, ease: "none" }, "<")
+        .to(textItems[2], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to({}, { duration: 1 });
     }, section);
 
     return () => {
@@ -57,16 +60,16 @@ export function Education() {
     <section
       ref={sectionRef}
       aria-labelledby="education-title"
-      className="px-6 py-24 sm:px-10 sm:py-32"
+      className="px-6 py-20 sm:px-10 sm:py-28"
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-10">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 sm:gap-8">
         <h2
           id="education-title"
           className="max-w-3xl text-3xl leading-tight font-semibold text-foreground sm:text-4xl"
         >
           Invertir sin saber qué funciona no es una estrategia.
         </h2>
-        <div className="max-w-3xl space-y-8">
+        <div className="max-w-3xl space-y-5">
           <p data-education-item className="text-lg leading-8 text-muted-foreground">
             Muchas organizaciones invierten en múltiples canales, pero operan a
             ciegas.
