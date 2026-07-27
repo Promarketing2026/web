@@ -54,5 +54,8 @@ No se crearon páginas frontend del blog; quedan para una tarea posterior.
 2026-07-26 — A14a creó `/blog` y `/blog/[slug]` conectados a Sanity con GROQ.
 El listado muestra tarjetas responsive de `post`; el detalle renderiza título, fecha, imagen destacada y `contenido` con PortableText.
 No se crearon todavía páginas de glosario ni casos de éxito.
+2026-07-26 — A14b creó `/glosario` conectado a Sanity con GROQ.
+La página lista `glosarioTermino` en orden alfabético y usa accordion shadcn/Radix para mostrar la definición extendida.
+No se crearon páginas individuales por término.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

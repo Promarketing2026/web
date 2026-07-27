@@ -28,3 +28,12 @@ export const POST_SLUGS_QUERY = groq`
     "slug": slug.current
   }
 `;
+
+export const GLOSARIO_TERMINOS_QUERY = groq`
+  *[_type == "glosarioTermino" && defined(termino)] | order(termino asc) {
+    _id,
+    termino,
+    definicionCorta,
+    definicionExtendida
+  }
+`;

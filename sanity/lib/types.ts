@@ -21,3 +21,10 @@ export type Post = PostCard & {
 export type PostSlug = {
   slug: string;
 };
+
+export type GlosarioTermino = {
+  _id: string;
+  termino: string;
+  definicionCorta: string;
+  definicionExtendida?: PortableTextBlock[];
+};
