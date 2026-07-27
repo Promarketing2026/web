@@ -51,5 +51,8 @@ B6 Motion en Prueba social, Objeciones y CTA final pasa a ser la siguiente tarea
 2026-07-26 — A13 configuró Sanity Studio embebido en `/studio` con `next-sanity`.
 Se agregaron schemas mínimos para `post`, `glosarioTermino` y `casoDeExito`, parametrizados por variables `NEXT_PUBLIC_SANITY_*`.
 No se crearon páginas frontend del blog; quedan para una tarea posterior.
+2026-07-26 — A14a creó `/blog` y `/blog/[slug]` conectados a Sanity con GROQ.
+El listado muestra tarjetas responsive de `post`; el detalle renderiza título, fecha, imagen destacada y `contenido` con PortableText.
+No se crearon todavía páginas de glosario ni casos de éxito.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

@@ -93,7 +93,13 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
 
 - [hecho] A13. Setup de Sanity (`pnpm create sanity@latest`, schema
       mínimo: artículo de blog, término de glosario, caso de éxito)
-- [SIGUIENTE] A14. Crear páginas frontend para blog/glosario/casos usando
+- [hecho] A14a. Crear páginas frontend de blog: `/blog` y `/blog/[slug]`
+      usando documentos `post` de Sanity, GROQ y PortableText.
+- [SIGUIENTE] A14b. Crear páginas frontend del glosario usando documentos
+      `glosarioTermino` de Sanity, sin inventar contenido real.
+- [ ] A14c. Crear páginas frontend de casos de éxito usando documentos
+      `casoDeExito` de Sanity, sin inventar contenido real.
+- [ ] A14. Crear páginas frontend para blog/glosario/casos usando
       contenido de Sanity, sin inventar contenido real.
 
 ---
