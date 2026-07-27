@@ -37,3 +37,14 @@ export const GLOSARIO_TERMINOS_QUERY = groq`
     definicionExtendida
   }
 `;
+
+export const CASOS_DE_EXITO_QUERY = groq`
+  *[_type == "casoDeExito" && defined(cliente)] | order(cliente asc) {
+    _id,
+    cliente,
+    situacion,
+    intervencion,
+    resultado,
+    cifraDestacada
+  }
+`;

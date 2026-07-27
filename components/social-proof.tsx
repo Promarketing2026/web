@@ -1,3 +1,5 @@
+import { CaseResultCard } from "@/components/case-result-card";
+
 export function SocialProof() {
   return (
     <section
@@ -25,20 +27,12 @@ export function SocialProof() {
           </p>
         </div>
 
-        <article
-          aria-label="Resultado de las subastas de EMILIMA"
-          className="max-w-3xl rounded-lg border border-border bg-card p-6 sm:p-8"
-        >
-          <p className="text-6xl leading-none font-semibold text-foreground">
-            100%
-          </p>
-          <p className="mt-3 text-lg font-medium text-foreground">
-            de los lotes vendidos, en las 3 subastas
-          </p>
-          <p className="mt-6 text-sm text-muted-foreground">
-            Antes: solo 6 de 45 lotes vendidos por subasta
-          </p>
-        </article>
+        <CaseResultCard
+          label="100%"
+          result="de los lotes vendidos, en las 3 subastas"
+          context="Antes: solo 6 de 45 lotes vendidos por subasta"
+          className="max-w-3xl"
+        />
       </div>
     </section>
   );

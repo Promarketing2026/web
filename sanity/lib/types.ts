@@ -28,3 +28,12 @@ export type GlosarioTermino = {
   definicionCorta: string;
   definicionExtendida?: PortableTextBlock[];
 };
+
+export type CasoDeExito = {
+  _id: string;
+  cliente: string;
+  situacion: string;
+  intervencion?: string;
+  resultado: string;
+  cifraDestacada?: string;
+};

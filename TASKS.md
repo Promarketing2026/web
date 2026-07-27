@@ -101,9 +101,9 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       usando documentos `post` de Sanity, GROQ y PortableText.
 - [hecho] A14b. Crear páginas frontend del glosario usando documentos
       `glosarioTermino` de Sanity, sin inventar contenido real.
-- [SIGUIENTE] A14c. Crear páginas frontend de casos de éxito usando documentos
+- [hecho] A14c. Crear páginas frontend de casos de éxito usando documentos
       `casoDeExito` de Sanity, sin inventar contenido real.
-- [ ] A14. Crear páginas frontend para blog/glosario/casos usando
+- [hecho] A14. Crear páginas frontend para blog/glosario/casos usando
       contenido de Sanity, sin inventar contenido real.
 
 ---

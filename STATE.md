@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-A13 (Sanity CMS embebido) completada. Próximo paso: definir páginas frontend de blog/glosario/casos cuando se priorice.
+A14 (páginas frontend base para Sanity) completada. Próximo paso: priorizar A12, B6 o un retoque pendiente.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -57,5 +57,8 @@ No se crearon todavía páginas de glosario ni casos de éxito.
 2026-07-26 — A14b creó `/glosario` conectado a Sanity con GROQ.
 La página lista `glosarioTermino` en orden alfabético y usa accordion shadcn/Radix para mostrar la definición extendida.
 No se crearon páginas individuales por término.
+2026-07-26 — A14c creó `/casos-de-exito` conectado a Sanity con GROQ.
+La página lista `casoDeExito` en tarjetas y reutiliza la tarjeta de resultado extraída desde la sección Prueba social.
+No se crearon páginas individuales por caso.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
