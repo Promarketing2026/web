@@ -109,6 +109,8 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       Glosario y Casos de Éxito.
 - [hecho] FOOTER-1. Reestructurar Footer en columnas: marca/redes,
       navegación, contacto y copyright full-width.
+- [hecho] CONV-1. Crear página `/gracias` con contador, redirección a `/`,
+      soporte de query `servicio` y captura local de UTM para A12.
 
 ---
 ## Backlog (no empezar aún)
