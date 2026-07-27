@@ -107,6 +107,8 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       contenido de Sanity, sin inventar contenido real.
 - [hecho] NAV-1. Agregar dropdown "Recursos" al Navbar con links a Blog,
       Glosario y Casos de Éxito.
+- [hecho] FOOTER-1. Reestructurar Footer en columnas: marca/redes,
+      navegación, contacto y copyright full-width.
 
 ---
 ## Backlog (no empezar aún)

@@ -62,5 +62,7 @@ La página lista `casoDeExito` en tarjetas y reutiliza la tarjeta de resultado e
 No se crearon páginas individuales por caso.
 2026-07-26 — Navbar actualizado con dropdown estático "Recursos".
 El dropdown usa shadcn/Radix y enlaza a `/blog`, `/glosario` y `/casos-de-exito` manteniendo Inicio, Solución y Contacto.
+2026-07-26 — Footer reestructurado en columnas responsivas.
+La primera columna agrupa marca, descripción y redes; la segunda navegación; la tercera conserva Contacto; copyright queda al ancho completo.
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
