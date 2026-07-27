@@ -76,6 +76,10 @@ Por eso: Fase A = todo estático. Fase B = animación, una sola pasada al final.
       y el diagrama activos en ese momento. Requiere revisar de fondo el
       timeline de ScrollTrigger, no solo ajustar duraciones.
 
+- [ ] RETOQUE-3: @sanity/image-url usa el import por defecto (deprecado).
+      Cambiar a `import { createImageUrlBuilder } from '@sanity/image-url'`
+      en el archivo donde se construyen las URLs de imágenes.
+
 ## PAUSADAS (no descartadas — retomar cuando el usuario lo indique)
 
 - [ ] B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente
