@@ -1,24 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 import { EducationInfrastructureDiagram } from "@/components/education-infrastructure-diagram";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function Education() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section) {
-      return;
-    }
-
-    const context = gsap.context(() => {
+  useGSAP(
+    () => {
       const stages = gsap.utils.toArray<SVGGElement>("[data-education-stage]");
       const textItems = gsap.utils.toArray<HTMLElement>("[data-education-item]");
 
@@ -29,7 +24,7 @@ export function Education() {
 
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: section,
+          trigger: sectionRef.current,
           start: "top top",
           end: "+=400%",
           scrub: true,
@@ -49,12 +44,9 @@ export function Education() {
         .to(textItems[1], { opacity: 0.28, duration: 0.35, ease: "none" }, "<")
         .to(textItems[2], { opacity: 1, duration: 0.35, ease: "none" }, "<")
         .to({}, { duration: 1 });
-    }, section);
-
-    return () => {
-      context.revert();
-    };
-  }, []);
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section

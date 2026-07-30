@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-A12c (anti-spam: honeypot + rate limiting con Upstash Redis) completada. Próximo paso: A12d (redirección post-envío).
+A12c (anti-spam) y DEPLOY-1 (primer deploy a Vercel) completados. Sitio en producción: https://web-orcin-sigma-57.vercel.app/. Próximo paso: A12d (redirección post-envío a /gracias).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -70,6 +70,26 @@ Incluye componente cliente reutilizable con contador 5→0, redirección a `/`, 
 por IP con Upstash Redis (`lib/rate-limit.ts`, ventana de 10 min, máx. 3
 envíos), integrados en la Server Action de `lib/hubspot.ts`. Siguiente paso:
 A12d (redirección post-envío a /gracias con UTMs vía sessionStorage).
+
+2026-07-30 — DEPLOY-1 completado: proyecto `web` desplegado en Vercel
+(https://web-orcin-sigma-57.vercel.app/). Variables HUBSPOT_SERVICE_KEY y
+NEXT_PUBLIC_SANITY_* configuradas manualmente; hubo que desactivar
+"Vercel Authentication" en Deployment Protection porque venía activada
+por defecto y bloqueaba el acceso público al sitio. Verificado: Home,
+formulario→HubSpot, y /blog, /glosario, /casos-de-exito con contenido
+real de Sanity. Pendiente: conectar integración de Upstash Redis al
+proyecto (las variables KV/UPSTASH no se cargaron, rate limiting
+inactivo por ahora — el resto del anti-spam, honeypot, sí funciona).
+
+2026-07-30 — A12d verificado end-to-end: formulario envía a HubSpot,
+redirige a /gracias con servicio y UTMs, countdown regresa al home.
+Corregido bug de sintaxis JSX (etiqueta <a> faltante) en
+auditoria-form.tsx y thank-you-redirect.tsx. Corregido error de
+consola "removeChild/NotFoundError" en la sección "Educación del
+concepto": se migró education.tsx de useEffect + gsap.context manual
+al hook useGSAP de @gsap/react, que sincroniza correctamente la
+limpieza de ScrollTrigger/pin-spacer con el desmontaje de React
+durante la navegación entre páginas.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

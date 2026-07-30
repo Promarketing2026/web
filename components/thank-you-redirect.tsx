@@ -14,6 +14,8 @@ const UTM_KEYS = [
 type UtmKey = (typeof UTM_KEYS)[number];
 type UtmParams = Partial<Record<UtmKey, string>>;
 
+const MEETINGS_URL = "https://meetings.hubspot.com/promarketing-2026";
+
 export function ThankYouRedirect() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -62,6 +64,15 @@ export function ThankYouRedirect() {
           <span className="font-semibold text-foreground">{countdown}</span>{" "}
           segundos.
         </p>
+
+        <a
+          href={MEETINGS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 inline-flex items-center justify-center rounded-md bg-foreground px-6 py-3 font-medium text-background transition-opacity hover:opacity-90"
+        >
+          Agendar una reunión ahora
+        </a>
 
         {Object.keys(utmParams).length > 0 ? (
           <dl className="mt-8 grid gap-3 rounded-lg border border-border bg-muted p-4 text-sm sm:grid-cols-2">

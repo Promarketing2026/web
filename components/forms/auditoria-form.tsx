@@ -1,33 +1,44 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { submitAuditoriaForm, type AuditoriaFormState } from "@/lib/hubspot";
-
-// ─────────────────────────────────────────────────────────────────────────
-// A12b — agrega el checkbox de consentimiento (enlaza a
-// /politica-de-privacidad) y muestra los errores de validación que ahora
-// vienen de zod en el servidor. Los inputs siguen teniendo `required` en
-// el navegador como ayuda visual inmediata, pero la validación que manda
-// es la del servidor (lib/hubspot.ts) — por eso el mensaje de error real
-// puede aparecer incluso si el navegador "dejó pasar" el envío.
-// ─────────────────────────────────────────────────────────────────────────
+import { getStoredUtmParams } from "@/lib/utm";
 
 const initialState: AuditoriaFormState = { status: "idle" };
 
 export function AuditoriaForm() {
+  const router = useRouter();
   const [state, formAction, isPending] = useActionState(
     submitAuditoriaForm,
     initialState,
   );
+  const [servicio, setServicio] = useState("");
+
+  useEffect(() => {
+    if (state.status !== "success") return;
+
+    const params = new URLSearchParams();
+    if (servicio) params.set("servicio", servicio);
+
+    const utms = getStoredUtmParams();
+    for (const [key, value] of Object.entries(utms)) {
+      if (value) params.set(key, value);
+    }
+
+    const query = params.toString();
+    const timeoutId = window.setTimeout(() => {
+      router.push(`/gracias${query ? `?${query}` : ""}`);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [state.status, servicio, router]);
 
   if (state.status === "success") {
     return (
       <div className="rounded-lg border border-border bg-muted p-6 text-center">
         <p className="text-lg font-medium text-foreground">
-          ¡Listo! Recibimos tu solicitud.
-        </p>
-        <p className="mt-1 text-muted-foreground">
-          Te contactaremos pronto para coordinar tu Auditoría C.L.A.R.O.
+          ¡Listo! Te estamos redirigiendo...
         </p>
       </div>
     );
@@ -39,9 +50,6 @@ export function AuditoriaForm() {
 
   return (
     <form action={formAction} className="space-y-4" noValidate={false}>
-      {/* Honeypot — invisible para personas reales, muchos bots lo llenan
-          igual porque completan todos los campos que encuentran en el
-          HTML. Ver lib/hubspot.ts para la lógica de detección. */}
       <div
         aria-hidden="true"
         style={{
@@ -91,7 +99,7 @@ export function AuditoriaForm() {
           htmlFor="email"
           className="mb-1 block text-sm font-medium text-foreground"
         >
-          Correo electrónico
+          Correo electronico
         </label>
         <input
           id="email"
@@ -131,27 +139,28 @@ export function AuditoriaForm() {
           htmlFor="servicio"
           className="mb-1 block text-sm font-medium text-foreground"
         >
-          Servicio de tu interés
+          Servicio de tu interes
         </label>
         <select
           id="servicio"
           name="servicio"
-          defaultValue=""
+          value={servicio}
+          onChange={(event) => setServicio(event.target.value)}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
         >
           <option value="" disabled>
-            Selecciona una opción
+            Selecciona una opcion
           </option>
-          <option value="auditoria-claro">Auditoría C.L.A.R.O.</option>
-          <option value="diseno-marca">Diseño y Gestión de Marca</option>
+          <option value="auditoria-claro">Auditoria C.L.A.R.O.</option>
+          <option value="diseno-marca">Diseno y Gestion de Marca</option>
           <option value="infraestructura-web">Infraestructura Web</option>
           <option value="ecommerce-conversion">
-            Ecommerce y Conversión
+            Ecommerce y Conversion
           </option>
           <option value="seo-geo-aeo">SEO / GEO / AEO</option>
           <option value="ads-paid-media">Ads / Paid Media</option>
           <option value="automatizacion-comercial">
-            Automatización Comercial
+            Automatizacion Comercial
           </option>
           <option value="tracking-trazabilidad">
             Tracking y Trazabilidad
@@ -172,14 +181,14 @@ export function AuditoriaForm() {
           className="mt-1 h-4 w-4 rounded border-border"
         />
         <label htmlFor="consentimiento" className="text-sm text-muted-foreground">
-          He leído y acepto la{" "}
+          He leido y acepto la{" "}
           <a
             href="/politica-de-privacidad"
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-foreground"
           >
-            Política de Privacidad
+            Politica de Privacidad
           </a>
           , y autorizo el tratamiento de mis datos para ser contactado.
         </label>
@@ -205,7 +214,7 @@ export function AuditoriaForm() {
         disabled={isPending}
         className="w-full rounded-md bg-foreground px-4 py-2 font-medium text-background transition-opacity disabled:opacity-60"
       >
-        {isPending ? "Enviando…" : "Solicitar Auditoría C.L.A.R.O."}
+        {isPending ? "Enviando..." : "Solicitar Auditoria C.L.A.R.O."}
       </button>
     </form>
   );
