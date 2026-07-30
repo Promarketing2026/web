@@ -5,7 +5,7 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-A14 (páginas frontend base para Sanity) completada. Próximo paso: priorizar A12, B6 o un retoque pendiente.
+A12c (anti-spam: honeypot + rate limiting con Upstash Redis) completada. Próximo paso: A12d (redirección post-envío).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -66,5 +66,10 @@ El dropdown usa shadcn/Radix y enlaza a `/blog`, `/glosario` y `/casos-de-exito`
 La primera columna agrupa marca, descripción y redes; la segunda navegación; la tercera conserva Contacto; copyright queda al ancho completo.
 2026-07-26 — Página `/gracias` agregada para post-conversión.
 Incluye componente cliente reutilizable con contador 5→0, redirección a `/`, soporte de `servicio` y captura visible de parámetros UTM presentes en la URL.
+2026-07-30 — A12c completado: honeypot (campo "pagina_web") + rate limiting
+por IP con Upstash Redis (`lib/rate-limit.ts`, ventana de 10 min, máx. 3
+envíos), integrados en la Server Action de `lib/hubspot.ts`. Siguiente paso:
+A12d (redirección post-envío a /gracias con UTMs vía sessionStorage).
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

@@ -6,9 +6,10 @@ import { checkRateLimit } from "@/lib/rate-limit";
 
 // ─────────────────────────────────────────────────────────────────────────
 // A12c completo — honeypot (ya integrado antes) + rate limiting por IP
-// usando lib/rate-limit.ts (Vercel KV). Ver ese archivo para los
-// prerrequisitos manuales (crear la base de datos en Vercel, instalar
-// @vercel/kv).
+// usando lib/rate-limit.ts (Upstash Redis vía Vercel Marketplace). Ver
+// ese archivo para los prerrequisitos manuales (instalar la integración
+// de Upstash desde el Marketplace de Vercel; el paquete usado es
+// @upstash/redis, no @vercel/kv, que ya está descontinuado).
 //
 // Cómo obtenemos la IP: en un Server Action no hay acceso directo al
 // objeto Request, así que leemos el header "x-forwarded-for" con
