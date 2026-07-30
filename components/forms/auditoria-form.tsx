@@ -4,19 +4,12 @@ import { useActionState } from "react";
 import { submitAuditoriaForm, type AuditoriaFormState } from "@/lib/hubspot";
 
 // ─────────────────────────────────────────────────────────────────────────
-// A12a — Formulario base (sin honeypot, sin checkbox de consentimiento
-// todavía, sin validación zod). Eso llega en A12b/A12c.
-//
-// DÓNDE USAR ESTE COMPONENTE (supuesto que estoy tomando, ajústalo si no
-// aplica): lo pensé para reemplazar el botón estático del componente
-// "CTA final" (A9), o para vivir en una sección propia dentro de esa
-// misma parte del Home. Si prefieres una página dedicada tipo
-// /solicitar-auditoria en vez de inline, es un cambio de una línea
-// (mover el <AuditoriaForm /> a esa page.tsx) — dime y lo ajustamos.
-//
-// Ajusta la lista de <option> de "servicio" contra los 7 sistemas reales
-// de la oferta (ya listados en el Backlog de TASKS.md) cuando quieras
-// que coincidan exactamente.
+// A12b — agrega el checkbox de consentimiento (enlaza a
+// /politica-de-privacidad) y muestra los errores de validación que ahora
+// vienen de zod en el servidor. Los inputs siguen teniendo `required` en
+// el navegador como ayuda visual inmediata, pero la validación que manda
+// es la del servidor (lib/hubspot.ts) — por eso el mensaje de error real
+// puede aparecer incluso si el navegador "dejó pasar" el envío.
 // ─────────────────────────────────────────────────────────────────────────
 
 const initialState: AuditoriaFormState = { status: "idle" };
@@ -40,8 +33,12 @@ export function AuditoriaForm() {
     );
   }
 
+  const nombreError = state.fieldErrors?.nombre;
+  const emailError = state.fieldErrors?.email;
+  const consentimientoError = state.fieldErrors?.consentimiento;
+
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="space-y-4" noValidate={false}>
       <div>
         <label
           htmlFor="nombre"
@@ -55,8 +52,15 @@ export function AuditoriaForm() {
           type="text"
           required
           autoComplete="name"
+          aria-invalid={Boolean(nombreError)}
+          aria-describedby={nombreError ? "nombre-error" : undefined}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
         />
+        {nombreError && (
+          <p id="nombre-error" role="alert" className="mt-1 text-sm text-destructive">
+            {nombreError}
+          </p>
+        )}
       </div>
 
       <div>
@@ -72,8 +76,15 @@ export function AuditoriaForm() {
           type="email"
           required
           autoComplete="email"
+          aria-invalid={Boolean(emailError)}
+          aria-describedby={emailError ? "email-error" : undefined}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
         />
+        {emailError && (
+          <p id="email-error" role="alert" className="mt-1 text-sm text-destructive">
+            {emailError}
+          </p>
+        )}
       </div>
 
       <div>
@@ -125,7 +136,42 @@ export function AuditoriaForm() {
         </select>
       </div>
 
-      {state.status === "error" && (
+      <div className="flex items-start gap-2">
+        <input
+          id="consentimiento"
+          name="consentimiento"
+          type="checkbox"
+          required
+          aria-invalid={Boolean(consentimientoError)}
+          aria-describedby={
+            consentimientoError ? "consentimiento-error" : undefined
+          }
+          className="mt-1 h-4 w-4 rounded border-border"
+        />
+        <label htmlFor="consentimiento" className="text-sm text-muted-foreground">
+          He leído y acepto la{" "}
+          <a
+            href="/politica-de-privacidad"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-foreground"
+          >
+            Política de Privacidad
+          </a>
+          , y autorizo el tratamiento de mis datos para ser contactado.
+        </label>
+      </div>
+      {consentimientoError && (
+        <p
+          id="consentimiento-error"
+          role="alert"
+          className="-mt-2 text-sm text-destructive"
+        >
+          {consentimientoError}
+        </p>
+      )}
+
+      {state.status === "error" && !nombreError && !emailError && !consentimientoError && (
         <p role="alert" className="text-sm text-destructive">
           {state.message}
         </p>
