@@ -1,6 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { AuditoriaForm } from "@/components/forms/auditoria-form";
 
 export function FinalCta() {
   return (
@@ -17,16 +15,13 @@ export function FinalCta() {
           No escales la fragmentación. Construye la infraestructura necesaria
           para crecer con claridad.
         </h2>
-        <div className="space-y-3">
-          <Button asChild size="lg" className="h-11 px-4 text-sm">
-            <a href="#contacto">
-              Solicitar Auditoría C.L.A.R.O.
-              <ArrowUpRight aria-hidden="true" />
-            </a>
-          </Button>
-          <p className="text-sm text-muted-foreground">
-            Diagnóstico de tu operación comercial, sin costo.
-          </p>
+
+        <p className="text-sm text-muted-foreground">
+          Diagnóstico de tu operación comercial, sin costo.
+        </p>
+
+        <div className="w-full max-w-md text-left">
+          <AuditoriaForm />
         </div>
       </div>
     </section>
