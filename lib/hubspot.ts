@@ -1,56 +1,119 @@
 "use server";
 
+import { z } from "zod";
+import { headers } from "next/headers";
+import { checkRateLimit } from "@/lib/rate-limit";
+
 // ─────────────────────────────────────────────────────────────────────────
-// A12a — Integración base del formulario de Auditoría C.L.A.R.O. con HubSpot
+// A12c completo — honeypot (ya integrado antes) + rate limiting por IP
+// usando lib/rate-limit.ts (Vercel KV). Ver ese archivo para los
+// prerrequisitos manuales (crear la base de datos en Vercel, instalar
+// @vercel/kv).
 //
-// NOTA IMPORTANTE sobre TASKS.md: el ítem original decía "HubSpot Forms
-// API", pero el Service Key que ya tienes (scopes
-// crm.objects.contacts.read/write) es un token de Private App para la
-// CRM API, no para la Forms API pública (que usa portalId + formGuid y no
-// necesita este tipo de scopes). Por eso esta implementación llama
-// directamente a POST /crm/v3/objects/contacts. Si más adelante prefieren
-// usar la Forms API real (útil para trackear el "form ID" nativo de
-// HubSpot en reportes de marketing), es una integración distinta —
-// avísame y la armamos aparte.
-//
-// LO QUE FALTA (fuera de esta tarea, cubierto en A12b/A12c/A12d):
-//   - Validación server-side con zod (A12b)
-//   - Honeypot + rate limiting (A12c)
-//   - Redirección a /gracias con UTMs + link a Meetings (A12d)
-//
-// PRERREQUISITO MANUAL EN HUBSPOT (antes de probar este código):
-//   Crear la propiedad de contacto personalizada "servicio_de_interes"
-//   (Configuración → Propiedades → Propiedades de contacto → Crear
-//   propiedad, tipo texto de una línea, nombre interno EXACTO:
-//   servicio_de_interes). Si no existe, HubSpot responde 400 al enviar
-//   ese campo.
+// Cómo obtenemos la IP: en un Server Action no hay acceso directo al
+// objeto Request, así que leemos el header "x-forwarded-for" con
+// headers() de next/headers. Vercel lo agrega automáticamente en
+// producción. En desarrollo local puede venir vacío — por eso hay un
+// fallback a "unknown", que simplemente comparte una sola "IP" para todas
+// tus pruebas locales (no afecta a usuarios reales).
 // ─────────────────────────────────────────────────────────────────────────
 
 export type AuditoriaFormState = {
   status: "idle" | "success" | "error";
   message?: string;
+  fieldErrors?: {
+    nombre?: string;
+    email?: string;
+    consentimiento?: string;
+  };
 };
 
 const HUBSPOT_CONTACTS_URL = "https://api.hubapi.com/crm/v3/objects/contacts";
+
+const auditoriaSchema = z.object({
+  nombre: z
+    .string()
+    .trim()
+    .min(2, "Ingresa tu nombre completo.")
+    .max(120, "El nombre es demasiado largo."),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email("Ingresa un correo electrónico válido."),
+  empresa: z
+    .string()
+    .trim()
+    .max(120, "El nombre de la empresa es demasiado largo.")
+    .optional()
+    .or(z.literal("")),
+  servicio: z.string().trim().optional().or(z.literal("")),
+  consentimiento: z.boolean().refine((value) => value === true, {
+    message: "Debes aceptar la política de privacidad para continuar.",
+  }),
+});
+
+async function getClientIp(): Promise<string> {
+  const headersList = await headers();
+  const forwardedFor = headersList.get("x-forwarded-for");
+  return forwardedFor?.split(",")[0]?.trim() || "unknown";
+}
 
 export async function submitAuditoriaForm(
   _prevState: AuditoriaFormState,
   formData: FormData,
 ): Promise<AuditoriaFormState> {
-  const nombre = formData.get("nombre")?.toString().trim() ?? "";
-  const email = formData.get("email")?.toString().trim() ?? "";
-  const empresa = formData.get("empresa")?.toString().trim() ?? "";
-  const servicio = formData.get("servicio")?.toString().trim() ?? "";
+  // ── Honeypot: primero que nada, es gratis y no requiere red. ──────────
+  const honeypot = formData.get("pagina_web");
+  if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    console.warn(
+      "Honeypot activado — posible envío de bot, ignorado silenciosamente.",
+    );
+    return { status: "success" };
+  }
 
-  // Validación mínima solo para no llamar a HubSpot con datos vacíos.
-  // La validación completa (formato de email, longitudes, etc.) es A12b.
-  if (!nombre || !email) {
+  // ── Rate limiting por IP ────────────────────────────────────────────
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(ip);
+
+  if (!allowed) {
     return {
       status: "error",
-      message: "Nombre y correo son obligatorios.",
+      message:
+        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
     };
   }
 
+  const parsed = auditoriaSchema.safeParse({
+    nombre: formData.get("nombre"),
+    email: formData.get("email"),
+    empresa: formData.get("empresa"),
+    servicio: formData.get("servicio"),
+    consentimiento: formData.get("consentimiento") === "on",
+  });
+
+  if (!parsed.success) {
+    const fieldErrors: AuditoriaFormState["fieldErrors"] = {};
+
+    for (const issue of parsed.error.issues) {
+      const field = issue.path[0];
+      if (
+        field === "nombre" ||
+        field === "email" ||
+        field === "consentimiento"
+      ) {
+        fieldErrors[field] = issue.message;
+      }
+    }
+
+    return {
+      status: "error",
+      message: "Revisa los campos marcados antes de continuar.",
+      fieldErrors,
+    };
+  }
+
+  const { nombre, email, empresa, servicio } = parsed.data;
   const [firstname, ...restoDelNombre] = nombre.split(" ");
   const lastname = restoDelNombre.join(" ") || undefined;
 
@@ -72,13 +135,7 @@ export async function submitAuditoriaForm(
       }),
     });
 
-    if (response.ok) {
-      return { status: "success" };
-    }
-
-    // 409 = el contacto ya existe en HubSpot (mismo email). No es un error
-    // real para el usuario que llena el formulario — lo tratamos como éxito.
-    if (response.status === 409) {
+    if (response.ok || response.status === 409) {
       return { status: "success" };
     }
 

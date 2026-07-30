@@ -39,6 +39,29 @@ export function AuditoriaForm() {
 
   return (
     <form action={formAction} className="space-y-4" noValidate={false}>
+      {/* Honeypot — invisible para personas reales, muchos bots lo llenan
+          igual porque completan todos los campos que encuentran en el
+          HTML. Ver lib/hubspot.ts para la lógica de detección. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+        }}
+      >
+        <label htmlFor="pagina_web">No completar este campo</label>
+        <input
+          id="pagina_web"
+          name="pagina_web"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <label
           htmlFor="nombre"
