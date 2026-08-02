@@ -124,5 +124,15 @@ backend todavía (queda como B8-conectar). También se corrigieron los
 anchors "Inicio"/"Solución" del footer (mismo bug que el navbar,
 /#seccion en vez de #seccion). Verificado visualmente por el usuario.
 
+2026-08-02 — SEO-1 completado: creados app/sitemap.ts y app/robots.ts
+usando las convenciones nativas de Next.js 16. El sitemap incluye las
+páginas estáticas (Home, /blog, /glosario, /casos-de-exito,
+/politica-de-privacidad) y cada artículo de blog dinámico, consultado
+desde Sanity con POST_SLUGS_QUERY. robots.ts bloquea /studio de la
+indexación y referencia el sitemap. URL base controlada por
+NEXT_PUBLIC_SITE_URL (con fallback al dominio de Vercel) — pendiente
+de actualizar esa variable cuando se compre un dominio propio.
+Verificado en /sitemap.xml y /robots.txt.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

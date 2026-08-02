@@ -40,7 +40,7 @@ PENDIENTES DE RETOQUE (tareas ya "hechas" con defectos conocidos, pausadas)
 PAUSADAS (no descartadas — retomar cuando el usuario lo indique)
  B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente con B3/B4
  B7. Verificar que Lenis no rompe ScrollTrigger (requiere sincronizar ambos — es un paso técnico conocido, no improvisar)
- B8. Footer — input de newsletter (solo UI): campo de email + botón "Suscribirme", validación básica de formato en el cliente. Sin conexión a backend todavía (destino del email aún no decidido) — eso será una tarea separada, B8-conectar.
+ [hecho]B8. Footer — input de newsletter (solo UI): campo de email + botón "Suscribirme", validación básica de formato en el cliente. Sin conexión a backend todavía (destino del email aún no decidido) — eso será una tarea separada, B8-conectar.
  A12. Formulario de contacto — VER FASE C (A12a-A12d), ahora desglosado porque el Service Key de HubSpot ya está disponible. Este ítem queda como referencia; el trabajo real vive en la Fase C.
 PRIORIDAD ACTUAL (decisión del usuario: avanzar con el blog)
 [hecho] A13. Setup de Sanity (pnpm create sanity@latest, schema mínimo: artículo de blog, término de glosario, caso de éxito)
@@ -69,7 +69,7 @@ C3. Despliegue
  [hecho] DEPLOY-1. Primer deploy a Vercel: conectar el repo, configurar variables de entorno (HUBSPOT_SERVICE_KEY, keys de Sanity, keys de reCAPTCHA cuando existan). Esto es un flujo conocido del dashboard de Vercel — tarea MANUAL del usuario según REGLA DE COSTO, no de un modelo de IA. [manual]
  DEPLOY-2. Confirmar que las Preview Deployments automáticas por rama funcionan (branch ≠ main → preview URL) antes de mandar nada a producción. También manual/configuración en el dashboard. [manual]
 C4. Testing
- QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
+ [hecho]QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
  QA-2. (opcional, evaluar más adelante) Test E2E automatizado con Playwright del flujo formulario → HubSpot. Pausado hasta después del lanzamiento salvo que el usuario decida priorizarlo antes. [código]
 C5. Medición y analítica
  ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
@@ -79,8 +79,8 @@ C6. Vacíos técnicos (orden sugerido: SEO/metadatos primero, por impacto
 
 en la primera impresión al compartir el link; accesibilidad y límites de plan al final porque no bloquean el lanzamiento)
 
- SEO-1. sitemap.xml + robots.txt, incluyendo bloquear /studio (panel de Sanity) de la indexación. [código]
- SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
+ [hecho] SEO-1. sitemap.xml + robots.txt, incluyendo bloquear /studio (panel de Sanity) de la indexación. [código]
+ [SIGUIENTE] SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
  SEO-3. llms.txt básico. [código]
  META-1. Favicon + metadatos Open Graph (título, descripción, imagen de preview) usando la Metadata API de Next — requiere que el usuario provea el asset del favicon/imagen OG si no existe uno todavía. [código, puede necesitar un asset del usuario]
  ERROR-1. Página 404 personalizada. [código]
