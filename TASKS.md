@@ -80,8 +80,8 @@ C6. Vacíos técnicos (orden sugerido: SEO/metadatos primero, por impacto
 en la primera impresión al compartir el link; accesibilidad y límites de plan al final porque no bloquean el lanzamiento)
 
  [hecho] SEO-1. sitemap.xml + robots.txt, incluyendo bloquear /studio (panel de Sanity) de la indexación. [código]
- [SIGUIENTE] SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
- SEO-3. llms.txt básico. [código]
+ [hecho] SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
+ [SIGUIENTE]SEO-3. llms.txt básico. [código]
  META-1. Favicon + metadatos Open Graph (título, descripción, imagen de preview) usando la Metadata API de Next — requiere que el usuario provea el asset del favicon/imagen OG si no existe uno todavía. [código, puede necesitar un asset del usuario]
  ERROR-1. Página 404 personalizada. [código]
  ACCESS-1. Correr Lighthouse y/o axe DevTools sobre el sitio desplegado y anotar hallazgos. Es una verificación con herramienta conocida — tarea MANUAL del usuario según REGLA DE COSTO; un modelo de IA puede ayudar después a corregir problemas puntuales que se encuentren. [manual, con posible seguimiento en código]

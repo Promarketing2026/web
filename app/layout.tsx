@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { OrganizationJsonLd } from "@/components/organization-jsonld";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { UtmCapture } from "@/components/utm-capture";
 import "./globals.css";
@@ -14,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Promarketing Per\u00fa",
-  description: "Promarketing Per\u00fa",
+  title: "Promarketing Perú",
+  description: "Promarketing Perú",
 };
 
 export default function RootLayout({
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <OrganizationJsonLd />
         <Suspense fallback={null}>
           <UtmCapture />
         </Suspense>
@@ -35,7 +37,7 @@ export default function RootLayout({
         <SmoothScrollProvider>
           <main className="flex-1">{children}</main>
         </SmoothScrollProvider>
-        <footer aria-label="Pie de p\u00e1gina">
+        <footer aria-label="Pie de página">
           <Footer />
         </footer>
       </body>

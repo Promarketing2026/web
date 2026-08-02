@@ -133,6 +133,14 @@ indexación y referencia el sitemap. URL base controlada por
 NEXT_PUBLIC_SITE_URL (con fallback al dominio de Vercel) — pendiente
 de actualizar esa variable cuando se compre un dominio propio.
 Verificado en /sitemap.xml y /robots.txt.
+2026-08-02 — SEO-2 completado: creado lib/site-config.ts centralizando
+SITE_URL, SITE_NAME ("Promarketing Perú"), LEGAL_NAME ("Promarketing
+Consulting S.A.C.") y SOCIAL_LINKS (Instagram, LinkedIn, Facebook,
+YouTube, TikTok, X). Creado components/organization-jsonld.tsx con
+JSON-LD de tipo Organization + WebSite, montado en app/layout.tsx.
+sitemap.ts y robots.ts refactorizados para usar el mismo SITE_URL
+centralizado. Verificado en el código fuente de la página: el script
+application/ld+json se renderiza correctamente con todos los datos.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

@@ -2,13 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { client } from "@/sanity/lib/client";
 import { POST_SLUGS_QUERY } from "@/sanity/lib/queries";
-
-// NEXT_PUBLIC_SITE_URL: agregar esta variable en .env.local y en Vercel
-// cuando se decida el dominio final. Mientras tanto, usa el dominio
-// gratuito de Vercel como valor por defecto — no hace falta tocar este
-// archivo cuando el dominio cambie, solo actualizar la variable.
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://web-orcin-sigma-57.vercel.app";
+import { SITE_URL } from "@/lib/site-config";
 
 const staticRoutes = [
   "",
