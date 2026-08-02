@@ -91,5 +91,38 @@ al hook useGSAP de @gsap/react, que sincroniza correctamente la
 limpieza de ScrollTrigger/pin-spacer con el desmontaje de React
 durante la navegación entre páginas.
 
+2026-07-31 — Corregido bug en lib/hubspot.ts (hallazgo de QA-1): cuando
+un contacto ya existía en HubSpot (mismo email, respuesta 409), el
+código no actualizaba sus propiedades — Empresa y Servicio de interés
+se perdían en envíos repetidos. Ahora se hace un PATCH al contacto
+existente vía idProperty=email. Verificado en HubSpot: ambos campos se
+actualizan correctamente. También corregido en auditoria-form.tsx:
+noValidate desactivaba la validación nativa del navegador, impidiendo
+ver los mensajes de error personalizados de zod (A12b) — se quitó
+noValidate={false} y los atributos required redundantes.
+
+2026-07-31 — Corregido rate limiting (hallazgo de QA-1): faltaba
+conectar Upstash Redis. Se creó la base de datos "promarketing-rate-limit"
+(plan Free) desde el Marketplace de Vercel, conectada al proyecto `web`
+en los 3 entornos. Variables KV_REST_API_URL y KV_REST_API_TOKEN
+agregadas a Vercel (automático) y a .env.local (manual). Verificado:
+al 4to envío en menos de 10 min, el formulario bloquea correctamente
+con el mensaje de rate limit.
+2026-07-31 — Corregido navbar (hallazgo de QA-1): los anchors (Inicio,
+Solución, Contacto) y el logo usaban hrefs relativos (#inicio), que
+solo funcionaban estando ya en el Home. Cambiados a rutas absolutas
+(/#inicio, /#solucion, /#contacto) en components/navbar.tsx para que
+funcionen correctamente desde /blog, /glosario y /casos-de-exito.
+Verificado en un artículo del blog.
+2026-07-31 — Footer corregido (hallazgo de QA-1) y B8 completado:
+reemplazados los íconos genéricos de RR.SS. por logos reales
+(FaInstagram, FaLinkedinIn, FaFacebookF de react-icons, dependencia
+nueva agregada con aprobación explícita del usuario). Copyright
+centrado con text-center. Se creó newsletter-form.tsx (B8): campo de
+email + botón "Suscribirme", validación de formato en el cliente, sin
+backend todavía (queda como B8-conectar). También se corrigieron los
+anchors "Inicio"/"Solución" del footer (mismo bug que el navbar,
+/#seccion en vez de #seccion). Verificado visualmente por el usuario.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

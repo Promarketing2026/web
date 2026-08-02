@@ -1,33 +1,29 @@
-import {
-  AtSign,
-  BriefcaseBusiness,
-  Mail,
-  MapPin,
-  Phone,
-  Share2,
-} from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+
+import { NewsletterForm } from "@/components/newsletter-form";
 
 const socialLinks = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/promarketingperu",
-    icon: AtSign,
+    icon: FaInstagram,
   },
   {
     label: "LinkedIn",
     href: "https://pe.linkedin.com/company/promarketingpe",
-    icon: BriefcaseBusiness,
+    icon: FaLinkedinIn,
   },
   {
     label: "Facebook",
     href: "https://www.facebook.com/ProMarketingConsulting/",
-    icon: Share2,
+    icon: FaFacebookF,
   },
 ];
 
 const footerNavLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Solución", href: "#solucion" },
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Solución", href: "/#solucion" },
   { label: "Blog", href: "/blog" },
   { label: "Glosario", href: "/glosario" },
   { label: "Casos de Éxito", href: "/casos-de-exito" },
@@ -40,7 +36,7 @@ export function Footer() {
   return (
     <div className="border-t border-border bg-muted/40 px-6 py-12 sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
-        <div className="grid gap-10 md:grid-cols-[1.25fr_0.8fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <p className="text-base font-semibold text-foreground">
               Promarketing Perú
@@ -121,9 +117,13 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          <div>
+            <NewsletterForm />
+          </div>
         </div>
 
-        <p className="border-t border-border pt-6 text-sm text-muted-foreground">
+        <p className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
           © 2026 Promarketing Perú. Todos los derechos reservados.
         </p>
       </div>

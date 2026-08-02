@@ -17,6 +17,14 @@ import { checkRateLimit } from "@/lib/rate-limit";
 // producción. En desarrollo local puede venir vacío — por eso hay un
 // fallback a "unknown", que simplemente comparte una sola "IP" para todas
 // tus pruebas locales (no afecta a usuarios reales).
+//
+// A12a — retoque QA: si el contacto ya existe en HubSpot (mismo email),
+// la API responde 409. Antes, ese caso se trataba como "éxito" sin
+// actualizar nada — así que reenviar el formulario con el mismo correo
+// pero con Empresa/Servicio distintos nunca llegaba a HubSpot. Ahora, en
+// caso de 409, hacemos un PATCH al contacto existente (usando el email
+// como identificador) para actualizar sus propiedades con los datos
+// nuevos del envío.
 // ─────────────────────────────────────────────────────────────────────────
 
 export type AuditoriaFormState = {
@@ -58,6 +66,38 @@ async function getClientIp(): Promise<string> {
   const headersList = await headers();
   const forwardedFor = headersList.get("x-forwarded-for");
   return forwardedFor?.split(",")[0]?.trim() || "unknown";
+}
+
+async function updateExistingContact(
+  email: string,
+  properties: Record<string, string | undefined>,
+): Promise<boolean> {
+  const url = `${HUBSPOT_CONTACTS_URL}/${encodeURIComponent(email)}?idProperty=email`;
+
+  try {
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${process.env.HUBSPOT_SERVICE_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ properties }),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      console.error(
+        "HubSpot: fallo al actualizar contacto existente:",
+        response.status,
+        errorBody,
+      );
+    }
+
+    return response.ok;
+  } catch (error) {
+    console.error("Error de red al actualizar contacto en HubSpot:", error);
+    return false;
+  }
 }
 
 export async function submitAuditoriaForm(
@@ -118,6 +158,14 @@ export async function submitAuditoriaForm(
   const [firstname, ...restoDelNombre] = nombre.split(" ");
   const lastname = restoDelNombre.join(" ") || undefined;
 
+  const properties = {
+    firstname,
+    lastname,
+    email,
+    company: empresa || undefined,
+    servicio_de_interes: servicio || undefined,
+  };
+
   try {
     const response = await fetch(HUBSPOT_CONTACTS_URL, {
       method: "POST",
@@ -125,19 +173,27 @@ export async function submitAuditoriaForm(
         Authorization: `Bearer ${process.env.HUBSPOT_SERVICE_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        properties: {
-          firstname,
-          lastname,
-          email,
-          company: empresa || undefined,
-          servicio_de_interes: servicio || undefined,
-        },
-      }),
+      body: JSON.stringify({ properties }),
     });
 
-    if (response.ok || response.status === 409) {
+    if (response.ok) {
       return { status: "success" };
+    }
+
+    if (response.status === 409) {
+      // El contacto ya existe (mismo email) — actualizamos sus
+      // propiedades en vez de descartar los datos nuevos del envío.
+      const updated = await updateExistingContact(email, properties);
+
+      if (updated) {
+        return { status: "success" };
+      }
+
+      return {
+        status: "error",
+        message:
+          "No pudimos actualizar tu solicitud en este momento. Intenta de nuevo en unos minutos.",
+      };
     }
 
     const errorBody = await response.text();

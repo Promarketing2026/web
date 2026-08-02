@@ -49,7 +49,7 @@ export function AuditoriaForm() {
   const consentimientoError = state.fieldErrors?.consentimiento;
 
   return (
-    <form action={formAction} className="space-y-4" noValidate={false}>
+    <form action={formAction} className="space-y-4" noValidate>
       <div
         aria-hidden="true"
         style={{
@@ -81,7 +81,6 @@ export function AuditoriaForm() {
           id="nombre"
           name="nombre"
           type="text"
-          required
           autoComplete="name"
           aria-invalid={Boolean(nombreError)}
           aria-describedby={nombreError ? "nombre-error" : undefined}
@@ -105,7 +104,6 @@ export function AuditoriaForm() {
           id="email"
           name="email"
           type="email"
-          required
           autoComplete="email"
           aria-invalid={Boolean(emailError)}
           aria-describedby={emailError ? "email-error" : undefined}
@@ -173,7 +171,6 @@ export function AuditoriaForm() {
           id="consentimiento"
           name="consentimiento"
           type="checkbox"
-          required
           aria-invalid={Boolean(consentimientoError)}
           aria-describedby={
             consentimientoError ? "consentimiento-error" : undefined
