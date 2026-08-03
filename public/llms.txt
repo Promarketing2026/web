@@ -1,0 +1,18 @@
+# Promarketing Perú
+
+> Diseñamos Infraestructura Comercial Conectada para organizaciones que necesitan crecer con claridad.
+
+## Sitio principal
+
+- [Inicio](https://web-orcin-sigma-57.vercel.app/): Presentación de Promarketing Perú y acceso a la Auditoría C.L.A.R.O.
+
+## Recursos
+
+- [Blog](https://web-orcin-sigma-57.vercel.app/blog): Artículos publicados por Promarketing Perú.
+- [Glosario](https://web-orcin-sigma-57.vercel.app/glosario): Términos y definiciones sobre infraestructura comercial.
+- [Casos de éxito](https://web-orcin-sigma-57.vercel.app/casos-de-exito): Casos de éxito publicados por Promarketing Perú.
+
+## Información adicional
+
+- [Política de privacidad](https://web-orcin-sigma-57.vercel.app/politica-de-privacidad): Información sobre el tratamiento de datos personales.
+- [Sitemap](https://web-orcin-sigma-57.vercel.app/sitemap.xml): Índice de URLs públicas del sitio.
