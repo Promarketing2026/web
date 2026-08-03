@@ -5,7 +5,16 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-A12c (anti-spam) y DEPLOY-1 (primer deploy a Vercel) completados. Sitio en producción: https://web-orcin-sigma-57.vercel.app/. Próximo paso: A12d (redirección post-envío a /gracias).
+Sitio en producción: https://web-orcin-sigma-57.vercel.app/. El formulario de
+Auditoría C.L.A.R.O. está conectado a HubSpot de punta a punta: validación
+con zod, checkbox de consentimiento legal, anti-spam (honeypot + rate
+limiting con Upstash Redis), y redirección a /gracias con UTMs capturados
+vía sessionStorage — todo verificado en producción. QA-1 se ejecutó y varios
+bugs encontrados durante esa verificación ya fueron corregidos (respuesta
+409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
+del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
+(sitemap.xml, robots.txt) y SEO-2 (JSON-LD Organization/WebSite) completados.
+Próximo paso: SEO-3 (llms.txt).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -15,8 +24,9 @@ A12c (anti-spam) y DEPLOY-1 (primer deploy a Vercel) completados. Sitio en produ
 - Animación de componentes: Motion (`motion/react` — NO usar el import viejo `framer-motion`)
 - Animación de scroll: GSAP + ScrollTrigger + SplitText + Lenis
 - CMS de contenido: Sanity.io (free tier)
-- CRM de leads: HubSpot (free tier) — vía API desde Server Action del formulario
-- Hosting: Vercel (free/Hobby)
+- CRM de leads: HubSpot (free tier) — vía Server Action con HUBSPOT_SERVICE_KEY
+- Hosting: Vercel (free/Hobby) — desplegado en producción
+- Anti-spam/rate limiting: Upstash Redis (free tier, vía integración de Vercel)
 
 ## Decisiones de diseño
 - Design system basado en referencias tipo Clerk/Vercel/Supabase, pero implementado
@@ -39,6 +49,9 @@ A12c (anti-spam) y DEPLOY-1 (primer deploy a Vercel) completados. Sitio en produ
 ## Pendiente de traer del usuario
 - BRAND.md (sistema de marca conceptual: tono de voz, valores, reglas — sin paleta todavía)
 - Contenido real de servicios y casos de éxito
+- Dominio propio (NEXT_PUBLIC_SITE_URL usa el dominio de Vercel como fallback)
+- Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
+- Asset de favicon/imagen Open Graph para META-1
 
 ## Última actualización
 2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
@@ -48,28 +61,43 @@ B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y 
 B5b agregó `ScrollTrigger` con pin, scrub y crossfade entre las 3 etapas del SVG durante `+=200%`.
 B5c sincronizó los tres textos existentes con las etapas del SVG reutilizando el mismo timeline y ScrollTrigger.
 B6 Motion en Prueba social, Objeciones y CTA final pasa a ser la siguiente tarea.
+
 2026-07-26 — A13 configuró Sanity Studio embebido en `/studio` con `next-sanity`.
 Se agregaron schemas mínimos para `post`, `glosarioTermino` y `casoDeExito`, parametrizados por variables `NEXT_PUBLIC_SANITY_*`.
 No se crearon páginas frontend del blog; quedan para una tarea posterior.
+
 2026-07-26 — A14a creó `/blog` y `/blog/[slug]` conectados a Sanity con GROQ.
 El listado muestra tarjetas responsive de `post`; el detalle renderiza título, fecha, imagen destacada y `contenido` con PortableText.
 No se crearon todavía páginas de glosario ni casos de éxito.
+
 2026-07-26 — A14b creó `/glosario` conectado a Sanity con GROQ.
 La página lista `glosarioTermino` en orden alfabético y usa accordion shadcn/Radix para mostrar la definición extendida.
 No se crearon páginas individuales por término.
+
 2026-07-26 — A14c creó `/casos-de-exito` conectado a Sanity con GROQ.
 La página lista `casoDeExito` en tarjetas y reutiliza la tarjeta de resultado extraída desde la sección Prueba social.
 No se crearon páginas individuales por caso.
+
 2026-07-26 — Navbar actualizado con dropdown estático "Recursos".
 El dropdown usa shadcn/Radix y enlaza a `/blog`, `/glosario` y `/casos-de-exito` manteniendo Inicio, Solución y Contacto.
+
 2026-07-26 — Footer reestructurado en columnas responsivas.
 La primera columna agrupa marca, descripción y redes; la segunda navegación; la tercera conserva Contacto; copyright queda al ancho completo.
+
 2026-07-26 — Página `/gracias` agregada para post-conversión.
 Incluye componente cliente reutilizable con contador 5→0, redirección a `/`, soporte de `servicio` y captura visible de parámetros UTM presentes en la URL.
+
+2026-07-30 — A12a completado: Server Action conectada a HubSpot CRM API
+(crm/v3/objects/contacts), integrada en FinalCta. Requirió regenerar el
+token en "Claves de servicio" (interfaz nueva de HubSpot reemplazó Private
+Apps).
+
+2026-07-30 — A12b completado: validación server-side con zod + checkbox de
+consentimiento explícito enlazado a /politica-de-privacidad (LEGAL-1).
+
 2026-07-30 — A12c completado: honeypot (campo "pagina_web") + rate limiting
 por IP con Upstash Redis (`lib/rate-limit.ts`, ventana de 10 min, máx. 3
-envíos), integrados en la Server Action de `lib/hubspot.ts`. Siguiente paso:
-A12d (redirección post-envío a /gracias con UTMs vía sessionStorage).
+envíos), integrados en la Server Action de `lib/hubspot.ts`.
 
 2026-07-30 — DEPLOY-1 completado: proyecto `web` desplegado en Vercel
 (https://web-orcin-sigma-57.vercel.app/). Variables HUBSPOT_SERVICE_KEY y
@@ -77,9 +105,8 @@ NEXT_PUBLIC_SANITY_* configuradas manualmente; hubo que desactivar
 "Vercel Authentication" en Deployment Protection porque venía activada
 por defecto y bloqueaba el acceso público al sitio. Verificado: Home,
 formulario→HubSpot, y /blog, /glosario, /casos-de-exito con contenido
-real de Sanity. Pendiente: conectar integración de Upstash Redis al
-proyecto (las variables KV/UPSTASH no se cargaron, rate limiting
-inactivo por ahora — el resto del anti-spam, honeypot, sí funciona).
+real de Sanity. Pendiente en ese momento: conectar integración de Upstash
+Redis al proyecto (resuelto después, ver entrada del 2026-07-31).
 
 2026-07-30 — A12d verificado end-to-end: formulario envía a HubSpot,
 redirige a /gracias con servicio y UTMs, countdown regresa al home.
@@ -108,12 +135,14 @@ en los 3 entornos. Variables KV_REST_API_URL y KV_REST_API_TOKEN
 agregadas a Vercel (automático) y a .env.local (manual). Verificado:
 al 4to envío en menos de 10 min, el formulario bloquea correctamente
 con el mensaje de rate limit.
+
 2026-07-31 — Corregido navbar (hallazgo de QA-1): los anchors (Inicio,
 Solución, Contacto) y el logo usaban hrefs relativos (#inicio), que
 solo funcionaban estando ya en el Home. Cambiados a rutas absolutas
 (/#inicio, /#solucion, /#contacto) en components/navbar.tsx para que
 funcionen correctamente desde /blog, /glosario y /casos-de-exito.
 Verificado en un artículo del blog.
+
 2026-07-31 — Footer corregido (hallazgo de QA-1) y B8 completado:
 reemplazados los íconos genéricos de RR.SS. por logos reales
 (FaInstagram, FaLinkedinIn, FaFacebookF de react-icons, dependencia
@@ -133,6 +162,7 @@ indexación y referencia el sitemap. URL base controlada por
 NEXT_PUBLIC_SITE_URL (con fallback al dominio de Vercel) — pendiente
 de actualizar esa variable cuando se compre un dominio propio.
 Verificado en /sitemap.xml y /robots.txt.
+
 2026-08-02 — SEO-2 completado: creado lib/site-config.ts centralizando
 SITE_URL, SITE_NAME ("Promarketing Perú"), LEGAL_NAME ("Promarketing
 Consulting S.A.C.") y SOCIAL_LINKS (Instagram, LinkedIn, Facebook,
@@ -141,6 +171,13 @@ JSON-LD de tipo Organization + WebSite, montado en app/layout.tsx.
 sitemap.ts y robots.ts refactorizados para usar el mismo SITE_URL
 centralizado. Verificado en el código fuente de la página: el script
 application/ld+json se renderiza correctamente con todos los datos.
+
+2026-08-03 — Corregida contradicción interna: la sección "Fase actual"
+(al inicio del archivo) estaba desactualizada respecto al resto del
+propio archivo — mencionaba A12d como pendiente cuando ya estaba hecho
+y verificado, y no reflejaba QA-1, SEO-1 ni SEO-2. Actualizada para
+coincidir con el estado real confirmado por las entradas de abajo y por
+TASKS.md (SEO-3 es la tarea [SIGUIENTE]).
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
