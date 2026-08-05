@@ -43,11 +43,11 @@ export default async function GlosarioPage() {
           >
             {terminos.map((termino) => (
               <AccordionItem key={termino._id} value={termino._id}>
-                <AccordionTrigger>
+                <AccordionTrigger headingLevel="h2">
                   <div className="grid flex-1 gap-3 text-left sm:grid-cols-[minmax(180px,0.36fr)_1fr] sm:gap-8">
-                    <h2 className="text-xl leading-snug font-semibold text-foreground">
+                    <span className="text-xl leading-snug font-semibold text-foreground">
                       {termino.termino}
-                    </h2>
+                    </span>
                     <p className="text-base leading-7 text-muted-foreground">
                       {termino.definicionCorta}
                     </p>
