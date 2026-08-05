@@ -84,11 +84,15 @@ conformidad ni sustituto de las pruebas manuales.
 ### A11Y-03 — Contraste del aviso preliminar de privacidad
 
 - Severidad: **HIGH**
-- Estado: **FAIL**
+- Estado: **PASS** después de ACCESS-2b.
 - Criterio relacionado: WCAG 2.2 AA, 1.4.3 Contraste mínimo.
 - Archivo: `app/politica-de-privacidad/page.tsx`.
 - Evidencia: texto de 14 px con relación `4.34:1`; requiere `4.5:1`.
 - Acción: usar un token de texto con mayor contraste sobre `bg-muted`.
+- Corrección: el aviso usa `text-foreground` sobre `bg-muted`, sin colores
+  hardcodeados.
+- Verificación: Lighthouse Accessibility de Privacidad obtuvo `100` y
+  `color-contrast: 1` localmente y en producción.
 
 ### A11Y-04 — Jerarquía de encabezados en Glosario
 
@@ -104,11 +108,14 @@ conformidad ni sustituto de las pruebas manuales.
 ### A11Y-05 — Landmark `main` duplicado en Privacidad
 
 - Severidad: **MEDIUM**
-- Estado: **FAIL** en la inspección semántica.
+- Estado: **PASS** después de ACCESS-2b.
 - Archivos: `app/layout.tsx` y `app/politica-de-privacidad/page.tsx`.
 - Evidencia: el layout ya envuelve todas las páginas en `<main>` y la página de
   privacidad añade un segundo `<main>` anidado.
 - Acción: sustituir el landmark interior por un contenedor o `section`.
+- Corrección: el contenedor interior ahora es una `section` etiquetada por el
+  `h1` mediante `aria-labelledby="privacy-policy-title"`.
+- Verificación: el HTML local y productivo contiene un solo `<main>`.
 
 ### A11Y-06 — Teclado y foco visible
 
@@ -130,9 +137,9 @@ conformidad ni sustituto de las pruebas manuales.
 | Control | Estado |
 | --- | --- |
 | Lighthouse Accessibility ≥95 en rutas evaluables | PASS |
-| Contraste WCAG 2.2 AA | FAIL — Educación corregida; Privacidad pendiente |
+| Contraste WCAG 2.2 AA | PASS en las rutas Lighthouse evaluadas |
 | Jerarquía de encabezados | FAIL |
-| Landmarks únicos y coherentes | FAIL |
+| Landmarks únicos y coherentes | PASS en la inspección actual |
 | Reduced motion | FAIL |
 | Navegación completa por teclado | BLOCKED |
 | Foco visible | BLOCKED |

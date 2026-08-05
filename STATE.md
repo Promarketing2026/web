@@ -21,7 +21,7 @@ añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
 pero la auditoría de accesibilidad produjo FAIL y BLOCKED verificables. Próximo
-paso: ACCESS-2b (contraste y landmark de Privacidad).
+paso: ACCESS-2c (jerarquía de encabezados del Glosario).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -309,6 +309,13 @@ movimiento reducido, no se crea ScrollTrigger ni pin/scrub y se presentan todos
 los textos con la etapa final estática. Lint, TypeScript y build PASS.
 Lighthouse Accessibility del Home obtuvo 100 y `color-contrast` PASS localmente
 y en producción. Próximo paso: ACCESS-2b.
+
+2026-08-05 — ACCESS-2b completado: el aviso preliminar de Privacidad usa
+`text-foreground` sobre `bg-muted`, y el `<main>` interior se sustituyó por una
+`section` etiquetada desde el `h1`. Lint, TypeScript y build PASS. Lighthouse
+Accessibility de Privacidad obtuvo 100 y contraste PASS localmente y en
+producción; el HTML productivo contiene un solo `<main>`. Próximo paso:
+ACCESS-2c.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
