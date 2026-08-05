@@ -250,8 +250,10 @@ ya está compartido con la cuenta publicitaria `1079263640454668`. Lint,
 TypeScript y build aprobados. Commit `78ce654` desplegado como Ready en Vercel;
 la URL oficial devuelve la CSP nueva. Tag Assistant confirmó que, con los cuatro
 permisos opcionales denegados, ninguna de las cuatro etiquetas del borrador se
-activa. Siguen pendientes Google Ads, los otros tres estados de consentimiento,
-un envío exitoso controlado y la publicación del contenedor. Riesgos a revisar:
+activa. Google Ads pasa a ANALYTICS-2B y queda pospuesto hasta que su cuenta esté
+configurada; no bloquea el cierre actual de GA4 y Meta. Siguen pendientes los
+otros tres estados de consentimiento, un envío exitoso controlado y la
+publicación del contenedor. Riesgos a revisar:
 el alias `web-promarketing1.vercel.app` aún sirve una versión anterior y Meta
 tiene activadas las coincidencias avanzadas automáticas.
 
