@@ -8,11 +8,11 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 const publicContentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.clarity.ms`,
+  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.clarity.ms https://www.googleadservices.com https://www.google.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://connect.facebook.net`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://cdn.sanity.io https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms",
+  "img-src 'self' data: blob: https://cdn.sanity.io https://www.googletagmanager.com https://*.google-analytics.com https://*.g.doubleclick.net https://www.google.com https://google.com https://www.google.com.pe https://pagead2.googlesyndication.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.facebook.com https://*.clarity.ms",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io https://www.google-analytics.com https://region1.google-analytics.com https://*.clarity.ms",
+  "connect-src 'self' https://*.api.sanity.io https://*.apicdn.sanity.io https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.g.doubleclick.net https://www.google.com https://google.com https://www.google.com.pe https://pagead2.googlesyndication.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.facebook.com https://*.clarity.ms",
   "frame-src 'self' https://www.googletagmanager.com https://meetings.hubspot.com",
   "media-src 'self' https://cdn.sanity.io",
   "worker-src 'self' blob:",

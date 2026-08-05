@@ -240,5 +240,15 @@ datos personales. Política de Privacidad actualizada. Lint, TypeScript, build,
 orden de scripts y flujos manuales aprobados. ANALYTICS-2 conserva GA4 como
 borrador sin publicar; Meta y Google Ads siguen pendientes.
 
+2026-08-04 — ANALYTICS-2 en curso: el formulario emite `lead_submit_success`
+una sola vez y únicamente después de que HubSpot confirma el envío; el evento
+incluye servicio y UTM, nunca nombre, correo ni empresa. CSP ampliada para los
+endpoints de GA4, Google Ads y Meta. En GTM quedaron en borrador GA4 base,
+`generate_lead`, Meta Pixel `937463375421449` y Meta `Lead`, todos con controles
+de consentimiento y activadores separados. Meta confirma que el píxel principal
+ya está compartido con la cuenta publicitaria `1079263640454668`. Lint,
+TypeScript y build aprobados. Sigue pendiente Google Ads, las pruebas de Tag
+Assistant, el despliegue de este código y la publicación del contenedor.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { submitAuditoriaForm, type AuditoriaFormState } from "@/lib/hubspot";
 import { getStoredUtmParams } from "@/lib/utm";
@@ -9,6 +9,7 @@ const initialState: AuditoriaFormState = { status: "idle" };
 
 export function AuditoriaForm() {
   const router = useRouter();
+  const conversionTrackedRef = useRef(false);
   const [state, formAction, isPending] = useActionState(
     submitAuditoriaForm,
     initialState,
@@ -24,6 +25,16 @@ export function AuditoriaForm() {
     const utms = getStoredUtmParams();
     for (const [key, value] of Object.entries(utms)) {
       if (value) params.set(key, value);
+    }
+
+    if (!conversionTrackedRef.current) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_submit_success",
+        lead_service: servicio || "not_selected",
+        ...utms,
+      });
+      conversionTrackedRef.current = true;
     }
 
     const query = params.toString();

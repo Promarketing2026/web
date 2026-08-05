@@ -77,7 +77,7 @@ C4. Testing
 C5. Medición y analítica
  [hecho] ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
  [hecho] CONSENT-1. Implementar preferencias de cookies y Consent Mode v2 antes de publicar etiquetas: estado predeterminado denegado para analítica/publicidad, aceptar/rechazar/configurar, persistencia local y opción revocable desde el footer. [código]
- [SIGUIENTE] ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers (ej. envío exitoso del formulario, vista de /gracias). Estado parcial: etiqueta base de GA4 guardada como borrador sin publicar. Antes de publicar: ampliar CSP para Meta/Google Ads, conectar el píxel Meta confirmado y crear la acción de conversión de Google Ads. [código + configuración]
+ [SIGUIENTE] ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers de conversión confirmada. Estado parcial: CSP ampliada; `lead_submit_success` se emite solo tras éxito de HubSpot; GA4 base + `generate_lead` y Meta Pixel base + `Lead` están configurados en borrador con controles de consentimiento. El píxel principal ya está vinculado a la cuenta publicitaria. Pendiente antes de publicar: crear la acción de conversión de Google Ads (la interfaz sigue bloqueada por el aviso de ad blocker), probar los cuatro estados de consentimiento en Tag Assistant y aprobar producción. [código + configuración]
  ANALYTICS-3. Instalar el snippet de Microsoft Clarity. [código]
 C6. Vacíos técnicos (orden sugerido: SEO/metadatos primero, por impacto
 
