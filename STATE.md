@@ -19,8 +19,8 @@ completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
 integrado mediante un único contenedor, limitado a producción. CONSENT-1
 añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
-Política de Privacidad. Próximo paso ejecutable: ERROR-1 (página 404
-personalizada).
+Política de Privacidad. ERROR-1 ya está completado. Próximo paso ejecutable:
+ACCESS-1 (auditoría de accesibilidad).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -284,6 +284,12 @@ GTM y el smoke test final en producción.
 pendiente y ANALYTICS-2 queda bloqueado, sin publicar el contenedor de GTM. No
 se adelantan Google Ads ni Clarity porque también dependen del marco de
 consentimiento. La siguiente tarea independiente y ejecutable es ERROR-1.
+
+2026-08-05 — ERROR-1 completado: se añadió una página 404 personalizada y
+responsive con enlaces accesibles al inicio y al blog, usando los componentes
+y tokens existentes. Lint, TypeScript y build aprobados. Una ruta inexistente
+respondió HTTP 404, mostró el contenido personalizado y conservó `noindex`.
+Próximo paso: ACCESS-1.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
