@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useReducedMotion } from "motion/react";
 
 import { EducationInfrastructureDiagram } from "@/components/education-infrastructure-diagram";
 
@@ -11,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function Education() {
   const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useGSAP(
     () => {
@@ -18,9 +20,20 @@ export function Education() {
       const textItems = gsap.utils.toArray<HTMLElement>("[data-education-item]");
 
       gsap.set(stages, { opacity: 0 });
+
+      if (shouldReduceMotion) {
+        const finalStage = stages[stages.length - 1];
+        if (finalStage) gsap.set(finalStage, { opacity: 1 });
+        gsap.set(textItems, { clearProps: "color", opacity: 1 });
+        return;
+      }
+
       gsap.set(stages[0], { opacity: 1 });
-      gsap.set(textItems, { opacity: 0.28 });
-      gsap.set(textItems[0], { opacity: 1 });
+      gsap.set(textItems, {
+        color: "var(--muted-foreground)",
+        opacity: 1,
+      });
+      gsap.set(textItems[0], { color: "var(--foreground)" });
 
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -36,16 +49,44 @@ export function Education() {
         .to({}, { duration: 1 })
         .to(stages[0], { opacity: 0, duration: 0.35, ease: "none" })
         .to(stages[1], { opacity: 1, duration: 0.35, ease: "none" }, "<")
-        .to(textItems[0], { opacity: 0.28, duration: 0.35, ease: "none" }, "<")
-        .to(textItems[1], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to(
+          textItems[0],
+          {
+            color: "var(--muted-foreground)",
+            duration: 0.35,
+            ease: "none",
+          },
+          "<",
+        )
+        .to(
+          textItems[1],
+          { color: "var(--foreground)", duration: 0.35, ease: "none" },
+          "<",
+        )
         .to({}, { duration: 1 })
         .to(stages[1], { opacity: 0, duration: 0.35, ease: "none" })
         .to(stages[2], { opacity: 1, duration: 0.35, ease: "none" }, "<")
-        .to(textItems[1], { opacity: 0.28, duration: 0.35, ease: "none" }, "<")
-        .to(textItems[2], { opacity: 1, duration: 0.35, ease: "none" }, "<")
+        .to(
+          textItems[1],
+          {
+            color: "var(--muted-foreground)",
+            duration: 0.35,
+            ease: "none",
+          },
+          "<",
+        )
+        .to(
+          textItems[2],
+          { color: "var(--foreground)", duration: 0.35, ease: "none" },
+          "<",
+        )
         .to({}, { duration: 1 });
     },
-    { scope: sectionRef },
+    {
+      dependencies: [shouldReduceMotion],
+      revertOnUpdate: true,
+      scope: sectionRef,
+    },
   );
 
   return (
