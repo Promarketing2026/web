@@ -1,12 +1,17 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { fadeUpVariant } from "@/lib/animations";
 
-const problemItem = fadeUpVariant({ y: 18, duration: 0.5 });
-
 export function Problem() {
+  const shouldReduceMotion = useReducedMotion();
+  const problemItem = fadeUpVariant({
+    y: 18,
+    duration: 0.5,
+    reducedMotion: shouldReduceMotion ?? false,
+  });
+
   return (
     <section
       aria-labelledby="problem-title"

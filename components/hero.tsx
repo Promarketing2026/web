@@ -1,15 +1,16 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { HeroInfrastructureDiagram } from "@/components/hero-infrastructure-diagram";
 import { fadeUpVariant } from "@/lib/animations";
 
-const heroItem = fadeUpVariant();
-
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+  const heroItem = fadeUpVariant({ reducedMotion: shouldReduceMotion ?? false });
+
   return (
     <section
       id="inicio"

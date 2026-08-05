@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Database, Megaphone, TrendingUp, Zap } from "lucide-react";
 import gsap from "gsap";
+import { useReducedMotion } from "motion/react";
 
 const nodes = [
   { label: "Marketing", Icon: Megaphone, x: 200, y: 48 },
@@ -29,6 +30,7 @@ const nodeDescriptions = [
 ];
 
 export function HeroInfrastructureDiagram() {
+  const shouldReduceMotion = useReducedMotion();
   const [activeNodeIndex, setActiveNodeIndex] = useState(0);
   const lightPathRef = useRef<SVGPathElement>(null);
   const glowPointRef = useRef<SVGCircleElement>(null);
@@ -41,6 +43,14 @@ export function HeroInfrastructureDiagram() {
     const description = descriptionRef.current;
 
     if (!lightPath || !glowPoint || !description) {
+      return;
+    }
+
+    if (shouldReduceMotion) {
+      gsap.set(lightPath, { clearProps: "strokeDasharray,strokeDashoffset" });
+      gsap.set(glowPoint, { opacity: 0 });
+      gsap.set(description, { opacity: 1 });
+      activeNodeIndexRef.current = 0;
       return;
     }
 
@@ -141,7 +151,7 @@ export function HeroInfrastructureDiagram() {
       introPulse.kill();
       loop.kill();
     };
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <div
@@ -241,7 +251,7 @@ export function HeroInfrastructureDiagram() {
         ref={descriptionRef}
         className="mx-auto min-h-12 max-w-sm text-center text-sm leading-6 text-muted-foreground"
       >
-        {nodeDescriptions[activeNodeIndex]}
+        {nodeDescriptions[shouldReduceMotion ? 0 : activeNodeIndex]}
       </p>
     </div>
   );

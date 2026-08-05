@@ -7,6 +7,7 @@ import { ConsentDefaults } from "@/components/consent-defaults";
 import { GoogleTagManager } from "@/components/google-tag-manager";
 import { Navbar } from "@/components/navbar";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
+import { MotionProvider } from "@/components/motion-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { UtmCapture } from "@/components/utm-capture";
 import {
@@ -75,9 +76,11 @@ export default function RootLayout({
         <header aria-label="Encabezado del sitio">
           <Navbar />
         </header>
-        <SmoothScrollProvider>
-          <main className="flex-1">{children}</main>
-        </SmoothScrollProvider>
+        <MotionProvider>
+          <SmoothScrollProvider>
+            <main className="flex-1">{children}</main>
+          </SmoothScrollProvider>
+        </MotionProvider>
         <footer aria-label="Pie de página">
           <Footer />
         </footer>

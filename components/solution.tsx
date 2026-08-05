@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 import { fadeUpVariant } from "@/lib/animations";
 
@@ -12,10 +12,16 @@ const auditDimensions = [
   "Optimización",
 ];
 
-const solutionItem = fadeUpVariant();
-const dimensionItem = fadeUpVariant({ y: 16, duration: 0.45 });
-
 export function Solution() {
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = shouldReduceMotion ?? false;
+  const solutionItem = fadeUpVariant({ reducedMotion });
+  const dimensionItem = fadeUpVariant({
+    y: 16,
+    duration: 0.45,
+    reducedMotion,
+  });
+
   return (
     <section
       id="solucion"
