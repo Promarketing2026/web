@@ -73,13 +73,21 @@ conformidad ni sustituto de las pruebas manuales.
 ### A11Y-02 — Movimiento reducido no implementado de forma integral
 
 - Severidad: **MEDIUM**
-- Estado: **FAIL** respecto al criterio interno del proyecto.
-- Evidencia: no existen usos de `useReducedMotion`,
+- Estado: **PASS** después de ACCESS-2d.
+- Evidencia inicial: no existían usos de `useReducedMotion`,
   `prefers-reduced-motion` ni variantes `motion-reduce` en el código auditado.
   GSAP fija y anima Educación, Motion anima varias secciones y Lenis mantiene
   desplazamiento suavizado para todos los usuarios.
 - Acción: establecer una política global de movimiento reducido y adaptar
   Motion, GSAP, diagramas animados y Lenis.
+- Corrección: `MotionConfig` respeta la preferencia del sistema, las variantes
+  de entrada muestran su estado final sin desplazamiento ni espera, Lenis no se
+  inicia, los timelines GSAP quedan estáticos y CSS reduce animaciones,
+  transiciones y desplazamiento suave no esenciales.
+- Verificación: Chrome con `prefers-reduced-motion: reduce` confirmó Lenis
+  inactivo, Hero visible sin transformación, bucle del diagrama detenido y
+  etapa final de Educación visible. Lighthouse Accessibility obtuvo `100` en
+  modo normal y reducido, localmente y en producción.
 
 ### A11Y-03 — Contraste del aviso preliminar de privacidad
 
@@ -146,13 +154,14 @@ conformidad ni sustituto de las pruebas manuales.
 | Contraste WCAG 2.2 AA | PASS en las rutas Lighthouse evaluadas |
 | Jerarquía de encabezados | PASS |
 | Landmarks únicos y coherentes | PASS en la inspección actual |
-| Reduced motion | FAIL |
+| Reduced motion | PASS |
 | Navegación completa por teclado | BLOCKED |
 | Foco visible | BLOCKED |
 | Evidencia documentada | PASS |
 
 ## Criterio de cierre
 
-ACCESS-1 queda ejecutada como auditoría, pero la accesibilidad del sitio no se
-considera aprobada. Los hallazgos deben corregirse y volver a probarse antes del
-cierre de producción.
+Los hallazgos automatizables de ACCESS-1 están corregidos y verificados. La
+accesibilidad del sitio todavía no se considera completamente aprobada porque
+la navegación por teclado y el foco visible continúan `BLOCKED` hasta
+restablecer el plugin del navegador y ejecutar ACCESS-VERIFY.

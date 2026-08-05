@@ -20,8 +20,9 @@ integrado mediante un único contenedor, limitado a producción. CONSENT-1
 añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
-pero la auditoría de accesibilidad produjo FAIL y BLOCKED verificables. Próximo
-paso: ACCESS-2d (política global restante de movimiento reducido).
+Los hallazgos automatizables de accesibilidad están corregidos; ACCESS-VERIFY
+continúa bloqueado por el plugin del navegador. Próximo paso ejecutable:
+LIMITS-1 (límites de los planes gratuitos).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -322,6 +323,13 @@ encabezado explícito y el Glosario usa la secuencia `h1 → h2`, sin encabezado
 dentro de botones. Lint, TypeScript y build PASS. Lighthouse Accessibility del
 Glosario obtuvo 100 y `heading-order` PASS localmente y en producción. Próximo
 paso: ACCESS-2d.
+
+2026-08-05 — ACCESS-2d completado: política global de movimiento reducido para
+Motion, Lenis, GSAP y transiciones CSS. Con la preferencia activa, las entradas
+quedan visibles sin desplazamiento, Lenis no inicia y los diagramas muestran un
+estado estático. Lint, TypeScript y build PASS. Chrome y Lighthouse verificaron
+modo normal y reducido localmente y en producción; Accessibility 100 en ambos.
+ACCESS-VERIFY sigue bloqueado por el plugin. Próximo paso ejecutable: LIMITS-1.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
