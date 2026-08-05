@@ -257,5 +257,14 @@ publicación del contenedor. Riesgos a revisar:
 el alias `web-promarketing1.vercel.app` aún sirve una versión anterior y Meta
 tiene activadas las coincidencias avanzadas automáticas.
 
+2026-08-05 — ANALYTICS-2, prepublicación aprobada: Tag Assistant verificó los
+cuatro estados de consentimiento. Con todo denegado no se activó ninguna
+etiqueta; solo analítica activó únicamente GA4; solo marketing activó únicamente
+Meta; aceptar todo activó ambas etiquetas base una vez. El envío controlado
+`2026promarketing+qa-analytics@gmail.com` fue confirmado por HubSpot como el
+contacto `239982014990`, redirigió a `/gracias` y activó una vez GA4
+`generate_lead` y una vez Meta `Lead`, sin duplicados. El contenedor sigue sin
+publicarse: falta aprobación explícita y el smoke test posterior en producción.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
