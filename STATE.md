@@ -247,8 +247,13 @@ endpoints de GA4, Google Ads y Meta. En GTM quedaron en borrador GA4 base,
 `generate_lead`, Meta Pixel `937463375421449` y Meta `Lead`, todos con controles
 de consentimiento y activadores separados. Meta confirma que el píxel principal
 ya está compartido con la cuenta publicitaria `1079263640454668`. Lint,
-TypeScript y build aprobados. Sigue pendiente Google Ads, las pruebas de Tag
-Assistant, el despliegue de este código y la publicación del contenedor.
+TypeScript y build aprobados. Commit `78ce654` desplegado como Ready en Vercel;
+la URL oficial devuelve la CSP nueva. Tag Assistant confirmó que, con los cuatro
+permisos opcionales denegados, ninguna de las cuatro etiquetas del borrador se
+activa. Siguen pendientes Google Ads, los otros tres estados de consentimiento,
+un envío exitoso controlado y la publicación del contenedor. Riesgos a revisar:
+el alias `web-promarketing1.vercel.app` aún sirve una versión anterior y Meta
+tiene activadas las coincidencias avanzadas automáticas.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
