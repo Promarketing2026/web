@@ -266,5 +266,17 @@ contacto `239982014990`, redirigió a `/gracias` y activó una vez GA4
 `generate_lead` y una vez Meta `Lead`, sin duplicados. El contenedor sigue sin
 publicarse: falta aprobación explícita y el smoke test posterior en producción.
 
+2026-08-05 — ANALYTICS-2, control previo a publicación: se confirmó que el
+activo correcto es el píxel de Meta `937463375421449`, asociado a Promarketing
+Perú 2026, y se desactivó la coincidencia avanzada automática; la interfaz dejó
+el control general y todos sus parámetros en “No”. La Política de Privacidad se
+actualizó al Reglamento vigente (D.S. N° 016-2024-JUS), corrigió los datos
+visibles y declaró el uso previsto de Google Tag Manager, GA4 y Meta, además de
+distinguir Google Ads y Clarity como no activos. Lint, TypeScript y build
+aprobados; el build requirió `NODE_OPTIONS=--use-system-ca` por la cadena de
+certificados local de Windows al consultar Sanity. El aviso de versión
+preliminar permanece: la revisión/aprobación jurídica bloquea la publicación de
+GTM y el smoke test final en producción.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

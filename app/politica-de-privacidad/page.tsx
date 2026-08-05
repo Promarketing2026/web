@@ -4,14 +4,14 @@ import type { Metadata } from "next";
 // LEGAL-1 — Página de Política de Privacidad
 //
 // Plantilla base alineada a la Ley N° 29733 (Ley de Protección de Datos
-// Personales, Perú) y su Reglamento (D.S. N° 003-2013-JUS).
+// Personales, Perú) y su Reglamento vigente (D.S. N° 016-2024-JUS).
 //
 // TODO ANTES DE LANZAR — completar y hacer revisar por un abogado:
-//   1. Reemplazar todos los valores entre [CORCHETES] con los datos reales
-//      de la empresa (razón social, RUC, domicilio, email de contacto).
-//   2. Confirmar con el usuario si existe (o existirá) un Banco Nacional
-//      de Datos Personales registrado ante la ANPD — hoy el texto asume
-//      que sí se hará el registro correspondiente, ajustar si no aplica.
+//   1. Confirmar que la razón social, RUC, domicilio y correo para ejercer
+//      derechos coinciden con la información legal vigente de la empresa.
+//   2. Confirmar si el banco de datos personales está inscrito (o se
+//      inscribirá) en el Registro Nacional de Protección de Datos Personales
+//      y añadir la información correspondiente si aplica.
 //   3. Una vez revisado y aprobado el contenido legal, eliminar el banner
 //      <ReviewNotice /> de abajo (o el flag SHOW_REVIEW_NOTICE).
 //   4. Enlazar esta página desde el checkbox de consentimiento del
@@ -19,7 +19,7 @@ import type { Metadata } from "next";
 // ─────────────────────────────────────────────────────────────────────────
 
 const SHOW_REVIEW_NOTICE = true;
-const LAST_UPDATED = "4 de agosto de 2026";
+const LAST_UPDATED = "5 de agosto de 2026";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
@@ -73,12 +73,14 @@ export default function PoliticaDePrivacidadPage() {
 
       <Section title="1. Responsable del tratamiento">
         <p>
-          PROMARKETING CONSULTING SAC, identificada con RUC 20601326532, con
-          domicilio en Calle las Cantamas Mz 13 Lt 6 Musa II ETapa, La Molina, Lima, PERÚ] (en adelante,
+          PROMARKETING CONSULTING S.A.C., identificada con RUC 20601326532,
+          con domicilio en Calle Las Cantamas Mz. 13 Lt. 6, Musa II Etapa, La
+          Molina, Lima, Perú (en adelante,
           &ldquo;Promarketing Perú&rdquo;), es responsable del tratamiento de
           los datos personales que usted proporciona a través de este sitio
           web, de conformidad con la Ley N° 29733, Ley de Protección de Datos
-          Personales, y su Reglamento (D.S. N° 003-2013-JUS).
+          Personales, y su Reglamento vigente, aprobado por el D.S. N°
+          016-2024-JUS.
         </p>
       </Section>
 
@@ -94,11 +96,19 @@ export default function PoliticaDePrivacidadPage() {
           <li>Servicio de su interés</li>
         </ul>
         <p>
-          Adicionalmente, este sitio puede utilizar herramientas de analítica
-          web y medición de campañas, como Google Analytics, Meta Pixel,
-          Google Ads y Microsoft Clarity. Las categorías opcionales se
+          Adicionalmente, las herramientas de analítica y medición que se
+          habiliten pueden recopilar identificadores en línea, información del
+          navegador o dispositivo, dirección IP aproximada, páginas visitadas
+          e interacciones con el sitio. Estas categorías opcionales se
           mantienen desactivadas hasta que usted expresa su preferencia en el
           panel de cookies.
+        </p>
+        <p>
+          La configuración prevista para el lanzamiento incluye Google
+          Analytics 4 para analítica y Meta Pixel para medición de campañas.
+          Google Ads y Microsoft Clarity no están activos actualmente; si se
+          incorporan, esta política y el panel de preferencias deberán
+          actualizarse antes de activarlos.
         </p>
         <p>
           Su elección se conserva localmente en el navegador y puede
@@ -136,6 +146,12 @@ export default function PoliticaDePrivacidadPage() {
           la casilla de aceptación en nuestro formulario de contacto, conforme
           al artículo 5 de la Ley N° 29733.
         </p>
+        <p>
+          El consentimiento para analítica y marketing se solicita de manera
+          separada mediante el panel de preferencias de cookies. Rechazar esas
+          categorías no impide utilizar las funciones necesarias del sitio, y
+          usted puede retirar o modificar su elección en cualquier momento.
+        </p>
       </Section>
 
       <Section title="5. Encargados de tratamiento y terceros">
@@ -159,24 +175,47 @@ export default function PoliticaDePrivacidadPage() {
             <strong className="text-foreground">Vercel</strong>: hospedaje
             técnico del sitio web.
           </li>
+          <li>
+            <strong className="text-foreground">Google</strong>: gestión de
+            etiquetas mediante Google Tag Manager y, únicamente con
+            consentimiento de analítica, medición mediante Google Analytics 4.
+          </li>
+          <li>
+            <strong className="text-foreground">Meta Platforms</strong>:
+            medición y atribución de campañas mediante Meta Pixel, únicamente
+            con consentimiento de marketing. La coincidencia avanzada
+            automática está desactivada y no enviamos intencionalmente a esta
+            herramienta el nombre, correo electrónico ni empresa ingresados en
+            el formulario.
+          </li>
         </ul>
         <p>
-          No vendemos ni cedemos sus datos personales a terceros con fines
-          distintos a los aquí descritos.
+          No vendemos sus datos personales. Solo los comunicamos a los
+          proveedores indicados en la medida necesaria para las finalidades
+          aquí descritas y según las preferencias que usted haya elegido.
         </p>
       </Section>
 
-      <Section title="6. Plazo de conservación">
+      <Section title="6. Tratamiento fuera del Perú">
+        <p>
+          Algunos de los proveedores tecnológicos indicados pueden procesar o
+          almacenar información fuera del Perú. Estas operaciones deberán
+          realizarse con las garantías contractuales y medidas de seguridad
+          exigibles para proteger los datos personales.
+        </p>
+      </Section>
+
+      <Section title="7. Plazo de conservación">
         <p>
           Conservamos sus datos personales mientras exista una relación
-          comercial o de interés vigente con usted, y hasta  24
+          comercial o de interés vigente con usted, y hasta 24
           meses después del último contacto, salvo que usted solicite antes
           su eliminación o exista una obligación legal de conservarlos por
           más tiempo.
         </p>
       </Section>
 
-      <Section title="7. Sus derechos (derechos ARCO)">
+      <Section title="8. Sus derechos (derechos ARCO)">
         <p>
           Usted puede ejercer en cualquier momento sus derechos de Acceso,
           Rectificación, Cancelación y Oposición (derechos ARCO), así como
@@ -197,7 +236,7 @@ export default function PoliticaDePrivacidadPage() {
         </p>
       </Section>
 
-      <Section title="8. Cambios a esta política">
+      <Section title="9. Cambios a esta política">
         <p>
           Podemos actualizar esta política para reflejar cambios legales,
           técnicos o en nuestros servicios. La fecha de la última
@@ -205,7 +244,7 @@ export default function PoliticaDePrivacidadPage() {
         </p>
       </Section>
 
-      <Section title="9. Contacto">
+      <Section title="10. Contacto">
         <p>
           Para cualquier consulta sobre esta Política de Privacidad, escríbanos
           a{" "}
