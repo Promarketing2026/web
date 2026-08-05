@@ -19,8 +19,9 @@ completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
 integrado mediante un único contenedor, limitado a producción. CONSENT-1
 añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
-Política de Privacidad. ERROR-1 ya está completado. Próximo paso ejecutable:
-ACCESS-1 (auditoría de accesibilidad).
+Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
+pero la auditoría de accesibilidad produjo FAIL y BLOCKED verificables. Próximo
+paso: ACCESS-2a (contraste y movimiento reducido en Educación).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -290,6 +291,16 @@ responsive con enlaces accesibles al inicio y al blog, usando los componentes
 y tokens existentes. Lint, TypeScript y build aprobados. Una ruta inexistente
 respondió HTTP 404, mostró el contenido personalizado y conservó `noindex`.
 Próximo paso: ACCESS-1.
+
+2026-08-05 — ACCESS-1 ejecutada y documentada en
+`docs/quality/accessibility-audit-2026-08-05.md`. Lighthouse Accessibility:
+Home 97 en escritorio y móvil, Blog 100, artículo 100, Glosario 98, Casos 100 y
+Privacidad 96. La referencia ≥95 pasa, pero el resultado general es FAIL por
+contraste en Educación y el aviso legal, jerarquía de encabezados del Glosario,
+`main` anidado en Privacidad y ausencia de una política integral de reduced
+motion. Teclado/foco queda BLOCKED: Chrome y la extensión están habilitados,
+pero falta el registro del native host y el plugin debe reinstalarse desde su
+interfaz. Próximo paso: ACCESS-2a.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
