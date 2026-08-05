@@ -21,8 +21,9 @@ añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
 Los hallazgos automatizables de accesibilidad están corregidos; ACCESS-VERIFY
-continúa bloqueado por el plugin del navegador. Próximo paso ejecutable:
-LIMITS-1 (límites de los planes gratuitos).
+continúa bloqueado por el plugin del navegador. LIMITS-1 detectó un riesgo HIGH:
+Vercel Hobby no admite sitios comerciales. Próximo paso: decisión HOSTING-1
+entre Vercel Pro o migración, sin ejecutar gastos sin aprobación explícita.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -330,6 +331,14 @@ quedan visibles sin desplazamiento, Lenis no inicia y los diagramas muestran un
 estado estático. Lint, TypeScript y build PASS. Chrome y Lighthouse verificaron
 modo normal y reducido localmente y en producción; Accessibility 100 en ambos.
 ACCESS-VERIFY sigue bloqueado por el plugin. Próximo paso ejecutable: LIMITS-1.
+
+2026-08-05 — LIMITS-1 completado con fuentes oficiales en
+`docs/infrastructure/free-tier-limits.md`. Se definieron umbrales internos de
+70 %/85 %, pero el consumo privado actual no fue leído y la capacidad no se
+considera verificada. Resultado FAIL/HIGH en Vercel: Hobby está
+restringido a uso personal no comercial y Promarketing promociona servicios.
+Próximo paso: HOSTING-1 requiere elegir Vercel Pro o migración; no se autoriza
+ningún gasto implícitamente.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
