@@ -19,7 +19,7 @@ import type { Metadata } from "next";
 // ─────────────────────────────────────────────────────────────────────────
 
 const SHOW_REVIEW_NOTICE = true;
-const LAST_UPDATED = "29 de julio de 2026";
+const LAST_UPDATED = "4 de agosto de 2026";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad",
@@ -94,12 +94,16 @@ export default function PoliticaDePrivacidadPage() {
           <li>Servicio de su interés</li>
         </ul>
         <p>
-          Adicionalmente, este sitio utiliza herramientas de analítica web y
-          medición de campañas (como Google Analytics, Google Tag Manager,
-          Meta Pixel y Microsoft Clarity) que pueden recopilar datos de
-          navegación de forma agregada. info@promarketingperu.comCompletar esta sección cuando
-          ANALYTICS-1/2/3 estén instaladas, detallando qué recopila cada
-          herramienta.]
+          Adicionalmente, este sitio puede utilizar herramientas de analítica
+          web y medición de campañas, como Google Analytics, Meta Pixel,
+          Google Ads y Microsoft Clarity. Las categorías opcionales se
+          mantienen desactivadas hasta que usted expresa su preferencia en el
+          panel de cookies.
+        </p>
+        <p>
+          Su elección se conserva localmente en el navegador y puede
+          modificarla en cualquier momento mediante el enlace
+          &ldquo;Preferencias de cookies&rdquo; disponible en el pie de página.
         </p>
       </Section>
 

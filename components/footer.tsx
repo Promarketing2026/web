@@ -1,7 +1,9 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
 import { NewsletterForm } from "@/components/newsletter-form";
+import { CookiePreferencesButton } from "@/components/cookie-preferences-button";
 
 const socialLinks = [
   {
@@ -123,9 +125,18 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
-          © 2026 Promarketing Perú. Todos los derechos reservados.
-        </p>
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-sm text-muted-foreground sm:flex-row">
+          <p>© 2026 Promarketing Perú. Todos los derechos reservados.</p>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <Link
+              href="/politica-de-privacidad"
+              className="hover:text-foreground"
+            >
+              Política de Privacidad
+            </Link>
+            <CookiePreferencesButton />
+          </div>
+        </div>
       </div>
     </div>
   );

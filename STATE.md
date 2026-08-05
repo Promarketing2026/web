@@ -16,8 +16,9 @@ del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
 (llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-4
 completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
-integrado mediante un único contenedor, limitado a producción. Próximo paso:
-ANALYTICS-2 (configurar tags y activadores dentro de GTM).
+integrado mediante un único contenedor, limitado a producción. CONSENT-1
+añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
+Próximo paso: ANALYTICS-2 (completar, probar y publicar tags en GTM).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -230,6 +231,14 @@ en el layout raíz. `NEXT_PUBLIC_GTM_ID` está validada y configurada únicament
 en Vercel Production; local y Preview no cargan el contenedor. Lint,
 TypeScript, builds por entorno, prueba negativa del ID y HTML generado
 aprobados. Próximo paso: ANALYTICS-2.
+
+2026-08-04 — CONSENT-1 completado: preferencias necesarias, analítica y
+marketing con aceptar, rechazar, configurar y revocar desde el footer. Consent
+Mode v2 establece analítica/publicidad como denegadas antes de cargar GTM y
+actualiza `dataLayer` después de cada elección; la preferencia se conserva sin
+datos personales. Política de Privacidad actualizada. Lint, TypeScript, build,
+orden de scripts y flujos manuales aprobados. ANALYTICS-2 conserva GA4 como
+borrador sin publicar; Meta y Google Ads siguen pendientes.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

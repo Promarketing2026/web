@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
+import { ConsentBanner } from "@/components/consent-banner";
+import { ConsentDefaults } from "@/components/consent-defaults";
 import { GoogleTagManager } from "@/components/google-tag-manager";
 import { Navbar } from "@/components/navbar";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
@@ -59,6 +61,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <ConsentDefaults />
+      </head>
       <body className="flex min-h-full flex-col">
         {isProductionDeployment && publicEnv.NEXT_PUBLIC_GTM_ID ? (
           <GoogleTagManager containerId={publicEnv.NEXT_PUBLIC_GTM_ID} />
@@ -76,6 +81,7 @@ export default function RootLayout({
         <footer aria-label="Pie de página">
           <Footer />
         </footer>
+        <ConsentBanner />
       </body>
     </html>
   );

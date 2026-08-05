@@ -76,7 +76,8 @@ C4. Testing
  QA-2. (opcional, evaluar más adelante) Test E2E automatizado con Playwright del flujo formulario → HubSpot. Pausado hasta después del lanzamiento salvo que el usuario decida priorizarlo antes. [código]
 C5. Medición y analítica
  [hecho] ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
- [SIGUIENTE] ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers (ej. envío exitoso del formulario, vista de /gracias). Esto se hace en la interfaz de GTM, no en el código del sitio — tarea MANUAL del usuario. [manual]
+ [hecho] CONSENT-1. Implementar preferencias de cookies y Consent Mode v2 antes de publicar etiquetas: estado predeterminado denegado para analítica/publicidad, aceptar/rechazar/configurar, persistencia local y opción revocable desde el footer. [código]
+ [SIGUIENTE] ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers (ej. envío exitoso del formulario, vista de /gracias). Estado parcial: etiqueta base de GA4 guardada como borrador sin publicar. Antes de publicar: ampliar CSP para Meta/Google Ads, conectar el píxel Meta confirmado y crear la acción de conversión de Google Ads. [código + configuración]
  ANALYTICS-3. Instalar el snippet de Microsoft Clarity. [código]
 C6. Vacíos técnicos (orden sugerido: SEO/metadatos primero, por impacto
 
