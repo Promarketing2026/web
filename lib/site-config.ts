@@ -1,4 +1,5 @@
 import { publicEnv } from "@/lib/env/public";
+import { isProductionDeployment } from "@/lib/env/deployment";
 
 // NEXT_PUBLIC_SITE_URL prevalece cuando existe. En Vercel se usa la URL
 // automática del despliegue; fuera de Vercel, localhost es solo un valor local.
@@ -8,7 +9,7 @@ function resolveSiteUrl(): string {
   }
 
   const vercelHost =
-    process.env.VERCEL_ENV === "production"
+    isProductionDeployment
       ? process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL
       : process.env.VERCEL_URL;
 

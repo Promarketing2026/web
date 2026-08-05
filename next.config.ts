@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 // Valida secretos y credenciales de infraestructura antes de iniciar dev/build.
 import "./lib/env/server";
+import { isProductionDeployment } from "./lib/env/deployment";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -63,6 +64,14 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=31536000",
   },
+  ...(isProductionDeployment
+    ? []
+    : [
+        {
+          key: "X-Robots-Tag",
+          value: "noindex, nofollow, noarchive",
+        },
+      ]),
 ];
 
 const nextConfig: NextConfig = {

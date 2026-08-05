@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { deploymentEnvironment } from "./deployment";
+
 const emptyStringToUndefined = (value: unknown) =>
   typeof value === "string" && value.trim() === "" ? undefined : value;
 
@@ -80,11 +82,10 @@ if (!parsedServerEnv.success) {
 }
 
 const parsed = parsedServerEnv.data;
-const rawEnvironment = process.env.VERCEL_ENV ?? "local";
 
 export const serverEnv = Object.freeze({
   hubspotServiceKey: parsed.HUBSPOT_SERVICE_KEY,
   redisUrl: parsed.KV_REST_API_URL ?? parsed.UPSTASH_REDIS_REST_URL!,
   redisToken: parsed.KV_REST_API_TOKEN ?? parsed.UPSTASH_REDIS_REST_TOKEN!,
-  deploymentEnvironment: rawEnvironment.replace(/[^a-zA-Z0-9_-]/g, "-"),
+  deploymentEnvironment,
 });

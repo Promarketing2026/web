@@ -12,6 +12,7 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from "@/lib/site-config";
+import { isProductionDeployment } from "@/lib/env/deployment";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  robots: isProductionDeployment
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
   },
