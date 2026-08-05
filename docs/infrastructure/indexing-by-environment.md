@@ -1,6 +1,6 @@
 # Indexación por entorno
 
-Última verificación local: 2026-08-04.
+Última verificación: 2026-08-04.
 
 ## Política
 
@@ -40,3 +40,14 @@ Se generaron y sirvieron dos builds separados:
 Vercel. Si el sitio migra a otro proveedor, debe definirse una señal de
 producción equivalente antes del despliegue; de lo contrario, el sistema
 seguirá correctamente en modo noindex por seguridad.
+
+## Evidencia de Preview
+
+- Commit verificado: `a66e13c`.
+- Vercel: `success` — `Deployment has completed`.
+- El acceso anónimo respondió `302` hacia Vercel Authentication e incluyó
+  `X-Robots-Tag: noindex`.
+- La sesión autorizada cargó el Home con meta `noindex, nofollow`.
+- El navegador conectado bloqueó la navegación directa a `/robots.txt`; por
+  ello su contenido remoto no se marca como verificado. El archivo sí se
+  comprobó en el build Preview exacto: `User-Agent: *` y `Disallow: /`.

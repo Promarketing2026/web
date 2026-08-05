@@ -14,8 +14,8 @@ bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
-(llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-3
-completados. Próximo paso: INFRA-4 (robots/noindex por entorno).
+(llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-4
+completados. Próximo paso: ANALYTICS-1 (Google Tag Manager).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -213,6 +213,14 @@ CORS de Sanity, esperado para URLs efímeras y no atribuible a la CSP. Riesgo
 residual MEDIUM aceptado por etapas hasta activar el bloqueo. Próximo paso:
 INFRA-4. Se registró FORM-NOTIFY-1 para notificar envíos a
 `promarketing2027@gmail.com`, con alcance y proveedor todavía por confirmar.
+
+2026-08-04 — INFRA-4 completado: solo `VERCEL_ENV=production` permite
+indexación. Preview, Development, local y entornos desconocidos bloquean el
+rastreo mediante `robots.txt`, meta robots y `X-Robots-Tag`; producción permite
+el sitio, mantiene `/studio` bloqueado y publica el sitemap. Lint, TypeScript,
+builds separados de Preview/Production y Preview real aprobados. La capa
+anónima de Vercel devolvió autenticación + `noindex` y la página autorizada
+incluyó meta `noindex, nofollow`. Próximo paso: ANALYTICS-1.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
