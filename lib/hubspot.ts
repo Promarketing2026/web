@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { headers } from "next/headers";
+import { serverEnv } from "@/lib/env/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -78,7 +79,7 @@ async function updateExistingContact(
     const response = await fetch(url, {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${process.env.HUBSPOT_SERVICE_KEY}`,
+        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ properties }),
@@ -170,7 +171,7 @@ export async function submitAuditoriaForm(
     const response = await fetch(HUBSPOT_CONTACTS_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.HUBSPOT_SERVICE_KEY}`,
+        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ properties }),

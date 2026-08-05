@@ -1,12 +1,21 @@
-// Datos centralizados del sitio y la empresa. Reutilizado por
-// app/sitemap.ts, app/robots.ts y el JSON-LD (SEO-2).
-//
-// NEXT_PUBLIC_SITE_URL: agregar esta variable en .env.local y en Vercel
-// cuando se decida el dominio final. Mientras tanto, usa el dominio
-// gratuito de Vercel como valor por defecto.
+import { publicEnv } from "@/lib/env/public";
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://web-orcin-sigma-57.vercel.app";
+// NEXT_PUBLIC_SITE_URL prevalece cuando existe. En Vercel se usa la URL
+// automática del despliegue; fuera de Vercel, localhost es solo un valor local.
+function resolveSiteUrl(): string {
+  if (publicEnv.NEXT_PUBLIC_SITE_URL) {
+    return publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  }
+
+  const vercelHost =
+    process.env.VERCEL_ENV === "production"
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL
+      : process.env.VERCEL_URL;
+
+  return vercelHost ? `https://${vercelHost}` : "http://localhost:3000";
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 // Nombre de marca (el que se muestra en el sitio: navbar, footer, etc.)
 export const SITE_NAME = "Promarketing Perú";

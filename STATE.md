@@ -15,7 +15,7 @@ bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
 (llms.txt) y META-1 (favicon oficial + Open Graph/Twitter) completados.
-Próximo paso: INFRA-1 (variables de entorno por entorno y validación).
+Próximo paso: INFRA-2 (auditoría de variables y Preview en Vercel).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -33,10 +33,9 @@ Próximo paso: INFRA-1 (variables de entorno por entorno y validación).
 - Design system basado en referencias tipo Clerk/Vercel/Supabase, pero implementado
   100% con TOKENS (variables CSS/Tailwind), no valores hardcodeados — así se puede
   cambiar de referencia visual después sin reescribir componentes.
-- Paleta de color: PENDIENTE A PROPÓSITO. El usuario la está definiendo como parte
-  de su proceso de aprendizaje de marca. Mientras tanto usar variables placeholder
-  neutras (ej. `--color-primary: #71717a` gris neutro) en vez de colores reales.
-  No inventar ni sugerir una paleta final sin que el usuario la traiga.
+- Paleta de color: aprobada en DOC 08. Debe implementarse mediante tokens
+  semánticos y mantenerse sincronizada entre código y Figma; Figma todavía
+  requiere la actualización correspondiente.
 
 ## Narrativa de conversión del Home (orden de bloques, ya definido)
 1. Hook (promesa clara, sin jerga)
@@ -50,9 +49,10 @@ Próximo paso: INFRA-1 (variables de entorno por entorno y validación).
 ## Pendiente de traer del usuario
 - BRAND.md (sistema de marca conceptual: tono de voz, valores, reglas — sin paleta todavía)
 - Contenido real de servicios y casos de éxito
-- Dominio propio (NEXT_PUBLIC_SITE_URL usa el dominio de Vercel como fallback)
+- Dominio propio (Vercel resuelve la URL actual; `NEXT_PUBLIC_SITE_URL`
+  prevalecerá cuando se configure el dominio definitivo)
 - Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
-- Asset de favicon/imagen Open Graph para META-1
+- Actualización del Design System en Figma para reflejar la paleta aprobada
 
 ## Última actualización
 2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
@@ -187,6 +187,14 @@ y por página, canonicals e imágenes Open Graph/Twitter. ESLint, TypeScript,
 build y comprobación visual aprobados. `docs/marca/` quedó excluida de Git.
 La paleta de DOC 08 fue confirmada como aprobada para producción y sus tokens
 de imagen social quedaron centralizados. Próximo paso: INFRA-1.
+
+2026-08-04 — INFRA-1 completado: variables públicas y privadas centralizadas
+y validadas con Zod al iniciar dev/build; pares Redis incompletos y credenciales
+obligatorias detienen el proceso sin revelar valores. La URL se resuelve por
+entorno y las claves de rate limiting separan local/Preview/producción. Matriz
+y operación documentadas en `docs/infrastructure/environment-variables.md`.
+Lint, TypeScript, build y pruebas negativas de configuración aprobados.
+Próximo paso: INFRA-2.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

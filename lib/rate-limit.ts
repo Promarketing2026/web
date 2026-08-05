@@ -1,14 +1,11 @@
 import { Redis } from "@upstash/redis";
 
-const redisUrl =
-  process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-const redisToken =
-  process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+import { serverEnv } from "@/lib/env/server";
 
-const redis =
-  redisUrl && redisToken
-    ? new Redis({ url: redisUrl, token: redisToken })
-    : null;
+const redis = new Redis({
+  url: serverEnv.redisUrl,
+  token: serverEnv.redisToken,
+});
 
 const WINDOW_SECONDS = 10 * 60; // ventana de 10 minutos
 const MAX_REQUESTS_PER_WINDOW = 3; // máximo de envíos permitidos en esa ventana
@@ -16,14 +13,7 @@ const MAX_REQUESTS_PER_WINDOW = 3; // máximo de envíos permitidos en esa venta
 export async function checkRateLimit(
   identifier: string,
 ): Promise<{ allowed: boolean }> {
-  if (!redis) {
-    console.warn(
-      "Rate limiting no configurado (faltan variables de Redis) — dejando pasar el envío.",
-    );
-    return { allowed: true };
-  }
-
-  const key = `rate-limit:auditoria:${identifier}`;
+  const key = `rate-limit:${serverEnv.deploymentEnvironment}:auditoria:${identifier}`;
 
   try {
     const count = await redis.incr(key);

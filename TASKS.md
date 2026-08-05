@@ -53,7 +53,7 @@ PRIORIDAD ACTUAL (decisión del usuario: avanzar con el blog)
 [hecho] CONV-1. Crear página /gracias con contador, redirección a /, soporte de query servicio y captura local de UTM para A12.
 FASE C — PRE-LANZAMIENTO
 
-Contexto: el Service Key de HubSpot y el link de Meetings ya existen (.env.local → HUBSPOT_SERVICE_KEY, scopes crm.objects.contacts.read y crm.objects.contacts.write). El orden de abajo asume que el formulario de Auditoría C.L.A.R.O. es la pieza crítica del pre-lanzamiento — todo lo demás existe para que ese formulario y el sitio sean seguros, legales y medibles antes de recibir tráfico real. Cada bloque indica si es tarea de código (para un modelo de IA) o tarea manual del usuario, según la REGLA DE COSTO de AGENTS.md. Get it get it
+Contexto: el Service Key de HubSpot y el link de Meetings ya existen (.env.local → HUBSPOT_SERVICE_KEY, scopes crm.objects.contacts.read y crm.objects.contacts.write). El orden de abajo asume que el formulario de Auditoría C.L.A.R.O. es la pieza crítica del pre-lanzamiento — todo lo demás existe para que ese formulario y el sitio sean seguros, legales y medibles antes de recibir tráfico real. La autonomía del agente y las acciones que requieren autorización se rigen por AGENTS.md.
 
 C0. Legal (bloquea A12 — el checkbox de consentimiento necesita un link real)
  [hecho] LEGAL-1. Página /politica-de-privacidad — plantilla base alineada a la Ley N° 29733 (Ley de Protección de Datos Personales, Perú): identidad del responsable del tratamiento, finalidad de los datos recogidos en el formulario, derechos ARCO, plazo de conservación, sin inventar datos de la empresa que el usuario no haya confirmado (razón social, RUC, email de contacto de datos). Contenido placeholder marcado explícitamente como "pendiente de revisión por un abogado" — mismo criterio que la paleta de marca: no se inventa el contenido final, solo la estructura. [código]
@@ -67,7 +67,9 @@ C2. Seguridad adicional
  SEC-1. reCAPTCHA v3 o hCaptcha en el formulario — requiere que el usuario genere las keys (site key + secret key) primero, igual que pasó con HubSpot. [código, bloqueado por una key del usuario]
 C3. Despliegue
  [hecho] DEPLOY-1. Primer deploy a Vercel: conectar el repo, configurar variables de entorno (HUBSPOT_SERVICE_KEY, keys de Sanity, keys de reCAPTCHA cuando existan). Esto es un flujo conocido del dashboard de Vercel — tarea MANUAL del usuario según REGLA DE COSTO, no de un modelo de IA. [manual]
- DEPLOY-2. Confirmar que las Preview Deployments automáticas por rama funcionan (branch ≠ main → preview URL) antes de mandar nada a producción. También manual/configuración en el dashboard. [manual]
+ [SIGUIENTE] INFRA-2. Auditar en Vercel, sin exponer valores, la presencia y alcance de variables en Development/Preview/Production; comprobar Preview Deployments y su protección. Cualquier cambio externo requiere autorización. [auditoría + configuración]
+ INFRA-3. Implementar y verificar cabeceras HTTP de seguridad y una CSP compatible con Next.js, Sanity, HubSpot y analítica; iniciar en Report-Only cuando corresponda. [código + verificación]
+ INFRA-4. Adaptar robots/noindex por entorno y comprobar que Preview no sea indexable; robots no sustituye la protección de acceso. [código + configuración]
 C4. Testing
  [hecho]QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
  QA-2. (opcional, evaluar más adelante) Test E2E automatizado con Playwright del flujo formulario → HubSpot. Pausado hasta después del lanzamiento salvo que el usuario decida priorizarlo antes. [código]
@@ -83,7 +85,7 @@ en la primera impresión al compartir el link; accesibilidad y límites de plan 
  [hecho] SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
  [hecho]SEO-3. llms.txt básico. [código]
  [hecho] META-1. Favicon + metadatos Open Graph (título, descripción, imagen de preview) usando la Metadata API de Next — requiere que el usuario provea el asset del favicon/imagen OG si no existe uno todavía. [código, puede necesitar un asset del usuario]
- [SIGUIENTE] INFRA-1. Centralizar y validar las variables de entorno obligatorias, documentando su aplicación en local, Preview y producción sin incluir secretos. [código + documentación]
+ [hecho] INFRA-1. Centralizar y validar las variables de entorno obligatorias, documentando su aplicación en local, Preview y producción sin incluir secretos. [código + documentación]
  ERROR-1. Página 404 personalizada. [código]
  ACCESS-1. Correr Lighthouse y/o axe DevTools sobre el sitio desplegado y anotar hallazgos. Es una verificación con herramienta conocida — tarea MANUAL del usuario según REGLA DE COSTO; un modelo de IA puede ayudar después a corregir problemas puntuales que se encuentren. [manual, con posible seguimiento en código]
  LIMITS-1. Documentar en STATE.md los límites del free tier de Sanity, HubSpot y Vercel (requests/mes, contactos, builds, etc.) para monitorear a medida que crece el tráfico. Tarea de investigación/ redacción, no de código — puede hacerla un modelo de IA con acceso a la documentación oficial de cada servicio. [investigación]
