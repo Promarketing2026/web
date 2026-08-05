@@ -6,6 +6,12 @@ import { Navbar } from "@/components/navbar";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { UtmCapture } from "@/components/utm-capture";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,8 +21,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Promarketing Perú",
-  description: "Promarketing Perú",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_PE",
+    url: "/",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

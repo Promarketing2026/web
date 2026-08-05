@@ -4,8 +4,11 @@ import { CASOS_DE_EXITO_QUERY } from "@/sanity/lib/queries";
 import type { CasoDeExito } from "@/sanity/lib/types";
 
 export const metadata = {
-  title: "Casos de exito | Promarketing Peru",
-  description: "Casos de exito de Promarketing Peru.",
+  title: "Casos de éxito",
+  description: "Casos de éxito de Promarketing Perú.",
+  alternates: {
+    canonical: "/casos-de-exito",
+  },
 };
 
 function getSituacionExtracto(situacion: string) {

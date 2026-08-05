@@ -11,6 +11,12 @@ export const SITE_URL =
 // Nombre de marca (el que se muestra en el sitio: navbar, footer, etc.)
 export const SITE_NAME = "Promarketing Perú";
 
+export const SITE_TITLE =
+  "Promarketing Perú | Infraestructura Comercial Conectada";
+
+export const SITE_DESCRIPTION =
+  "Integramos marketing, ventas, datos y automatización en un ecosistema coherente y trazable para organizaciones que necesitan crecer con claridad.";
+
 // Razón social real de la empresa — distinta del nombre de marca.
 export const LEGAL_NAME = "Promarketing Consulting S.A.C.";
 

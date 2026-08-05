@@ -38,8 +38,11 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 
   return {
-    title: `${post.titulo} | Promarketing Peru`,
+    title: post.titulo,
     description: post.extracto,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
   };
 }
 

@@ -7,8 +7,11 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import type { PostCard } from "@/sanity/lib/types";
 
 export const metadata = {
-  title: "Blog | Promarketing Peru",
-  description: "Articulos de Promarketing Peru.",
+  title: "Blog",
+  description: "Artículos de Promarketing Perú.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 function formatDate(date: string) {

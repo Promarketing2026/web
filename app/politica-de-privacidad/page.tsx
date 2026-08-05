@@ -22,9 +22,12 @@ const SHOW_REVIEW_NOTICE = true;
 const LAST_UPDATED = "29 de julio de 2026";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad — Promarketing Perú",
+  title: "Política de Privacidad",
   description:
     "Cómo Promarketing Perú recopila, usa y protege los datos personales de quienes contactan a través de este sitio, conforme a la Ley N° 29733.",
+  alternates: {
+    canonical: "/politica-de-privacidad",
+  },
 };
 
 function ReviewNotice() {

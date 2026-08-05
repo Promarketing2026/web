@@ -81,8 +81,9 @@ en la primera impresión al compartir el link; accesibilidad y límites de plan 
 
  [hecho] SEO-1. sitemap.xml + robots.txt, incluyendo bloquear /studio (panel de Sanity) de la indexación. [código]
  [hecho] SEO-2. JSON-LD (schema Organization/WebSite como mínimo) en el layout raíz o el Home. [código]
- [SIGUIENTE]SEO-3. llms.txt básico. [código]
- META-1. Favicon + metadatos Open Graph (título, descripción, imagen de preview) usando la Metadata API de Next — requiere que el usuario provea el asset del favicon/imagen OG si no existe uno todavía. [código, puede necesitar un asset del usuario]
+ [hecho]SEO-3. llms.txt básico. [código]
+ [hecho] META-1. Favicon + metadatos Open Graph (título, descripción, imagen de preview) usando la Metadata API de Next — requiere que el usuario provea el asset del favicon/imagen OG si no existe uno todavía. [código, puede necesitar un asset del usuario]
+ [SIGUIENTE] INFRA-1. Centralizar y validar las variables de entorno obligatorias, documentando su aplicación en local, Preview y producción sin incluir secretos. [código + documentación]
  ERROR-1. Página 404 personalizada. [código]
  ACCESS-1. Correr Lighthouse y/o axe DevTools sobre el sitio desplegado y anotar hallazgos. Es una verificación con herramienta conocida — tarea MANUAL del usuario según REGLA DE COSTO; un modelo de IA puede ayudar después a corregir problemas puntuales que se encuentren. [manual, con posible seguimiento en código]
  LIMITS-1. Documentar en STATE.md los límites del free tier de Sanity, HubSpot y Vercel (requests/mes, contactos, builds, etc.) para monitorear a medida que crece el tráfico. Tarea de investigación/ redacción, no de código — puede hacerla un modelo de IA con acceso a la documentación oficial de cada servicio. [investigación]

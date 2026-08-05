@@ -11,8 +11,11 @@ import { GLOSARIO_TERMINOS_QUERY } from "@/sanity/lib/queries";
 import type { GlosarioTermino } from "@/sanity/lib/types";
 
 export const metadata = {
-  title: "Glosario | Promarketing Peru",
-  description: "Terminos clave sobre infraestructura comercial y medicion.",
+  title: "Glosario",
+  description: "Términos clave sobre infraestructura comercial y medición.",
+  alternates: {
+    canonical: "/glosario",
+  },
 };
 
 export default async function GlosarioPage() {

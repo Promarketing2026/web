@@ -13,8 +13,9 @@ vía sessionStorage — todo verificado en producción. QA-1 se ejecutó y vario
 bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
-(sitemap.xml, robots.txt) y SEO-2 (JSON-LD Organization/WebSite) completados.
-Próximo paso: SEO-3 (llms.txt).
+(sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
+(llms.txt) y META-1 (favicon oficial + Open Graph/Twitter) completados.
+Próximo paso: INFRA-1 (variables de entorno por entorno y validación).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -178,6 +179,14 @@ propio archivo — mencionaba A12d como pendiente cuando ya estaba hecho
 y verificado, y no reflejaba QA-1, SEO-1 ni SEO-2. Actualizada para
 coincidir con el estado real confirmado por las entradas de abajo y por
 TASKS.md (SEO-3 es la tarea [SIGUIENTE]).
+SEO-3 completado (llms.txt estático en public/). Próximo paso: META-1
+(favicon + Open Graph).
+
+2026-08-04 — META-1 completado y verificado: favicon oficial, metadata global
+y por página, canonicals e imágenes Open Graph/Twitter. ESLint, TypeScript,
+build y comprobación visual aprobados. `docs/marca/` quedó excluida de Git.
+La paleta de DOC 08 fue confirmada como aprobada para producción y sus tokens
+de imagen social quedaron centralizados. Próximo paso: INFRA-1.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
