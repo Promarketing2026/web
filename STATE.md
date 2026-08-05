@@ -21,7 +21,7 @@ añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
 pero la auditoría de accesibilidad produjo FAIL y BLOCKED verificables. Próximo
-paso: ACCESS-2a (contraste y movimiento reducido en Educación).
+paso: ACCESS-2b (contraste y landmark de Privacidad).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -301,6 +301,14 @@ contraste en Educación y el aviso legal, jerarquía de encabezados del Glosario
 motion. Teclado/foco queda BLOCKED: Chrome y la extensión están habilitados,
 pero falta el registro del native host y el plugin debe reinstalarse desde su
 interfaz. Próximo paso: ACCESS-2a.
+
+2026-08-05 — ACCESS-2a completado: Educación ya no reduce textos a opacidad
+`0.28`; diferencia la etapa activa mediante `--foreground` y
+`--muted-foreground`, manteniendo contraste válido. Si el sistema solicita
+movimiento reducido, no se crea ScrollTrigger ni pin/scrub y se presentan todos
+los textos con la etapa final estática. Lint, TypeScript y build PASS.
+Lighthouse Accessibility del Home obtuvo 100 y `color-contrast` PASS localmente
+y en producción. Próximo paso: ACCESS-2b.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

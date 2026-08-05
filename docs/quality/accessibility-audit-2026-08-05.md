@@ -53,7 +53,7 @@ conformidad ni sustituto de las pruebas manuales.
 ### A11Y-01 — Contraste de textos inactivos en Educación
 
 - Severidad: **HIGH**
-- Estado: **FAIL**
+- Estado: **PASS** después de ACCESS-2a.
 - Criterio relacionado: WCAG 2.2 AA, 1.4.3 Contraste mínimo.
 - Archivo: `components/education.tsx`.
 - Causa: GSAP reduce los textos no activos a `opacity: 0.28`, pero continúan
@@ -63,6 +63,12 @@ conformidad ni sustituto de las pruebas manuales.
   - Texto de 30 px: relación `1.94:1`; requiere `3:1`.
 - Acción: rediseñar el estado inactivo para conservar contraste o retirar de la
   exposición visual/accesible el contenido que no corresponde a la etapa.
+- Corrección: la opacidad `0.28` se sustituyó por una transición entre
+  `--foreground` y `--muted-foreground`, ambos a opacidad completa. Con la
+  preferencia de movimiento reducido, no se crea ScrollTrigger: se muestran
+  todos los textos y la etapa final del diagrama de forma estática.
+- Verificación: lint, TypeScript y build PASS. Lighthouse Accessibility del
+  Home obtuvo `100` y `color-contrast: 1` tanto localmente como en producción.
 
 ### A11Y-02 — Movimiento reducido no implementado de forma integral
 
@@ -124,7 +130,7 @@ conformidad ni sustituto de las pruebas manuales.
 | Control | Estado |
 | --- | --- |
 | Lighthouse Accessibility ≥95 en rutas evaluables | PASS |
-| Contraste WCAG 2.2 AA | FAIL |
+| Contraste WCAG 2.2 AA | FAIL — Educación corregida; Privacidad pendiente |
 | Jerarquía de encabezados | FAIL |
 | Landmarks únicos y coherentes | FAIL |
 | Reduced motion | FAIL |
