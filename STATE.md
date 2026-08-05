@@ -15,7 +15,9 @@ bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
 (llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-4
-completados. Próximo paso: ANALYTICS-1 (Google Tag Manager).
+completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
+integrado mediante un único contenedor, limitado a producción. Próximo paso:
+ANALYTICS-2 (configurar tags y activadores dentro de GTM).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -221,6 +223,13 @@ el sitio, mantiene `/studio` bloqueado y publica el sitemap. Lint, TypeScript,
 builds separados de Preview/Production y Preview real aprobados. La capa
 anónima de Vercel devolvió autenticación + `noindex` y la página autorizada
 incluyó meta `noindex, nofollow`. Próximo paso: ANALYTICS-1.
+
+2026-08-04 — ANALYTICS-1 completado: se verificaron las cuentas de
+Promarketing en Google Tag Manager y GA4 y se instaló un único contenedor GTM
+en el layout raíz. `NEXT_PUBLIC_GTM_ID` está validada y configurada únicamente
+en Vercel Production; local y Preview no cargan el contenedor. Lint,
+TypeScript, builds por entorno, prueba negativa del ID y HTML generado
+aprobados. Próximo paso: ANALYTICS-2.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

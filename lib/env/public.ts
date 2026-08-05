@@ -32,6 +32,14 @@ const publicEnvSchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "debe usar el formato YYYY-MM-DD")
     .default("2026-07-26"),
   NEXT_PUBLIC_SITE_URL: optionalHttpUrl,
+  NEXT_PUBLIC_GTM_ID: z.preprocess(
+    emptyStringToUndefined,
+    z
+      .string()
+      .trim()
+      .regex(/^GTM-[A-Z0-9]+$/, "debe tener el formato GTM-XXXXXXXX")
+      .optional(),
+  ),
 });
 
 const parsedPublicEnv = publicEnvSchema.safeParse({
@@ -41,6 +49,7 @@ const parsedPublicEnv = publicEnvSchema.safeParse({
   NEXT_PUBLIC_SANITY_API_VERSION:
     process.env.NEXT_PUBLIC_SANITY_API_VERSION,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
 });
 
 if (!parsedPublicEnv.success) {

@@ -75,8 +75,8 @@ C4. Testing
  [hecho]QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
  QA-2. (opcional, evaluar más adelante) Test E2E automatizado con Playwright del flujo formulario → HubSpot. Pausado hasta después del lanzamiento salvo que el usuario decida priorizarlo antes. [código]
 C5. Medición y analítica
- [SIGUIENTE] ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
- ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers (ej. envío exitoso del formulario, vista de /gracias). Esto se hace en la interfaz de GTM, no en el código del sitio — tarea MANUAL del usuario. [manual]
+ [hecho] ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
+ [SIGUIENTE] ANALYTICS-2. Configurar dentro de GTM los tags de Meta Pixel, Google Ads Conversion Tracking y GA4, y los triggers (ej. envío exitoso del formulario, vista de /gracias). Esto se hace en la interfaz de GTM, no en el código del sitio — tarea MANUAL del usuario. [manual]
  ANALYTICS-3. Instalar el snippet de Microsoft Clarity. [código]
 C6. Vacíos técnicos (orden sugerido: SEO/metadatos primero, por impacto
 

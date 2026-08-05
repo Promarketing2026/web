@@ -12,6 +12,7 @@ Git.
 | `NEXT_PUBLIC_SANITY_DATASET` | Sí | Sí | Sí | No | Dataset que corresponde al entorno. |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | No | No | No | No | Usa `2026-07-26` si se omite. |
 | `NEXT_PUBLIC_SITE_URL` | Recomendado | Opcional | Recomendado | No | Prevalece sobre la URL automática de Vercel. |
+| `NEXT_PUBLIC_GTM_ID` | Opcional | No | Sí | No | ID público `GTM-…`; el contenedor solo se monta en Vercel Production. |
 | `HUBSPOT_SERVICE_KEY` | Sí | Sí | Sí | Sí | Token privado; nunca usar `NEXT_PUBLIC_`. |
 | `KV_REST_API_URL` | Sí | Sí | Sí | Sí | Debe existir junto con `KV_REST_API_TOKEN`. |
 | `KV_REST_API_TOKEN` | Sí | Sí | Sí | Sí | Debe existir junto con `KV_REST_API_URL`. |
@@ -23,6 +24,8 @@ pares incompletos.
 ## Comportamiento
 
 - Las variables `NEXT_PUBLIC_*` quedan fijadas cuando se ejecuta el build.
+- `NEXT_PUBLIC_GTM_ID` se valida, pero se ignora fuera de Vercel Production para
+  no medir visitas locales ni de Preview.
 - En Vercel, cada variable debe asignarse expresamente a Development, Preview y
   Production según corresponda.
 - Si `NEXT_PUBLIC_SITE_URL` no existe, Preview utiliza `VERCEL_URL` y producción
