@@ -21,7 +21,7 @@ añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
 ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
 pero la auditoría de accesibilidad produjo FAIL y BLOCKED verificables. Próximo
-paso: ACCESS-2c (jerarquía de encabezados del Glosario).
+paso: ACCESS-2d (política global restante de movimiento reducido).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -316,6 +316,12 @@ y en producción. Próximo paso: ACCESS-2b.
 Accessibility de Privacidad obtuvo 100 y contraste PASS localmente y en
 producción; el HTML productivo contiene un solo `<main>`. Próximo paso:
 ACCESS-2c.
+
+2026-08-05 — ACCESS-2c completado: `AccordionTrigger` admite un nivel de
+encabezado explícito y el Glosario usa la secuencia `h1 → h2`, sin encabezados
+dentro de botones. Lint, TypeScript y build PASS. Lighthouse Accessibility del
+Glosario obtuvo 100 y `heading-order` PASS localmente y en producción. Próximo
+paso: ACCESS-2d.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

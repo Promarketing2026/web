@@ -97,13 +97,19 @@ conformidad ni sustituto de las pruebas manuales.
 ### A11Y-04 — Jerarquía de encabezados en Glosario
 
 - Severidad: **MEDIUM**
-- Estado: **FAIL**
+- Estado: **PASS** después de ACCESS-2c.
 - Archivo: `app/glosario/page.tsx` y componente compartido de Accordion.
 - Evidencia: el encabezado generado por Radix para cada trigger se renderiza
   como `h3` inmediatamente después del `h1`, y el contenido incluye además un
   `h2` dentro del botón.
 - Acción: definir un nivel semántico coherente para los términos sin introducir
   encabezados anidados o saltos `h1 → h3`.
+- Corrección: `AccordionTrigger` admite un nivel de encabezado explícito; el
+  Glosario usa un `h2` como contenedor del trigger y el nombre del término se
+  renderiza como `span`, sin encabezados dentro del botón.
+- Verificación: el HTML local y productivo mantiene la secuencia `h1 → h2` sin
+  encabezados anidados. Lighthouse Accessibility del Glosario obtuvo `100` y
+  `heading-order: 1` localmente y en producción.
 
 ### A11Y-05 — Landmark `main` duplicado en Privacidad
 
@@ -138,7 +144,7 @@ conformidad ni sustituto de las pruebas manuales.
 | --- | --- |
 | Lighthouse Accessibility ≥95 en rutas evaluables | PASS |
 | Contraste WCAG 2.2 AA | PASS en las rutas Lighthouse evaluadas |
-| Jerarquía de encabezados | FAIL |
+| Jerarquía de encabezados | PASS |
 | Landmarks únicos y coherentes | PASS en la inspección actual |
 | Reduced motion | FAIL |
 | Navegación completa por teclado | BLOCKED |
