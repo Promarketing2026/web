@@ -14,8 +14,8 @@ bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
-(llms.txt) y META-1 (favicon oficial + Open Graph/Twitter) completados.
-Próximo paso: INFRA-2 (auditoría de variables y Preview en Vercel).
+(llms.txt), META-1 (favicon oficial + Open Graph/Twitter), INFRA-1 e INFRA-2
+completados. Próximo paso: INFRA-3 (cabeceras HTTP de seguridad y CSP).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -195,6 +195,13 @@ entorno y las claves de rate limiting separan local/Preview/producción. Matriz
 y operación documentadas en `docs/infrastructure/environment-variables.md`.
 Lint, TypeScript, build y pruebas negativas de configuración aprobados.
 Próximo paso: INFRA-2.
+
+2026-08-04 — INFRA-2 completado: alcances de variables auditados en Vercel sin
+leer valores y Standard Protection activada. Un Preview temporal terminó con
+estado correcto, exigió autenticación y devolvió `X-Robots-Tag: noindex`; el
+dominio público de producción mantuvo respuesta `200 OK`. La rama temporal se
+eliminó local y remotamente. Riesgo residual MEDIUM aceptado temporalmente:
+Preview y producción comparten HubSpot. Próximo paso: INFRA-3.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

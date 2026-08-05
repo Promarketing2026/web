@@ -38,3 +38,37 @@ pares incompletos.
 Local y Preview deberían usar cuentas, datasets o recursos de prueba cuando el
 proveedor lo permita. Si comparten HubSpot, Sanity o Redis con producción, esa
 decisión debe registrarse como riesgo residual antes de liberar.
+
+## Auditoría de Vercel — 2026-08-04
+
+Estado: **PASS**, con un riesgo residual temporal aceptado.
+
+La revisión se realizó sobre los nombres y alcances configurados; no se leyeron
+ni registraron valores secretos.
+
+| Grupo | Alcance observado en Vercel | Resultado |
+|---|---|---|
+| Sanity (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`) | Preview y Production | PASS. Comparten contenido publicado; no son secretos. Local usa `.env.local`. |
+| HubSpot (`HUBSPOT_SERVICE_KEY`) | Preview y Production | PASS con riesgo residual. Local usa `.env.local`. |
+| Redis/KV (`REDIS_URL`, `KV_URL`, `KV_REST_API_URL`, `KV_REST_API_TOKEN`, `KV_REST_API_READ_ONLY_TOKEN`) | Development, Preview y Production | PASS. Las claves lógicas de rate limiting incluyen el entorno. |
+| URL/API opcionales (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SANITY_API_VERSION`) | Sin valor explícito | PASS. Se aplican los fallbacks documentados. |
+
+### Preview y protección
+
+- Vercel Authentication quedó activada con **Standard Protection**.
+- La rama temporal `infra/preview-audit` generó automáticamente el deployment
+  `DPrRcinNeg4bwURX9AUXGCgGyqyp`; el estado de integración fue `success`
+  (`Deployment has completed`).
+- Una solicitud anónima al dominio del Preview respondió `302` hacia el inicio
+  de sesión de Vercel e incluyó `X-Robots-Tag: noindex`.
+- La URL generada de cada deployment de producción también queda protegida. El
+  dominio público asignado a producción, `web-orcin-sigma-57.vercel.app`, se
+  mantuvo accesible anónimamente con `200 OK`.
+- La rama de auditoría fue eliminada de Git local y del remoto al terminar.
+
+### Riesgo residual
+
+**MEDIUM — aceptado temporalmente:** Preview y Production usan la misma cuenta
+de HubSpot. Una prueba desde Preview puede crear o actualizar contactos reales.
+Hasta separar destinos, las pruebas deben usar correos identificables como test
+y no datos personales reales.

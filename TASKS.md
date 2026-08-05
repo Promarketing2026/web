@@ -67,8 +67,8 @@ C2. Seguridad adicional
  SEC-1. reCAPTCHA v3 o hCaptcha en el formulario — requiere que el usuario genere las keys (site key + secret key) primero, igual que pasó con HubSpot. [código, bloqueado por una key del usuario]
 C3. Despliegue
  [hecho] DEPLOY-1. Primer deploy a Vercel: conectar el repo, configurar variables de entorno (HUBSPOT_SERVICE_KEY, keys de Sanity, keys de reCAPTCHA cuando existan). Esto es un flujo conocido del dashboard de Vercel — tarea MANUAL del usuario según REGLA DE COSTO, no de un modelo de IA. [manual]
- [SIGUIENTE] INFRA-2. Auditar en Vercel, sin exponer valores, la presencia y alcance de variables en Development/Preview/Production; comprobar Preview Deployments y su protección. Cualquier cambio externo requiere autorización. [auditoría + configuración]
- INFRA-3. Implementar y verificar cabeceras HTTP de seguridad y una CSP compatible con Next.js, Sanity, HubSpot y analítica; iniciar en Report-Only cuando corresponda. [código + verificación]
+ [hecho] INFRA-2. Auditar en Vercel, sin exponer valores, la presencia y alcance de variables en Development/Preview/Production; comprobar Preview Deployments y su protección. Cualquier cambio externo requiere autorización. [auditoría + configuración]
+ [SIGUIENTE] INFRA-3. Implementar y verificar cabeceras HTTP de seguridad y una CSP compatible con Next.js, Sanity, HubSpot y analítica; iniciar en Report-Only cuando corresponda. [código + verificación]
  INFRA-4. Adaptar robots/noindex por entorno y comprobar que Preview no sea indexable; robots no sustituye la protección de acceso. [código + configuración]
 C4. Testing
  [hecho]QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
