@@ -7,8 +7,8 @@
 | Control | Estado | Evidencia |
 |---|---|---|
 | Cabeceras HTTP defensivas | PASS | Respuestas locales de `/` y `/studio` verificadas. |
-| CSP del sitio público | PASS — Report-Only | Cabecera emitida sin bloquear recursos. |
-| CSP específica de Sanity Studio | PASS — Report-Only | Política separada con API, WebSocket, workers y recursos de Sanity. |
+| CSP del sitio público | PASS — Report-Only | Cabecera local verificada y Home del Preview sin violaciones CSP. |
+| CSP específica de Sanity Studio | PASS — Report-Only | Studio cargó en Preview sin violaciones CSP; política separada con API, WebSocket y workers. |
 | CSP aplicada en modo estricto | PENDIENTE | Requiere observación en Preview con analítica instalada. |
 
 La CSP permanece en `Content-Security-Policy-Report-Only`. Este modo informa
@@ -63,6 +63,18 @@ Cambiar a `Content-Security-Policy` solo después de comprobar en un Preview:
 3. GTM, GA4 y Clarity instalados y funcionando con los orígenes actuales.
 4. Sin nuevos orígenes añadidos sin una función documentada.
 
-Riesgo residual **MEDIUM**: mientras la política sea Report-Only, una violación
-se detecta pero no se bloquea. Es temporal y debe reevaluarse al completar las
-tareas de analítica y la verificación de Preview.
+## Evidencia de Preview
+
+- Commit verificado: `44ba333`.
+- Vercel: `success` — `Deployment has completed`.
+- El acceso anónimo respondió `302` hacia Vercel Authentication y añadió
+  `X-Robots-Tag: noindex`.
+- La sesión autorizada cargó Home y `/studio` sin mensajes de violación CSP.
+- Sanity mostró que el origen efímero no estaba registrado en CORS. No se añadió
+  porque la rama y su URL son temporales; esta limitación no fue causada por la
+  CSP.
+
+Riesgo residual **MEDIUM, aceptado temporalmente por despliegue por etapas**:
+mientras la política sea Report-Only, una violación se detecta pero no se
+bloquea. Debe reevaluarse al completar las tareas de analítica y antes de pasar
+la cabecera a modo estricto.

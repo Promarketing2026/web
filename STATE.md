@@ -14,8 +14,8 @@ bugs encontrados durante esa verificación ya fueron corregidos (respuesta
 409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
 del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 (sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
-(llms.txt), META-1 (favicon oficial + Open Graph/Twitter), INFRA-1 e INFRA-2
-completados. Próximo paso: INFRA-3 (cabeceras HTTP de seguridad y CSP).
+(llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-3
+completados. Próximo paso: INFRA-4 (robots/noindex por entorno).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -53,6 +53,8 @@ completados. Próximo paso: INFRA-3 (cabeceras HTTP de seguridad y CSP).
   prevalecerá cuando se configure el dominio definitivo)
 - Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
 - Actualización del Design System en Figma para reflejar la paleta aprobada
+- Confirmar qué formularios deben notificar a `promarketing2027@gmail.com` y
+  elegir el proveedor de envío server-side para FORM-NOTIFY-1
 
 ## Última actualización
 2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
@@ -202,6 +204,15 @@ estado correcto, exigió autenticación y devolvió `X-Robots-Tag: noindex`; el
 dominio público de producción mantuvo respuesta `200 OK`. La rama temporal se
 eliminó local y remotamente. Riesgo residual MEDIUM aceptado temporalmente:
 Preview y producción comparten HubSpot. Próximo paso: INFRA-3.
+
+2026-08-04 — INFRA-3 completado: cabeceras HTTP defensivas y CSP diferenciada
+para el sitio público y Sanity Studio, inicialmente en Report-Only. Lint,
+TypeScript, build, respuestas locales y Preview aprobados; Home y Studio no
+registraron violaciones CSP. El Studio del dominio temporal pidió un origen
+CORS de Sanity, esperado para URLs efímeras y no atribuible a la CSP. Riesgo
+residual MEDIUM aceptado por etapas hasta activar el bloqueo. Próximo paso:
+INFRA-4. Se registró FORM-NOTIFY-1 para notificar envíos a
+`promarketing2027@gmail.com`, con alcance y proveedor todavía por confirmar.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
