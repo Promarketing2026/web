@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 function ReviewNotice() {
   if (!SHOW_REVIEW_NOTICE) return null;
   return (
-    <div className="mb-10 border-l-4 border-foreground/30 bg-muted px-4 py-3 text-sm text-muted-foreground">
+    <div className="mb-10 border-l-4 border-foreground/30 bg-muted px-4 py-3 text-sm text-foreground">
       <strong className="text-foreground">Versión preliminar.</strong> Este
       documento es una plantilla de referencia y todavía no ha sido revisado
       por un abogado. No debe considerarse asesoría legal ni un documento
@@ -61,11 +61,17 @@ function Section({
 
 export default function PoliticaDePrivacidadPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16 md:py-24">
+    <section
+      aria-labelledby="privacy-policy-title"
+      className="mx-auto max-w-3xl px-4 py-16 md:py-24"
+    >
       <p className="mb-2 text-sm uppercase tracking-wide text-muted-foreground">
         Legal
       </p>
-      <h1 className="mb-8 text-3xl font-bold text-foreground md:text-4xl">
+      <h1
+        id="privacy-policy-title"
+        className="mb-8 text-3xl font-bold text-foreground md:text-4xl"
+      >
         Política de Privacidad
       </h1>
 
@@ -261,6 +267,6 @@ export default function PoliticaDePrivacidadPage() {
       <p className="mt-12 text-sm text-muted-foreground">
         Última actualización: {LAST_UPDATED}
       </p>
-    </main>
+    </section>
   );
 }
