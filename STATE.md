@@ -18,7 +18,9 @@ del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
 completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
 integrado mediante un único contenedor, limitado a producción. CONSENT-1
 añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
-Próximo paso: ANALYTICS-2 (completar, probar y publicar tags en GTM).
+ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
+Política de Privacidad. Próximo paso ejecutable: ERROR-1 (página 404
+personalizada).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -277,6 +279,11 @@ aprobados; el build requirió `NODE_OPTIONS=--use-system-ca` por la cadena de
 certificados local de Windows al consultar Sanity. El aviso de versión
 preliminar permanece: la revisión/aprobación jurídica bloquea la publicación de
 GTM y el smoke test final en producción.
+
+2026-08-05 — Por decisión del usuario, la revisión jurídica se registra como
+pendiente y ANALYTICS-2 queda bloqueado, sin publicar el contenedor de GTM. No
+se adelantan Google Ads ni Clarity porque también dependen del marco de
+consentimiento. La siguiente tarea independiente y ejecutable es ERROR-1.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
