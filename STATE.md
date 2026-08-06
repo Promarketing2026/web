@@ -590,5 +590,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — Suavizado de Tiempos y Prevención de Sobreposición de Texto: ralentizada la animación del circuito a 8.0s (2.0s por tramo) con transiciones suaves en `components/hero-infrastructure-diagram.tsx`. Reubicadas las etiquetas de texto fuera de las circunferencias de los nodos (arriba en nodos superiores, abajo en nodos inferiores) con íconos perfectamente centrados a 24px para garantizar legibilidad y cero colisiones visuales. `pnpm build` verificado con éxito.
 
+2026-08-05 — Potenciación Estética del Diagrama Hero: añadidos rejilla técnica de plano arquitectónico en el SVG (`#circuit-grid`), rayos radiales interconectados hacia el núcleo de marca, doble estela láser con sombra luminosa neón (`#3CF5B5`), ondas de pulso expandible en los nodos activos y tarjeta de descripción con insignia dinámica e ícono de la capacidad seleccionada. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
