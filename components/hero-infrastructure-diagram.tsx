@@ -8,21 +8,21 @@ import { useReducedMotion } from "motion/react";
 import { BrandIsotipo } from "@/components/brand-logo";
 
 const nodes = [
-  { id: "marketing", label: "Marketing", Icon: Megaphone, x: 80, y: 50 },
-  { id: "ventas", label: "Ventas", Icon: TrendingUp, x: 360, y: 50 },
-  { id: "datos", label: "Datos", Icon: Database, x: 360, y: 190 },
-  { id: "automatizacion", label: "Automatización", Icon: Zap, x: 80, y: 190 },
+  { id: "marketing", label: "Marketing", Icon: Megaphone, x: 85, y: 65 },
+  { id: "ventas", label: "Ventas", Icon: TrendingUp, x: 375, y: 65 },
+  { id: "datos", label: "Datos", Icon: Database, x: 375, y: 195 },
+  { id: "automatizacion", label: "Automatización", Icon: Zap, x: 85, y: 195 },
 ];
 
-// Circuito Rectangular Horizontal con esquinas suavizadas
+// Circuito Rectangular Horizontal amplio y proporcionado
 const loopPath =
-  "M 96 50 H 344 Q 360 50 360 66 V 174 Q 360 190 344 190 H 96 Q 80 190 80 174 V 66 Q 80 50 96 50 Z";
+  "M 105 65 H 355 Q 375 65 375 85 V 175 Q 375 195 355 195 H 105 Q 85 195 85 175 V 85 Q 85 65 105 65 Z";
 
 const connectorPaths = [
-  "M 80 50 H 360",
-  "M 360 50 V 190",
-  "M 360 190 H 80",
-  "M 80 190 V 50",
+  "M 85 65 H 375",
+  "M 375 65 V 195",
+  "M 375 195 H 85",
+  "M 85 195 V 65",
 ];
 
 const nodeDescriptions = [
@@ -60,7 +60,7 @@ export function HeroInfrastructureDiagram() {
     }
 
     const pathLength = lightPath.getTotalLength();
-    const lightLength = 110;
+    const lightLength = 120;
     const progress = { distance: 0 };
 
     function moveGlowPoint(distance: number) {
@@ -83,33 +83,33 @@ export function HeroInfrastructureDiagram() {
 
       gsap.to(description, {
         opacity: 0,
-        y: -4,
-        duration: 0.16,
-        ease: "power1.out",
+        y: -3,
+        duration: 0.22,
+        ease: "power2.out",
         onComplete: () => {
           setActiveNodeIndex(index);
           gsap.fromTo(
             description,
-            { opacity: 0, y: 4 },
-            { opacity: 1, y: 0, duration: 0.2, ease: "power1.inOut" }
+            { opacity: 0, y: 3 },
+            { opacity: 1, y: 0, duration: 0.28, ease: "power2.inOut" }
           );
         },
       });
     }
 
-    // Sincronización exacta según los segmentos geométricos del rectángulo horizontal
+    // Ritmo sincronizado y pausado para lectura cómoda (2.0s por tramo)
     function syncActiveNode(distance: number) {
       const norm = distance % pathLength;
       const frac = norm / pathLength;
 
-      if (frac >= 0 && frac < 0.3) {
-        setActiveNode(0); // Marketing (Superior Izquierda -> Derecha)
-      } else if (frac >= 0.3 && frac < 0.5) {
-        setActiveNode(1); // Ventas (Superior Derecha -> Inferior Derecha)
-      } else if (frac >= 0.5 && frac < 0.8) {
-        setActiveNode(2); // Datos (Inferior Derecha -> Inferior Izquierda)
+      if (frac >= 0 && frac < 0.28) {
+        setActiveNode(0); // Marketing
+      } else if (frac >= 0.28 && frac < 0.52) {
+        setActiveNode(1); // Ventas
+      } else if (frac >= 0.52 && frac < 0.78) {
+        setActiveNode(2); // Datos
       } else {
-        setActiveNode(3); // Automatización (Inferior Izquierda -> Superior Izquierda)
+        setActiveNode(3); // Automatización
       }
     }
 
@@ -119,27 +119,28 @@ export function HeroInfrastructureDiagram() {
     });
     moveGlowPoint(0);
 
-    const introPulse = gsap.timeline({ delay: 0.3 });
+    const introPulse = gsap.timeline({ delay: 0.4 });
 
     introPulse
       .fromTo(
         glowPoint,
         { attr: { r: 4 }, opacity: 0 },
-        { attr: { r: 12 }, opacity: 1, duration: 0.25, ease: "power2.out" }
+        { attr: { r: 12 }, opacity: 1, duration: 0.3, ease: "power2.out" }
       )
       .to(glowPoint, {
         attr: { r: 7 },
         opacity: 1,
-        duration: 0.35,
+        duration: 0.4,
         ease: "power2.inOut",
       });
 
-    const loop = gsap.timeline({ delay: 0.8 });
+    // Duración ampliada a 8.0s (ritmo elegante, sereno y didáctico)
+    const loop = gsap.timeline({ delay: 1.0 });
 
     loop
       .to(lightPath, {
         strokeDashoffset: 0,
-        duration: 5.2,
+        duration: 8.0,
         ease: "none",
         repeat: -1,
       })
@@ -147,7 +148,7 @@ export function HeroInfrastructureDiagram() {
         progress,
         {
           distance: pathLength,
-          duration: 5.2,
+          duration: 8.0,
           ease: "none",
           repeat: -1,
           onUpdate: () => {
@@ -170,7 +171,7 @@ export function HeroInfrastructureDiagram() {
   return (
     <div
       aria-label="Diagrama Interactivo de la Infraestructura Comercial Conectada"
-      className="group relative w-full max-w-xl space-y-5 rounded-2xl border border-border/80 bg-card/60 p-6 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-accent-connection/40"
+      className="group relative w-full max-w-xl space-y-6 rounded-2xl border border-border/80 bg-card/60 p-6 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-accent-connection/40"
     >
       <div className="flex items-center justify-between border-b border-border/60 pb-3">
         <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-accent-connection uppercase">
@@ -187,12 +188,12 @@ export function HeroInfrastructureDiagram() {
 
       <svg
         role="img"
-        viewBox="0 0 440 240"
+        viewBox="0 0 460 260"
         className="h-auto w-full overflow-visible select-none"
       >
         <title>Infraestructura Comercial Conectada Promarketing</title>
         
-        {/* Rutas de Conexión del Rectángulo Horizontal */}
+        {/* Rutas de Conexión del Circuito Rectangular */}
         {connectorPaths.map((path, idx) => (
           <path
             key={path}
@@ -206,7 +207,7 @@ export function HeroInfrastructureDiagram() {
           />
         ))}
 
-        {/* Trazo Láser Animado Continuo por el Circuito Rectangular */}
+        {/* Trazo Láser Animado Continuo */}
         <path
           ref={lightPathRef}
           d={loopPath}
@@ -222,8 +223,8 @@ export function HeroInfrastructureDiagram() {
         {/* Punto de Luz Brillante Deslizante Sincronizado */}
         <circle
           ref={glowPointRef}
-          cx="80"
-          cy="50"
+          cx="85"
+          cy="65"
           r="7"
           fill="#3CF5B5"
           opacity="0"
@@ -233,12 +234,12 @@ export function HeroInfrastructureDiagram() {
           }}
         />
 
-        {/* Núcleo Central Horizontal Rectangular con Isotipo Promarketing */}
-        <g transform="translate(220, 120)">
+        {/* Núcleo Central Rectangular con Isotipo Promarketing */}
+        <g transform="translate(230, 130)">
           <rect
-            x="-75"
+            x="-78"
             y="-28"
-            width="150"
+            width="156"
             height="56"
             rx="14"
             fill="var(--card)"
@@ -247,7 +248,7 @@ export function HeroInfrastructureDiagram() {
             strokeWidth="2"
             className="shadow-xl"
           />
-          <foreignObject x="-60" y="-16" width="32" height="32">
+          <foreignObject x="-64" y="-14" width="28" height="28">
             <BrandIsotipo size={28} className="text-accent-connection" />
           </foreignObject>
           <text
@@ -273,6 +274,7 @@ export function HeroInfrastructureDiagram() {
         {/* Nodos Interactivos (Marketing, Ventas, Datos, Automatización) */}
         {nodes.map(({ id, label, Icon, x, y }, idx) => {
           const isActive = currentDisplayIndex === idx;
+          const isTopNode = y < 100;
 
           return (
             <g
@@ -281,11 +283,24 @@ export function HeroInfrastructureDiagram() {
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              {/* Etiqueta de Capacidad (Colocada fuera del círculo sin sobreponerse) */}
+              <text
+                x={x}
+                y={isTopNode ? y - 36 : y + 46}
+                fill={isActive ? "#3CF5B5" : "var(--muted-foreground)"}
+                textAnchor="middle"
+                className={`text-[12px] transition-colors duration-300 ${
+                  isActive ? "font-bold text-accent-connection" : "font-medium"
+                }`}
+              >
+                {label}
+              </text>
+
               {/* Halo activo alrededor del nodo */}
               <circle
                 cx={x}
                 cy={y}
-                r="36"
+                r="34"
                 fill="none"
                 stroke={isActive ? "#3CF5B5" : "transparent"}
                 strokeWidth="2"
@@ -299,7 +314,7 @@ export function HeroInfrastructureDiagram() {
               <circle
                 cx={x}
                 cy={y}
-                r="28"
+                r="26"
                 fill={isActive ? "#171B19" : "var(--background)"}
                 stroke={isActive ? "#3CF5B5" : "var(--border)"}
                 strokeWidth={isActive ? "2.5" : "1.5"}
@@ -309,8 +324,8 @@ export function HeroInfrastructureDiagram() {
                 }}
               />
 
-              {/* Ícono de Capacidad */}
-              <foreignObject x={x - 12} y={y - 18} width="24" height="24">
+              {/* Ícono de Capacidad Centrado en el Nodo */}
+              <foreignObject x={x - 12} y={y - 12} width="24" height="24">
                 <Icon
                   aria-hidden="true"
                   className={`size-6 transition-colors duration-300 ${
@@ -319,29 +334,16 @@ export function HeroInfrastructureDiagram() {
                   strokeWidth={2}
                 />
               </foreignObject>
-
-              {/* Etiqueta de Capacidad */}
-              <text
-                x={x}
-                y={y > 100 ? y + 26 : y - 18}
-                fill={isActive ? "#3CF5B5" : "var(--muted-foreground)"}
-                textAnchor="middle"
-                className={`text-[11px] font-medium transition-colors duration-300 ${
-                  isActive ? "font-semibold text-accent-connection" : ""
-                }`}
-              >
-                {label}
-              </text>
             </g>
           );
         })}
       </svg>
 
-      {/* Caja de Descripción Sincronizada */}
-      <div className="rounded-xl border border-border/60 bg-background/80 p-3.5 text-center shadow-inner">
+      {/* Caja de Descripción Elegante y Transicionada */}
+      <div className="rounded-xl border border-border/60 bg-background/80 p-4 text-center shadow-inner">
         <p
           ref={descriptionRef}
-          className="mx-auto min-h-10 max-w-md text-xs sm:text-sm leading-relaxed text-foreground/90 font-medium transition-opacity"
+          className="mx-auto min-h-11 max-w-md text-xs sm:text-sm leading-relaxed text-foreground/90 font-medium transition-opacity"
         >
           {nodeDescriptions[currentDisplayIndex]}
         </p>
