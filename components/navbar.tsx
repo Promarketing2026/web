@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -33,7 +33,22 @@ export function Navbar() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // ScrollSpy & Route Active Detector: Mantiene la opción activa marcada según la sección visible o la ruta
+  // Bandera para evitar que IntersectionObserver interfiera durante un scroll por clic
+  const isManualScroll = useRef<boolean>(false);
+  const scrollTimer = useRef<NodeJS.Timeout | null>(null);
+
+  // Manejador de clic directo para fijar la sección activa y evitar rebotes de scroll
+  const handleNavClick = (id: string) => {
+    setActiveId(id);
+    isManualScroll.current = true;
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+
+    scrollTimer.current = setTimeout(() => {
+      isManualScroll.current = false;
+    }, 1000);
+  };
+
+  // ScrollSpy & Route Active Detector optimizado y estabilizado
   useEffect(() => {
     if (pathname !== "/") {
       if (
@@ -50,6 +65,9 @@ export function Navbar() {
 
     const sections = ["inicio", "solucion", "contacto"];
     const observerCallback: IntersectionObserverCallback = (entries) => {
+      // Ignorar actualizaciones de scroll si el usuario acaba de hacer clic en un enlace
+      if (isManualScroll.current) return;
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveId(entry.target.id);
@@ -59,8 +77,8 @@ export function Navbar() {
 
     const observerOptions: IntersectionObserverInit = {
       root: null,
-      rootMargin: "-20% 0px -50% 0px",
-      threshold: 0.1,
+      rootMargin: "-15% 0px -55% 0px",
+      threshold: 0.15,
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -70,7 +88,10 @@ export function Navbar() {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    };
   }, [pathname]);
 
   const activeOrHoveredId = hoveredId || activeId;
@@ -80,13 +101,14 @@ export function Navbar() {
       <div className="mx-auto flex max-w-5xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
         <Link
           href="/#inicio"
+          onClick={() => handleNavClick("inicio")}
           className="group inline-flex items-center gap-2.5 text-sm font-semibold text-foreground transition-all duration-300 hover:text-accent-connection focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-base rounded-md p-1 -ml-1"
         >
           <BrandIsotipo size={24} className="text-foreground transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
           <span className="tracking-tight">Promarketing Perú</span>
         </Link>
 
-        {/* Navegación Principal con ScrollSpy & Kinetic Sliding Pill (Mantiene siempre marcada la opción en acción) */}
+        {/* Navegación Principal Estabilizada con Kinetic Sliding Pill */}
         <nav
           aria-label="Navegación principal"
           className="relative flex items-center gap-1 md:gap-2"
@@ -101,11 +123,11 @@ export function Navbar() {
                 key={item.id}
                 href={item.href}
                 onMouseEnter={() => setHoveredId(item.id)}
-                onClick={() => setActiveId(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 onFocus={() => setHoveredId(item.id)}
                 className="relative px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
               >
-                {/* Pastilla Kinetic deslizante activa */}
+                {/* Pastilla Kinetic deslizante activa sin rebotes */}
                 {isSelected && (
                   <motion.span
                     layoutId="kinetic-navbar-pill"
@@ -118,8 +140,10 @@ export function Navbar() {
                       shouldReduceMotion
                         ? { duration: 0 }
                         : {
-                            ease: [0.65, 0, 0.35, 1],
-                            duration: 0.4,
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 32,
+                            mass: 0.8,
                           }
                     }
                   />
@@ -155,8 +179,10 @@ export function Navbar() {
                     shouldReduceMotion
                       ? { duration: 0 }
                       : {
-                          ease: [0.65, 0, 0.35, 1],
-                          duration: 0.4,
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 32,
+                          mass: 0.8,
                         }
                   }
                 />
@@ -195,7 +221,7 @@ export function Navbar() {
           size="lg"
           className="group relative h-10 w-full gap-2 px-4 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 active:scale-98 sm:w-fit"
         >
-          <Link href="/#contacto">
+          <Link href="/#contacto" onClick={() => handleNavClick("contacto")}>
             <span>Solicitar Auditoría C.L.A.R.O.</span>
             <ArrowUpRight
               aria-hidden="true"
