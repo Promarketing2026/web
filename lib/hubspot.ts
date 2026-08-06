@@ -217,3 +217,100 @@ export async function submitAuditoriaForm(
     };
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+// B8-conectar: Server Action para suscripción al Newsletter
+// ─────────────────────────────────────────────────────────────────────────
+
+export type NewsletterFormState = {
+  status: "idle" | "success" | "error";
+  message?: string;
+};
+
+const newsletterSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email("Ingresa un correo electrónico válido."),
+});
+
+export async function submitNewsletterForm(
+  _prevState: NewsletterFormState,
+  formData: FormData,
+): Promise<NewsletterFormState> {
+  // Honeypot anti-bot
+  const honeypot = formData.get("website_hp");
+  if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    console.warn("Honeypot de Newsletter activado — ignorado silenciosamente.");
+    return {
+      status: "success",
+      message: "¡Gracias por suscribirte a nuestro newsletter!",
+    };
+  }
+
+  // Rate limiting por IP
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(ip);
+
+  if (!allowed) {
+    return {
+      status: "error",
+      message:
+        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
+    };
+  }
+
+  const parsed = newsletterSchema.safeParse({
+    email: formData.get("email"),
+  });
+
+  if (!parsed.success) {
+    return {
+      status: "error",
+      message: parsed.error.issues[0]?.message || "Correo electrónico no válido.",
+    };
+  }
+
+  const { email } = parsed.data;
+
+  try {
+    const response = await fetch(HUBSPOT_CONTACTS_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        properties: {
+          email,
+        },
+      }),
+    });
+
+    if (response.ok || response.status === 409) {
+      // 409 = el correo ya está registrado en HubSpot; lo tratamos como suscrito correctamente
+      return {
+        status: "success",
+        message: "¡Gracias por suscribirte a nuestro newsletter!",
+      };
+    }
+
+    const errorBody = await response.text();
+    console.error("HubSpot Newsletter respondió con error:", response.status, errorBody);
+
+    return {
+      status: "error",
+      message:
+        "No pudimos procesar tu suscripción en este momento. Intenta de nuevo más tarde.",
+    };
+  } catch (error) {
+    console.error("Error de red en suscripción Newsletter:", error);
+    return {
+      status: "error",
+      message:
+        "Ocurrió un problema de conexión. Revisa tu red e intenta de nuevo.",
+    };
+  }
+}
+

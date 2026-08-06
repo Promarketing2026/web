@@ -66,7 +66,7 @@ C1. Formulario de Auditoría C.L.A.R.O. (reemplaza a A12, desglosado)
  [hecho] A12d. Redirección post-envío: a /gracias (aplicando ya RETOQUE-4: UTMs capturados en la página del formulario vía sessionStorage, viajando como campos ocultos hacia HubSpot) y luego botón/link al Programador de Reuniones (https://meetings.hubspot.com/promarketing-2026). [código]
  [hecho] FORM-SCOPE-1. Alcance confirmado: Auditoría C.L.A.R.O. creará/actualizará el contacto en HubSpot y enviará una notificación interna; newsletter se conectará a una lista de suscriptores en HubSpot sin generar una alerta interna por cada alta. [decisión]
  [hecho] FORM-NOTIFY-1. Enviar una notificación server-side a `promarketing2027@gmail.com` después de que Auditoría C.L.A.R.O. se procese correctamente en HubSpot. Implementado con el paquete oficial de Resend (`lib/email.ts`), plantilla HTML limpia y soporte para la variable `RESEND_API_KEY`. [código + configuración]
- [SIGUIENTE] B8-conectar. Conectar el newsletter al destino aprobado en FORM-SCOPE-1, con validación server-side, consentimiento y manejo correcto de errores; actualmente es solo una interfaz local. [código]
+ [hecho] B8-conectar. Conectar el newsletter a la API de contactos de HubSpot (`submitNewsletterForm` en `lib/hubspot.ts`), con validación Zod server-side, rate limiting por IP (`lib/rate-limit.ts`) y honeypot anti-bot. [código]
 C2. Seguridad adicional
  SEC-1. reCAPTCHA v3 o hCaptcha en el formulario — requiere que el usuario genere las keys (site key + secret key) primero, igual que pasó con HubSpot. [código, bloqueado por una key del usuario]
 C3. Despliegue
