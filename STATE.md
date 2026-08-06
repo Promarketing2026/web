@@ -61,12 +61,34 @@ aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
 6. Objeciones (FAQ corto)
 7. CTA final
 
-## Pendiente de traer del usuario
-- BRAND.md (sistema de marca conceptual: tono de voz, valores, reglas — sin paleta todavía)
-- Contenido real de servicios y casos de éxito
-- [PENDIENTE DE CONFIGURAR EN DNS/VERCEL/RESEND] Dominio propio `promarketingperu.com`: El código ya está preparado (`lib/email.ts`, `lib/site-config.ts`), pero PENDIENTE la configuración de DNS (registros TXT/CNAME en Resend), la vinculación en Vercel y la variable `NEXT_PUBLIC_SITE_URL=https://promarketingperu.com`.
-- Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
-- Actualización del Design System en Figma para reflejar la paleta aprobada
+## Pendiente de configuración de herramientas y datos del usuario
+
+### 1. Dominio Oficial (`promarketingperu.com`)
+- [ ] Vincular el dominio `promarketingperu.com` en el dashboard de Vercel.
+- [ ] Configurar `NEXT_PUBLIC_SITE_URL=https://promarketingperu.com` en Vercel.
+- [ ] Agregar los 3 registros DNS (`TXT`/`CNAME`) indicados en Resend para autenticar `notificaciones@promarketingperu.com`.
+
+### 2. Notificaciones por Email (Resend)
+- [ ] Generar la API Key en [resend.com](https://resend.com).
+- [ ] Agregar `RESEND_API_KEY=re_xxxx...` en `.env.local` y en Vercel.
+
+### 3. Microsoft Clarity
+- [x] Configurado en código local (`NEXT_PUBLIC_CLARITY_PROJECT_ID=u2hkjsheaa` en `.env.local`).
+- [ ] Agregar `NEXT_PUBLIC_CLARITY_PROJECT_ID=u2hkjsheaa` en Vercel (Production/Preview).
+
+### 4. Google Tag Manager & Analítica
+- [x] Script y Consent Mode v2 configurados en código (`NEXT_PUBLIC_GTM_ID=GTM-THQJQQ2D`).
+- [ ] Publicar el borrador del contenedor en el panel de Google Tag Manager (pausado hasta revisión legal `LEGAL-2`).
+- [ ] Configurar cuenta de Google Ads y etiquetas de conversión cuando se decida implementar (`ANALYTICS-2B`).
+
+### 5. Seguridad y Formularios
+- [ ] Generar llaves para reCAPTCHA v3 / hCaptcha (`site key` + `secret key`) para la tarea `SEC-1`.
+
+### 6. Contenido y Legal
+- [ ] BRAND.md (tono de voz, valores, guía conceptual).
+- [ ] Contenido real en Sanity Studio para Blog, Glosario y Casos de Éxito.
+- [ ] Revisión y aprobación jurídica de la Política de Privacidad (`LEGAL-2`).
+- [ ] Actualización del Design System en Figma para reflejar los tokens aprobados.
 B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y resultado medible.
 B5b agregó `ScrollTrigger` con pin, scrub y crossfade entre las 3 etapas del SVG durante `+=200%`.
 B5c sincronizó los tres textos existentes con las etapas del SVG reutilizando el mismo timeline y ScrollTrigger.
