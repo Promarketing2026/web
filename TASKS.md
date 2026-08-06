@@ -38,7 +38,7 @@ PENDIENTES DE RETOQUE (tareas ya "hechas" con defectos conocidos, pausadas)
  RETOQUE-3: @sanity/image-url usa el import por defecto (deprecado). Cambiar a import { createImageUrlBuilder } from '@sanity/image-url' en el archivo donde se construyen las URLs de imágenes.
  RETOQUE-4: la captura de UTMs está implementada en el lugar incorrecto (/gracias, donde ya no existen en la URL). Debe moverse a la página de aterrizaje real (donde vive el formulario) usando sessionStorage, y viajar como campos ocultos del formulario hacia HubSpot en A12. El código actual en thank-you-redirect.tsx sirve como referencia técnica pero no es la implementación final.
 PAUSADAS (no descartadas — retomar cuando el usuario lo indique)
- B6. "Prueba social", "Objeciones", "CTA final" → Motion, consistente con B3/B4
+ [hecho] B6. "Prueba social", "Objeciones", "CTA final" → Motion (`motion/react`), consistente con B3/B4/B4.5 y respetando `useReducedMotion`. [código]
  B7. Verificar que Lenis no rompe ScrollTrigger (requiere sincronizar ambos — es un paso técnico conocido, no improvisar)
  [hecho]B8. Footer — input de newsletter (solo UI): campo de email + botón "Suscribirme", validación básica de formato en el cliente. Sin conexión a backend todavía (destino del email aún no decidido) — eso será una tarea separada, B8-conectar.
  A12. Formulario de contacto — VER FASE C (A12a-A12d), ahora desglosado porque el Service Key de HubSpot ya está disponible. Este ítem queda como referencia; el trabajo real vive en la Fase C.

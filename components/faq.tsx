@@ -1,3 +1,8 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { fadeUpVariant } from "@/lib/animations";
+
 const faqItems = [
   {
     question: "¿En qué se diferencian de una agencia de marketing tradicional?",
@@ -25,12 +30,34 @@ const faqItems = [
 ];
 
 export function Faq() {
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = shouldReduceMotion ?? false;
+  const itemVariant = fadeUpVariant({ reducedMotion, y: 16 });
+
   return (
     <section aria-label="Preguntas frecuentes" className="px-6 py-24 sm:px-10 sm:py-32">
       <div className="mx-auto max-w-5xl">
-        <dl className="border-t border-border">
-          {faqItems.map((item) => (
-            <div key={item.question} className="border-b border-border py-8">
+        <motion.dl
+          className="border-t border-border"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {faqItems.map((item, index) => (
+            <motion.div
+              key={item.question}
+              className="border-b border-border py-8"
+              variants={itemVariant}
+              custom={index * 0.05}
+            >
               <dt
                 data-faq-question
                 className="max-w-3xl text-xl leading-tight font-semibold text-foreground"
@@ -43,9 +70,9 @@ export function Faq() {
               >
                 {item.answer}
               </dd>
-            </div>
+            </motion.div>
           ))}
-        </dl>
+        </motion.dl>
       </div>
     </section>
   );
