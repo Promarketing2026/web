@@ -586,5 +586,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — Optimización de Impacto Visual en Sección Inicio (Hero): enriquecido `components/hero.tsx` y `components/hero-infrastructure-diagram.tsx` eliminando textos provisionales (Lorem Ipsum) e incorporando copy oficial estratégico del `DOC 01` (Marketing, Ventas, Datos, Automatización). Añadido resplandor ambiental neón (`#3CF5B5` y `#E38035`), pill de categoría de marca animado, isotipo central en el núcleo del diagrama e interactividad hover en cada nodo. `pnpm build` verificado con éxito.
 
+2026-08-05 — Rediseño del Diagrama a Circuito Rectangular Horizontal: reemplazada la elipse por una arquitectura de circuito rectangular horizontal con esquinas suavizadas (`M 96 50 H 344 ...`), alineando los 4 nodos (Marketing, Ventas, Datos, Automatización) en una cuadrícula proporcional limpia y sincronizando el punto de luz láser de GSAP al 100% con cada parada de contenido. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
