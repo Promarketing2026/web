@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 
 import { BrandIsotipo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
@@ -28,41 +29,9 @@ const resourceItems = [
 export function Navbar() {
   const [activeId, setActiveId] = useState<string>("inicio");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
-  const [pillStyle, setPillStyle] = useState<{
-    left: number;
-    width: number;
-    opacity: number;
-  }>({ left: 0, width: 0, opacity: 0 });
-
-  const itemRefs = useRef<Record<string, HTMLElement | null>>({});
-
-  const targetId = hoveredId || activeId;
-
-  const updatePill = (id: string | null) => {
-    if (!id || !itemRefs.current[id]) {
-      setPillStyle((prev) => ({ ...prev, opacity: 0 }));
-      return;
-    }
-    const el = itemRefs.current[id];
-    if (el) {
-      setPillStyle({
-        left: el.offsetLeft,
-        width: el.offsetWidth,
-        opacity: 1,
-      });
-    }
-  };
-
-  useEffect(() => {
-    updatePill(targetId);
-  }, [targetId]);
-
-  useEffect(() => {
-    const handleResize = () => updatePill(targetId);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [targetId]);
+  const activeOrHoveredId = hoveredId || activeId;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/85 px-6 backdrop-blur-md transition-colors duration-300 sm:px-10">
@@ -75,59 +44,72 @@ export function Navbar() {
           <span className="tracking-tight">Promarketing Perú</span>
         </Link>
 
-        {/* Navegación Principal con el efecto .pill exacto de kinetics.colorion.co */}
+        {/* Navegación Principal con Kinetic Sliding Pill de alta precisión y sin saltos */}
         <nav
           aria-label="Navegación principal"
           className="relative flex items-center gap-1 md:gap-2"
-          onMouseLeave={() => {
-            setHoveredId(null);
-            updatePill(activeId);
-          }}
+          onMouseLeave={() => setHoveredId(null)}
         >
-          {/* El elemento .pill con la regla CSS exacta de kinetics.colorion.co */}
-          <span
-            className="pill pointer-events-none absolute top-1 bottom-1 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
-            style={{
-              left: `${pillStyle.left}px`,
-              width: `${pillStyle.width}px`,
-              opacity: pillStyle.opacity,
-              transition:
-                "left 0.4s cubic-bezier(0.65, 0, 0.35, 1), width 0.4s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease",
-            }}
-            aria-hidden="true"
-          />
+          {navItems.map((item) => {
+            const isSelected = activeOrHoveredId === item.id;
 
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              href={item.href}
-              ref={(el) => {
-                itemRefs.current[item.id] = el;
-              }}
-              onMouseEnter={() => setHoveredId(item.id)}
-              onClick={() => setActiveId(item.id)}
-              onFocus={() => setHoveredId(item.id)}
-              onBlur={() => setHoveredId(null)}
-              className="relative z-10 px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
-            >
-              {item.label}
-            </Link>
-          ))}
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onClick={() => setActiveId(item.id)}
+                onFocus={() => setHoveredId(item.id)}
+                className="relative px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+              >
+                {/* Desplazamiento kinetico fluido sin saltos iniciales ni parpadeos */}
+                {isSelected && (
+                  <motion.span
+                    layoutId="kinetic-navbar-pill"
+                    className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : {
+                            ease: [0.65, 0, 0.35, 1],
+                            duration: 0.4,
+                          }
+                    }
+                  />
+                )}
+                <span className={`relative z-10 transition-colors duration-200 ${isSelected ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
 
           <DropdownMenu>
             <DropdownMenuTrigger
-              ref={(el) => {
-                itemRefs.current["recursos"] = el;
-              }}
               onMouseEnter={() => setHoveredId("recursos")}
               onFocus={() => setHoveredId("recursos")}
-              onBlur={() => setHoveredId(null)}
-              className="group relative z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors duration-200 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+              className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring rounded-md"
             >
-              <span>Recursos</span>
+              {activeOrHoveredId === "recursos" && (
+                <motion.span
+                  layoutId="kinetic-navbar-pill"
+                  className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : {
+                          ease: [0.65, 0, 0.35, 1],
+                          duration: 0.4,
+                        }
+                  }
+                />
+              )}
+              <span className={`relative z-10 transition-colors duration-200 ${activeOrHoveredId === "recursos" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+                Recursos
+              </span>
               <ChevronDown
                 aria-hidden="true"
-                className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection"
+                className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-48">
