@@ -29,6 +29,7 @@ const serverEnvSchema = z
     KV_REST_API_TOKEN: optionalSecret,
     UPSTASH_REDIS_REST_URL: optionalHttpsUrl,
     UPSTASH_REDIS_REST_TOKEN: optionalSecret,
+    RESEND_API_KEY: optionalSecret,
   })
   .superRefine((env, context) => {
     const kvComplete = Boolean(env.KV_REST_API_URL && env.KV_REST_API_TOKEN);
@@ -71,6 +72,7 @@ const parsedServerEnv = serverEnvSchema.safeParse({
   KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
   UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
   UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+  RESEND_API_KEY: process.env.RESEND_API_KEY,
 });
 
 if (!parsedServerEnv.success) {
@@ -87,5 +89,6 @@ export const serverEnv = Object.freeze({
   hubspotServiceKey: parsed.HUBSPOT_SERVICE_KEY,
   redisUrl: parsed.KV_REST_API_URL ?? parsed.UPSTASH_REDIS_REST_URL!,
   redisToken: parsed.KV_REST_API_TOKEN ?? parsed.UPSTASH_REDIS_REST_TOKEN!,
+  resendApiKey: parsed.RESEND_API_KEY,
   deploymentEnvironment,
 });

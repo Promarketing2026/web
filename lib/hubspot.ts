@@ -4,6 +4,7 @@ import { z } from "zod";
 import { headers } from "next/headers";
 import { serverEnv } from "@/lib/env/server";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { sendLeadNotificationEmail } from "@/lib/email";
 
 // ─────────────────────────────────────────────────────────────────────────
 // A12c completo — honeypot (ya integrado antes) + rate limiting por IP
@@ -178,6 +179,7 @@ export async function submitAuditoriaForm(
     });
 
     if (response.ok) {
+      void sendLeadNotificationEmail({ nombre, email, empresa, servicio });
       return { status: "success" };
     }
 
@@ -187,6 +189,7 @@ export async function submitAuditoriaForm(
       const updated = await updateExistingContact(email, properties);
 
       if (updated) {
+        void sendLeadNotificationEmail({ nombre, email, empresa, servicio });
         return { status: "success" };
       }
 

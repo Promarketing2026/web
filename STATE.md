@@ -357,5 +357,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — Actualización de dependencias: `next` y `eslint-config-next` actualizados a la versión `16.3.0` mediante `pnpm`. `pnpm build` ejecutado con éxito produciendo la compilación estática completa sin advertencias ni errores.
 
+2026-08-05 — FORM-NOTIFY-1 completado: instalado el SDK oficial de Resend (`resend`). Creado `lib/email.ts` con plantilla HTML responsiva enviando notificaciones a `promarketing2027@gmail.com` al confirmarse un envío en HubSpot (`lib/hubspot.ts`). Validado en `lib/env/server.ts` con la variable opcional `RESEND_API_KEY`. Próximo paso: `B8-conectar`.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
