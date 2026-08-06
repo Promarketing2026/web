@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 
 import { BrandIsotipo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
@@ -13,9 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navItems = [
-  { label: "Inicio", href: "/#inicio" },
-  { label: "Solución", href: "/#solucion" },
-  { label: "Contacto", href: "/#contacto" },
+  { id: "inicio", label: "Inicio", href: "/#inicio" },
+  { id: "solucion", label: "Solución", href: "/#solucion" },
+  { id: "contacto", label: "Contacto", href: "/#contacto" },
 ];
 
 const resourceItems = [
@@ -25,6 +27,9 @@ const resourceItems = [
 ];
 
 export function Navbar() {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/85 px-6 backdrop-blur-md transition-colors duration-300 sm:px-10">
       <div className="mx-auto flex max-w-5xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
@@ -36,34 +41,80 @@ export function Navbar() {
           <span className="tracking-tight">Promarketing Perú</span>
         </Link>
 
+        {/* Navegación Principal con Kinetic Sliding Pill Indicator */}
         <nav
           aria-label="Navegación principal"
-          className="flex items-center gap-5 md:gap-7"
+          className="relative flex items-center gap-1 md:gap-2"
+          onMouseLeave={() => setHoveredId(null)}
         >
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group relative py-1 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xs"
-            >
-              {item.label}
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-0.5 left-0 h-[2px] w-0 bg-accent-connection transition-all duration-300 ease-out group-hover:w-full group-focus-visible:w-full"
-              />
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isHovered = hoveredId === item.id;
 
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                onMouseEnter={() => setHoveredId(item.id)}
+                onFocus={() => setHoveredId(item.id)}
+                onBlur={() => setHoveredId(null)}
+                className="relative px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+              >
+                {/* Sliding Pill Background Animado (inspirado en kinetics.colorion.co) */}
+                {isHovered && (
+                  <motion.span
+                    layoutId="kinetic-navbar-pill"
+                    className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                    initial={shouldReduceMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : {
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 30,
+                            mass: 0.8,
+                          }
+                    }
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </Link>
+            );
+          })}
+
+          {/* Menú Desplegable con animación Kinetic Pill */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="group relative inline-flex items-center gap-1.5 py-1 text-sm font-medium text-muted-foreground outline-none transition-colors duration-200 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring rounded-xs">
-              <span>Recursos</span>
+            <DropdownMenuTrigger
+              onMouseEnter={() => setHoveredId("recursos")}
+              onFocus={() => setHoveredId("recursos")}
+              onBlur={() => setHoveredId(null)}
+              className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-muted-foreground outline-none transition-colors duration-200 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+            >
+              {hoveredId === "recursos" && (
+                <motion.span
+                  layoutId="kinetic-navbar-pill"
+                  className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                  initial={shouldReduceMotion ? false : { opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : {
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                          mass: 0.8,
+                        }
+                  }
+                />
+              )}
+              <span className="relative z-10">Recursos</span>
               <ChevronDown
                 aria-hidden="true"
-                className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-0.5 left-0 h-[2px] w-0 bg-accent-connection transition-all duration-300 ease-out group-hover:w-full group-data-[state=open]:w-full"
+                className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-48">
