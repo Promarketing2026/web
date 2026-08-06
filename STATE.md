@@ -24,9 +24,7 @@ Los hallazgos automatizables de accesibilidad están corregidos; ACCESS-VERIFY
 continúa bloqueado por el plugin del navegador. LIMITS-1 detectó un riesgo HIGH:
 Vercel Hobby no admite sitios comerciales. La migración queda diferida hasta
 cerrar frontend, backend e integraciones, y deberá mantener costo de plataforma
-USD 0. FORM-SCOPE-1 quedó resuelta: Auditoría notificará internamente y el
-newsletter irá a una lista de HubSpot sin alerta por cada alta. Próximo paso:
-aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
+USD 0. FORM-SCOPE-1 quedó resuelta, FORM-NOTIFY-1 (notificación interna vía Resend), B8-conectar (suscripción a newsletter) y ANALYTICS-3 (Microsoft Clarity) están completados. Próximo paso prioritario: RETOQUE-2 (sincronización y ajuste del timeline ScrollTrigger en Educación del Concepto).
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -592,7 +590,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — Potenciación Estética del Diagrama Hero: añadidos rejilla técnica de plano arquitectónico en el SVG (`#circuit-grid`), rayos radiales interconectados hacia el núcleo de marca, doble estela láser con sombra luminosa neón (`#3CF5B5`), ondas de pulso expandible en los nodos activos y tarjeta de descripción con insignia dinámica e ícono de la capacidad seleccionada. `pnpm build` verificado con éxito.
 
-2026-08-05 — Ajuste de Rigor Visual según DOC 08 (Estructura Activa / Arquitecto Pragmático): depurado `components/hero-infrastructure-diagram.tsx` eliminando la simulación tecnológica artificial (rejilla recargada, animaciones de pulso excesivas) para alinearse con los principios de marca. Mantenida la estructura ortogonal limpia del circuito rectangular, el trazado fino de conexión `#3CF5B5` y la máxima legibilidad del copy de valor. `pnpm build` verificado con éxito.
+2026-08-06 — Resolución de Hallazgos de Auditoría Técnica: aisladas las claves de rate-limiting por formulario en `lib/rate-limit.ts` (`auditoria` vs `newsletter`), corregido el error de ESLint de React 19 en `components/navbar.tsx` usando derivación `useMemo`, sustituidos los colores hex hardcodeados por variables CSS (`var(--accent-connection)` y `var(--card)`) en `components/hero-infrastructure-diagram.tsx`, completado `.env.local.example` y sincronizado el resumen inicial de `STATE.md`. `pnpm lint` y `pnpm build` verificados con 0 errores.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
+

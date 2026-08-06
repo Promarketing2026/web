@@ -117,7 +117,7 @@ export async function submitAuditoriaForm(
 
   // ── Rate limiting por IP ────────────────────────────────────────────
   const ip = await getClientIp();
-  const { allowed } = await checkRateLimit(ip);
+  const { allowed } = await checkRateLimit(ip, "auditoria");
 
   if (!allowed) {
     return {
@@ -251,7 +251,7 @@ export async function submitNewsletterForm(
 
   // Rate limiting por IP
   const ip = await getClientIp();
-  const { allowed } = await checkRateLimit(ip);
+  const { allowed } = await checkRateLimit(ip, "newsletter");
 
   if (!allowed) {
     return {

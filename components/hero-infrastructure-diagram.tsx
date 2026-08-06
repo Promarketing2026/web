@@ -87,7 +87,7 @@ export function HeroInfrastructureDiagram() {
           gsap.fromTo(
             description,
             { opacity: 0, y: 2 },
-            { opacity: 1, y: 0, duration: 0.25, ease: "power2.inOut" }
+            { opacity: 1, y: 0, duration: 0.25, ease: "power1.inOut" }
           );
         },
       });
@@ -196,7 +196,7 @@ export function HeroInfrastructureDiagram() {
             key={path}
             d={path}
             fill="none"
-            stroke="#3CF5B5"
+            stroke="var(--accent-connection)"
             strokeOpacity={currentDisplayIndex === idx ? "0.6" : "0.2"}
             strokeLinecap="round"
             strokeWidth="2.5"
@@ -209,7 +209,7 @@ export function HeroInfrastructureDiagram() {
           ref={lightPathRef}
           d={loopPath}
           fill="none"
-          stroke="#3CF5B5"
+          stroke="var(--accent-connection)"
           strokeLinecap="round"
           strokeWidth="3"
           style={{
@@ -223,10 +223,10 @@ export function HeroInfrastructureDiagram() {
           cx="85"
           cy="65"
           r="6"
-          fill="#3CF5B5"
+          fill="var(--accent-connection)"
           opacity="0"
           style={{
-            filter: "drop-shadow(0 0 8px #3CF5B5)",
+            filter: "drop-shadow(0 0 8px var(--accent-connection))",
           }}
         />
 
@@ -239,7 +239,7 @@ export function HeroInfrastructureDiagram() {
             height="56"
             rx="12"
             fill="var(--card)"
-            stroke="#3CF5B5"
+            stroke="var(--accent-connection)"
             strokeOpacity="0.4"
             strokeWidth="1.5"
             className="shadow-lg"
@@ -259,7 +259,7 @@ export function HeroInfrastructureDiagram() {
           <text
             x="12"
             y="12"
-            fill="#3CF5B5"
+            fill="var(--accent-connection)"
             textAnchor="middle"
             className="text-[10px] font-semibold uppercase tracking-wider"
           >
@@ -283,7 +283,7 @@ export function HeroInfrastructureDiagram() {
               <text
                 x={x}
                 y={isTopNode ? y - 36 : y + 46}
-                fill={isActive ? "#3CF5B5" : "var(--muted-foreground)"}
+                fill={isActive ? "var(--accent-connection)" : "var(--muted-foreground)"}
                 textAnchor="middle"
                 className={`text-[12px] transition-colors duration-200 ${
                   isActive ? "font-semibold text-accent-connection" : "font-medium"
@@ -297,8 +297,8 @@ export function HeroInfrastructureDiagram() {
                 cx={x}
                 cy={y}
                 r="26"
-                fill={isActive ? "#171B19" : "var(--background)"}
-                stroke={isActive ? "#3CF5B5" : "var(--border)"}
+                fill={isActive ? "var(--card)" : "var(--background)"}
+                stroke={isActive ? "var(--accent-connection)" : "var(--border)"}
                 strokeWidth={isActive ? "2" : "1.5"}
                 className="transition-all duration-200 shadow-md"
                 style={{

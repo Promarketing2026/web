@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -48,20 +48,24 @@ export function Navbar() {
     }, 1000);
   };
 
-  // ScrollSpy & Route Active Detector optimizado y estabilizado
-  useEffect(() => {
+  // Derivación pura del estado activo cuando se está fuera de la raíz (evita renders en cascada)
+  const routeActiveId = useMemo(() => {
     if (pathname !== "/") {
       if (
         pathname.startsWith("/blog") ||
         pathname.startsWith("/glosario") ||
         pathname.startsWith("/casos-de-exito")
       ) {
-        setActiveId("recursos");
-      } else {
-        setActiveId("");
+        return "recursos";
       }
-      return;
+      return "";
     }
+    return null;
+  }, [pathname]);
+
+  // ScrollSpy para la página de inicio
+  useEffect(() => {
+    if (pathname !== "/") return;
 
     const sections = ["inicio", "solucion", "contacto"];
     const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -94,7 +98,8 @@ export function Navbar() {
     };
   }, [pathname]);
 
-  const activeOrHoveredId = hoveredId || activeId;
+  const effectiveActiveId = routeActiveId !== null ? routeActiveId : activeId;
+  const activeOrHoveredId = hoveredId || effectiveActiveId;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/85 px-6 backdrop-blur-md transition-colors duration-300 sm:px-10">

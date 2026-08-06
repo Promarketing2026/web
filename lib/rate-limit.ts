@@ -12,8 +12,9 @@ const MAX_REQUESTS_PER_WINDOW = 3; // máximo de envíos permitidos en esa venta
 
 export async function checkRateLimit(
   identifier: string,
+  prefix: string = "auditoria",
 ): Promise<{ allowed: boolean }> {
-  const key = `rate-limit:${serverEnv.deploymentEnvironment}:auditoria:${identifier}`;
+  const key = `rate-limit:${serverEnv.deploymentEnvironment}:${prefix}:${identifier}`;
 
   try {
     const count = await redis.incr(key);
