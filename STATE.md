@@ -51,6 +51,10 @@ aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
 ## Narrativa de conversión del Home (orden de bloques, ya definido)
 1. Hook (promesa clara, sin jerga)
 2. El problema (lo que el mercado no explica bien)
+
+## Narrativa de conversión del Home (orden de bloques, ya definido)
+1. Hook (promesa clara, sin jerga)
+2. El problema (lo que el mercado no explica bien)
 3. Educación del concepto (bloque diferenciador, animación GSAP scroll)
 4. La solución (el servicio, ya entendido por el lector)
 5. Prueba social (caso de éxito con cifras)
@@ -60,16 +64,9 @@ aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
 ## Pendiente de traer del usuario
 - BRAND.md (sistema de marca conceptual: tono de voz, valores, reglas — sin paleta todavía)
 - Contenido real de servicios y casos de éxito
-- Dominio propio confirmado: `promarketingperu.com` (`NEXT_PUBLIC_SITE_URL` se establecerá a `https://promarketingperu.com` al vincularlo). Notificaciones por correo configuradas para salir desde `notificaciones@promarketingperu.com`.
+- [PENDIENTE DE CONFIGURAR EN DNS/VERCEL/RESEND] Dominio propio `promarketingperu.com`: El código ya está preparado (`lib/email.ts`, `lib/site-config.ts`), pero PENDIENTE la configuración de DNS (registros TXT/CNAME en Resend), la vinculación en Vercel y la variable `NEXT_PUBLIC_SITE_URL=https://promarketingperu.com`.
 - Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
 - Actualización del Design System en Figma para reflejar la paleta aprobada
-- Confirmar qué formularios deben notificar a `promarketing2027@gmail.com` y
-  elegir el proveedor de envío server-side para FORM-NOTIFY-1
-
-## Última actualización
-2026-07-26 — Se agregó Motion a la sección "La solución" usando la variante compartida de `lib/animations.ts`.
-Título, párrafos y dimensiones entran con fade/slide; la lista de dimensiones usa `staggerChildren`.
-B4.5 agregó alternancia de secciones, separadores tipo muesca y variante `.section-dark` para secciones oscuras.
 B5a agregó el SVG estático de 3 etapas: fragmentación, solución conectada y resultado medible.
 B5b agregó `ScrollTrigger` con pin, scrub y crossfade entre las 3 etapas del SVG durante `+=200%`.
 B5c sincronizó los tres textos existentes con las etapas del SVG reutilizando el mismo timeline y ScrollTrigger.
