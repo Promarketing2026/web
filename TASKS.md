@@ -35,7 +35,7 @@ FASE B — Animación
 PENDIENTES DE RETOQUE (tareas ya "hechas" con defectos conocidos, pausadas)
  RETOQUE-1 (de B2.5): el párrafo debajo del diagrama del Hero salta o empuja el layout cuando cambia de texto entre nodos — falta un min-height correctamente aplicado o el contenedor no lo respeta. Revisar el CSS del contenedor de ese párrafo.
  RETOQUE-2 (de B5): la sincronización entre texto/labels/diagrama en "Educación del concepto" sigue sin sentirse correcta — las transiciones son muy rápidas, hay demasiado padding entre texto y diagrama, y los labels de etapa no siempre coinciden con el texto y el diagrama activos en ese momento. Requiere revisar de fondo el timeline de ScrollTrigger, no solo ajustar duraciones.
- RETOQUE-3: @sanity/image-url usa el import por defecto (deprecado). Cambiar a import { createImageUrlBuilder } from '@sanity/image-url' en el archivo donde se construyen las URLs de imágenes.
+ [hecho] RETOQUE-3: @sanity/image-url utiliza `createImageUrlBuilder` en `sanity/lib/image.ts`, eliminando cualquier import por defecto deprecado. [código]
  RETOQUE-4: la captura de UTMs está implementada en el lugar incorrecto (/gracias, donde ya no existen en la URL). Debe moverse a la página de aterrizaje real (donde vive el formulario) usando sessionStorage, y viajar como campos ocultos del formulario hacia HubSpot en A12. El código actual en thank-you-redirect.tsx sirve como referencia técnica pero no es la implementación final.
 PAUSADAS (no descartadas — retomar cuando el usuario lo indique)
  [hecho] B6. "Prueba social", "Objeciones", "CTA final" → Motion (`motion/react`), consistente con B3/B4/B4.5 y respetando `useReducedMotion`. [código]
