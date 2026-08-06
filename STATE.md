@@ -357,5 +357,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — B8-conectar completado: formulario de suscripción al Newsletter en el footer (`components/newsletter-form.tsx`) conectado a la Server Action `submitNewsletterForm` en `lib/hubspot.ts`. Incluye validación Zod, rate-limiting por IP y honeypot anti-spam. `pnpm build` ejecutado con éxito.
 
+2026-08-05 — ANALYTICS-3 completado: creado `components/microsoft-clarity.tsx` para cargar el script oficial de Microsoft Clarity condicionado a la variable pública opcional `NEXT_PUBLIC_CLARITY_PROJECT_ID`. La CSP existente en `next.config.ts` ya permite `https://*.clarity.ms`. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

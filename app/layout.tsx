@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { ConsentBanner } from "@/components/consent-banner";
 import { ConsentDefaults } from "@/components/consent-defaults";
 import { GoogleTagManager } from "@/components/google-tag-manager";
+import { MicrosoftClarity } from "@/components/microsoft-clarity";
 import { Navbar } from "@/components/navbar";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
 import { MotionProvider } from "@/components/motion-provider";
@@ -69,6 +70,7 @@ export default function RootLayout({
         {isProductionDeployment && publicEnv.NEXT_PUBLIC_GTM_ID ? (
           <GoogleTagManager containerId={publicEnv.NEXT_PUBLIC_GTM_ID} />
         ) : null}
+        <MicrosoftClarity projectId={publicEnv.NEXT_PUBLIC_CLARITY_PROJECT_ID} />
         <OrganizationJsonLd />
         <Suspense fallback={null}>
           <UtmCapture />

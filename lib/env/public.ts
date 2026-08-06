@@ -40,6 +40,10 @@ const publicEnvSchema = z.object({
       .regex(/^GTM-[A-Z0-9]+$/, "debe tener el formato GTM-XXXXXXXX")
       .optional(),
   ),
+  NEXT_PUBLIC_CLARITY_PROJECT_ID: z.preprocess(
+    emptyStringToUndefined,
+    z.string().trim().min(1).optional(),
+  ),
 });
 
 const parsedPublicEnv = publicEnvSchema.safeParse({
@@ -50,6 +54,7 @@ const parsedPublicEnv = publicEnvSchema.safeParse({
     process.env.NEXT_PUBLIC_SANITY_API_VERSION,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+  NEXT_PUBLIC_CLARITY_PROJECT_ID: process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID,
 });
 
 if (!parsedPublicEnv.success) {
