@@ -2,7 +2,9 @@ import { Resend } from "resend";
 import { serverEnv } from "@/lib/env/server";
 
 const NOTIFICATION_RECIPIENT = "promarketing2027@gmail.com";
-const DEFAULT_FROM = "Auditoría Promarketing <onboarding@resend.dev>";
+const DEFAULT_FROM =
+  process.env.RESEND_FROM_EMAIL ||
+  "Auditoría Promarketing <notificaciones@promarketingperu.com>";
 
 export type LeadNotificationData = {
   nombre: string;

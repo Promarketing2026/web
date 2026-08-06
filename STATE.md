@@ -60,8 +60,7 @@ aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
 ## Pendiente de traer del usuario
 - BRAND.md (sistema de marca conceptual: tono de voz, valores, reglas — sin paleta todavía)
 - Contenido real de servicios y casos de éxito
-- Dominio propio (Vercel resuelve la URL actual; `NEXT_PUBLIC_SITE_URL`
-  prevalecerá cuando se configure el dominio definitivo)
+- Dominio propio confirmado: `promarketingperu.com` (`NEXT_PUBLIC_SITE_URL` se establecerá a `https://promarketingperu.com` al vincularlo). Notificaciones por correo configuradas para salir desde `notificaciones@promarketingperu.com`.
 - Keys de reCAPTCHA/hCaptcha para SEC-1 (bloqueado hasta que el usuario las genere)
 - Actualización del Design System en Figma para reflejar la paleta aprobada
 - Confirmar qué formularios deben notificar a `promarketing2027@gmail.com` y
