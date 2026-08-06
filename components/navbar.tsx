@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 
 import { BrandIsotipo } from "@/components/brand-logo";
@@ -27,9 +28,50 @@ const resourceItems = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [activeId, setActiveId] = useState<string>("inicio");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  // ScrollSpy & Route Active Detector: Mantiene la opción activa marcada según la sección visible o la ruta
+  useEffect(() => {
+    if (pathname !== "/") {
+      if (
+        pathname.startsWith("/blog") ||
+        pathname.startsWith("/glosario") ||
+        pathname.startsWith("/casos-de-exito")
+      ) {
+        setActiveId("recursos");
+      } else {
+        setActiveId("");
+      }
+      return;
+    }
+
+    const sections = ["inicio", "solucion", "contacto"];
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveId(entry.target.id);
+        }
+      });
+    };
+
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
 
   const activeOrHoveredId = hoveredId || activeId;
 
@@ -44,7 +86,7 @@ export function Navbar() {
           <span className="tracking-tight">Promarketing Perú</span>
         </Link>
 
-        {/* Navegación Principal con Kinetic Sliding Pill de alta precisión y sin saltos */}
+        {/* Navegación Principal con ScrollSpy & Kinetic Sliding Pill (Mantiene siempre marcada la opción en acción) */}
         <nav
           aria-label="Navegación principal"
           className="relative flex items-center gap-1 md:gap-2"
@@ -52,6 +94,7 @@ export function Navbar() {
         >
           {navItems.map((item) => {
             const isSelected = activeOrHoveredId === item.id;
+            const isActiveSection = activeId === item.id;
 
             return (
               <Link
@@ -62,11 +105,15 @@ export function Navbar() {
                 onFocus={() => setHoveredId(item.id)}
                 className="relative px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
               >
-                {/* Desplazamiento kinetico fluido sin saltos iniciales ni parpadeos */}
+                {/* Pastilla Kinetic deslizante activa */}
                 {isSelected && (
                   <motion.span
                     layoutId="kinetic-navbar-pill"
-                    className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                    className={`absolute inset-0 z-0 rounded-md border shadow-xs ${
+                      isActiveSection
+                        ? "border-accent-connection/60 bg-secondary/90"
+                        : "border-accent-connection/30 bg-secondary/70"
+                    }`}
                     transition={
                       shouldReduceMotion
                         ? { duration: 0 }
@@ -77,7 +124,13 @@ export function Navbar() {
                     }
                   />
                 )}
-                <span className={`relative z-10 transition-colors duration-200 ${isSelected ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+                <span
+                  className={`relative z-10 transition-colors duration-200 ${
+                    isSelected
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground"
+                  }`}
+                >
                   {item.label}
                 </span>
               </Link>
@@ -93,7 +146,11 @@ export function Navbar() {
               {activeOrHoveredId === "recursos" && (
                 <motion.span
                   layoutId="kinetic-navbar-pill"
-                  className="absolute inset-0 z-0 rounded-md border border-accent-connection/40 bg-secondary/80 shadow-xs"
+                  className={`absolute inset-0 z-0 rounded-md border shadow-xs ${
+                    activeId === "recursos"
+                      ? "border-accent-connection/60 bg-secondary/90"
+                      : "border-accent-connection/30 bg-secondary/70"
+                  }`}
                   transition={
                     shouldReduceMotion
                       ? { duration: 0 }
@@ -104,7 +161,13 @@ export function Navbar() {
                   }
                 />
               )}
-              <span className={`relative z-10 transition-colors duration-200 ${activeOrHoveredId === "recursos" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+              <span
+                className={`relative z-10 transition-colors duration-200 ${
+                  activeOrHoveredId === "recursos"
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground"
+                }`}
+              >
                 Recursos
               </span>
               <ChevronDown
