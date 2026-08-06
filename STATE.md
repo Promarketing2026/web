@@ -592,5 +592,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — Potenciación Estética del Diagrama Hero: añadidos rejilla técnica de plano arquitectónico en el SVG (`#circuit-grid`), rayos radiales interconectados hacia el núcleo de marca, doble estela láser con sombra luminosa neón (`#3CF5B5`), ondas de pulso expandible en los nodos activos y tarjeta de descripción con insignia dinámica e ícono de la capacidad seleccionada. `pnpm build` verificado con éxito.
 
+2026-08-05 — Ajuste de Rigor Visual según DOC 08 (Estructura Activa / Arquitecto Pragmático): depurado `components/hero-infrastructure-diagram.tsx` eliminando la simulación tecnológica artificial (rejilla recargada, animaciones de pulso excesivas) para alinearse con los principios de marca. Mantenida la estructura ortogonal limpia del circuito rectangular, el trazado fino de conexión `#3CF5B5` y la máxima legibilidad del copy de valor. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
