@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { ConsentBanner } from "@/components/consent-banner";
 import { ConsentDefaults } from "@/components/consent-defaults";
@@ -21,8 +21,8 @@ import { isProductionDeployment } from "@/lib/env/deployment";
 import { publicEnv } from "@/lib/env/public";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -62,11 +62,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} h-full antialiased`}>
+    <html lang="es" className={`${instrumentSans.variable} h-full antialiased`}>
       <head>
         <ConsentDefaults />
       </head>
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col font-sans">
         {isProductionDeployment && publicEnv.NEXT_PUBLIC_GTM_ID ? (
           <GoogleTagManager containerId={publicEnv.NEXT_PUBLIC_GTM_ID} />
         ) : null}

@@ -1,6 +1,7 @@
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+import { BrandIsotipo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,9 +28,10 @@ export function Navbar() {
       <div className="mx-auto flex max-w-5xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
         <Link
           href="/#inicio"
-          className="text-sm font-semibold text-foreground sm:text-base"
+          className="group inline-flex items-center gap-2.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-90 sm:text-base"
         >
-          Promarketing Perú
+          <BrandIsotipo size={22} className="text-foreground" />
+          <span>Promarketing Perú</span>
         </Link>
 
         <nav
@@ -40,13 +42,13 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              className="relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {item.label}
             </Link>
           ))}
           <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">
+            <DropdownMenuTrigger className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
               Recursos
               <ChevronDown aria-hidden="true" className="size-4" />
             </DropdownMenuTrigger>
@@ -60,7 +62,7 @@ export function Navbar() {
           </DropdownMenu>
         </nav>
 
-        <Button asChild size="lg" className="h-11 w-full px-4 text-sm sm:w-fit">
+        <Button asChild size="lg" className="h-11 w-full px-4 text-sm transition-transform active:scale-98 sm:w-fit">
           <Link href="/#contacto">
             Solicitar Auditoría C.L.A.R.O.
             <ArrowUpRight aria-hidden="true" />

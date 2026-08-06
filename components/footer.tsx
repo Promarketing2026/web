@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
+import { BrandIsotipo } from "@/components/brand-logo";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { CookiePreferencesButton } from "@/components/cookie-preferences-button";
 
@@ -40,9 +41,12 @@ export function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <p className="text-base font-semibold text-foreground">
-              Promarketing Perú
-            </p>
+            <div className="group inline-flex items-center gap-2.5">
+              <BrandIsotipo size={22} className="text-foreground" />
+              <p className="text-base font-semibold text-foreground">
+                Promarketing Perú
+              </p>
+            </div>
             <p className="max-w-sm text-sm leading-6 text-muted-foreground">
               Diseñamos Infraestructura Comercial Conectada para organizaciones
               que necesitan crecer con claridad.
@@ -59,7 +63,7 @@ export function Footer() {
                     rel="noopener noreferrer"
                     aria-label={link.label}
                     title={link.label}
-                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:bg-background hover:text-foreground"
+                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground transition-all hover:border-foreground/30 hover:bg-background hover:text-foreground hover:scale-105 active:scale-95"
                   >
                     <Icon aria-hidden="true" className="size-4" />
                   </a>
@@ -75,7 +79,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               {footerNavLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="hover:text-foreground">
+                  <a href={link.href} className="transition-colors hover:text-foreground">
                     {link.label}
                   </a>
                 </li>
@@ -89,7 +93,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:crece@promarketingperu.com"
-                  className="inline-flex items-center gap-2 hover:text-foreground"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <Mail aria-hidden="true" className="size-4" />
                   crece@promarketingperu.com
@@ -100,7 +104,7 @@ export function Footer() {
                   href="https://wa.me/51992573585"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 hover:text-foreground"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <Phone aria-hidden="true" className="size-4" />
                   992 573 585
@@ -111,7 +115,7 @@ export function Footer() {
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 hover:text-foreground"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <MapPin aria-hidden="true" className="size-4" />
                   Ver ubicación
@@ -130,7 +134,7 @@ export function Footer() {
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
             <Link
               href="/politica-de-privacidad"
-              className="hover:text-foreground"
+              className="transition-colors hover:text-foreground"
             >
               Política de Privacidad
             </Link>

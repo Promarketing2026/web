@@ -383,5 +383,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — B6 completado: integradas animaciones de entrada con Motion (`motion/react`) en las secciones restantes del Home: Prueba social (`components/social-proof.tsx`), Objeciones (`components/faq.tsx`) y CTA final (`components/final-cta.tsx`). Todas las secciones utilizan la variante compartida `fadeUpVariant` de `lib/animations.ts`, respetan la preferencia de movimiento reducido `useReducedMotion` y se activan mediante `whileInView` con `viewport={{ once: true }}`. `pnpm build` verificado con éxito.
 
+2026-08-05 — Sincronización del Sistema Visual (`DOC 08`): actualizada la fuente institucional a `Instrument Sans` (`next/font/google`), integrados los tokens cromáticos oficiales (`accent.connection` `#3CF5B5` y `accent.decision` `#E38035`) y creado el componente `BrandIsotipo` (`components/brand-logo.tsx`) utilizando la geometría SVG maestra en Navbar y Footer con micro-interacciones. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
