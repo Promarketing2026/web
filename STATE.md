@@ -387,5 +387,7 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-05 — RETOQUE-3 completado: verificado que `sanity/lib/image.ts` utiliza la exportación con nombre `createImageUrlBuilder` de `@sanity/image-url`, eliminando advertencias de importaciones deprecadas. `pnpm build` verificado con éxito.
 
+2026-08-05 — Optimización de Animaciones de Navegación: implementadas micro-interacciones de accesibilidad y usabilidad en `components/navbar.tsx` y `components/ui/dropdown-menu.tsx`. Incluye subrayado expansivo animado en links con `accent.connection` (`#3CF5B5`), rotación fluida de Chevron en dropdowns con animaciones de entrada/salida Radix, e interacción con elevación y resplandor en el botón de CTA principal. `pnpm build` verificado con éxito.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
