@@ -22,8 +22,11 @@ ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
 Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
 Los hallazgos automatizables de accesibilidad están corregidos; ACCESS-VERIFY
 continúa bloqueado por el plugin del navegador. LIMITS-1 detectó un riesgo HIGH:
-Vercel Hobby no admite sitios comerciales. Próximo paso: decisión HOSTING-1
-entre Vercel Pro o migración, sin ejecutar gastos sin aprobación explícita.
+Vercel Hobby no admite sitios comerciales. La migración queda diferida hasta
+cerrar frontend, backend e integraciones, y deberá mantener costo de plataforma
+USD 0. FORM-SCOPE-1 quedó resuelta: Auditoría notificará internamente y el
+newsletter irá a una lista de HubSpot sin alerta por cada alta. Próximo paso:
+aprobar el proveedor gratuito de FORM-NOTIFY-1 antes de implementarlo.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -339,6 +342,20 @@ considera verificada. Resultado FAIL/HIGH en Vercel: Hobby está
 restringido a uso personal no comercial y Promarketing promociona servicios.
 Próximo paso: HOSTING-1 requiere elegir Vercel Pro o migración; no se autoriza
 ningún gasto implícitamente.
+
+2026-08-05 — Se corrigió el orden de cierre: HOSTING-1 queda diferida hasta
+terminar frontend, backend e integraciones, con costo de plataforma USD 0 como
+requisito obligatorio y Vercel Pro descartado. FORM-SCOPE-1 pasa a ser la tarea
+siguiente para definir el flujo de Auditoría C.L.A.R.O. y newsletter antes de
+implementar notificaciones o conexiones adicionales.
+
+2026-08-05 — FORM-SCOPE-1 completada por confirmación del usuario. Auditoría
+C.L.A.R.O. mantendrá HubSpot y sumará una notificación interna a
+`promarketing2027@gmail.com`; newsletter se conectará a una lista de HubSpot
+sin enviar una alerta interna por cada suscripción. FORM-NOTIFY-1 queda como
+siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
+
+2026-08-05 — Actualización de dependencias: `next` y `eslint-config-next` actualizados a la versión `16.3.0` mediante `pnpm`. `pnpm build` ejecutado con éxito produciendo la compilación estática completa sin advertencias ni errores.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
