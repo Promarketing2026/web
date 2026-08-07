@@ -602,6 +602,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — QA-2 Pruebas E2E con Playwright completadas: Instalado `@playwright/test` (`playwright.config.ts`) y creadas 4 suites de pruebas automáticas en `tests/e2e/` (`home.spec.ts`, `auditoria-form.spec.ts`, `servicios.spec.ts` y `content.spec.ts`). Verificados los flujos de renderizado, navegación, validación de formularios, detección anti-spam (honeypot) y manejo de errores defensivos (`try/catch`). 10/10 pruebas pasaron exitosamente (`PASS`). `pnpm lint` y `pnpm build` verificados con 0 errores.
 
+2026-08-07 — Publicación de GTM ANALYTICS-2 completada: Publicado oficialmente en producción el contenedor `GTM-THQJQQ2D` (Versión 2 - `v1.0 - GA4 + Meta Pixel + Consent Mode v2`). Incluye la etiqueta base de GA4 (`G-QLQ5SYP5G3`), Meta Pixel (`937463375421449`), los eventos de conversión `generate_lead` y `Lead`, y el cumplimiento estricto de Consent Mode v2.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
