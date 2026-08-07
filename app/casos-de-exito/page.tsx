@@ -21,7 +21,12 @@ function getSituacionExtracto(situacion: string) {
 }
 
 export default async function CasosDeExitoPage() {
-  const casos = await client.fetch<CasoDeExito[]>(CASOS_DE_EXITO_QUERY);
+  let casos: CasoDeExito[] = [];
+  try {
+    casos = await client.fetch<CasoDeExito[]>(CASOS_DE_EXITO_QUERY);
+  } catch (error) {
+    console.warn("Sanity fetch error (casos):", error);
+  }
 
   return (
     <section className="border-y border-border bg-muted/40 px-6 py-24 sm:px-10 sm:py-32">

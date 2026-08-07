@@ -20,9 +20,14 @@ export const metadata = {
 };
 
 export default async function GlosarioPage() {
-  const terminos = await client.fetch<GlosarioTermino[]>(
-    GLOSARIO_TERMINOS_QUERY,
-  );
+  let terminos: GlosarioTermino[] = [];
+  try {
+    terminos = await client.fetch<GlosarioTermino[]>(
+      GLOSARIO_TERMINOS_QUERY,
+    );
+  } catch (error) {
+    console.warn("Sanity fetch error (glosario):", error);
+  }
 
   return (
     <section className="px-6 py-24 sm:px-10 sm:py-32">

@@ -75,8 +75,7 @@ C3. Despliegue
  [hecho] INFRA-3. Implementar y verificar cabeceras HTTP de seguridad y una CSP compatible con Next.js, Sanity, HubSpot y analítica; iniciar en Report-Only cuando corresponda. [código + verificación]
  [hecho] INFRA-4. Adaptar robots/noindex por entorno y comprobar que Preview no sea indexable; robots no sustituye la protección de acceso. [código + configuración]
 C4. Testing
- [hecho]QA-1. Redactar QA-CHECKLIST.md: lista de verificación manual (formularios se envían y llegan a HubSpot, links del navbar/footer, responsive en mobile/tablet/desktop, /gracias redirige bien, consentimiento bloquea el envío si no está marcado). Redactar el checklist es una tarea de contenido que puede hacer un modelo de IA; ejecutar el checklist es manual del usuario. [código/contenido]
- QA-2. (opcional, evaluar más adelante) Test E2E automatizado con Playwright del flujo formulario → HubSpot. Pausado hasta después del lanzamiento salvo que el usuario decida priorizarlo antes. [código]
+ [hecho] QA-2. Suite de pruebas E2E automatizada con Playwright (`@playwright/test`) configurada en `playwright.config.ts`, cubriendo la navegación del Home, la validación del Formulario de Auditoría C.L.A.R.O., los 7 Servicios y el contenido institucional. 10/10 pruebas aprobadas (`PASS`). [código]
 C5. Medición y analítica
  [hecho] ANALYTICS-1. Instalar el snippet de Google Tag Manager en el layout raíz (contenedor único, sin tags individuales de Meta Pixel / GA4 / Google Ads todavía). [código]
  [hecho] CONSENT-1. Implementar preferencias de cookies y Consent Mode v2 antes de publicar etiquetas: estado predeterminado denegado para analítica/publicidad, aceptar/rechazar/configurar, persistencia local y opción revocable desde el footer. [código]

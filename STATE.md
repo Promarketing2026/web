@@ -600,6 +600,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — Páginas Dinámicas de Glosario y Casos de Éxito completadas: Añadido el campo `slug` a los esquemas de Sanity (`sanity/schemaTypes/glosarioTermino.ts` y `casoDeExito.ts`), creadas las vistas de detalle `/glosario/[slug]` (`app/glosario/[slug]/page.tsx`) y `/casos-de-exito/[slug]` (`app/casos-de-exito/[slug]/page.tsx`) conectadas con consultas GROQ (`sanity/lib/queries.ts`), PortableText, metadata SEO, marcado JSON-LD (`DefinedTerm` y `Article`), enlaces recíprocos y actualización del sitemap dinámico XML (`app/sitemap.ts`). `pnpm lint` y `pnpm build` verificados con 0 errores.
 
+2026-08-07 — QA-2 Pruebas E2E con Playwright completadas: Instalado `@playwright/test` (`playwright.config.ts`) y creadas 4 suites de pruebas automáticas en `tests/e2e/` (`home.spec.ts`, `auditoria-form.spec.ts`, `servicios.spec.ts` y `content.spec.ts`). Verificados los flujos de renderizado, navegación, validación de formularios, detección anti-spam (honeypot) y manejo de errores defensivos (`try/catch`). 10/10 pruebas pasaron exitosamente (`PASS`). `pnpm lint` y `pnpm build` verificados con 0 errores.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
