@@ -18,6 +18,7 @@ import {
 const navItems = [
   { id: "inicio", label: "Inicio", href: "/#inicio" },
   { id: "solucion", label: "Solución", href: "/#solucion" },
+  { id: "servicios", label: "Servicios", href: "/servicios" },
   { id: "contacto", label: "Contacto", href: "/#contacto" },
 ];
 
@@ -51,6 +52,9 @@ export function Navbar() {
   // Derivación pura del estado activo cuando se está fuera de la raíz (evita renders en cascada)
   const routeActiveId = useMemo(() => {
     if (pathname !== "/") {
+      if (pathname.startsWith("/servicios")) {
+        return "servicios";
+      }
       if (
         pathname.startsWith("/blog") ||
         pathname.startsWith("/glosario") ||

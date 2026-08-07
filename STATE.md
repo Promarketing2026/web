@@ -596,6 +596,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — RETOQUE-4 completado: La captura de parámetros de atribución (UTM) se ejecuta en la landing page mediante `UtmCapture` y `sessionStorage`, inyectando campos ocultos en `AuditoriaForm` (`components/forms/auditoria-form.tsx`) que viajan a la Server Action de `lib/hubspot.ts` y a las notificaciones por correo de Resend (`lib/email.ts`). La página `/gracias` (`components/thank-you-redirect.tsx`) recupera los UTMs desde la URL o sessionStorage como fallback. `pnpm lint` y `pnpm build` verificados con 0 errores y 0 advertencias.
 
+2026-08-07 — Páginas de Servicios Individuales completadas: Implementada la arquitectura de datos (`lib/services.ts`), el Hub central `/servicios` (`app/servicios/page.tsx`) y las páginas de detalle dinámicas `/servicios/[slug]` (`app/servicios/[slug]/page.tsx`) para las 7 capacidades comerciales (Diseño de Marca, Infraestructura Web, Ecommerce, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial y Tracking/Trazabilidad). Todas prerrenderizadas estáticamente (SSG) con metadata SEO, esquemas JSON-LD (Service / ItemList), actualización de Navbar (`components/navbar.tsx`) y sitemap XML (`app/sitemap.ts`). `pnpm lint` y `pnpm build` verificados con 0 errores.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
