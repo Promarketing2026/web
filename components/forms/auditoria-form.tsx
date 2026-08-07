@@ -15,6 +15,7 @@ export function AuditoriaForm() {
     initialState,
   );
   const [servicio, setServicio] = useState("");
+  const [utms] = useState<Record<string, string>>(() => getStoredUtmParams());
 
   useEffect(() => {
     if (state.status !== "success") return;
@@ -22,7 +23,6 @@ export function AuditoriaForm() {
     const params = new URLSearchParams();
     if (servicio) params.set("servicio", servicio);
 
-    const utms = getStoredUtmParams();
     for (const [key, value] of Object.entries(utms)) {
       if (value) params.set(key, value);
     }
@@ -43,7 +43,7 @@ export function AuditoriaForm() {
     }, 0);
 
     return () => window.clearTimeout(timeoutId);
-  }, [state.status, servicio, router]);
+  }, [state.status, servicio, utms, router]);
 
   if (state.status === "success") {
     return (
@@ -61,6 +61,13 @@ export function AuditoriaForm() {
 
   return (
     <form action={formAction} className="space-y-4" noValidate>
+      {/* Campos ocultos de UTMs desde sessionStorage */}
+      <input type="hidden" name="utm_source" value={utms.utm_source || ""} />
+      <input type="hidden" name="utm_medium" value={utms.utm_medium || ""} />
+      <input type="hidden" name="utm_campaign" value={utms.utm_campaign || ""} />
+      <input type="hidden" name="utm_content" value={utms.utm_content || ""} />
+      <input type="hidden" name="utm_term" value={utms.utm_term || ""} />
+
       <div
         aria-hidden="true"
         style={{

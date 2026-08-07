@@ -157,6 +157,14 @@ export async function submitAuditoriaForm(
   }
 
   const { nombre, email, empresa, servicio } = parsed.data;
+  const utms = {
+    utm_source: formData.get("utm_source")?.toString() || undefined,
+    utm_medium: formData.get("utm_medium")?.toString() || undefined,
+    utm_campaign: formData.get("utm_campaign")?.toString() || undefined,
+    utm_content: formData.get("utm_content")?.toString() || undefined,
+    utm_term: formData.get("utm_term")?.toString() || undefined,
+  };
+
   const [firstname, ...restoDelNombre] = nombre.split(" ");
   const lastname = restoDelNombre.join(" ") || undefined;
 
@@ -179,7 +187,7 @@ export async function submitAuditoriaForm(
     });
 
     if (response.ok) {
-      void sendLeadNotificationEmail({ nombre, email, empresa, servicio });
+      void sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
       return { status: "success" };
     }
 
@@ -189,7 +197,7 @@ export async function submitAuditoriaForm(
       const updated = await updateExistingContact(email, properties);
 
       if (updated) {
-        void sendLeadNotificationEmail({ nombre, email, empresa, servicio });
+        void sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
         return { status: "success" };
       }
 

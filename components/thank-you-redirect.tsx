@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { getStoredUtmParams } from "@/lib/utm";
 
 const UTM_KEYS = [
   "utm_source",
@@ -24,7 +25,7 @@ export function ThankYouRedirect() {
   const service = searchParams.get("servicio");
 
   const utmParams = useMemo(() => {
-    return UTM_KEYS.reduce<UtmParams>((acc, key) => {
+    const fromUrl = UTM_KEYS.reduce<UtmParams>((acc, key) => {
       const value = searchParams.get(key);
 
       if (value) {
@@ -33,6 +34,12 @@ export function ThankYouRedirect() {
 
       return acc;
     }, {});
+
+    if (Object.keys(fromUrl).length > 0) {
+      return fromUrl;
+    }
+
+    return getStoredUtmParams();
   }, [searchParams]);
 
   useEffect(() => {

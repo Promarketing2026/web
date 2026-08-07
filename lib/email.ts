@@ -11,6 +11,7 @@ export type LeadNotificationData = {
   email: string;
   empresa?: string;
   servicio?: string;
+  utms?: Record<string, string | undefined>;
 };
 
 export async function sendLeadNotificationEmail(
@@ -25,12 +26,37 @@ export async function sendLeadNotificationEmail(
 
   const resend = new Resend(serverEnv.resendApiKey);
 
-  const { nombre, email, empresa, servicio } = data;
+  const { nombre, email, empresa, servicio, utms } = data;
   const fecha = new Date().toLocaleString("es-PE", {
     timeZone: "America/Lima",
     dateStyle: "medium",
     timeStyle: "short",
   });
+
+  const activeUtms = utms
+    ? Object.entries(utms).filter(([, val]) => Boolean(val))
+    : [];
+
+  const utmRowsHtml =
+    activeUtms.length > 0
+      ? `
+        <tr>
+          <td colspan="2" style="padding: 14px 0 6px 0; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+            📌 Parámetros de Atribución (UTM):
+          </td>
+        </tr>
+        ${activeUtms
+          .map(
+            ([key, val]) => `
+          <tr>
+            <td style="padding: 6px 0; border-bottom: 1px solid #f4f4f5; font-weight: 600; color: #71717a; padding-left: 12px;">${key}:</td>
+            <td style="padding: 6px 0; border-bottom: 1px solid #f4f4f5; color: #09090b; font-family: monospace;">${val}</td>
+          </tr>
+        `,
+          )
+          .join("")}
+      `
+      : "";
 
   const html = `
     <!DOCTYPE html>
@@ -50,7 +76,7 @@ export async function sendLeadNotificationEmail(
         
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5; font-weight: 600; width: 140px;">Nombre:</td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5; font-weight: 600; width: 160px;">Nombre:</td>
             <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5;">${nombre}</td>
           </tr>
           <tr>
@@ -68,9 +94,10 @@ export async function sendLeadNotificationEmail(
             <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5;">${servicio || "General / No especificado"}</td>
           </tr>
           <tr>
-            <td style="padding: 10px 0; font-weight: 600;">Fecha de recepción:</td>
-            <td style="padding: 10px 0;">${fecha} (PET)</td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5; font-weight: 600;">Fecha de recepción:</td>
+            <td style="padding: 10px 0; border-bottom: 1px solid #f4f4f5;">${fecha} (PET)</td>
           </tr>
+          ${utmRowsHtml}
         </table>
 
         <div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e4e7; font-size: 12px; color: #a1a1aa; text-align: center;">

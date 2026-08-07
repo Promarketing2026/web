@@ -36,7 +36,7 @@ PENDIENTES DE RETOQUE (tareas ya "hechas" con defectos conocidos, pausadas)
  [hecho] RETOQUE-1 (de B2.5): estabilizado el contenedor del párrafo debajo del diagrama del Hero con `min-h-10` y transiciones fluidas de opacidad en `components/hero-infrastructure-diagram.tsx`, eliminando cualquier salto de layout. [código]
  [hecho] RETOQUE-2 (de B5): sincronización de la sección "Educación del concepto" rediseñada en 2 columnas, con tarjetas de etapa dinámicas, diagrama SVG centrado y timeline de ScrollTrigger calibrado a ritmo suave. [código]
  [hecho] RETOQUE-3: @sanity/image-url utiliza `createImageUrlBuilder` en `sanity/lib/image.ts`, eliminando cualquier import por defecto deprecado. [código]
- [SIGUIENTE] RETOQUE-4: la captura de UTMs está implementada en el lugar incorrecto (/gracias, donde ya no existen en la URL). Debe moverse a la página de aterrizaje real (donde vive el formulario) usando sessionStorage, y viajar como campos ocultos del formulario hacia HubSpot en A12. El código actual en thank-you-redirect.tsx sirve como referencia técnica pero no es la implementación final.
+ [hecho] RETOQUE-4: la captura de UTMs se movió a la página de aterrizaje real vía `sessionStorage`, viaja como campos ocultos en el formulario hacia la Server Action de HubSpot y Resend (`lib/hubspot.ts`, `components/forms/auditoria-form.tsx`), y se transmite a `/gracias` con fallback local. [código]
 PAUSADAS (no descartadas — retomar cuando el usuario lo indique)
  [hecho] B6. "Prueba social", "Objeciones", "CTA final" → Motion (`motion/react`), consistente con B3/B4/B4.5 y respetando `useReducedMotion`. [código]
  B7. Verificar que Lenis no rompe ScrollTrigger (requiere sincronizar ambos — es un paso técnico conocido, no improvisar)

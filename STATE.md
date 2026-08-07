@@ -594,6 +594,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — RETOQUE-2 y Guía de Plataformas completados: Creada la guía exhaustiva `docs/infrastructure/platform-setup-guide.md` detallando los pasos de configuración manual para Resend DNS, Dominio Vercel, GTM, Clarity, reCAPTCHA v3 y HubSpot. Rediseñada la sección "Educación del concepto" en 2 columnas con tarjetas interactiva-dinámicas (`components/education.tsx`) y SVG centrado por etapas (`components/education-infrastructure-diagram.tsx`). Timeline GSAP ScrollTrigger calibrado a `scrub: 0.8` con soporte `prefers-reduced-motion`. `pnpm lint` y `pnpm build` verificados con 0 errores y 0 advertencias.
 
+2026-08-07 — RETOQUE-4 completado: La captura de parámetros de atribución (UTM) se ejecuta en la landing page mediante `UtmCapture` y `sessionStorage`, inyectando campos ocultos en `AuditoriaForm` (`components/forms/auditoria-form.tsx`) que viajan a la Server Action de `lib/hubspot.ts` y a las notificaciones por correo de Resend (`lib/email.ts`). La página `/gracias` (`components/thank-you-redirect.tsx`) recupera los UTMs desde la URL o sessionStorage como fallback. `pnpm lint` y `pnpm build` verificados con 0 errores y 0 advertencias.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
