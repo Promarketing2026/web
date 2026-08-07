@@ -592,6 +592,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-06 — Resolución de Hallazgos de Auditoría Técnica: aisladas las claves de rate-limiting por formulario en `lib/rate-limit.ts` (`auditoria` vs `newsletter`), corregido el error de ESLint de React 19 en `components/navbar.tsx` usando derivación `useMemo`, sustituidos los colores hex hardcodeados por variables CSS (`var(--accent-connection)` y `var(--card)`) en `components/hero-infrastructure-diagram.tsx`, completado `.env.local.example` y sincronizado el resumen inicial de `STATE.md`. `pnpm lint` y `pnpm build` verificados con 0 errores.
 
+2026-08-07 — RETOQUE-2 y Guía de Plataformas completados: Creada la guía exhaustiva `docs/infrastructure/platform-setup-guide.md` detallando los pasos de configuración manual para Resend DNS, Dominio Vercel, GTM, Clarity, reCAPTCHA v3 y HubSpot. Rediseñada la sección "Educación del concepto" en 2 columnas con tarjetas interactiva-dinámicas (`components/education.tsx`) y SVG centrado por etapas (`components/education-infrastructure-diagram.tsx`). Timeline GSAP ScrollTrigger calibrado a `scrub: 0.8` con soporte `prefers-reduced-motion`. `pnpm lint` y `pnpm build` verificados con 0 errores y 0 advertencias.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
