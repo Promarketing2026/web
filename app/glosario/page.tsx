@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 
 import {
@@ -54,7 +55,7 @@ export default async function GlosarioPage() {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="border-t border-border pt-6 sm:ml-[calc(36%+2rem)]">
+                  <div className="border-t border-border pt-6 sm:ml-[calc(36%+2rem)] space-y-4">
                     {termino.definicionExtendida?.length ? (
                       <div className="space-y-5 text-base leading-7 text-foreground">
                         <PortableText value={termino.definicionExtendida} />
@@ -65,6 +66,17 @@ export default async function GlosarioPage() {
                         publicada.
                       </p>
                     )}
+
+                    {termino.slug ? (
+                      <div className="pt-2">
+                        <Link
+                          href={`/glosario/${termino.slug}`}
+                          className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-connection hover:underline"
+                        >
+                          Ver página del concepto →
+                        </Link>
+                      </div>
+                    ) : null}
                   </div>
                 </AccordionContent>
               </AccordionItem>

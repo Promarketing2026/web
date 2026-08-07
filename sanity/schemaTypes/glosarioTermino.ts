@@ -12,6 +12,16 @@ export const glosarioTermino = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug URL",
+      type: "slug",
+      options: {
+        source: "termino",
+        maxLength: 96,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "definicionCorta",
       title: "Definicion corta",
       type: "text",

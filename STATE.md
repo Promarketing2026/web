@@ -598,6 +598,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — Páginas de Servicios Individuales completadas: Implementada la arquitectura de datos (`lib/services.ts`), el Hub central `/servicios` (`app/servicios/page.tsx`) y las páginas de detalle dinámicas `/servicios/[slug]` (`app/servicios/[slug]/page.tsx`) para las 7 capacidades comerciales (Diseño de Marca, Infraestructura Web, Ecommerce, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial y Tracking/Trazabilidad). Todas prerrenderizadas estáticamente (SSG) con metadata SEO, esquemas JSON-LD (Service / ItemList), actualización de Navbar (`components/navbar.tsx`) y sitemap XML (`app/sitemap.ts`). `pnpm lint` y `pnpm build` verificados con 0 errores.
 
+2026-08-07 — Páginas Dinámicas de Glosario y Casos de Éxito completadas: Añadido el campo `slug` a los esquemas de Sanity (`sanity/schemaTypes/glosarioTermino.ts` y `casoDeExito.ts`), creadas las vistas de detalle `/glosario/[slug]` (`app/glosario/[slug]/page.tsx`) y `/casos-de-exito/[slug]` (`app/casos-de-exito/[slug]/page.tsx`) conectadas con consultas GROQ (`sanity/lib/queries.ts`), PortableText, metadata SEO, marcado JSON-LD (`DefinedTerm` y `Article`), enlaces recíprocos y actualización del sitemap dinámico XML (`app/sitemap.ts`). `pnpm lint` y `pnpm build` verificados con 0 errores.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 

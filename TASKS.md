@@ -103,5 +103,5 @@ en la primera impresión al compartir el link; accesibilidad y límites de plan 
  [PENDIENTE — DIFERIDA HASTA CIERRE FUNCIONAL] HOSTING-1. Migrar desde Vercel Hobby a un hosting que permita uso comercial con costo de plataforma USD 0. Vercel Pro queda descartado por el requisito económico. No iniciar la migración hasta cerrar y verificar frontend, backend e integraciones, ni cambiar producción sin aprobación explícita. [infraestructura + decisión]
 Backlog (no empezar aún)
 [hecho] Páginas de servicio individuales — los 7 sistemas de la oferta (Diseño y Gestión de Marca, Infraestructura Web, Ecommerce y Conversión, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial, Tracking y Trazabilidad), implementados en las rutas `/servicios` y `/servicios/[slug]` con prerenderizado estático (SSG), metadata SEO, JSON-LD y formulario preseleccionado. [código]
-Glosario (colección completa)
+[hecho] Glosario y Casos de Éxito — creadas las rutas dinámicas de detalle `/glosario/[slug]` y `/casos-de-exito/[slug]` integradas con Sanity.io (GROQ), PortableText, metadata SEO, esquemas JSON-LD (DefinedTerm / Article) y sitemap dinámico XML. [código]
 Animación tipo "paint stroke" SVG en secciones por definir (pendiente: usuario debe especificar en qué secciones exactamente)

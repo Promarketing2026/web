@@ -25,6 +25,7 @@ export type PostSlug = {
 export type GlosarioTermino = {
   _id: string;
   termino: string;
+  slug?: string;
   definicionCorta: string;
   definicionExtendida?: PortableTextBlock[];
 };
@@ -32,6 +33,7 @@ export type GlosarioTermino = {
 export type CasoDeExito = {
   _id: string;
   cliente: string;
+  slug?: string;
   situacion: string;
   intervencion?: string;
   resultado: string;

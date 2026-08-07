@@ -12,6 +12,16 @@ export const casoDeExito = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "Slug URL",
+      type: "slug",
+      options: {
+        source: "cliente",
+        maxLength: 96,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "situacion",
       title: "Situacion",
       type: "text",

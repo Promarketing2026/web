@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CaseResultCard } from "@/components/case-result-card";
 import { client } from "@/sanity/lib/client";
 import { CASOS_DE_EXITO_QUERY } from "@/sanity/lib/queries";
@@ -40,7 +41,7 @@ export default async function CasosDeExitoPage() {
             {casos.map((caso) => (
               <div
                 key={caso._id}
-                className="flex min-h-full flex-col gap-6 rounded-lg border border-border bg-card p-6 text-card-foreground sm:p-8"
+                className="flex min-h-full flex-col justify-between gap-6 rounded-lg border border-border bg-card p-6 text-card-foreground sm:p-8"
               >
                 <div>
                   <p className="text-sm font-semibold text-muted-foreground uppercase">
@@ -54,11 +55,22 @@ export default async function CasosDeExitoPage() {
                   </p>
                 </div>
 
-                <CaseResultCard
-                  label={caso.cifraDestacada || "Resultado"}
-                  result={caso.resultado}
-                  className="mt-auto border-border bg-background"
-                />
+                <div className="space-y-4">
+                  <CaseResultCard
+                    label={caso.cifraDestacada || "Resultado"}
+                    result={caso.resultado}
+                    className="border-border bg-background"
+                  />
+
+                  {caso.slug ? (
+                    <Link
+                      href={`/casos-de-exito/${caso.slug}`}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-connection hover:underline pt-2"
+                    >
+                      Ver caso completo →
+                    </Link>
+                  ) : null}
+                </div>
               </div>
             ))}
           </div>
