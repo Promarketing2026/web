@@ -63,9 +63,8 @@ Este documento centraliza todas las instrucciones técnicas paso a paso y los re
 
 ### Requisitos y Estado Actual
 - **Contenedor GTM**: `GTM-THQJQQ2D` montado en el layout raíz de Next.js.
-- **Configuración local/preview**: Consent Mode v2 predeterminado en `denied` hasta que el usuario responda al banner de cookies (`components/cookie-consent-banner.tsx`).
-- **Estado**: Borrador verificado con Tag Assistant (GA4 base, GA4 `generate_lead`, Meta Pixel `937463375421449`, Meta `Lead`).
-- **Bloqueo actual**: Pausado hasta aprobación jurídica de la Política de Privacidad (`LEGAL-2`).
+- **Configuración en producción**: Consent Mode v2 predeterminado en `denied` hasta que el usuario responda al banner de cookies (`components/cookie-consent-banner.tsx`).
+- **Estado**: **¡Publicado oficialmente en producción el 06/08/2026!** (Versión 2: GA4 `G-QLQ5SYP5G3`, Meta Pixel `937463375421449`, Consent Mode v2 y eventos de conversión `generate_lead` y `Lead`).
 
 ### Pasos de Configuración para Publicación
 1. **Aprobación Jurídica (`LEGAL-2`)**:
