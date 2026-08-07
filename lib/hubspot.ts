@@ -187,7 +187,11 @@ export async function submitAuditoriaForm(
     });
 
     if (response.ok) {
-      void sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
+      try {
+        await sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
+      } catch (emailError) {
+        console.error("Error no bloqueante al enviar email de notificación:", emailError);
+      }
       return { status: "success" };
     }
 
@@ -197,7 +201,11 @@ export async function submitAuditoriaForm(
       const updated = await updateExistingContact(email, properties);
 
       if (updated) {
-        void sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
+        try {
+          await sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
+        } catch (emailError) {
+          console.error("Error no bloqueante al enviar email de notificación:", emailError);
+        }
         return { status: "success" };
       }
 

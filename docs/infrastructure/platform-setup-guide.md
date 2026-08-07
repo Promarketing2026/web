@@ -2,6 +2,12 @@
 
 Este documento centraliza todas las instrucciones técnicas paso a paso y los requisitos necesarios para completar la configuración de los servicios externos y herramientas de infraestructura pendientes de activación para el sitio web de **Promarketing Perú**.
 
+> [!NOTE]
+> **Buenas Prácticas de Arquitectura (Actualizado a Agosto de 2026)**:
+> - **Serverless Async Execution**: Las llamadas a APIs externas en Server Actions de Next.js (como Resend o HubSpot) deben ser siempre esperadas con `await` dentro de bloques `try/catch` defensivos. Evitar promesas flotantes (`void fn()`) previene que la plataforma serverless de Vercel cancele las solicitudes HTTP al concluir el response del handler.
+> - **GTM & Consent Mode v2**: El estado predeterminado de consentimiento debe inyectarse en el `<head>` mediante `gtag('consent', 'default', ...)` ANTES de la descarga del contenedor de Google Tag Manager.
+> - **Manejo de Duplicados en CRM**: La API v3 de HubSpot responde con código HTTP `409 Conflict` cuando un correo ya existe; la arquitectura debe ejecutar un `PATCH` con `?idProperty=email` para actualizar el contacto sin perder información.
+
 ---
 
 ## 1. Dominio Oficial y Servidor (`promarketingperu.com`)
