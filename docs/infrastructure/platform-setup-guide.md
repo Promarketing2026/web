@@ -134,3 +134,50 @@ Este documento centraliza todas las instrucciones técnicas paso a paso y los re
    - Tipo: Lista estática o basada en filtros (ej. `Suscrito a Newsletter = True`).
 2. **Creación de Propiedades Personalizadas** *(Opcional)*:
    - Verificar en HubSpot → **Configuración** → **Propiedades** → **Propiedades de Contacto** que los campos `servicio_de_interes` y `empresa` tengan coincidencia de tipo texto si se desea visualizarlos directamente en las tarjetas del CRM.
+
+---
+
+## 7. Google Ads y Conversiones (`ANALYTICS-2B`)
+
+### Requisitos y Estado Actual
+- **Estado**: Pospuesto por decisión del usuario hasta tener la cuenta publicitaria de Google Ads lista. No bloquea el lanzamiento ni el funcionamiento del formulario.
+
+### Pasos de Configuración Futura
+1. **Acción de Conversión en Google Ads**:
+   - Ingresar a [Google Ads Console](https://ads.google.com) → **Objetivos** → **Conversiones** → **Nueva acción de conversión** (Tipo: Sitio web).
+   - Crear conversión para el evento de envío de formulario de Auditoría C.L.A.R.O.
+2. **Instalación de Etiqueta en GTM**:
+   - Copiar el **ID de conversión** (ej. `AW-XXXXXXXXX`) y la **Etiqueta de conversión** (Conversion Label).
+   - Crear el Tag de "Google Ads Conversion Tracking" en Google Tag Manager (`GTM-THQJQQ2D`), activándolo bajo el evento personalizado `lead_submit_success` con consentimiento de marketing otorgado.
+
+---
+
+## 8. Gestor de Contenidos Sanity Studio (CMS)
+
+### Requisitos y Estado Actual
+- **Acceso**: Embebido en la ruta `/studio` de la aplicación Next.js.
+- **Schemas**: `post` (Blog), `glosarioTermino` (Glosario), `casoDeExito` (Casos de Éxito).
+- **Estado**: Schemas e integración GROQ 100% funcionales. Faltan redactar y publicar los artículos reales de la empresa.
+
+### Pasos de Configuración y Carga
+1. **Ingreso a Sanity Studio**:
+   - Abrir `https://promarketingperu.com/studio` (o `http://localhost:3000/studio` en desarrollo).
+   - Iniciar sesión con la cuenta de Sanity asociada al proyecto.
+2. **Publicación de Artículos y Términos**:
+   - Crear y publicar los posts iniciales en la sección **Post**.
+   - Registrar los términos técnicos en la sección **Glosario Termino**.
+   - Cargar los testimonios y métricas reales en **Caso De Exito**.
+
+---
+
+## 9. Monitoreo de Límites de Infraestructura (Free Tiers)
+
+### Requisitos y Estado Actual
+- **Documento de Referencia**: [`docs/infrastructure/free-tier-limits.md`](file:///d:/2027/Proyecto%20React/Webiste/web/docs/infrastructure/free-tier-limits.md).
+- **Umbrales Alerta**: 70% de consumo (atención) / 85% de consumo (acción requerida).
+
+### Puntos de Control Mensual
+- **Vercel Hobby**: Monitorear ancho de banda (100 GB/mes) y ejecuciones de Serverless Functions. *Nota: Para uso comercial directo, se evaluará la migración a costo USD 0 en `HOSTING-1` al finalizar la fase funcional.*
+- **HubSpot Free**: Monitorear límite de 1,000,000 de contactos y 2,000 emails/mes.
+- **Sanity Free**: Monitorear límite de 10,000 documentos, 10 GB de assets y 100,000 solicitudes de API al mes.
+
