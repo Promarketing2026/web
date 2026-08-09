@@ -18,26 +18,25 @@ export function FinalCta() {
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
         <motion.h2
           id="final-cta-title"
-          className="max-w-4xl text-3xl leading-tight font-semibold text-foreground sm:text-4xl"
+          className="max-w-4xl text-3xl leading-tight font-bold text-foreground sm:text-4xl"
           variants={itemVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           custom={0}
         >
-          No escales la fragmentación. Construye la infraestructura necesaria
-          para crecer con claridad.
+          No necesitas saber exactamente qué solución necesitas para empezar.
         </motion.h2>
 
         <motion.p
-          className="text-sm text-muted-foreground"
+          className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           variants={itemVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           custom={0.1}
         >
-          Diagnóstico de tu operación comercial, sin costo.
+          Si tienes una necesidad concreta, cuéntanos cuál es. Si todavía no sabes cómo definirla, cuéntanos qué está ocurriendo.
         </motion.p>
 
         <motion.div
@@ -50,6 +49,17 @@ export function FinalCta() {
         >
           <AuditoriaForm />
         </motion.div>
+
+        <motion.p
+          className="max-w-md text-xs text-muted-foreground pt-2"
+          variants={itemVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.3}
+        >
+          🛡️ No necesitas preparar un diagnóstico formal ni conocer nuestra metodología previamente. Queremos entender primero qué necesitas resolver.
+        </motion.p>
       </div>
     </section>
   );

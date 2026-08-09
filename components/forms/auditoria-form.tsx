@@ -155,7 +155,7 @@ export function AuditoriaForm() {
           htmlFor="servicio"
           className="mb-1 block text-sm font-medium text-foreground"
         >
-          Servicio de tu interes
+          ¿Qué necesitas o qué está pasando?
         </label>
         <select
           id="servicio"
@@ -165,22 +165,17 @@ export function AuditoriaForm() {
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
         >
           <option value="" disabled>
-            Selecciona una opcion
+            Selecciona una opción inicial
           </option>
-          <option value="auditoria-claro">Auditoria C.L.A.R.O.</option>
-          <option value="diseno-marca">Diseno y Gestion de Marca</option>
-          <option value="infraestructura-web">Infraestructura Web</option>
-          <option value="ecommerce-conversion">
-            Ecommerce y Conversion
-          </option>
-          <option value="seo-geo-aeo">SEO / GEO / AEO</option>
-          <option value="ads-paid-media">Ads / Paid Media</option>
-          <option value="automatizacion-comercial">
-            Automatizacion Comercial
-          </option>
-          <option value="tracking-trazabilidad">
-            Tracking y Trazabilidad
-          </option>
+          <option value="necesito-web">Necesito una web o mejorar la que tengo</option>
+          <option value="fortalecer-marca">Quiero fortalecer mi marca</option>
+          <option value="generar-oportunidades">Necesito generar más oportunidades</option>
+          <option value="convertir-oportunidades">Tengo oportunidades pero no estoy convirtiendo</option>
+          <option value="ordenar-ventas-crm">Necesito ordenar ventas, CRM o seguimiento</option>
+          <option value="automatizar-procesos">Quiero automatizar procesos</option>
+          <option value="entender-resultados">Necesito entender mejor mis resultados</option>
+          <option value="otra-necesidad">Tengo otra necesidad</option>
+          <option value="no-seguro">No estoy seguro todavía</option>
         </select>
       </div>
 
@@ -196,14 +191,14 @@ export function AuditoriaForm() {
           className="mt-1 h-4 w-4 rounded border-border"
         />
         <label htmlFor="consentimiento" className="text-sm text-muted-foreground">
-          He leido y acepto la{" "}
+          He leído y acepto la{" "}
           <a
             href="/politica-de-privacidad"
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-foreground"
           >
-            Politica de Privacidad
+            Política de Privacidad
           </a>
           , y autorizo el tratamiento de mis datos para ser contactado.
         </label>
@@ -227,9 +222,9 @@ export function AuditoriaForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-md bg-foreground px-4 py-2 font-medium text-background transition-opacity disabled:opacity-60"
+        className="w-full rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
       >
-        {isPending ? "Enviando..." : "Solicitar Auditoria C.L.A.R.O."}
+        {isPending ? "Enviando..." : "Cuéntanos tu situación"}
       </button>
     </form>
   );

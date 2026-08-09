@@ -14,19 +14,23 @@ test.describe("Página Principal (Home)", () => {
     // Verificar el encabezado principal (H1)
     const mainHeading = page.getByRole("heading", { level: 1 });
     await expect(mainHeading).toBeVisible();
-    await expect(mainHeading).toContainText(/Infraestructura Comercial Conectada/i);
+    await expect(mainHeading).toContainText(/capacidades comerciales/i);
   });
 
   test("debe renderizar las secciones clave del Home", async ({ page }) => {
     await page.goto("/");
 
-    // Sección El Problema
-    const problemSection = page.locator("#inicio");
-    await expect(problemSection).toBeVisible();
+    // Sección Hero
+    const heroSection = page.locator("#inicio");
+    await expect(heroSection).toBeVisible();
 
-    // Sección Solución / Auditoría
-    const solutionSection = page.locator("#solucion");
-    await expect(solutionSection).toBeVisible();
+    // Sección Necesidades
+    const needsSection = page.locator("#necesidades");
+    await expect(needsSection).toBeVisible();
+
+    // Sección Cómo ayudamos
+    const howWeHelpSection = page.locator("#como-ayudamos");
+    await expect(howWeHelpSection).toBeVisible();
 
     // Sección Contacto / Formulario
     const contactSection = page.locator("#contacto");

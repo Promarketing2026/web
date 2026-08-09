@@ -1,183 +1,159 @@
 "use client";
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { useReducedMotion } from "motion/react";
-import { Layers, Network, LineChart } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, BarChart3, CheckCircle, Database, Layers, Target, Users } from "lucide-react";
+import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
+import { fadeUpVariant } from "@/lib/animations";
 
-import { EducationInfrastructureDiagram } from "@/components/education-infrastructure-diagram";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
-const steps = [
+const systems = [
   {
-    id: 1,
-    badge: "Etapa 1: El Problema",
-    title: "Fragmentación Operativa",
+    id: "marca",
+    name: "Sistema de Marca",
+    promise: "Construir significado, diferenciación y coherencia.",
+    capabilities: ["Estrategia de marca", "Posicionamiento", "Identidad gráfica y verbal", "Expresión en canales", "Arquitectura de valor"],
+    href: "/servicios/diseno-de-marca",
     icon: Layers,
-    description:
-      "Muchas organizaciones invierten en múltiples canales digitales, pero operan a ciegas con sistemas aislados y datos incomunicados.",
+    color: "accent-connection",
   },
   {
-    id: 2,
-    badge: "Etapa 2: La Solución",
-    title: "Infraestructura Conectada",
-    icon: Network,
-    description:
-      "Se construye trazabilidad unificada para conectar marketing, ventas y analítica, rastreando el recorrido exacto de cada oportunidad comercial.",
+    id: "demanda",
+    name: "Sistema de Demanda",
+    promise: "Crear mejores condiciones para que el mercado adecuado conozca y considere la propuesta.",
+    capabilities: ["Adquisición pagada (Paid Media)", "Estrategia SEO & AEO", "Marketing de contenidos", "Estrategia Go-To-Market", "Canales de captación"],
+    href: "/servicios/ads-paid-media",
+    icon: Target,
+    color: "accent-connection",
   },
   {
-    id: 3,
-    badge: "Etapa 3: El Resultado",
-    title: "Atribución y Crecimiento",
-    icon: LineChart,
-    description:
-      "Sin capacidad de atribución, no puedes saber qué acciones generan ingresos reales. Con datos claros, cada decisión de inversión es óptima.",
+    id: "conversion",
+    name: "Sistema de Conversión",
+    promise: "Ayudar a transformar interés en oportunidades y decisiones comerciales.",
+    capabilities: ["Experiencia digital y Web", "Arquitectura de información & UX", "Optimización de tasa de conversión", "Mecanismos de contacto y captación"],
+    href: "/servicios/infraestructura-web",
+    icon: Users,
+    color: "accent-connection",
+  },
+  {
+    id: "gestion",
+    name: "Sistema de Gestión Comercial",
+    promise: "Coordinar cómo se atienden, gestionan y desarrollan oportunidades.",
+    capabilities: ["Implementación CRM", "Automatización de seguimiento", "Definición de procesos de ventas", "Coordinación comercial", "Gestión de pipeline"],
+    href: "/servicios/ecommerce",
+    icon: Database,
+    color: "accent-decision",
+  },
+  {
+    id: "informacion",
+    name: "Sistema de Información y Decisión",
+    promise: "Entender mejor qué está ocurriendo para poder decidir con mayor fundamento.",
+    capabilities: ["Tracking y trazabilidad end-to-end", "Analítica web y comercial", "Reporting unificado", "Atribución de resultados", "Tableros de decisión"],
+    href: "/servicios/tracking-trazabilidad",
+    icon: BarChart3,
+    color: "accent-decision",
   },
 ];
 
 export function Education() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const [activeSystemId, setActiveSystemId] = useState<string>("marca");
   const shouldReduceMotion = useReducedMotion();
+  const itemVariant = fadeUpVariant({ reducedMotion: shouldReduceMotion ?? false });
 
-  useGSAP(
-    () => {
-      const stages = gsap.utils.toArray<SVGGElement>("[data-education-stage]");
-      const cardItems = gsap.utils.toArray<HTMLElement>("[data-education-card]");
-
-      gsap.set(stages, { opacity: 0 });
-      gsap.set(cardItems, {
-        opacity: 0.4,
-        scale: 0.98,
-        borderColor: "var(--border)",
-      });
-
-      if (shouldReduceMotion) {
-        gsap.set(stages, { opacity: 1 });
-        gsap.set(cardItems, {
-          opacity: 1,
-          scale: 1,
-          borderColor: "var(--border)",
-        });
-        return;
-      }
-
-      // Estado inicial (Etapa 1 activa)
-      gsap.set(stages[0], { opacity: 1 });
-      gsap.set(cardItems[0], {
-        opacity: 1,
-        scale: 1,
-        borderColor: "var(--accent-connection)",
-      });
-
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=300%",
-          scrub: 0.8,
-          pin: true,
-        },
-      });
-
-      timeline
-        // Mantener Etapa 1 visible un momento
-        .to({}, { duration: 1 })
-        // Transición Etapa 1 -> 2
-        .to(stages[0], { opacity: 0, duration: 0.5, ease: "power2.inOut" })
-        .to(stages[1], { opacity: 1, duration: 0.5, ease: "power2.inOut" }, "<")
-        .to(
-          cardItems[0],
-          { opacity: 0.4, scale: 0.98, borderColor: "var(--border)", duration: 0.5 },
-          "<",
-        )
-        .to(
-          cardItems[1],
-          { opacity: 1, scale: 1, borderColor: "var(--accent-connection)", duration: 0.5 },
-          "<",
-        )
-        // Mantener Etapa 2 visible
-        .to({}, { duration: 1 })
-        // Transición Etapa 2 -> 3
-        .to(stages[1], { opacity: 0, duration: 0.5, ease: "power2.inOut" })
-        .to(stages[2], { opacity: 1, duration: 0.5, ease: "power2.inOut" }, "<")
-        .to(
-          cardItems[1],
-          { opacity: 0.4, scale: 0.98, borderColor: "var(--border)", duration: 0.5 },
-          "<",
-        )
-        .to(
-          cardItems[2],
-          { opacity: 1, scale: 1, borderColor: "var(--accent-decision)", duration: 0.5 },
-          "<",
-        )
-        // Mantener Etapa 3 visible
-        .to({}, { duration: 1 });
-    },
-    {
-      dependencies: [shouldReduceMotion],
-      revertOnUpdate: true,
-      scope: sectionRef,
-    },
-  );
+  const activeSystem = systems.find((s) => s.id === activeSystemId) || systems[0];
 
   return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="education-title"
-      className="px-6 py-20 sm:px-10 sm:py-28 bg-background relative overflow-hidden"
-    >
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-12 max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-widest text-accent-connection mb-3 block">
-            Metodología y Diagnóstico
+    <section id="como-ayudamos" className="relative px-6 py-24 sm:px-10 sm:py-32 bg-secondary/20 border-b border-border/60">
+      <div className="mx-auto max-w-5xl space-y-12">
+        {/* Intro */}
+        <div className="max-w-3xl space-y-4">
+          <span className="text-xs font-semibold uppercase tracking-wider text-accent-connection">
+            Arquitectura de Solución
           </span>
-          <h2
-            id="education-title"
-            className="text-3xl leading-tight font-bold text-foreground sm:text-4xl lg:text-5xl"
-          >
-            Invertir sin saber qué funciona no es una estrategia.
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Organizamos capacidades alrededor de la función comercial que necesita mejorar.
           </h2>
+          <p className="text-base text-muted-foreground sm:text-lg">
+            No vendemos tácticas aisladas. Articulamos sistemas especializados según la necesidad real de tu negocio.
+          </p>
         </div>
 
-        {/* Layout en Rejilla 2 Columnas (Texto/Tarjetas + Diagrama SVG) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Columna Izquierda: Tarjetas de Etapa */}
-          <div className="lg:col-span-5 space-y-4">
-            {steps.map((step) => {
-              const Icon = step.icon;
+        {/* 5 Sistemas Nodos Interactive Container */}
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
+          {/* Navegación por Sistemas (5 cols) */}
+          <div className="space-y-2 lg:col-span-5">
+            {systems.map((sys) => {
+              const isSelected = activeSystemId === sys.id;
+              const Icon = sys.icon;
               return (
-                <div
-                  key={step.id}
-                  data-education-card
-                  data-education-item
-                  className="p-6 rounded-2xl border bg-card/60 backdrop-blur-sm transition-all duration-300 shadow-sm hover:shadow-md"
+                <button
+                  key={sys.id}
+                  onClick={() => setActiveSystemId(sys.id)}
+                  className={`w-full text-left flex items-center gap-3 rounded-xl border p-4 transition-all duration-200 ${
+                    isSelected
+                      ? "border-accent-connection bg-accent-connection/10 text-foreground font-semibold shadow-xs"
+                      : "border-border/60 bg-background/80 text-muted-foreground hover:border-border hover:text-foreground"
+                  }`}
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 rounded-lg bg-muted text-foreground">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {step.badge}
-                    </span>
+                  <div className={`p-2 rounded-lg ${isSelected ? "bg-accent-connection/20 text-accent-connection" : "bg-muted text-muted-foreground"}`}>
+                    <Icon className="size-5" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {step.description}
-                  </p>
-                </div>
+                  <span className="text-sm sm:text-base font-semibold">{sys.name}</span>
+                </button>
               );
             })}
           </div>
 
-          {/* Columna Derecha: Canvas Pinned con Diagrama SVG */}
-          <div className="lg:col-span-7 flex items-center justify-center p-6 rounded-3xl border border-border/80 bg-card/40 backdrop-blur-md shadow-xl min-h-[380px]">
-            <EducationInfrastructureDiagram />
-          </div>
+          {/* Ficha Detalle del Sistema Seleccionado (7 cols) */}
+          <motion.div
+            key={activeSystem.id}
+            variants={itemVariant}
+            initial="hidden"
+            animate="visible"
+            className="rounded-2xl border border-accent-connection/40 bg-background p-6 sm:p-8 space-y-6 lg:col-span-7 shadow-xl"
+          >
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-accent-connection">
+                Macro-Sistema Comercial
+              </span>
+              <h3 className="mt-1 text-2xl font-bold text-foreground">
+                {activeSystem.name}
+              </h3>
+              <p className="mt-2 text-base text-muted-foreground leading-relaxed">
+                {activeSystem.promise}
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                Capacidades que pueden intervenir:
+              </h4>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {activeSystem.capabilities.map((cap) => (
+                  <div key={cap} className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <CheckCircle className="size-4 text-accent-connection shrink-0" />
+                    <span>{cap}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-border flex items-center justify-between">
+              <Link
+                href={activeSystem.href}
+                className="inline-flex items-center gap-2 text-sm font-bold text-accent-connection hover:underline"
+              >
+                <span>Conocer {activeSystem.name}</span>
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Cierre conceptual */}
+        <div className="rounded-xl border border-border/80 bg-background/60 p-6 text-center max-w-3xl mx-auto">
+          <p className="text-sm font-medium text-muted-foreground">
+            💡 <strong className="text-foreground">No necesitas activar los cinco sistemas.</strong> Una necesidad específica puede requerir una solución específica o la articulación gradual de varios módulos.
+          </p>
         </div>
       </div>
     </section>

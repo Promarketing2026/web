@@ -9,8 +9,8 @@ test.describe("Módulo de Servicios (7 Sistemas de Oferta)", () => {
     const h1 = page.getByRole("heading", { level: 1 });
     await expect(h1).toContainText(/Nuestros 7 Sistemas de Oferta/i);
 
-    // Verificar las 7 tarjetas de servicios
-    const serviceCards = page.locator("a[href^='/servicios/']");
+    // Verificar las 7 tarjetas de servicios en el cuerpo principal
+    const serviceCards = page.locator("main a[href^='/servicios/']");
     await expect(serviceCards).toHaveCount(7);
   });
 

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 
-import { Education } from "@/components/education";
-import { Faq } from "@/components/faq";
-import { FinalCta } from "@/components/final-cta";
 import { Hero } from "@/components/hero";
-import { Problem } from "@/components/problem";
+import { NeedsGrid } from "@/components/needs-grid";
+import { Tension } from "@/components/tension";
+import { Education } from "@/components/education";
+import { InteractiveDemo } from "@/components/interactive-demo";
+import { HowWeThink } from "@/components/how-we-think";
 import { SocialProof } from "@/components/social-proof";
-import { Solution } from "@/components/solution";
+import { KnowledgeSection } from "@/components/knowledge-section";
+import { FinalCta } from "@/components/final-cta";
 
 export const metadata: Metadata = {
   alternates: {
@@ -18,11 +20,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Problem />
+      <NeedsGrid />
+      <Tension />
       <Education />
-      <Solution />
+      <InteractiveDemo />
+      <HowWeThink />
       <SocialProof />
-      <Faq />
+      <KnowledgeSection />
       <FinalCta />
     </>
   );

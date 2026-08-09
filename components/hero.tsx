@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
@@ -45,23 +45,23 @@ export function Hero() {
               Firma de Sistemas Comerciales Integrados
             </motion.div>
 
-            {/* Titular Principal */}
+            {/* Titular Principal V1 */}
             <motion.h1
               id="hero-title"
-              className="text-4xl font-semibold leading-tight text-foreground sm:text-5xl sm:leading-[1.15]"
+              className="text-4xl font-bold leading-tight text-foreground sm:text-5xl sm:leading-[1.15]"
               variants={heroItem}
               initial="hidden"
               animate="visible"
               custom={0.1}
             >
-              Diseñamos{" "}
+              Construimos las{" "}
               <span className="bg-gradient-to-r from-foreground via-foreground to-accent-connection bg-clip-text text-transparent">
-                Infraestructura Comercial Conectada
+                capacidades comerciales
               </span>{" "}
-              para organizaciones que necesitan crecer con claridad.
+              que tu negocio necesita para funcionar mejor.
             </motion.h1>
 
-            {/* Bajada Promesa */}
+            {/* Bajada Promesa V1 */}
             <motion.p
               className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-8"
               variants={heroItem}
@@ -69,14 +69,12 @@ export function Hero() {
               animate="visible"
               custom={0.2}
             >
-              Integramos marketing, ventas, datos y automatización en un
-              ecosistema coherente y trazable — para que recuperes la comprensión y el control de
-              tu operación comercial.
+              Estrategia, marca, demanda, conversión, tecnología e información articuladas según lo que realmente necesitas resolver.
             </motion.p>
 
-            {/* Bloque CTA + Garantía */}
+            {/* Bloque CTA Primario + Secundario */}
             <motion.div
-              className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center"
+              className="flex flex-col gap-3.5 pt-2 sm:flex-row sm:items-center"
               variants={heroItem}
               initial="hidden"
               animate="visible"
@@ -88,7 +86,7 @@ export function Hero() {
                 className="group relative h-12 px-6 text-base font-semibold shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 active:scale-98"
               >
                 <a href="#contacto">
-                  <span>Solicitar Auditoría C.L.A.R.O.</span>
+                  <span>Cuéntanos qué necesitas</span>
                   <ArrowUpRight
                     aria-hidden="true"
                     className="size-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -96,10 +94,16 @@ export function Hero() {
                 </a>
               </Button>
 
-              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground sm:pl-2">
-                <ShieldCheck aria-hidden="true" className="size-4 text-accent-connection" />
-                <span>Diagnóstico estratégico inicial sin costo</span>
-              </div>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-12 px-6 text-base font-medium transition-all duration-300 hover:border-accent-connection/50 hover:bg-secondary/60"
+              >
+                <a href="#como-ayudamos">
+                  <span>Cómo ayudamos →</span>
+                </a>
+              </Button>
             </motion.div>
           </div>
 

@@ -15,17 +15,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const navItems = [
-  { id: "inicio", label: "Inicio", href: "/#inicio" },
-  { id: "solucion", label: "Solución", href: "/#solucion" },
-  { id: "servicios", label: "Servicios", href: "/servicios" },
-  { id: "contacto", label: "Contacto", href: "/#contacto" },
+const solucionesItems = [
+  { label: "Web y experiencia digital", href: "/servicios/infraestructura-web" },
+  { label: "Marca y posicionamiento", href: "/servicios/diseno-de-marca" },
+  { label: "Generación de demanda", href: "/servicios/ads-paid-media" },
+  { label: "Conversión", href: "/servicios/seo-geo-aeo" },
+  { label: "CRM y gestión comercial", href: "/servicios/ecommerce" },
+  { label: "Automatización", href: "/servicios/automatizacion-comercial" },
+  { label: "Información y analítica", href: "/servicios/tracking-trazabilidad" },
 ];
 
-const resourceItems = [
-  { label: "Blog", href: "/blog" },
-  { label: "Glosario", href: "/glosario" },
-  { label: "Casos de Éxito", href: "/casos-de-exito" },
+const comoAyudamosItems = [
+  { label: "Sistema de Marca", href: "/#como-ayudamos" },
+  { label: "Sistema de Demanda", href: "/#como-ayudamos" },
+  { label: "Sistema de Conversión", href: "/#como-ayudamos" },
+  { label: "Sistema de Gestión Comercial", href: "/#como-ayudamos" },
+  { label: "Sistema de Información y Decisión", href: "/#como-ayudamos" },
 ];
 
 export function Navbar() {
@@ -34,11 +39,9 @@ export function Navbar() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Bandera para evitar que IntersectionObserver interfiera durante un scroll por clic
   const isManualScroll = useRef<boolean>(false);
   const scrollTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Manejador de clic directo para fijar la sección activa y evitar rebotes de scroll
   const handleNavClick = (id: string) => {
     setActiveId(id);
     isManualScroll.current = true;
@@ -49,33 +52,21 @@ export function Navbar() {
     }, 1000);
   };
 
-  // Derivación pura del estado activo cuando se está fuera de la raíz (evita renders en cascada)
   const routeActiveId = useMemo(() => {
     if (pathname !== "/") {
-      if (pathname.startsWith("/servicios")) {
-        return "servicios";
-      }
-      if (
-        pathname.startsWith("/blog") ||
-        pathname.startsWith("/glosario") ||
-        pathname.startsWith("/casos-de-exito")
-      ) {
-        return "recursos";
-      }
+      if (pathname.startsWith("/servicios")) return "soluciones";
+      if (pathname.startsWith("/blog") || pathname.startsWith("/glosario") || pathname.startsWith("/casos-de-exito")) return "conocimiento";
       return "";
     }
     return null;
   }, [pathname]);
 
-  // ScrollSpy para la página de inicio
   useEffect(() => {
     if (pathname !== "/") return;
 
-    const sections = ["inicio", "solucion", "contacto"];
+    const sections = ["inicio", "necesidades", "tension", "como-ayudamos", "demostracion", "como-pensamos", "evidencia", "conocimiento", "contacto"];
     const observerCallback: IntersectionObserverCallback = (entries) => {
-      // Ignorar actualizaciones de scroll si el usuario acaba de hacer clic en un enlace
       if (isManualScroll.current) return;
-
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveId(entry.target.id);
@@ -106,135 +97,132 @@ export function Navbar() {
   const activeOrHoveredId = hoveredId || effectiveActiveId;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/85 px-6 backdrop-blur-md transition-colors duration-300 sm:px-10">
-      <div className="mx-auto flex max-w-5xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-6 md:py-0">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/80 bg-background/85 px-4 backdrop-blur-md transition-colors duration-300 sm:px-8">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 py-3 md:h-16 md:flex-row md:items-center md:justify-between md:gap-4 md:py-0">
         <Link
           href="/#inicio"
           onClick={() => handleNavClick("inicio")}
           className="group inline-flex items-center gap-2.5 text-sm font-semibold text-foreground transition-all duration-300 hover:text-accent-connection focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-base rounded-md p-1 -ml-1"
         >
           <BrandIsotipo size={24} className="text-foreground transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
-          <span className="tracking-tight">Promarketing Perú</span>
+          <span className="tracking-tight font-bold">Promarketing</span>
         </Link>
 
-        {/* Navegación Principal Estabilizada con Kinetic Sliding Pill */}
+        {/* Navegación Principal */}
         <nav
           aria-label="Navegación principal"
-          className="relative flex items-center gap-1 md:gap-2"
+          className="relative flex flex-wrap items-center gap-1 md:gap-1.5"
           onMouseLeave={() => setHoveredId(null)}
         >
-          {navItems.map((item) => {
-            const isSelected = activeOrHoveredId === item.id;
-            const isActiveSection = activeId === item.id;
-
-            return (
-              <Link
-                key={item.id}
-                href={item.href}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onClick={() => handleNavClick(item.id)}
-                onFocus={() => setHoveredId(item.id)}
-                className="relative px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
-              >
-                {/* Pastilla Kinetic deslizante activa sin rebotes */}
-                {isSelected && (
-                  <motion.span
-                    layoutId="kinetic-navbar-pill"
-                    className={`absolute inset-0 z-0 rounded-md border shadow-xs ${
-                      isActiveSection
-                        ? "border-accent-connection/60 bg-secondary/90"
-                        : "border-accent-connection/30 bg-secondary/70"
-                    }`}
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : {
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 32,
-                            mass: 0.8,
-                          }
-                    }
-                  />
-                )}
-                <span
-                  className={`relative z-10 transition-colors duration-200 ${
-                    isSelected
-                      ? "text-foreground font-semibold"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
-
+          {/* Dropdown Soluciones */}
           <DropdownMenu>
             <DropdownMenuTrigger
-              onMouseEnter={() => setHoveredId("recursos")}
-              onFocus={() => setHoveredId("recursos")}
-              className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+              onMouseEnter={() => setHoveredId("soluciones")}
+              onFocus={() => setHoveredId("soluciones")}
+              className="group relative inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring rounded-md"
             >
-              {activeOrHoveredId === "recursos" && (
+              {activeOrHoveredId === "soluciones" && (
                 <motion.span
                   layoutId="kinetic-navbar-pill"
-                  className={`absolute inset-0 z-0 rounded-md border shadow-xs ${
-                    activeId === "recursos"
-                      ? "border-accent-connection/60 bg-secondary/90"
-                      : "border-accent-connection/30 bg-secondary/70"
-                  }`}
-                  transition={
-                    shouldReduceMotion
-                      ? { duration: 0 }
-                      : {
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 32,
-                          mass: 0.8,
-                        }
-                  }
+                  className="absolute inset-0 z-0 rounded-md border border-accent-connection/50 bg-secondary/80 shadow-xs"
+                  transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
-              <span
-                className={`relative z-10 transition-colors duration-200 ${
-                  activeOrHoveredId === "recursos"
-                    ? "text-foreground font-semibold"
-                    : "text-muted-foreground"
-                }`}
-              >
-                Recursos
+              <span className={`relative z-10 ${activeOrHoveredId === "soluciones" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+                Soluciones
               </span>
-              <ChevronDown
-                aria-hidden="true"
-                className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection"
-              />
+              <ChevronDown className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-48">
-              {resourceItems.map((item) => (
-                <DropdownMenuItem key={item.href} asChild>
-                  <Link
-                    href={item.href}
-                    className="w-full font-medium transition-colors hover:text-accent-connection"
-                  >
+            <DropdownMenuContent align="start" className="w-64">
+              {solucionesItems.map((item) => (
+                <DropdownMenuItem key={item.label} asChild>
+                  <Link href={item.href} className="w-full text-xs sm:text-sm font-medium transition-colors hover:text-accent-connection">
                     {item.label}
                   </Link>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Dropdown Cómo ayudamos */}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              onMouseEnter={() => setHoveredId("como-ayudamos")}
+              onFocus={() => setHoveredId("como-ayudamos")}
+              className="group relative inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+            >
+              {activeOrHoveredId === "como-ayudamos" && (
+                <motion.span
+                  layoutId="kinetic-navbar-pill"
+                  className="absolute inset-0 z-0 rounded-md border border-accent-connection/50 bg-secondary/80 shadow-xs"
+                  transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
+              <span className={`relative z-10 ${activeOrHoveredId === "como-ayudamos" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+                Cómo ayudamos
+              </span>
+              <ChevronDown className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-64">
+              {comoAyudamosItems.map((item) => (
+                <DropdownMenuItem key={item.label} asChild>
+                  <Link href={item.href} className="w-full text-xs sm:text-sm font-medium transition-colors hover:text-accent-connection">
+                    {item.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Link Cómo pensamos */}
+          <Link
+            href="/#como-pensamos"
+            onMouseEnter={() => setHoveredId("como-pensamos")}
+            onClick={() => handleNavClick("como-pensamos")}
+            className="relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none rounded-md"
+          >
+            {activeOrHoveredId === "como-pensamos" && (
+              <motion.span
+                layoutId="kinetic-navbar-pill"
+                className="absolute inset-0 z-0 rounded-md border border-accent-connection/50 bg-secondary/80 shadow-xs"
+                transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+              />
+            )}
+            <span className={`relative z-10 ${activeOrHoveredId === "como-pensamos" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+              Cómo pensamos
+            </span>
+          </Link>
+
+          {/* Link Conocimiento */}
+          <Link
+            href="/blog"
+            onMouseEnter={() => setHoveredId("conocimiento")}
+            onClick={() => handleNavClick("conocimiento")}
+            className="relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none rounded-md"
+          >
+            {activeOrHoveredId === "conocimiento" && (
+              <motion.span
+                layoutId="kinetic-navbar-pill"
+                className="absolute inset-0 z-0 rounded-md border border-accent-connection/50 bg-secondary/80 shadow-xs"
+                transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+              />
+            )}
+            <span className={`relative z-10 ${activeOrHoveredId === "conocimiento" ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
+              Conocimiento
+            </span>
+          </Link>
         </nav>
 
         <Button
           asChild
-          size="lg"
-          className="group relative h-10 w-full gap-2 px-4 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 active:scale-98 sm:w-fit"
+          size="sm"
+          className="group relative h-9 px-4 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/20 active:translate-y-0 active:scale-98"
         >
           <Link href="/#contacto" onClick={() => handleNavClick("contacto")}>
-            <span>Solicitar Auditoría C.L.A.R.O.</span>
+            <span>Hablemos</span>
             <ArrowUpRight
               aria-hidden="true"
-              className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </Link>
         </Button>

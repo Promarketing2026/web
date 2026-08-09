@@ -604,6 +604,8 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 
 2026-08-07 — Publicación de GTM ANALYTICS-2 completada: Publicado oficialmente en producción el contenedor `GTM-THQJQQ2D` (Versión 2 - `v1.0 - GA4 + Meta Pixel + Consent Mode v2`). Incluye la etiqueta base de GA4 (`G-QLQ5SYP5G3`), Meta Pixel (`937463375421449`), los eventos de conversión `generate_lead` y `Lead`, y el cumplimiento estricto de Consent Mode v2.
 
+2026-08-09 — Rediseño Funcional y Narrativo V1 de la Home completado: Implementada la nueva arquitectura en 10 secciones (Header con Soluciones vs Cómo ayudamos, Hero 60/40, Necesidades Bento Grid, Tensión de relaciones interdependientes, 5 Macro-Sistemas, Demostración interactiva en Pestañas, Cómo pensamos, Evidencia factual con Sanity, Conocimiento y Formulario de Contacto optimizado). Preservadas al 100% las integraciones con HubSpot, Upstash Redis rate limiter, UTMs en sessionStorage y Resend. Verificados `pnpm build` (22 páginas estáticas generadas sin errores) y suites E2E de Playwright (`10/10 PASS`).
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
 
