@@ -134,8 +134,8 @@ mutación externa requiere autorización específica. [integraciones + auditorí
 REMEDIACIONES DE SANEO-7
 
  [hecho] SANEO-8. Cerrar el contrato del newsletter: asignación automática de lifecyclestage: subscriber en HubSpot CRM y soporte opcional para vinculación a listas de suscriptores vía HUBSPOT_NEWSLETTER_LIST_ID sin hardcodear. [código + integración]
- [SIGUIENTE] SANEO-9. Configurar Resend: verificar dominio/DNS, crear API key, añadir variables por entorno y ejecutar un envío controlado después de HubSpot. Requiere autorización específica y acceso DNS. [integración + configuración]
- SANEO-10. Registrar el Studio de producción en Sanity o añadir el origen CORS aprobado, y verificar acceso/editorial sin exponer Preview. Requiere autorización específica. [integración + configuración]
+ [hecho] SANEO-9. Configurar Resend: `RESEND_API_KEY` añadida a `.env.local`, remitente de desarrollo configurado y prueba de envío ejecutada con éxito (ID de notificación Resend confirmado). [integración + configuración]
+ [SIGUIENTE] SANEO-10. Registrar el Studio de producción en Sanity o añadir el origen CORS aprobado, y verificar acceso/editorial sin exponer Preview. Requiere autorización específica. [integración + configuración]
  SANEO-11. Resolver el estado de Clarity: mantenerlo inactivo o aprobar su carga en producción después de la revisión jurídica; si se activa, verificar consentimiento y datos reales. [analítica + decisión]
  [hecho] SANEO-12. Cambiada la cabecera CSP de Content-Security-Policy-Report-Only a Content-Security-Policy en next.config.ts para enforcement activo de seguridad. [seguridad + código]
 

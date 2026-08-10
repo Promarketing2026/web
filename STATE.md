@@ -642,7 +642,9 @@ páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 
 2026-08-09 — SANEO-7 completado con resultado FAIL/HIGH y sin mutaciones externas. Evidencia en `docs/quality/integration-audit-2026-08-09.md`.
 
-2026-08-09 — SANEO-8 y SANEO-12 completados: En SANEO-8 se cerró el contrato del newsletter asignando `lifecyclestage: subscriber` en HubSpot CRM y añadiendo soporte para vinculación a listas de suscriptores vía `HUBSPOT_NEWSLETTER_LIST_ID`. En SANEO-12 se cambió la cabecera Content-Security-Policy en `next.config.ts` de modo `Report-Only` a modo de bloqueo activo (enforcement). Verificados: TypeScript (0 errores), ESLint (0 advertencias) y `pnpm build` (22 páginas estáticas). Próximo paso: SANEO-9.
+2026-08-09 — SANEO-8 y SANEO-12 completados: En SANEO-8 se cerró el contrato del newsletter asignando `lifecyclestage: subscriber` en HubSpot CRM y añadiendo soporte para vinculación a listas de suscriptores vía `HUBSPOT_NEWSLETTER_LIST_ID`. En SANEO-12 se cambió la cabecera Content-Security-Policy en `next.config.ts` de modo `Report-Only` a modo de bloqueo activo (enforcement). Verificados: TypeScript (0 errores), ESLint (0 advertencias) y `pnpm build` (22 páginas estáticas).
+
+2026-08-09 — SANEO-9 completado: Configurada la clave `RESEND_API_KEY` en `.env.local`, ajustada la dirección de destino y prueba de envío ejecutada exitosamente con respuesta `200` y confirmación de ID de mensaje Resend (`61a518fc-d093-48a8-8f59-7348788662bd`). TypeScript, ESLint y build de 22 páginas aprobados. Próximo paso: SANEO-10.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

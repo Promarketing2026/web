@@ -6,10 +6,11 @@ import {
   type LeadNotificationData,
 } from "@/lib/email-template";
 
-const NOTIFICATION_RECIPIENT = "promarketing2027@gmail.com";
+const NOTIFICATION_RECIPIENT =
+  process.env.RESEND_TO_EMAIL || "2026promarketing@gmail.com";
 const DEFAULT_FROM =
   process.env.RESEND_FROM_EMAIL ||
-  "Auditoría Promarketing <notificaciones@promarketingperu.com>";
+  "Auditoría Promarketing <onboarding@resend.dev>";
 
 export type { LeadNotificationData } from "@/lib/email-template";
 
