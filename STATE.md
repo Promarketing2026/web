@@ -6,15 +6,18 @@
 
 ## Fase actual
 Sitio desplegado en https://web-orcin-sigma-57.vercel.app/ con Home V1,
-contenido Sanity, formularios conectados a HubSpot, rate limiting con Upstash,
-notificación interna implementada con Resend, Consent Mode v2 y GTM publicado.
+contenido Sanity, Auditoría C.L.A.R.O. conectada a HubSpot y rate limiting con
+Upstash. Newsletter solo registra un contacto CRM y Resend está implementado en
+código pero inactivo por falta de configuración. Consent Mode v2 y GTM están
+publicados.
 El build de producción, ESLint y TypeScript pasan; 54/54 E2E pasan en Chromium,
 Firefox y WebKit con un trabajador. Navegación, entradas, correo, semántica,
-tokens, QA y dependencias ya fueron saneados. La revisión jurídica continúa
-pendiente y el árbol conserva un único aviso moderado transitivo del CLI de
-Sanity, sin ruta identificada hacia la aplicación pública. HOSTING-1 sigue
-diferida hasta cerrar esta fase y debe conservar costo de plataforma USD 0.
-Próximo paso: SANEO-7, marcado `[SIGUIENTE]` en TASKS.md.
+tokens, QA y dependencias ya fueron saneados. La auditoría externa terminó con
+resultado FAIL/HIGH: Resend está sin configurar, newsletter no gestiona una
+lista/suscripción y el Studio de producción carece de registro/CORS. La revisión
+jurídica continúa pendiente. HOSTING-1 sigue diferida hasta cerrar esta fase y
+debe conservar costo de plataforma USD 0. Próximo paso: SANEO-8, bloqueado hasta
+autorizar la remediación externa de HubSpot.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -636,6 +639,15 @@ bajó de 26 avisos (12 altos) a uno moderado en `uuid@10`, ruta exclusiva del CL
 de Sanity y sin explotación identificada en el sitio público. Evidencia en
 `docs/quality/dependency-audit-2026-08-09.md`. ESLint, TypeScript, build de 22
 páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
+
+2026-08-09 — SANEO-7 completado con resultado FAIL/HIGH y sin mutaciones
+externas. Vercel, HubSpot, Resend, Upstash, Sanity, GTM y Clarity se auditaron
+separando código, configuración, verificación y aprobación. Hallazgos críticos:
+Resend no tiene dominio/API key, newsletter no implementa lista/suscripción,
+Studio de producción no está registrado en Sanity y Clarity no está activo en
+producción. Los seis commits saneados siguen solo en local. Evidencia en
+`docs/quality/integration-audit-2026-08-09.md`. Próximo: SANEO-8, bloqueado por
+autorización específica para cambiar HubSpot.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
