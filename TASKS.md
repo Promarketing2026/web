@@ -110,11 +110,11 @@ Clarity, DNS o producción requiere autorización explícita.
  [hecho] SANEO-1. Corregir las rutas y la correspondencia semántica del menú
 "Soluciones" usando `SERVICES` como fuente de verdad, y añadir una prueba E2E
 que recorra todos sus destinos y descarte respuestas 404. [código + prueba]
- [SIGUIENTE] SANEO-2. Escapar todo dato no confiable usado en la plantilla HTML de Resend;
+ [hecho] SANEO-2. Escapar todo dato no confiable usado en la plantilla HTML de Resend;
 validar y limitar servicio y UTMs antes de enviarlos a HubSpot, analítica o
 correo. Añadir pruebas unitarias o de integración de entradas maliciosas.
 [seguridad + pruebas]
- SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
+ [SIGUIENTE] SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
 semántica resultante. [accesibilidad + código]
  SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
 Open Graph/Twitter contra la autoridad aprobada de DOC 08; no decidir una nueva

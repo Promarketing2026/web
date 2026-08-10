@@ -5,6 +5,8 @@ import { headers } from "next/headers";
 import { serverEnv } from "@/lib/env/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendLeadNotificationEmail } from "@/lib/email";
+import { isLeadServiceValue } from "@/lib/lead-input";
+import { normalizeUtmParams } from "@/lib/utm";
 
 // ─────────────────────────────────────────────────────────────────────────
 // A12c completo — honeypot (ya integrado antes) + rate limiting por IP
@@ -35,6 +37,7 @@ export type AuditoriaFormState = {
   fieldErrors?: {
     nombre?: string;
     email?: string;
+    servicio?: string;
     consentimiento?: string;
   };
 };
@@ -58,7 +61,14 @@ const auditoriaSchema = z.object({
     .max(120, "El nombre de la empresa es demasiado largo.")
     .optional()
     .or(z.literal("")),
-  servicio: z.string().trim().optional().or(z.literal("")),
+  servicio: z
+    .string()
+    .trim()
+    .refine((value) => value === "" || isLeadServiceValue(value), {
+      message: "Selecciona una opción válida.",
+    })
+    .optional()
+    .or(z.literal("")),
   consentimiento: z.boolean().refine((value) => value === true, {
     message: "Debes aceptar la política de privacidad para continuar.",
   }),
@@ -143,6 +153,7 @@ export async function submitAuditoriaForm(
       if (
         field === "nombre" ||
         field === "email" ||
+        field === "servicio" ||
         field === "consentimiento"
       ) {
         fieldErrors[field] = issue.message;
@@ -157,13 +168,13 @@ export async function submitAuditoriaForm(
   }
 
   const { nombre, email, empresa, servicio } = parsed.data;
-  const utms = {
+  const utms = normalizeUtmParams({
     utm_source: formData.get("utm_source")?.toString() || undefined,
     utm_medium: formData.get("utm_medium")?.toString() || undefined,
     utm_campaign: formData.get("utm_campaign")?.toString() || undefined,
     utm_content: formData.get("utm_content")?.toString() || undefined,
     utm_term: formData.get("utm_term")?.toString() || undefined,
-  };
+  });
 
   const [firstname, ...restoDelNombre] = nombre.split(" ");
   const lastname = restoDelNombre.join(" ") || undefined;
@@ -329,4 +340,3 @@ export async function submitNewsletterForm(
     };
   }
 }
-

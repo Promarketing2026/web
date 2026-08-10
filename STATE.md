@@ -14,7 +14,7 @@ jurídica continúa pendiente. El proyecto entra en Fase D — Saneamiento para
 corregir navegación, endurecer entradas y correo, reparar semántica HTML,
 estabilizar QA, clasificar dependencias y auditar integraciones. HOSTING-1 sigue
 diferida hasta cerrar esta fase y debe conservar costo de plataforma USD 0.
-Próximo paso: SANEO-2, marcado `[SIGUIENTE]` en TASKS.md.
+Próximo paso: SANEO-3, marcado `[SIGUIENTE]` en TASKS.md.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -606,6 +606,12 @@ y destinos desde `SERVICES`, eliminando slugs manuales, rutas 404 y asociaciones
 semánticas inconsistentes. Playwright recorre los siete destinos desde el menú;
 3/3 pruebas de Servicios pasan en Chromium. ESLint y TypeScript aprobados.
 Próximo paso: SANEO-2.
+
+2026-08-09 — SANEO-2 completado: servicios limitados a un catálogo compartido,
+UTMs normalizados y limitados a 200 caracteres en cliente y servidor, valores
+HTML escapados y saltos de línea neutralizados en el asunto de Resend. 5/5
+pruebas de seguridad/regresión, ESLint, TypeScript y build de 22 páginas pasan.
+No se enviaron datos a servicios externos. Próximo paso: SANEO-3.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

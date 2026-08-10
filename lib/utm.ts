@@ -9,6 +9,7 @@
 // personalizadas utm_source/utm_medium/etc. en HubSpot.
 
 const UTM_STORAGE_KEY = "promarketing_utms";
+const UTM_VALUE_MAX_LENGTH = 200;
 
 const UTM_KEYS = [
   "utm_source",
@@ -21,17 +22,29 @@ const UTM_KEYS = [
 export type UtmKey = (typeof UTM_KEYS)[number];
 export type UtmParams = Partial<Record<UtmKey, string>>;
 
+export function normalizeUtmParams(input: unknown): UtmParams {
+  if (!input || typeof input !== "object") return {};
+
+  const source = input as Record<string, unknown>;
+  const normalized: UtmParams = {};
+
+  for (const key of UTM_KEYS) {
+    const value = source[key];
+    if (typeof value !== "string") continue;
+
+    const trimmed = value.trim();
+    if (trimmed) normalized[key] = trimmed.slice(0, UTM_VALUE_MAX_LENGTH);
+  }
+
+  return normalized;
+}
+
 export function captureUtmParams(searchParams: URLSearchParams): void {
   if (typeof window === "undefined") return;
 
-  const found: UtmParams = {};
-
-  for (const key of UTM_KEYS) {
-    const value = searchParams.get(key);
-    if (value) {
-      found[key] = value;
-    }
-  }
+  const found = normalizeUtmParams(
+    Object.fromEntries(UTM_KEYS.map((key) => [key, searchParams.get(key)])),
+  );
 
   // Solo sobrescribimos si la URL actual trae UTMs nuevos. Si alguien
   // navega dentro del sitio sin UTMs en la URL, conservamos los que ya
@@ -46,7 +59,7 @@ export function getStoredUtmParams(): UtmParams {
 
   try {
     const raw = window.sessionStorage.getItem(UTM_STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as UtmParams) : {};
+    return raw ? normalizeUtmParams(JSON.parse(raw)) : {};
   } catch {
     return {};
   }

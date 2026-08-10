@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { submitAuditoriaForm, type AuditoriaFormState } from "@/lib/hubspot";
+import { LEAD_SERVICE_OPTIONS } from "@/lib/lead-input";
 import { getStoredUtmParams } from "@/lib/utm";
 
 const initialState: AuditoriaFormState = { status: "idle" };
@@ -58,6 +59,7 @@ export function AuditoriaForm() {
   const nombreError = state.fieldErrors?.nombre;
   const emailError = state.fieldErrors?.email;
   const consentimientoError = state.fieldErrors?.consentimiento;
+  const servicioError = state.fieldErrors?.servicio;
 
   return (
     <form action={formAction} className="space-y-4" noValidate>
@@ -163,20 +165,23 @@ export function AuditoriaForm() {
           value={servicio}
           onChange={(event) => setServicio(event.target.value)}
           className="w-full rounded-md border border-border bg-background px-3 py-2 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-foreground/40"
+          aria-invalid={Boolean(servicioError)}
+          aria-describedby={servicioError ? "servicio-error" : undefined}
         >
           <option value="" disabled>
             Selecciona una opción inicial
           </option>
-          <option value="necesito-web">Necesito una web o mejorar la que tengo</option>
-          <option value="fortalecer-marca">Quiero fortalecer mi marca</option>
-          <option value="generar-oportunidades">Necesito generar más oportunidades</option>
-          <option value="convertir-oportunidades">Tengo oportunidades pero no estoy convirtiendo</option>
-          <option value="ordenar-ventas-crm">Necesito ordenar ventas, CRM o seguimiento</option>
-          <option value="automatizar-procesos">Quiero automatizar procesos</option>
-          <option value="entender-resultados">Necesito entender mejor mis resultados</option>
-          <option value="otra-necesidad">Tengo otra necesidad</option>
-          <option value="no-seguro">No estoy seguro todavía</option>
+          {LEAD_SERVICE_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
+        {servicioError && (
+          <p id="servicio-error" role="alert" className="mt-1 text-sm text-destructive">
+            {servicioError}
+          </p>
+        )}
       </div>
 
       <div className="flex items-start gap-2">
