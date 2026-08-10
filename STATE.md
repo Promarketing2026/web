@@ -5,26 +5,16 @@
 > archivo ANTES de escribir código. No se necesita historial de chat previo.
 
 ## Fase actual
-Sitio en producción: https://web-orcin-sigma-57.vercel.app/. El formulario de
-Auditoría C.L.A.R.O. está conectado a HubSpot de punta a punta: validación
-con zod, checkbox de consentimiento legal, anti-spam (honeypot + rate
-limiting con Upstash Redis), y redirección a /gracias con UTMs capturados
-vía sessionStorage — todo verificado en producción. QA-1 se ejecutó y varios
-bugs encontrados durante esa verificación ya fueron corregidos (respuesta
-409 de HubSpot en contactos duplicados, anchors rotos de navbar/footer fuera
-del Home, limpieza de ScrollTrigger al desmontar componentes). SEO-1
-(sitemap.xml, robots.txt), SEO-2 (JSON-LD Organization/WebSite), SEO-3
-(llms.txt), META-1 (favicon oficial + Open Graph/Twitter) e INFRA-1 a INFRA-4
-completados. ANALYTICS-1 también quedó completado: Google Tag Manager está
-integrado mediante un único contenedor, limitado a producción. CONSENT-1
-añadió preferencias revocables y Consent Mode v2 antes de publicar etiquetas.
-ANALYTICS-2 queda pendiente y bloqueado hasta obtener revisión jurídica de la
-Política de Privacidad. ERROR-1 y la ejecución de ACCESS-1 ya están completados,
-Los hallazgos automatizables de accesibilidad están corregidos; ACCESS-VERIFY
-continúa bloqueado por el plugin del navegador. LIMITS-1 detectó un riesgo HIGH:
-Vercel Hobby no admite sitios comerciales. La migración queda diferida hasta
-cerrar frontend, backend e integraciones, y deberá mantener costo de plataforma
-USD 0. FORM-SCOPE-1 quedó resuelta, FORM-NOTIFY-1 (notificación interna vía Resend), B8-conectar (suscripción a newsletter) y ANALYTICS-3 (Microsoft Clarity) están completados. Próximo paso prioritario: RETOQUE-2 (sincronización y ajuste del timeline ScrollTrigger en Educación del Concepto).
+Sitio desplegado en https://web-orcin-sigma-57.vercel.app/ con Home V1,
+contenido Sanity, formularios conectados a HubSpot, rate limiting con Upstash,
+notificación interna implementada con Resend, Consent Mode v2 y GTM publicado.
+El build de producción, ESLint y TypeScript pasan; 10/10 E2E pasan en Chromium
+con un trabajador. La verificación cross-browser no está cerrada y la revisión
+jurídica continúa pendiente. El proyecto entra en Fase D — Saneamiento para
+corregir navegación, endurecer entradas y correo, reparar semántica HTML,
+estabilizar QA, clasificar dependencias y auditar integraciones. HOSTING-1 sigue
+diferida hasta cerrar esta fase y debe conservar costo de plataforma USD 0.
+Próximo paso: SANEO-2, marcado `[SIGUIENTE]` en TASKS.md.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -46,18 +36,17 @@ USD 0. FORM-SCOPE-1 quedó resuelta, FORM-NOTIFY-1 (notificación interna vía R
   semánticos y mantenerse sincronizada entre código y Figma; Figma todavía
   requiere la actualización correspondiente.
 
-## Narrativa de conversión del Home (orden de bloques, ya definido)
-1. Hook (promesa clara, sin jerga)
-2. El problema (lo que el mercado no explica bien)
-
-## Narrativa de conversión del Home (orden de bloques, ya definido)
-1. Hook (promesa clara, sin jerga)
-2. El problema (lo que el mercado no explica bien)
-3. Educación del concepto (bloque diferenciador, animación GSAP scroll)
-4. La solución (el servicio, ya entendido por el lector)
-5. Prueba social (caso de éxito con cifras)
-6. Objeciones (FAQ corto)
-7. CTA final
+## Narrativa vigente del Home V1
+1. Header: Soluciones vs. Cómo ayudamos
+2. Hero: capacidades comerciales conectadas
+3. Necesidades: Bento Grid
+4. Tensión: relaciones interdependientes
+5. Cómo ayudamos: cinco macro-sistemas
+6. Demostración interactiva
+7. Cómo pensamos
+8. Evidencia
+9. Conocimiento
+10. Contacto
 
 ## Pendiente de configuración de herramientas y datos del usuario
 
@@ -76,7 +65,8 @@ USD 0. FORM-SCOPE-1 quedó resuelta, FORM-NOTIFY-1 (notificación interna vía R
 
 ### 4. Google Tag Manager & Analítica
 - [x] Script y Consent Mode v2 configurados en código (`NEXT_PUBLIC_GTM_ID=GTM-THQJQQ2D`).
-- [ ] Publicar el borrador del contenedor en el panel de Google Tag Manager (pausado hasta revisión legal `LEGAL-2`).
+- [x] Contenedor GTM versión 2 publicado el 06/08/2026.
+- [ ] Revisión jurídica formal de la Política de Privacidad (`LEGAL-2`).
 - [ ] Configurar cuenta de Google Ads y etiquetas de conversión cuando se decida implementar (`ANALYTICS-2B`).
 
 ### 5. Seguridad y Formularios
@@ -605,6 +595,17 @@ siguiente y requiere aprobar un proveedor gratuito y obtener su credencial.
 2026-08-07 — Publicación de GTM ANALYTICS-2 completada: Publicado oficialmente en producción el contenedor `GTM-THQJQQ2D` (Versión 2 - `v1.0 - GA4 + Meta Pixel + Consent Mode v2`). Incluye la etiqueta base de GA4 (`G-QLQ5SYP5G3`), Meta Pixel (`937463375421449`), los eventos de conversión `generate_lead` y `Lead`, y el cumplimiento estricto de Consent Mode v2.
 
 2026-08-09 — Rediseño Funcional y Narrativo V1 de la Home completado: Implementada la nueva arquitectura en 10 secciones (Header con Soluciones vs Cómo ayudamos, Hero 60/40, Necesidades Bento Grid, Tensión de relaciones interdependientes, 5 Macro-Sistemas, Demostración interactiva en Pestañas, Cómo pensamos, Evidencia factual con Sanity, Conocimiento y Formulario de Contacto optimizado). Preservadas al 100% las integraciones con HubSpot, Upstash Redis rate limiter, UTMs en sessionStorage y Resend. Verificados `pnpm build` (22 páginas estáticas generadas sin errores) y suites E2E de Playwright (`10/10 PASS`).
+
+2026-08-09 — Iniciada Fase D — Saneamiento. Se reconciliaron el resumen de
+estado, la narrativa vigente del Home y el estado publicado de GTM. TASKS.md
+define ahora una secuencia explícita de saneamiento; SANEO-1 es la única tarea
+`[SIGUIENTE]`. No se autorizaron cambios en servicios externos ni hosting.
+
+2026-08-09 — SANEO-1 completado: el menú Soluciones recibe sus siete etiquetas
+y destinos desde `SERVICES`, eliminando slugs manuales, rutas 404 y asociaciones
+semánticas inconsistentes. Playwright recorre los siete destinos desde el menú;
+3/3 pruebas de Servicios pasan en Chromium. ESLint y TypeScript aprobados.
+Próximo paso: SANEO-2.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

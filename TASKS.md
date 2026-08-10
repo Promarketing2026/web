@@ -100,6 +100,37 @@ en la primera impresión al compartir el link; accesibilidad y límites de plan 
  [PENDIENTE — BLOQUEADA] ACCESS-VERIFY. Repetir Lighthouse y verificar navegación por teclado/foco visible después de corregir los hallazgos. BLOCKED hasta restablecer la comunicación de la extensión de Chrome. [auditoría]
  [hecho — RESULTADO FAIL/HIGH] LIMITS-1. Límites oficiales de Sanity Free, HubSpot Free Tools y Vercel Hobby documentados en `docs/infrastructure/free-tier-limits.md`, con umbrales y consecuencias. El consumo privado actual no fue leído. Hallazgo: Vercel Hobby prohíbe uso comercial y no es elegible para este sitio. [investigación]
  [PENDIENTE — DIFERIDA HASTA CIERRE FUNCIONAL] HOSTING-1. Migrar desde Vercel Hobby a un hosting que permita uso comercial con costo de plataforma USD 0. Vercel Pro queda descartado por el requisito económico. No iniciar la migración hasta cerrar y verificar frontend, backend e integraciones, ni cambiar producción sin aprobación explícita. [infraestructura + decisión]
+
+FASE D — SANEO DEL PROYECTO E INTEGRACIONES
+
+Regla de esta fase: una tarea a la vez. Las auditorías externas son de solo
+lectura; cualquier cambio en Vercel, HubSpot, Resend, Upstash, Sanity, GTM,
+Clarity, DNS o producción requiere autorización explícita.
+
+ [hecho] SANEO-1. Corregir las rutas y la correspondencia semántica del menú
+"Soluciones" usando `SERVICES` como fuente de verdad, y añadir una prueba E2E
+que recorra todos sus destinos y descarte respuestas 404. [código + prueba]
+ [SIGUIENTE] SANEO-2. Escapar todo dato no confiable usado en la plantilla HTML de Resend;
+validar y limitar servicio y UTMs antes de enviarlos a HubSpot, analítica o
+correo. Añadir pruebas unitarias o de integración de entradas maliciosas.
+[seguridad + pruebas]
+ SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
+semántica resultante. [accesibilidad + código]
+ SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
+Open Graph/Twitter contra la autoridad aprobada de DOC 08; no decidir una nueva
+paleta durante esta tarea. [marca + código]
+ SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la
+concurrencia local y ampliar cobertura para navegación, consentimiento, UTMs,
+newsletter y respuestas de integraciones simuladas sin crear datos externos.
+[QA + configuración]
+ SANEO-6. Clasificar las vulnerabilidades de `pnpm audit` por explotabilidad y
+ruta de ejecución; actualizar dependencias de forma controlada y sin usar
+`pnpm audit --fix` ciegamente. [dependencias + seguridad]
+ SANEO-7. Auditar en solo lectura la configuración efectiva de Vercel, HubSpot,
+Resend, Upstash, Sanity, GTM y Clarity; separar código implementado,
+configuración presente, verificación funcional y aprobación formal. Cualquier
+mutación externa requiere autorización específica. [integraciones + auditoría]
+
 Backlog (no empezar aún)
 [hecho] Páginas de servicio individuales — los 7 sistemas de la oferta (Diseño y Gestión de Marca, Infraestructura Web, Ecommerce y Conversión, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial, Tracking y Trazabilidad), implementados en las rutas `/servicios` y `/servicios/[slug]` con prerenderizado estático (SSG), metadata SEO, JSON-LD y formulario preseleccionado. [código]
 [hecho] Glosario y Casos de Éxito — creadas las rutas dinámicas de detalle `/glosario/[slug]` y `/casos-de-exito/[slug]` integradas con Sanity.io (GROQ), PortableText, metadata SEO, esquemas JSON-LD (DefinedTerm / Article) y sitemap dinámico XML. [código]

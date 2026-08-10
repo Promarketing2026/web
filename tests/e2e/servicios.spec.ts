@@ -1,6 +1,27 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Módulo de Servicios (7 Sistemas de Oferta)", () => {
+  test("todos los destinos del menú Soluciones deben existir", async ({ page }) => {
+    await page.goto("/");
+
+    await page.getByRole("button", { name: "Soluciones" }).click();
+
+    const links = page.getByRole("menu").locator("a[href^='/servicios/']");
+    await expect(links).toHaveCount(7);
+
+    const destinations = await links.evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute("href")),
+    );
+
+    expect(new Set(destinations).size).toBe(7);
+
+    for (const destination of destinations) {
+      expect(destination).toBeTruthy();
+      const response = await page.request.get(destination!);
+      expect(response.status(), `${destination} respondió ${response.status()}`).toBeLessThan(400);
+    }
+  });
+
   test("debe cargar el Hub de Servicios /servicios y mostrar las 7 capacidades", async ({ page }) => {
     await page.goto("/servicios");
 

@@ -19,6 +19,7 @@ import {
 } from "@/lib/site-config";
 import { isProductionDeployment } from "@/lib/env/deployment";
 import { publicEnv } from "@/lib/env/public";
+import { SERVICES } from "@/lib/services";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -61,6 +62,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const solutionItems = SERVICES.map(({ slug, title }) => ({
+    label: title,
+    href: `/servicios/${slug}`,
+  }));
+
   return (
     <html lang="es" className={`dark ${instrumentSans.variable} h-full antialiased`}>
       <head>
@@ -76,7 +82,7 @@ export default function RootLayout({
           <UtmCapture />
         </Suspense>
         <header aria-label="Encabezado del sitio">
-          <Navbar />
+          <Navbar solutionItems={solutionItems} />
         </header>
         <MotionProvider>
           <SmoothScrollProvider>

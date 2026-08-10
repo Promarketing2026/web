@@ -15,15 +15,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const solucionesItems = [
-  { label: "Web y experiencia digital", href: "/servicios/infraestructura-web" },
-  { label: "Marca y posicionamiento", href: "/servicios/diseno-de-marca" },
-  { label: "Generación de demanda", href: "/servicios/ads-paid-media" },
-  { label: "Conversión", href: "/servicios/seo-geo-aeo" },
-  { label: "CRM y gestión comercial", href: "/servicios/ecommerce" },
-  { label: "Automatización", href: "/servicios/automatizacion-comercial" },
-  { label: "Información y analítica", href: "/servicios/tracking-trazabilidad" },
-];
+type SolutionNavItem = {
+  label: string;
+  href: string;
+};
 
 const comoAyudamosItems = [
   { label: "Sistema de Marca", href: "/#como-ayudamos" },
@@ -33,7 +28,7 @@ const comoAyudamosItems = [
   { label: "Sistema de Información y Decisión", href: "/#como-ayudamos" },
 ];
 
-export function Navbar() {
+export function Navbar({ solutionItems }: { solutionItems: SolutionNavItem[] }) {
   const pathname = usePathname();
   const [activeId, setActiveId] = useState<string>("inicio");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -134,7 +129,7 @@ export function Navbar() {
               <ChevronDown className="relative z-10 size-4 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-accent-connection" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-64">
-              {solucionesItems.map((item) => (
+              {solutionItems.map((item) => (
                 <DropdownMenuItem key={item.label} asChild>
                   <Link href={item.href} className="w-full text-xs sm:text-sm font-medium transition-colors hover:text-accent-connection">
                     {item.label}
