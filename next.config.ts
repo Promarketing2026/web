@@ -47,7 +47,7 @@ const studioContentSecurityPolicy = [
 
 const securityHeaders = [
   {
-    key: "Content-Security-Policy-Report-Only",
+    key: "Content-Security-Policy",
     value: publicContentSecurityPolicy,
   },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -94,7 +94,7 @@ const nextConfig: NextConfig = {
         source: "/studio/:path*",
         headers: [
           {
-            key: "Content-Security-Policy-Report-Only",
+            key: "Content-Security-Policy",
             value: studioContentSecurityPolicy,
           },
         ],

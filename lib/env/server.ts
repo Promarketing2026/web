@@ -30,6 +30,7 @@ const serverEnvSchema = z
     UPSTASH_REDIS_REST_URL: optionalHttpsUrl,
     UPSTASH_REDIS_REST_TOKEN: optionalSecret,
     RESEND_API_KEY: optionalSecret,
+    HUBSPOT_NEWSLETTER_LIST_ID: optionalSecret,
   })
   .superRefine((env, context) => {
     const kvComplete = Boolean(env.KV_REST_API_URL && env.KV_REST_API_TOKEN);
@@ -73,6 +74,7 @@ const parsedServerEnv = serverEnvSchema.safeParse({
   UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
   UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   RESEND_API_KEY: process.env.RESEND_API_KEY,
+  HUBSPOT_NEWSLETTER_LIST_ID: process.env.HUBSPOT_NEWSLETTER_LIST_ID,
 });
 
 if (!parsedServerEnv.success) {
@@ -90,5 +92,6 @@ export const serverEnv = Object.freeze({
   redisUrl: parsed.KV_REST_API_URL ?? parsed.UPSTASH_REDIS_REST_URL!,
   redisToken: parsed.KV_REST_API_TOKEN ?? parsed.UPSTASH_REDIS_REST_TOKEN!,
   resendApiKey: parsed.RESEND_API_KEY,
+  hubspotNewsletterListId: parsed.HUBSPOT_NEWSLETTER_LIST_ID,
   deploymentEnvironment,
 });

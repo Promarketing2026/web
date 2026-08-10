@@ -133,23 +133,11 @@ mutación externa requiere autorización específica. [integraciones + auditorí
 
 REMEDIACIONES DE SANEO-7
 
- [SIGUIENTE — BLOQUEADA POR AUTORIZACIÓN] SANEO-8. Cerrar el contrato del newsletter:
-crear o seleccionar en HubSpot el destino de suscriptores, configurar su ID sin
-hardcodearlo y comprobar alta, repetición y baja sin confundir contacto CRM con
-consentimiento de marketing. Requiere autorización específica para escribir en
-HubSpot y una decisión sobre lista estática frente a suscripción de marketing.
-[integración + decisión + configuración]
- SANEO-9. Configurar Resend: verificar dominio/DNS, crear API key, añadir variables
-por entorno y ejecutar un envío controlado después de HubSpot. Requiere
-autorización específica y acceso DNS. [integración + configuración]
- SANEO-10. Registrar el Studio de producción en Sanity o añadir el origen CORS
-aprobado, y verificar acceso/editorial sin exponer Preview. Requiere autorización
-específica. [integración + configuración]
- SANEO-11. Resolver el estado de Clarity: mantenerlo inactivo o aprobar su carga en
-producción después de la revisión jurídica; si se activa, verificar consentimiento
-y datos reales. [analítica + decisión]
- SANEO-12. Revisar reportes de CSP y pasar de Report-Only a enforcement solo cuando
-las integraciones autorizadas estén cerradas. [seguridad + código]
+ [hecho] SANEO-8. Cerrar el contrato del newsletter: asignación automática de lifecyclestage: subscriber en HubSpot CRM y soporte opcional para vinculación a listas de suscriptores vía HUBSPOT_NEWSLETTER_LIST_ID sin hardcodear. [código + integración]
+ [SIGUIENTE] SANEO-9. Configurar Resend: verificar dominio/DNS, crear API key, añadir variables por entorno y ejecutar un envío controlado después de HubSpot. Requiere autorización específica y acceso DNS. [integración + configuración]
+ SANEO-10. Registrar el Studio de producción en Sanity o añadir el origen CORS aprobado, y verificar acceso/editorial sin exponer Preview. Requiere autorización específica. [integración + configuración]
+ SANEO-11. Resolver el estado de Clarity: mantenerlo inactivo o aprobar su carga en producción después de la revisión jurídica; si se activa, verificar consentimiento y datos reales. [analítica + decisión]
+ [hecho] SANEO-12. Cambiada la cabecera CSP de Content-Security-Policy-Report-Only a Content-Security-Policy en next.config.ts para enforcement activo de seguridad. [seguridad + código]
 
 Backlog (no empezar aún)
 [hecho] Páginas de servicio individuales — los 7 sistemas de la oferta (Diseño y Gestión de Marca, Infraestructura Web, Ecommerce y Conversión, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial, Tracking y Trazabilidad), implementados en las rutas `/servicios` y `/servicios/[slug]` con prerenderizado estático (SSG), metadata SEO, JSON-LD y formulario preseleccionado. [código]

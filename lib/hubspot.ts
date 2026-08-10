@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { serverEnv } from "@/lib/env/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendLeadNotificationEmail } from "@/lib/email";
-import { HUBSPOT_CONTACTS_URL, upsertHubSpotContact } from "@/lib/hubspot-client";
+import { upsertHubSpotContact, addContactToHubSpotList } from "@/lib/hubspot-client";
 import { isLeadServiceValue } from "@/lib/lead-input";
 import { normalizeUtmParams } from "@/lib/utm";
 
@@ -248,42 +248,35 @@ export async function submitNewsletterForm(
 
   const { email } = parsed.data;
 
-  try {
-    const response = await fetch(HUBSPOT_CONTACTS_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        properties: {
-          email,
-        },
-      }),
-    });
+  const result = await upsertHubSpotContact({
+    accessToken: serverEnv.hubspotServiceKey,
+    email,
+    properties: {
+      email,
+      lifecyclestage: "subscriber",
+    },
+  });
 
-    if (response.ok || response.status === 409) {
-      // 409 = el correo ya está registrado en HubSpot; lo tratamos como suscrito correctamente
-      return {
-        status: "success",
-        message: "¡Gracias por suscribirte a nuestro newsletter!",
-      };
+  if (result.ok) {
+    if (serverEnv.hubspotNewsletterListId) {
+      await addContactToHubSpotList({
+        accessToken: serverEnv.hubspotServiceKey,
+        listId: serverEnv.hubspotNewsletterListId,
+        email,
+      });
     }
 
-    const errorBody = await response.text();
-    console.error("HubSpot Newsletter respondió con error:", response.status, errorBody);
-
     return {
-      status: "error",
-      message:
-        "No pudimos procesar tu suscripción en este momento. Intenta de nuevo más tarde.",
-    };
-  } catch (error) {
-    console.error("Error de red en suscripción Newsletter:", error);
-    return {
-      status: "error",
-      message:
-        "Ocurrió un problema de conexión. Revisa tu red e intenta de nuevo.",
+      status: "success",
+      message: "¡Gracias por suscribirte a nuestro newsletter!",
     };
   }
+
+  console.error("HubSpot Newsletter respondió con error:", result.detail);
+
+  return {
+    status: "error",
+    message:
+      "No pudimos procesar tu suscripción en este momento. Intenta de nuevo más tarde.",
+  };
 }

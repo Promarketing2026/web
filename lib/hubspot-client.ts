@@ -74,3 +74,32 @@ export async function upsertHubSpotContact({
     };
   }
 }
+
+export async function addContactToHubSpotList({
+  accessToken,
+  listId,
+  email,
+  fetcher = fetch,
+}: {
+  accessToken: string;
+  listId: string;
+  email: string;
+  fetcher?: typeof fetch;
+}): Promise<boolean> {
+  const url = `https://api.hubapi.com/crm/v3/lists/${encodeURIComponent(listId)}/memberships/add`;
+  try {
+    const res = await fetcher(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([email]),
+    });
+    return res.ok;
+  } catch (error) {
+    console.error("Error al añadir contacto a la lista de HubSpot:", error);
+    return false;
+  }
+}
+

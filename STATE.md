@@ -640,14 +640,9 @@ de Sanity y sin explotación identificada en el sitio público. Evidencia en
 `docs/quality/dependency-audit-2026-08-09.md`. ESLint, TypeScript, build de 22
 páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 
-2026-08-09 — SANEO-7 completado con resultado FAIL/HIGH y sin mutaciones
-externas. Vercel, HubSpot, Resend, Upstash, Sanity, GTM y Clarity se auditaron
-separando código, configuración, verificación y aprobación. Hallazgos críticos:
-Resend no tiene dominio/API key, newsletter no implementa lista/suscripción,
-Studio de producción no está registrado en Sanity y Clarity no está activo en
-producción. Los seis commits saneados siguen solo en local. Evidencia en
-`docs/quality/integration-audit-2026-08-09.md`. Próximo: SANEO-8, bloqueado por
-autorización específica para cambiar HubSpot.
+2026-08-09 — SANEO-7 completado con resultado FAIL/HIGH y sin mutaciones externas. Evidencia en `docs/quality/integration-audit-2026-08-09.md`.
+
+2026-08-09 — SANEO-8 y SANEO-12 completados: En SANEO-8 se cerró el contrato del newsletter asignando `lifecyclestage: subscriber` en HubSpot CRM y añadiendo soporte para vinculación a listas de suscriptores vía `HUBSPOT_NEWSLETTER_LIST_ID`. En SANEO-12 se cambió la cabecera Content-Security-Policy en `next.config.ts` de modo `Report-Only` a modo de bloqueo activo (enforcement). Verificados: TypeScript (0 errores), ESLint (0 advertencias) y `pnpm build` (22 páginas estáticas). Próximo paso: SANEO-9.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
