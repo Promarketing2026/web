@@ -4,7 +4,12 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { submitAuditoriaForm, type AuditoriaFormState } from "@/lib/hubspot";
 import { LEAD_SERVICE_OPTIONS } from "@/lib/lead-input";
-import { getStoredUtmParams } from "@/lib/utm";
+import {
+  captureUtmParams,
+  getStoredUtmParams,
+  UTM_UPDATE_EVENT,
+  type UtmParams,
+} from "@/lib/utm";
 
 const initialState: AuditoriaFormState = { status: "idle" };
 
@@ -16,7 +21,21 @@ export function AuditoriaForm() {
     initialState,
   );
   const [servicio, setServicio] = useState("");
-  const [utms] = useState<Record<string, string>>(() => getStoredUtmParams());
+  const [utms, setUtms] = useState<UtmParams>({});
+
+  useEffect(() => {
+    const syncStoredUtms = () => setUtms(getStoredUtmParams());
+    window.addEventListener(UTM_UPDATE_EVENT, syncStoredUtms);
+
+    const captureTimer = window.setTimeout(() => {
+      captureUtmParams(new URLSearchParams(window.location.search));
+    }, 0);
+
+    return () => {
+      window.clearTimeout(captureTimer);
+      window.removeEventListener(UTM_UPDATE_EVENT, syncStoredUtms);
+    };
+  }, []);
 
   useEffect(() => {
     if (state.status !== "success") return;

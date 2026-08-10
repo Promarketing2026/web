@@ -9,6 +9,7 @@
 // personalizadas utm_source/utm_medium/etc. en HubSpot.
 
 const UTM_STORAGE_KEY = "promarketing_utms";
+export const UTM_UPDATE_EVENT = "promarketing:utm-update";
 const UTM_VALUE_MAX_LENGTH = 200;
 
 const UTM_KEYS = [
@@ -52,6 +53,8 @@ export function captureUtmParams(searchParams: URLSearchParams): void {
   if (Object.keys(found).length > 0) {
     window.sessionStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(found));
   }
+
+  window.dispatchEvent(new Event(UTM_UPDATE_EVENT));
 }
 
 export function getStoredUtmParams(): UtmParams {

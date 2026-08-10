@@ -119,11 +119,11 @@ semántica resultante. [accesibilidad + código]
  [hecho] SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
 Open Graph/Twitter contra la autoridad aprobada de DOC 08; no decidir una nueva
 paleta durante esta tarea. [marca + código]
- [SIGUIENTE] SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la
+ [hecho] SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la
 concurrencia local y ampliar cobertura para navegación, consentimiento, UTMs,
 newsletter y respuestas de integraciones simuladas sin crear datos externos.
 [QA + configuración]
- SANEO-6. Clasificar las vulnerabilidades de `pnpm audit` por explotabilidad y
+ [SIGUIENTE] SANEO-6. Clasificar las vulnerabilidades de `pnpm audit` por explotabilidad y
 ruta de ejecución; actualizar dependencias de forma controlada y sin usar
 `pnpm audit --fix` ciegamente. [dependencias + seguridad]
  SANEO-7. Auditar en solo lectura la configuración efectiva de Vercel, HubSpot,

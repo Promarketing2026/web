@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { serverEnv } from "@/lib/env/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { sendLeadNotificationEmail } from "@/lib/email";
+import { HUBSPOT_CONTACTS_URL, upsertHubSpotContact } from "@/lib/hubspot-client";
 import { isLeadServiceValue } from "@/lib/lead-input";
 import { normalizeUtmParams } from "@/lib/utm";
 
@@ -42,8 +43,6 @@ export type AuditoriaFormState = {
   };
 };
 
-const HUBSPOT_CONTACTS_URL = "https://api.hubapi.com/crm/v3/objects/contacts";
-
 const auditoriaSchema = z.object({
   nombre: z
     .string()
@@ -80,38 +79,6 @@ async function getClientIp(): Promise<string> {
   return forwardedFor?.split(",")[0]?.trim() || "unknown";
 }
 
-async function updateExistingContact(
-  email: string,
-  properties: Record<string, string | undefined>,
-): Promise<boolean> {
-  const url = `${HUBSPOT_CONTACTS_URL}/${encodeURIComponent(email)}?idProperty=email`;
-
-  try {
-    const response = await fetch(url, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ properties }),
-    });
-
-    if (!response.ok) {
-      const errorBody = await response.text();
-      console.error(
-        "HubSpot: fallo al actualizar contacto existente:",
-        response.status,
-        errorBody,
-      );
-    }
-
-    return response.ok;
-  } catch (error) {
-    console.error("Error de red al actualizar contacto en HubSpot:", error);
-    return false;
-  }
-}
-
 export async function submitAuditoriaForm(
   _prevState: AuditoriaFormState,
   formData: FormData,
@@ -123,18 +90,6 @@ export async function submitAuditoriaForm(
       "Honeypot activado — posible envío de bot, ignorado silenciosamente.",
     );
     return { status: "success" };
-  }
-
-  // ── Rate limiting por IP ────────────────────────────────────────────
-  const ip = await getClientIp();
-  const { allowed } = await checkRateLimit(ip, "auditoria");
-
-  if (!allowed) {
-    return {
-      status: "error",
-      message:
-        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
-    };
   }
 
   const parsed = auditoriaSchema.safeParse({
@@ -167,6 +122,18 @@ export async function submitAuditoriaForm(
     };
   }
 
+  // Solo una solicitud válida consume cuota de la integración externa.
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(ip, "auditoria");
+
+  if (!allowed) {
+    return {
+      status: "error",
+      message:
+        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
+    };
+  }
+
   const { nombre, email, empresa, servicio } = parsed.data;
   const utms = normalizeUtmParams({
     utm_source: formData.get("utm_source")?.toString() || undefined,
@@ -187,62 +154,42 @@ export async function submitAuditoriaForm(
     servicio_de_interes: servicio || undefined,
   };
 
-  try {
-    const response = await fetch(HUBSPOT_CONTACTS_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${serverEnv.hubspotServiceKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ properties }),
-    });
+  const hubspotResult = await upsertHubSpotContact({
+    accessToken: serverEnv.hubspotServiceKey,
+    email,
+    properties,
+  });
 
-    if (response.ok) {
-      try {
-        await sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
-      } catch (emailError) {
-        console.error("Error no bloqueante al enviar email de notificación:", emailError);
-      }
-      return { status: "success" };
+  if (hubspotResult.ok) {
+    try {
+      await sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
+    } catch (emailError) {
+      console.error("Error no bloqueante al enviar email de notificación:", emailError);
     }
+    return { status: "success" };
+  }
 
-    if (response.status === 409) {
-      // El contacto ya existe (mismo email) — actualizamos sus
-      // propiedades en vez de descartar los datos nuevos del envío.
-      const updated = await updateExistingContact(email, properties);
+  console.error(
+    "HubSpot respondió con error:",
+    hubspotResult.status,
+    hubspotResult.detail,
+  );
 
-      if (updated) {
-        try {
-          await sendLeadNotificationEmail({ nombre, email, empresa, servicio, utms });
-        } catch (emailError) {
-          console.error("Error no bloqueante al enviar email de notificación:", emailError);
-        }
-        return { status: "success" };
-      }
-
-      return {
-        status: "error",
-        message:
-          "No pudimos actualizar tu solicitud en este momento. Intenta de nuevo en unos minutos.",
-      };
-    }
-
-    const errorBody = await response.text();
-    console.error("HubSpot respondió con error:", response.status, errorBody);
-
+  if (hubspotResult.reason === "update") {
     return {
       status: "error",
       message:
-        "No pudimos guardar tu solicitud en este momento. Intenta de nuevo en unos minutos.",
-    };
-  } catch (error) {
-    console.error("Error de red al contactar HubSpot:", error);
-    return {
-      status: "error",
-      message:
-        "No pudimos conectarnos con nuestro sistema. Revisa tu conexión e intenta de nuevo.",
+        "No pudimos actualizar tu solicitud en este momento. Intenta de nuevo en unos minutos.",
     };
   }
+
+  return {
+    status: "error",
+    message:
+      hubspotResult.reason === "network"
+        ? "No pudimos conectarnos con nuestro sistema. Revisa tu conexión e intenta de nuevo."
+        : "No pudimos guardar tu solicitud en este momento. Intenta de nuevo en unos minutos.",
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -276,18 +223,6 @@ export async function submitNewsletterForm(
     };
   }
 
-  // Rate limiting por IP
-  const ip = await getClientIp();
-  const { allowed } = await checkRateLimit(ip, "newsletter");
-
-  if (!allowed) {
-    return {
-      status: "error",
-      message:
-        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
-    };
-  }
-
   const parsed = newsletterSchema.safeParse({
     email: formData.get("email"),
   });
@@ -296,6 +231,18 @@ export async function submitNewsletterForm(
     return {
       status: "error",
       message: parsed.error.issues[0]?.message || "Correo electrónico no válido.",
+    };
+  }
+
+  // Solo una suscripción válida consume cuota de la integración externa.
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(ip, "newsletter");
+
+  if (!allowed) {
+    return {
+      status: "error",
+      message:
+        "Has enviado demasiadas solicitudes en poco tiempo. Espera unos minutos e intenta de nuevo.",
     };
   }
 
