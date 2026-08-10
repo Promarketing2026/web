@@ -114,9 +114,9 @@ que recorra todos sus destinos y descarte respuestas 404. [código + prueba]
 validar y limitar servicio y UTMs antes de enviarlos a HubSpot, analítica o
 correo. Añadir pruebas unitarias o de integración de entradas maliciosas.
 [seguridad + pruebas]
- [SIGUIENTE] SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
+ [hecho] SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
 semántica resultante. [accesibilidad + código]
- SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
+ [SIGUIENTE] SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
 Open Graph/Twitter contra la autoridad aprobada de DOC 08; no decidir una nueva
 paleta durante esta tarea. [marca + código]
  SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la

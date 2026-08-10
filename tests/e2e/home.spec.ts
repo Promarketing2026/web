@@ -36,4 +36,13 @@ test.describe("Página Principal (Home)", () => {
     const contactSection = page.locator("#contacto");
     await expect(contactSection).toBeVisible();
   });
+
+  test("debe exponer landmarks de encabezado y pie únicos", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByRole("banner")).toHaveCount(1);
+    await expect(page.getByRole("contentinfo")).toHaveCount(1);
+    await expect(page.locator("header header")).toHaveCount(0);
+    await expect(page.locator("footer footer")).toHaveCount(0);
+  });
 });

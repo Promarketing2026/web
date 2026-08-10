@@ -81,17 +81,13 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <UtmCapture />
         </Suspense>
-        <header aria-label="Encabezado del sitio">
-          <Navbar solutionItems={solutionItems} />
-        </header>
+        <Navbar solutionItems={solutionItems} />
         <MotionProvider>
           <SmoothScrollProvider>
             <main className="flex-1">{children}</main>
           </SmoothScrollProvider>
         </MotionProvider>
-        <footer aria-label="Pie de página">
-          <Footer />
-        </footer>
+        <Footer />
         <ConsentBanner />
       </body>
     </html>
