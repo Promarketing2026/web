@@ -116,10 +116,10 @@ correo. Añadir pruebas unitarias o de integración de entradas maliciosas.
 [seguridad + pruebas]
  [hecho] SANEO-3. Eliminar landmarks `header`/`footer` anidados y comprobar la estructura
 semántica resultante. [accesibilidad + código]
- [SIGUIENTE] SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
+ [hecho] SANEO-4. Reconciliar los tokens usados por la UI, el isotipo y las imágenes
 Open Graph/Twitter contra la autoridad aprobada de DOC 08; no decidir una nueva
 paleta durante esta tarea. [marca + código]
- SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la
+ [SIGUIENTE] SANEO-5. Estabilizar Playwright: instalar/verificar navegadores, limitar la
 concurrencia local y ampliar cobertura para navegación, consentimiento, UTMs,
 newsletter y respuestas de integraciones simuladas sin crear datos externos.
 [QA + configuración]

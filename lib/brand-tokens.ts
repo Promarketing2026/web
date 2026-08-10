@@ -2,11 +2,11 @@
 // Estos valores reflejan los tokens semánticos aprobados en DOC 08 y deben
 // mantenerse sincronizados con CSS y Figma cuando el Design System cambie.
 export const BRAND_COLORS = {
-  canvasLight: "#F3F2EE",
+  canvasLight: "#F0F3F6",
   surfaceLight: "#FFFFFF",
-  logoOnLight: "#111111",
-  ink: "#111318",
+  logoOnLight: "#0A0E14",
+  ink: "#0A0E14",
   textSecondaryLight: "#5A625E",
-  connectionLight: "#087A5A",
-  decisionLight: "#9A4B0F",
+  connectionLight: "#008BA3",
+  decisionLight: "#C24100",
 } as const;

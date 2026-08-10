@@ -11,12 +11,11 @@ export function BrandIsotipo({
   className = "",
   ...props
 }: BrandLogoProps) {
-  // #f3f2ee para oscuro, #111111 para claro, currentColor si es auto
   const fillColor =
     variant === "dark"
-      ? "#f3f2ee"
+      ? "var(--brand-logo-on-dark)"
       : variant === "light"
-        ? "#111111"
+        ? "var(--brand-logo-on-light)"
         : "currentColor";
 
   return (

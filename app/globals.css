@@ -52,7 +52,9 @@
 }
 
 :root {
-  /* Paleta de Prueba: Contraste Complementario (Cian #00E5FF & Naranja #FF6A00) */
+  /* DOC 08: infraestructura neutral + Decisión, Conexión e Información. */
+  --brand-logo-on-dark: #F0F3F6;
+  --brand-logo-on-light: #0A0E14;
   --background: #F0F3F6;
   --foreground: #0A0E14;
   --card: #FFFFFF;
@@ -85,7 +87,7 @@
 }
 
 .dark {
-  /* Paleta de Prueba — Modo Oscuro por Defecto (Contraste Complementario) */
+  /* DOC 08: modo oscuro vigente. */
   --background: #0A0E14;        /* Negro Espacial */
   --foreground: #F0F3F6;        /* Blanco Cristal */
   --card: #161B22;              /* Gris Grafito */
@@ -100,7 +102,7 @@
   --muted-foreground: #8B949E;  /* Gris Estelar */
   --accent: #00E5FF;            /* Cian Eléctrico */
   --accent-foreground: #0A0E14;
-  --accent-connection: #00E5FF; /* Cian Eléctrico (Datos / Conexión) */
+  --accent-connection: #3CF5B5; /* Conexión / continuidad */
   --accent-decision: #FF6A00;   /* Naranja Neón (Decisión / Acción) */
   --destructive: #EF4444;
   --border: rgba(240, 243, 246, 0.12);
@@ -167,7 +169,7 @@
     --border: rgba(240, 243, 246, 0.12);
     --primary: #FF6A00;
     --primary-foreground: #FFFFFF;
-    --accent-connection: #00E5FF;
+    --accent-connection: #3CF5B5;
     --accent-decision: #FF6A00;
 
     background: var(--background);
