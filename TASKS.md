@@ -123,10 +123,10 @@ paleta durante esta tarea. [marca + código]
 concurrencia local y ampliar cobertura para navegación, consentimiento, UTMs,
 newsletter y respuestas de integraciones simuladas sin crear datos externos.
 [QA + configuración]
- [SIGUIENTE] SANEO-6. Clasificar las vulnerabilidades de `pnpm audit` por explotabilidad y
+ [hecho] SANEO-6. Clasificar las vulnerabilidades de `pnpm audit` por explotabilidad y
 ruta de ejecución; actualizar dependencias de forma controlada y sin usar
 `pnpm audit --fix` ciegamente. [dependencias + seguridad]
- SANEO-7. Auditar en solo lectura la configuración efectiva de Vercel, HubSpot,
+ [SIGUIENTE] SANEO-7. Auditar en solo lectura la configuración efectiva de Vercel, HubSpot,
 Resend, Upstash, Sanity, GTM y Clarity; separar código implementado,
 configuración presente, verificación funcional y aprobación formal. Cualquier
 mutación externa requiere autorización específica. [integraciones + auditoría]

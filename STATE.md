@@ -8,13 +8,13 @@
 Sitio desplegado en https://web-orcin-sigma-57.vercel.app/ con Home V1,
 contenido Sanity, formularios conectados a HubSpot, rate limiting con Upstash,
 notificación interna implementada con Resend, Consent Mode v2 y GTM publicado.
-El build de producción, ESLint y TypeScript pasan; 10/10 E2E pasan en Chromium
-con un trabajador. La verificación cross-browser no está cerrada y la revisión
-jurídica continúa pendiente. El proyecto entra en Fase D — Saneamiento para
-corregir navegación, endurecer entradas y correo, reparar semántica HTML,
-estabilizar QA, clasificar dependencias y auditar integraciones. HOSTING-1 sigue
+El build de producción, ESLint y TypeScript pasan; 54/54 E2E pasan en Chromium,
+Firefox y WebKit con un trabajador. Navegación, entradas, correo, semántica,
+tokens, QA y dependencias ya fueron saneados. La revisión jurídica continúa
+pendiente y el árbol conserva un único aviso moderado transitivo del CLI de
+Sanity, sin ruta identificada hacia la aplicación pública. HOSTING-1 sigue
 diferida hasta cerrar esta fase y debe conservar costo de plataforma USD 0.
-Próximo paso: SANEO-6, marcado `[SIGUIENTE]` en TASKS.md.
+Próximo paso: SANEO-7, marcado `[SIGUIENTE]` en TASKS.md.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -629,6 +629,13 @@ motores instalados. Se añadieron pruebas de consentimiento, UTMs, newsletter y
 HubSpot simulado; la suite detectó y corrigió UTMs perdidos en la primera visita
 y cuota Upstash consumida antes de validar. 54/54 pruebas cross-browser, ESLint,
 TypeScript y build de 22 páginas pasan. Sin efectos externos. Próximo: SANEO-6.
+
+2026-08-09 — SANEO-6 completado: dependencias directas actualizadas dentro de
+ramas compatibles y parches transitivos fijados de forma acotada. `pnpm audit`
+bajó de 26 avisos (12 altos) a uno moderado en `uuid@10`, ruta exclusiva del CLI
+de Sanity y sin explotación identificada en el sitio público. Evidencia en
+`docs/quality/dependency-audit-2026-08-09.md`. ESLint, TypeScript, build de 22
+páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
