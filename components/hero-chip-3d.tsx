@@ -136,22 +136,22 @@ export function HeroChip3D({
   return (
     <div
       aria-label="Isotipo 3D y Ecosistema de Metodología Promarketing"
-      className={`relative flex h-[380px] sm:h-[460px] lg:h-[520px] w-full select-none items-center justify-center overflow-visible ${className}`}
+      className={`relative flex h-[340px] sm:h-[420px] lg:h-[500px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
       style={{ perspective: "1200px" }}
     >
       {/* Resplandor Ambiental Global */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute size-[340px] sm:size-[440px] rounded-full blur-[120px] sm:blur-[150px] transition-all"
+        className="pointer-events-none absolute size-[280px] sm:size-[380px] lg:size-[440px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
         style={{
           backgroundColor: glowColor,
           opacity: 0.22,
         }}
       />
 
-      {/* Escenario 3D Isométrico */}
+      {/* Escenario 3D Isométrico con Escala Responsiva Fluida */}
       <div
-        className="relative flex h-[480px] w-[700px] items-center justify-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.68] sm:scale-[0.85] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
           transform: "rotateX(60deg) rotateY(-4deg) rotateZ(-34deg)",
