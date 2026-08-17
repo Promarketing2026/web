@@ -69,10 +69,8 @@ export default function RootLayout({
 
   return (
     <html lang="es" className={`dark ${instrumentSans.variable} h-full antialiased`}>
-      <head>
-        <ConsentDefaults />
-      </head>
       <body className="flex min-h-full flex-col font-sans">
+        <ConsentDefaults />
         {isProductionDeployment && publicEnv.NEXT_PUBLIC_GTM_ID ? (
           <GoogleTagManager containerId={publicEnv.NEXT_PUBLIC_GTM_ID} />
         ) : null}

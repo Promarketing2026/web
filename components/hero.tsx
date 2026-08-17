@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
-import { HeroInfrastructureDiagram } from "@/components/hero-infrastructure-diagram";
+import { HeroChip3D } from "@/components/hero-chip-3d";
 import { fadeUpVariant } from "@/lib/animations";
 
 export function Hero() {
@@ -107,15 +107,15 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Diagrama Interactivo de Alto Impacto Visual */}
+          {/* Isotipo 3D Flotante con Pistas Neón Activas */}
           <motion.div
-            className="w-full justify-self-center lg:justify-self-end"
+            className="w-full justify-self-center lg:justify-self-end flex items-center justify-center"
             variants={heroItem}
             initial="hidden"
             animate="visible"
             custom={0.4}
           >
-            <HeroInfrastructureDiagram />
+            <HeroChip3D />
           </motion.div>
         </div>
       </div>

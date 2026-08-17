@@ -646,6 +646,7 @@ páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 
 2026-08-09 — SANEO-9 completado: Configurada la clave `RESEND_API_KEY` en `.env.local`, ajustada la dirección de destino y prueba de envío ejecutada exitosamente con respuesta `200` y confirmación de ID de mensaje Resend (`61a518fc-d093-48a8-8f59-7348788662bd`). TypeScript, ESLint y build de 22 páginas aprobados. Próximo paso: SANEO-10.
 
+2026-08-17 — Integración de HeroChip3D en el Home: Implementado el componente visual `HeroChip3D` (`components/hero-chip-3d.tsx`) en el Hero principal (`components/hero.tsx`). Reemplaza el diagrama anterior con una escena en perspectiva isométrica 3D compuesta por el Isotipo de marca (`BrandIsotipo`) en relieve y 15 pistas PCB con animación stroke line láser en loop desfasado y destellos reactivos en las vías terminales. Corregida advertencia de script en App Router (`components/consent-defaults.tsx`). Verificados: ESLint (0 errores), `pnpm build` (23 páginas estáticas) y 54/54 pruebas E2E de Playwright aprobadas.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
-

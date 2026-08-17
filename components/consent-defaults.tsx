@@ -1,3 +1,4 @@
+
 import Script from "next/script";
 
 import { CONSENT_STORAGE_KEY } from "@/lib/consent";
@@ -39,11 +40,11 @@ const consentDefaultsScript = `
 
 export function ConsentDefaults() {
   return (
-    // App Router permite beforeInteractive en el layout raíz. Esta regla de
-    // ESLint conserva el mensaje heredado del Pages Router.
     // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
-    <Script id="consent-mode-defaults" strategy="beforeInteractive">
-      {consentDefaultsScript}
-    </Script>
+    <Script
+      id="consent-mode-defaults"
+      strategy="beforeInteractive"
+      dangerouslySetInnerHTML={{ __html: consentDefaultsScript }}
+    />
   );
 }
