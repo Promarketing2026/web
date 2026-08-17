@@ -15,7 +15,7 @@ interface ActiveTrace {
   duration: number;
 }
 
-// 1. PISTAS ACTIVAS PCB: Ruteo a 45° ordenado desde el perímetro del Isotipo
+// PISTAS ACTIVAS PCB
 const activeTraces: ActiveTrace[] = [
   // Cuadrante Superior Izquierdo
   { id: "tl1", path: "M 400 240 L 330 170 L 250 170 L 190 110 L 130 110", endX: 130, endY: 110, isFilledVia: true, delay: 0.1, duration: 1.6 },
@@ -41,6 +41,18 @@ const activeTraces: ActiveTrace[] = [
   { id: "l3", path: "M 385 270 L 310 220 L 220 220 L 160 160 L 90 160", endX: 90, endY: 160, isFilledVia: true, delay: 0.65, duration: 1.7 },
 ];
 
+// Capas de extrusión densa para volumen 3D sólido (10 capas micrométricas)
+const extrusionSlices = [
+  { z: -14, x: -5, opacity: 0.35, color: "#02080D", blur: "drop-shadow(-5px 5px 14px rgba(0,0,0,0.95))" },
+  { z: -12, x: -4.2, opacity: 0.5, color: "#030C14", blur: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.9))" },
+  { z: -10, x: -3.5, opacity: 0.65, color: "#04101A", blur: "drop-shadow(-3px 3px 8px rgba(0,0,0,0.85))" },
+  { z: -8, x: -2.8, opacity: 0.8, color: "#061522", blur: "drop-shadow(-2px 2px 6px rgba(0,0,0,0.8))" },
+  { z: -6, x: -2.1, opacity: 0.9, color: "#081E2E", blur: "drop-shadow(-1px 1px 4px rgba(0,0,0,0.75))" },
+  { z: -4, x: -1.4, opacity: 0.95, color: "#0A283C", blur: "drop-shadow(0 0 10px rgba(0,229,255,0.2))" },
+  { z: -2, x: -0.7, opacity: 0.98, color: "#008DA5", blur: "drop-shadow(0 0 16px var(--accent-connection))" },
+  { z: -1, x: -0.3, opacity: 1, color: "var(--accent-connection)", blur: "drop-shadow(0 0 24px #00E5FF)" },
+];
+
 export function HeroChip3D({
   className = "",
   glowColor = "var(--accent-connection)",
@@ -59,9 +71,10 @@ export function HeroChip3D({
 
     const masterTl = gsap.timeline({ repeat: -1 });
 
+    // Sutil respiración en altura Z
     if (logoElevatedRef.current) {
       gsap.to(logoElevatedRef.current, {
-        z: 28,
+        z: 32,
         duration: 3.0,
         repeat: -1,
         yoyo: true,
@@ -149,15 +162,15 @@ export function HeroChip3D({
         }}
       />
 
-      {/* Escenario 3D con Proyección Axonométrica Calibrada (X: 32°, Y: -35°) */}
+      {/* Escenario 3D: Alineado en el Eje X (sin cabeceo vertical) manteniendo el Giro en Y */}
       <div
-        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.72] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          // Pitch: 32° (levanta la cara frontal hacia el espectador)
-          // Yaw: -35° (expone el canto lateral izquierdo de extrusión)
-          // Roll/Fuga diagonal hacia el texto superior izquierdo
-          transform: "rotateX(32deg) rotateY(-35deg) rotateZ(-12deg)",
+          // X = 0° (Nivelado horizontalmente)
+          // Y = -34° (Giro hacia la izquierda para ver el bloque de perfil 3D)
+          // Z = 0° (Composición alineada con la horizontal)
+          transform: "rotateX(0deg) rotateY(-34deg) rotateZ(0deg)",
         }}
       >
         {/* SUELO DEL CIRCUITO PCB */}
@@ -256,8 +269,9 @@ export function HeroChip3D({
           style={{ transform: "translateZ(6px)" }}
         />
 
-        {/* Isotipo 3D Flotante Puro */}
-        {/* Isotipo 3D Flotante con Extrusión Lateral Resaltada */}
+        {/* =============================================================
+            ISOTIPO 3D CON EXTRUSIÓN MACIZA CONTINUA (Profundidad Sólida)
+            ============================================================= */}
         <div
           ref={logoElevatedRef}
           className="relative flex items-center justify-center select-none"
@@ -266,55 +280,27 @@ export function HeroChip3D({
             transform: "translateZ(24px)",
           }}
         >
-          {/* Nivel de Extrusión 1: Sombra y bisel posterior profundo (Z = -10px) */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-85"
-            style={{
-              transform: "translateZ(-10px) translateX(-3px)",
-              filter: "brightness(0.3) drop-shadow(-4px 4px 12px rgba(0,0,0,0.95))",
-            }}
-          >
-            <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
-              style={{ color: "#040F16" }}
-            />
-          </div>
+          {/* Capas de Extrusión para formar el bloque sólido macizo */}
+          {extrusionSlices.map((slice, i) => (
+            <div
+              key={`slice-${i}`}
+              aria-hidden="true"
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                transform: `translateZ(${slice.z}px) translateX(${slice.x}px)`,
+                opacity: slice.opacity,
+                filter: slice.blur,
+              }}
+            >
+              <BrandIsotipo
+                size={120}
+                className="sm:w-[136px] sm:h-[136px]"
+                style={{ color: slice.color }}
+              />
+            </div>
+          ))}
 
-          {/* Nivel de Extrusión 2: Canto lateral sólido con tono petróleo (Z = -5px) */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-90"
-            style={{
-              transform: "translateZ(-5px) translateX(-1.5px)",
-              filter: "brightness(0.65) drop-shadow(-2px 2px 6px rgba(0,0,0,0.7))",
-            }}
-          >
-            <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
-              style={{ color: "#0B2E3D" }}
-            />
-          </div>
-
-          {/* Nivel de Extrusión 3: Franja perimetral de luz neón (Z = -2px) */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-95"
-            style={{
-              transform: "translateZ(-2px)",
-              filter: "drop-shadow(0 0 16px var(--accent-connection)) drop-shadow(0 0 32px #00E5FF)",
-            }}
-          >
-            <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
-              style={{ color: "var(--accent-connection)" }}
-            />
-          </div>
-
-          {/* Nivel de Extrusión 4: Cara Frontal en Blanco Puro Incandescente (Z = 0px) */}
+          {/* Cara Frontal en Blanco Puro Incandescente (Z = 0px) */}
           <div
             className="relative flex items-center justify-center"
             style={{
