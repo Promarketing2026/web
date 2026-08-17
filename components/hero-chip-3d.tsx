@@ -149,12 +149,15 @@ export function HeroChip3D({
         }}
       />
 
-      {/* Escenario 3D Isométrico con Escala Responsiva Fluida */}
+      {/* Escenario 3D con Proyección Axonométrica Calibrada (X: 32°, Y: -35°) */}
       <div
-        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.68] sm:scale-[0.85] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.72] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateX(60deg) rotateY(-4deg) rotateZ(-34deg)",
+          // Pitch: 32° (levanta la cara frontal hacia el espectador)
+          // Yaw: -35° (expone el canto lateral izquierdo de extrusión)
+          // Roll/Fuga diagonal hacia el texto superior izquierdo
+          transform: "rotateX(32deg) rotateY(-35deg) rotateZ(-12deg)",
         }}
       >
         {/* SUELO DEL CIRCUITO PCB */}
@@ -254,31 +257,48 @@ export function HeroChip3D({
         />
 
         {/* Isotipo 3D Flotante Puro */}
+        {/* Isotipo 3D Flotante con Extrusión Lateral Resaltada */}
         <div
           ref={logoElevatedRef}
           className="relative flex items-center justify-center select-none"
           style={{
             transformStyle: "preserve-3d",
-            transform: "translateZ(20px)",
+            transform: "translateZ(24px)",
           }}
         >
-          {/* Nivel de Extrusión Inferior */}
+          {/* Nivel de Extrusión 1: Sombra y bisel posterior profundo (Z = -10px) */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-85"
             style={{
-              transform: "translateZ(-6px)",
-              filter: "brightness(0.35) drop-shadow(0 4px 10px rgba(0,0,0,0.9))",
+              transform: "translateZ(-10px) translateX(-3px)",
+              filter: "brightness(0.3) drop-shadow(-4px 4px 12px rgba(0,0,0,0.95))",
             }}
           >
             <BrandIsotipo
               size={120}
               className="sm:w-[136px] sm:h-[136px]"
-              style={{ color: "#061822" }}
+              style={{ color: "#040F16" }}
             />
           </div>
 
-          {/* Canto Neón */}
+          {/* Nivel de Extrusión 2: Canto lateral sólido con tono petróleo (Z = -5px) */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center opacity-90"
+            style={{
+              transform: "translateZ(-5px) translateX(-1.5px)",
+              filter: "brightness(0.65) drop-shadow(-2px 2px 6px rgba(0,0,0,0.7))",
+            }}
+          >
+            <BrandIsotipo
+              size={120}
+              className="sm:w-[136px] sm:h-[136px]"
+              style={{ color: "#0B2E3D" }}
+            />
+          </div>
+
+          {/* Nivel de Extrusión 3: Franja perimetral de luz neón (Z = -2px) */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-95"
@@ -294,7 +314,7 @@ export function HeroChip3D({
             />
           </div>
 
-          {/* Cara Frontal: Blanco Puro Incandescente */}
+          {/* Nivel de Extrusión 4: Cara Frontal en Blanco Puro Incandescente (Z = 0px) */}
           <div
             className="relative flex items-center justify-center"
             style={{
