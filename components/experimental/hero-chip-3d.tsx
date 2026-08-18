@@ -16,32 +16,41 @@ interface ActiveTrace {
 }
 
 const activeTraces: ActiveTrace[] = [
-  { id: "tl1", path: "M 400 240 L 330 170 L 250 170 L 190 110 L 130 110", endX: 130, endY: 110, isFilledVia: true, delay: 0.1, duration: 1.5 },
-  { id: "tl2", path: "M 425 225 L 380 150 L 300 80 L 240 80", endX: 240, endY: 80, isFilledVia: false, delay: 0.75, duration: 1.4 },
-  { id: "tl3", path: "M 450 215 L 430 130 L 370 80 L 370 30", endX: 370, endY: 30, isFilledVia: true, delay: 0.3, duration: 1.35 },
-  { id: "tr1", path: "M 465 215 L 490 130 L 530 80 L 530 30", endX: 530, endY: 30, isFilledVia: false, delay: 1.05, duration: 1.35 },
-  { id: "tr2", path: "M 490 225 L 530 150 L 610 80 L 670 80", endX: 670, endY: 80, isFilledVia: true, delay: 0.45, duration: 1.45 },
-  { id: "tr3", path: "M 515 240 L 580 170 L 660 170 L 720 110 L 780 110", endX: 780, endY: 110, isFilledVia: false, delay: 0.9, duration: 1.55 },
-  { id: "r1", path: "M 535 270 L 610 220 L 700 220 L 760 160 L 830 160", endX: 830, endY: 160, isFilledVia: true, delay: 0.15, duration: 1.6 },
-  { id: "r2", path: "M 545 300 L 650 300 L 720 255 L 850 255", endX: 850, endY: 255, isFilledVia: false, delay: 0.65, duration: 1.4 },
-  { id: "r3", path: "M 535 330 L 615 390 L 715 390 L 775 440 L 850 440", endX: 850, endY: 440, isFilledVia: true, delay: 1.25, duration: 1.45 },
-  { id: "b1", path: "M 510 360 L 565 430 L 640 500 L 700 500 L 730 535", endX: 730, endY: 535, isFilledVia: false, delay: 0.35, duration: 1.5 },
-  { id: "b2", path: "M 460 380 L 460 470 L 500 510 L 500 565", endX: 500, endY: 565, isFilledVia: true, delay: 0.8, duration: 1.35 },
-  { id: "b3", path: "M 410 360 L 355 430 L 280 500 L 220 500 L 190 535", endX: 190, endY: 535, isFilledVia: false, delay: 0.55, duration: 1.5 },
-  { id: "l1", path: "M 385 330 L 305 390 L 205 390 L 145 440 L 70 440", endX: 70, endY: 440, isFilledVia: true, delay: 0.95, duration: 1.45 },
-  { id: "l2", path: "M 375 300 L 270 300 L 200 255 L 70 255", endX: 70, endY: 255, isFilledVia: false, delay: 0.25, duration: 1.45 },
-  { id: "l3", path: "M 385 270 L 310 220 L 220 220 L 160 160 L 90 160", endX: 90, endY: 160, isFilledVia: true, delay: 0.6, duration: 1.6 },
+  { id: "tl1", path: "M 410 245 L 350 185 L 270 185 L 210 125 L 140 125", endX: 140, endY: 125, isFilledVia: true, delay: 0.1, duration: 1.5 },
+  { id: "tl2", path: "M 425 235 L 375 175 L 310 175 L 250 105 L 190 105", endX: 190, endY: 105, isFilledVia: false, delay: 0.7, duration: 1.4 },
+  { id: "tl3", path: "M 440 225 L 400 165 L 345 105 L 285 55", endX: 285, endY: 55, isFilledVia: true, delay: 0.3, duration: 1.35 },
+  { id: "tl4", path: "M 455 215 L 420 155 L 375 95 L 340 45", endX: 340, endY: 45, isFilledVia: false, delay: 0.95, duration: 1.4 },
+  { id: "tl5", path: "M 470 210 L 445 145 L 415 85 L 395 35", endX: 395, endY: 35, isFilledVia: true, delay: 0.5, duration: 1.45 },
+  { id: "tr1", path: "M 485 210 L 510 145 L 540 85 L 560 35", endX: 560, endY: 35, isFilledVia: false, delay: 1.1, duration: 1.35 },
+  { id: "tr2", path: "M 500 215 L 535 155 L 580 95 L 615 45", endX: 615, endY: 45, isFilledVia: true, delay: 0.4, duration: 1.4 },
+  { id: "tr3", path: "M 515 225 L 555 165 L 610 105 L 670 55", endX: 670, endY: 55, isFilledVia: false, delay: 0.85, duration: 1.45 },
+  { id: "tr4", path: "M 530 235 L 580 175 L 645 175 L 705 105 L 765 105", endX: 765, endY: 105, isFilledVia: true, delay: 0.2, duration: 1.5 },
+  { id: "tr5", path: "M 545 245 L 605 185 L 685 185 L 745 125 L 815 125", endX: 815, endY: 125, isFilledVia: false, delay: 0.95, duration: 1.55 },
+  { id: "br1", path: "M 545 355 L 605 415 L 685 415 L 745 475 L 815 475", endX: 815, endY: 475, isFilledVia: true, delay: 0.15, duration: 1.55 },
+  { id: "br2", path: "M 530 365 L 580 425 L 645 425 L 705 495 L 765 495", endX: 765, endY: 495, isFilledVia: false, delay: 0.75, duration: 1.5 },
+  { id: "br3", path: "M 515 375 L 555 435 L 610 495 L 670 545", endX: 670, endY: 545, isFilledVia: true, delay: 1.25, duration: 1.45 },
+  { id: "br4", path: "M 500 385 L 535 445 L 580 505 L 615 555", endX: 615, endY: 555, isFilledVia: false, delay: 0.55, duration: 1.4 },
+  { id: "br5", path: "M 485 390 L 510 455 L 540 515 L 560 565", endX: 560, endY: 565, isFilledVia: true, delay: 1.05, duration: 1.35 },
+  { id: "bl1", path: "M 470 390 L 445 455 L 415 515 L 395 565", endX: 395, endY: 565, isFilledVia: false, delay: 0.8, duration: 1.35 },
+  { id: "bl2", path: "M 455 385 L 420 445 L 375 505 L 340 555", endX: 340, endY: 555, isFilledVia: true, delay: 0.25, duration: 1.4 },
+  { id: "bl3", path: "M 440 375 L 400 435 L 345 495 L 285 545", endX: 285, endY: 545, isFilledVia: false, delay: 0.9, duration: 1.45 },
+  { id: "bl4", path: "M 425 365 L 375 425 L 310 425 L 250 495 L 190 495", endX: 190, endY: 495, isFilledVia: true, delay: 0.45, duration: 1.5 },
+  { id: "bl5", path: "M 410 355 L 350 415 L 270 415 L 210 475 L 140 475", endX: 140, endY: 475, isFilledVia: false, delay: 1.15, duration: 1.55 },
+  { id: "latL", path: "M 390 300 L 290 300 L 220 260 L 120 260", endX: 120, endY: 260, isFilledVia: true, delay: 0.35, duration: 1.6 },
+  { id: "latR", path: "M 565 300 L 665 300 L 735 340 L 835 340", endX: 835, endY: 340, isFilledVia: true, delay: 0.8, duration: 1.6 },
 ];
 
 const secondaryTraces = [
-  "M 260 140 L 190 70 L 100 70",
-  "M 310 110 L 250 50 L 170 50",
-  "M 590 110 L 650 50 L 730 50",
-  "M 640 140 L 710 70 L 800 70",
-  "M 640 460 L 710 530 L 800 530",
-  "M 590 490 L 650 550 L 730 550",
-  "M 310 490 L 250 550 L 170 550",
-  "M 260 460 L 190 530 L 100 530",
+  "M 330 160 L 250 80 L 160 80",
+  "M 380 130 L 320 60 L 220 60",
+  "M 575 130 L 635 60 L 735 60",
+  "M 625 160 L 705 80 L 795 80",
+  "M 625 440 L 705 520 L 795 520",
+  "M 575 470 L 635 540 L 735 540",
+  "M 380 470 L 320 540 L 220 540",
+  "M 330 440 L 250 520 L 160 520",
+  "M 260 300 L 170 300 L 90 350",
+  "M 695 300 L 785 300 L 865 250",
 ];
 
 const extrusionSlices = [
@@ -101,7 +110,7 @@ export function HeroChip3D({
     if (groundBounceRef.current) {
       gsap.to(groundBounceRef.current, {
         scale: 1.25,
-        opacity: 0.48,
+        opacity: 0.52,
         duration: 1.8,
         repeat: -1,
         yoyo: true,
@@ -144,7 +153,7 @@ export function HeroChip3D({
 
       const lineTl = gsap.timeline({
         repeat: -1,
-        repeatDelay: 0.5 + (index % 5) * 0.22,
+        repeatDelay: 0.45 + (index % 5) * 0.2,
         delay: trace.delay,
       });
 
@@ -220,13 +229,13 @@ export function HeroChip3D({
   return (
     <div
       aria-label="Isotipo 3D y Ecosistema de Metodología Promarketing"
-      className={`relative flex h-[360px] sm:h-[440px] lg:h-[520px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
+      className={`relative flex h-[380px] sm:h-[460px] lg:h-[540px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
       style={{ perspective: "1200px" }}
     >
       <div
         ref={coreAmbientPulseRef}
         aria-hidden="true"
-        className="pointer-events-none absolute size-[300px] sm:size-[400px] lg:size-[480px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
+        className="pointer-events-none absolute size-[340px] sm:size-[440px] lg:size-[520px] rounded-full blur-[110px] sm:blur-[150px] transition-all"
         style={{
           backgroundColor: glowColor,
           opacity: 0.24,
@@ -234,7 +243,7 @@ export function HeroChip3D({
       />
 
       <div
-        className="relative flex h-[460px] w-[660px] sm:w-[720px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[480px] w-[680px] sm:w-[760px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
           transform: "rotateX(42deg) rotateY(-28deg) rotateZ(12deg)",
@@ -250,21 +259,28 @@ export function HeroChip3D({
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <radialGradient id="pcbDepthFade" cx="50%" cy="50%" r="58%">
+              <radialGradient id="groundIlluminationFade" cx="50%" cy="50%" r="56%">
+                <stop offset="0%" stopColor="#00F0FF" stopOpacity="0.28" />
+                <stop offset="25%" stopColor="var(--accent-connection)" stopOpacity="0.16" />
+                <stop offset="55%" stopColor="#08222C" stopOpacity="0.08" />
+                <stop offset="85%" stopColor="#000000" stopOpacity="0" />
+              </radialGradient>
+
+              <radialGradient id="pcbDepthFadeHero" cx="50%" cy="50%" r="58%">
                 <stop offset="0%" stopColor="#fff" stopOpacity="1" />
                 <stop offset="70%" stopColor="#fff" stopOpacity="0.85" />
                 <stop offset="100%" stopColor="#fff" stopOpacity="0.1" />
               </radialGradient>
               <mask id={maskId}>
-                <rect width="900" height="600" fill="url(#pcbDepthFade)" />
+                <rect width="900" height="600" fill="url(#pcbDepthFadeHero)" />
               </mask>
 
-              <pattern id="pcbMicroGridExp" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="12" cy="12" r="0.85" fill="var(--accent-connection)" opacity="0.22" />
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.07" />
+              <pattern id="pcbMicroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="0.9" fill="var(--accent-connection)" opacity="0.25" />
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.08" />
               </pattern>
 
-              <filter id="pcbLaserGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="pcbLaserGlowHero" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
                 <feMerge>
@@ -275,9 +291,10 @@ export function HeroChip3D({
               </filter>
             </defs>
 
-            <rect width="900" height="600" fill="url(#pcbMicroGridExp)" mask={`url(#${maskId})`} />
+            <rect width="900" height="600" fill="url(#groundIlluminationFade)" />
+            <rect width="900" height="600" fill="url(#pcbMicroGrid)" mask={`url(#${maskId})`} />
 
-            <g mask={`url(#${maskId})`} fill="none" stroke="#0A141E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <g mask={`url(#${maskId})`} fill="none" stroke="#0B1A24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
                 <path key={`sec-${i}`} d={path} />
               ))}
@@ -289,7 +306,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlow)">
+            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHero)">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-glow-${trace.id}`}
@@ -319,7 +336,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            <g filter="url(#pcbLaserGlow)">
+            <g filter="url(#pcbLaserGlowHero)">
               {activeTraces.map((trace, i) => (
                 <g
                   key={`via-${trace.id}`}
@@ -343,8 +360,8 @@ export function HeroChip3D({
 
                   {trace.isFilledVia ? (
                     <>
-                      <circle r="8" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1" />
-                      <circle r="6" fill={glowColor} opacity="0.35" />
+                      <circle r="8.5" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1.2" />
+                      <circle r="6.2" fill={glowColor} opacity="0.35" />
                       <circle r="4.2" fill={glowColor} />
                       <circle r="2" fill="#FFFFFF" />
                     </>
@@ -369,7 +386,7 @@ export function HeroChip3D({
         <div
           ref={groundBounceRef}
           aria-hidden="true"
-          className="pointer-events-none absolute size-44 rounded-full bg-accent-connection/30 blur-xl transition-all"
+          className="pointer-events-none absolute size-48 rounded-full bg-accent-connection/35 blur-xl transition-all"
           style={{ transform: "translateZ(6px)" }}
         />
 
@@ -393,8 +410,8 @@ export function HeroChip3D({
               }}
             >
               <BrandIsotipo
-                size={126}
-                className="sm:w-[140px] sm:h-[140px]"
+                size={124}
+                className="sm:w-[138px] sm:h-[138px]"
                 style={{ color: slice.color }}
               />
             </div>
@@ -409,8 +426,8 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={126}
-              className="sm:w-[140px] sm:h-[140px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "var(--accent-connection)" }}
             />
           </div>
@@ -424,8 +441,8 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={126}
-              className="sm:w-[140px] sm:h-[140px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "#E0FFFF" }}
             />
           </div>
@@ -439,8 +456,8 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={126}
-              className="sm:w-[140px] sm:h-[140px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "#0F2636" }}
             />
           </div>
@@ -454,8 +471,8 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={126}
-              className="sm:w-[140px] sm:h-[140px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{
                 color: "#FFFFFF",
                 filter: "brightness(1.45)",
