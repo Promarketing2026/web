@@ -53,15 +53,15 @@ const secondaryTraces = [
   "M 695 300 L 785 300 L 865 250",
 ];
 
-const extrusionSlices = [
-  { z: -18, x: -7, opacity: 0.4, color: "#010508", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
-  { z: -14, x: -5.5, opacity: 0.55, color: "#020B12", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
-  { z: -11, x: -4.2, opacity: 0.72, color: "#04131F", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
-  { z: -8, x: -3, opacity: 0.86, color: "#061A28", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
-  { z: -5, x: -1.9, opacity: 0.93, color: "#092437", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
-  { z: -3, x: -1.1, opacity: 0.96, color: "#0D3048", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
-  { z: -1.5, x: -0.5, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
-  { z: -0.5, x: -0.1, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
+const boxExtrusionLayers = [
+  { z: -20, x: -7, y: 3.5, opacity: 0.45, color: "#010407", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
+  { z: -16, x: -5.6, y: 2.8, opacity: 0.6, color: "#02080E", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
+  { z: -12, x: -4.2, y: 2.1, opacity: 0.75, color: "#03101A", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
+  { z: -9, x: -3.1, y: 1.5, opacity: 0.88, color: "#051825", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
+  { z: -6, x: -2.1, y: 1.0, opacity: 0.94, color: "#082436", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
+  { z: -3.5, x: -1.2, y: 0.6, opacity: 0.97, color: "#0C324A", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
+  { z: -1.5, x: -0.5, y: 0.2, opacity: 0.99, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
+  { z: -0.5, x: -0.1, y: 0.0, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
 ];
 
 export function HeroChip3D({
@@ -246,7 +246,7 @@ export function HeroChip3D({
         className="relative flex h-[480px] w-[680px] sm:w-[760px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateX(42deg) rotateY(-28deg) rotateZ(12deg)",
+          transform: "rotateX(32deg) rotateY(-35deg) rotateZ(-12deg)",
         }}
       >
         <div
@@ -259,28 +259,28 @@ export function HeroChip3D({
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <radialGradient id="groundIlluminationFade" cx="50%" cy="50%" r="56%">
+              <radialGradient id="groundIlluminationFadeExp" cx="50%" cy="50%" r="56%">
                 <stop offset="0%" stopColor="#00F0FF" stopOpacity="0.28" />
                 <stop offset="25%" stopColor="var(--accent-connection)" stopOpacity="0.16" />
                 <stop offset="55%" stopColor="#08222C" stopOpacity="0.08" />
                 <stop offset="85%" stopColor="#000000" stopOpacity="0" />
               </radialGradient>
 
-              <radialGradient id="pcbDepthFadeHero" cx="50%" cy="50%" r="58%">
+              <radialGradient id="pcbDepthFadeHeroExp" cx="50%" cy="50%" r="58%">
                 <stop offset="0%" stopColor="#fff" stopOpacity="1" />
                 <stop offset="70%" stopColor="#fff" stopOpacity="0.85" />
                 <stop offset="100%" stopColor="#fff" stopOpacity="0.1" />
               </radialGradient>
               <mask id={maskId}>
-                <rect width="900" height="600" fill="url(#pcbDepthFadeHero)" />
+                <rect width="900" height="600" fill="url(#pcbDepthFadeHeroExp)" />
               </mask>
 
-              <pattern id="pcbMicroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+              <pattern id="pcbMicroGridExp" width="24" height="24" patternUnits="userSpaceOnUse">
                 <circle cx="12" cy="12" r="0.9" fill="var(--accent-connection)" opacity="0.25" />
                 <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.08" />
               </pattern>
 
-              <filter id="pcbLaserGlowHero" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="pcbLaserGlowHeroExp" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
                 <feMerge>
@@ -291,8 +291,8 @@ export function HeroChip3D({
               </filter>
             </defs>
 
-            <rect width="900" height="600" fill="url(#groundIlluminationFade)" />
-            <rect width="900" height="600" fill="url(#pcbMicroGrid)" mask={`url(#${maskId})`} />
+            <rect width="900" height="600" fill="url(#groundIlluminationFadeExp)" />
+            <rect width="900" height="600" fill="url(#pcbMicroGridExp)" mask={`url(#${maskId})`} />
 
             <g mask={`url(#${maskId})`} fill="none" stroke="#0B1A24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
@@ -306,7 +306,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHero)">
+            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHeroExp)">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-glow-${trace.id}`}
@@ -336,7 +336,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            <g filter="url(#pcbLaserGlowHero)">
+            <g filter="url(#pcbLaserGlowHeroExp)">
               {activeTraces.map((trace, i) => (
                 <g
                   key={`via-${trace.id}`}
@@ -398,21 +398,21 @@ export function HeroChip3D({
             transform: "translateZ(26px)",
           }}
         >
-          {extrusionSlices.map((slice, i) => (
+          {boxExtrusionLayers.map((layer, i) => (
             <div
-              key={`slice-${i}`}
+              key={`box-layer-${i}`}
               aria-hidden="true"
               className="absolute inset-0 flex items-center justify-center"
               style={{
-                transform: `translateZ(${slice.z}px) translateX(${slice.x}px)`,
-                opacity: slice.opacity,
-                filter: slice.filter,
+                transform: `translateZ(${layer.z}px) translateX(${layer.x}px) translateY(${layer.y}px)`,
+                opacity: layer.opacity,
+                filter: layer.filter,
               }}
             >
               <BrandIsotipo
-                size={124}
-                className="sm:w-[138px] sm:h-[138px]"
-                style={{ color: slice.color }}
+                size={126}
+                className="sm:w-[140px] sm:h-[140px]"
+                style={{ color: layer.color }}
               />
             </div>
           ))}
@@ -426,9 +426,24 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
               style={{ color: "var(--accent-connection)" }}
+            />
+          </div>
+
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center opacity-95"
+            style={{
+              transform: "translateZ(0.5px) translateX(-0.8px) translateY(-0.8px)",
+              filter: "brightness(1.7) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.95))",
+            }}
+          >
+            <BrandIsotipo
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
+              style={{ color: "#E0FFFF" }}
             />
           </div>
 
@@ -436,43 +451,28 @@ export function HeroChip3D({
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-90"
             style={{
-              transform: "translateZ(0.5px) translateX(-0.6px) translateY(-0.6px)",
-              filter: "brightness(1.65) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.9))",
-            }}
-          >
-            <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
-              style={{ color: "#E0FFFF" }}
-            />
-          </div>
-
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-85"
-            style={{
               transform: "translateZ(0.8px)",
-              filter: "brightness(0.9) contrast(1.25)",
+              filter: "brightness(0.92) contrast(1.3)",
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
-              style={{ color: "#0F2636" }}
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
+              style={{ color: "#0B2130" }}
             />
           </div>
 
           <div
             className="relative flex items-center justify-center"
             style={{
-              transform: "translateZ(1.2px)",
+              transform: "translateZ(1.4px)",
               filter:
                 "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 22px var(--accent-connection)) drop-shadow(0 0 48px #00F0FF)",
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
               style={{
                 color: "#FFFFFF",
                 filter: "brightness(1.45)",

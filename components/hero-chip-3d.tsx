@@ -15,30 +15,30 @@ interface ActiveTrace {
   duration: number;
 }
 
-// 1. HACES DE PISTAS PARALELAS PCB (Distribuidas en 4 grupos densos de precisión)
+// 1. PISTAS PCB EN HACES DE PRECISIÓN (Conectadas a la base de las cajas 3D)
 const activeTraces: ActiveTrace[] = [
-  // Haz Superior Izquierdo (5 pistas paralelas)
+  // Haz Superior Izquierdo (Fondo en fuga)
   { id: "tl1", path: "M 410 245 L 350 185 L 270 185 L 210 125 L 140 125", endX: 140, endY: 125, isFilledVia: true, delay: 0.1, duration: 1.5 },
   { id: "tl2", path: "M 425 235 L 375 175 L 310 175 L 250 105 L 190 105", endX: 190, endY: 105, isFilledVia: false, delay: 0.7, duration: 1.4 },
   { id: "tl3", path: "M 440 225 L 400 165 L 345 105 L 285 55", endX: 285, endY: 55, isFilledVia: true, delay: 0.3, duration: 1.35 },
   { id: "tl4", path: "M 455 215 L 420 155 L 375 95 L 340 45", endX: 340, endY: 45, isFilledVia: false, delay: 0.95, duration: 1.4 },
   { id: "tl5", path: "M 470 210 L 445 145 L 415 85 L 395 35", endX: 395, endY: 35, isFilledVia: true, delay: 0.5, duration: 1.45 },
 
-  // Haz Superior Derecho (5 pistas paralelas)
+  // Haz Superior Derecho (Fondo en fuga)
   { id: "tr1", path: "M 485 210 L 510 145 L 540 85 L 560 35", endX: 560, endY: 35, isFilledVia: false, delay: 1.1, duration: 1.35 },
   { id: "tr2", path: "M 500 215 L 535 155 L 580 95 L 615 45", endX: 615, endY: 45, isFilledVia: true, delay: 0.4, duration: 1.4 },
   { id: "tr3", path: "M 515 225 L 555 165 L 610 105 L 670 55", endX: 670, endY: 55, isFilledVia: false, delay: 0.85, duration: 1.45 },
   { id: "tr4", path: "M 530 235 L 580 175 L 645 175 L 705 105 L 765 105", endX: 765, endY: 105, isFilledVia: true, delay: 0.2, duration: 1.5 },
   { id: "tr5", path: "M 545 245 L 605 185 L 685 185 L 745 125 L 815 125", endX: 815, endY: 125, isFilledVia: false, delay: 0.95, duration: 1.55 },
 
-  // Haz Inferior Derecho (5 pistas paralelas)
+  // Haz Inferior Derecho (Primer plano)
   { id: "br1", path: "M 545 355 L 605 415 L 685 415 L 745 475 L 815 475", endX: 815, endY: 475, isFilledVia: true, delay: 0.15, duration: 1.55 },
   { id: "br2", path: "M 530 365 L 580 425 L 645 425 L 705 495 L 765 495", endX: 765, endY: 495, isFilledVia: false, delay: 0.75, duration: 1.5 },
   { id: "br3", path: "M 515 375 L 555 435 L 610 495 L 670 545", endX: 670, endY: 545, isFilledVia: true, delay: 1.25, duration: 1.45 },
   { id: "br4", path: "M 500 385 L 535 445 L 580 505 L 615 555", endX: 615, endY: 555, isFilledVia: false, delay: 0.55, duration: 1.4 },
   { id: "br5", path: "M 485 390 L 510 455 L 540 515 L 560 565", endX: 560, endY: 565, isFilledVia: true, delay: 1.05, duration: 1.35 },
 
-  // Haz Inferior Izquierdo (5 pistas paralelas orientadas hacia el texto)
+  // Haz Inferior Izquierdo (Primer plano orientado hacia el texto)
   { id: "bl1", path: "M 470 390 L 445 455 L 415 515 L 395 565", endX: 395, endY: 565, isFilledVia: false, delay: 0.8, duration: 1.35 },
   { id: "bl2", path: "M 455 385 L 420 445 L 375 505 L 340 555", endX: 340, endY: 555, isFilledVia: true, delay: 0.25, duration: 1.4 },
   { id: "bl3", path: "M 440 375 L 400 435 L 345 495 L 285 545", endX: 285, endY: 545, isFilledVia: false, delay: 0.9, duration: 1.45 },
@@ -50,7 +50,6 @@ const activeTraces: ActiveTrace[] = [
   { id: "latR", path: "M 565 300 L 665 300 L 735 340 L 835 340", endX: 835, endY: 340, isFilledVia: true, delay: 0.8, duration: 1.6 },
 ];
 
-// Pistas secundarias oscuras de fondo grabadas en el sustrato epoxi
 const secondaryTraces = [
   "M 330 160 L 250 80 L 160 80",
   "M 380 130 L 320 60 L 220 60",
@@ -64,16 +63,16 @@ const secondaryTraces = [
   "M 695 300 L 785 300 L 865 250",
 ];
 
-// 2. CAPAS DE EXTRUSIÓN MACIZA DE TITANIO (8 capas con oclusión profunda)
-const extrusionSlices = [
-  { z: -18, x: -7, opacity: 0.4, color: "#010508", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
-  { z: -14, x: -5.5, opacity: 0.55, color: "#020B12", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
-  { z: -11, x: -4.2, opacity: 0.72, color: "#04131F", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
-  { z: -8, x: -3, opacity: 0.86, color: "#061A28", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
-  { z: -5, x: -1.9, opacity: 0.93, color: "#092437", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
-  { z: -3, x: -1.1, opacity: 0.96, color: "#0D3048", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
-  { z: -1.5, x: -0.5, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
-  { z: -0.5, x: -0.1, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
+// 2. CAPAS DE EXTRUSIÓN DE CAJA MACIZA 3D (Efecto prismas biselados con paredes volumétricas)
+const boxExtrusionLayers = [
+  { z: -20, x: -7, y: 3.5, opacity: 0.45, color: "#010407", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
+  { z: -16, x: -5.6, y: 2.8, opacity: 0.6, color: "#02080E", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
+  { z: -12, x: -4.2, y: 2.1, opacity: 0.75, color: "#03101A", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
+  { z: -9, x: -3.1, y: 1.5, opacity: 0.88, color: "#051825", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
+  { z: -6, x: -2.1, y: 1.0, opacity: 0.94, color: "#082436", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
+  { z: -3.5, x: -1.2, y: 0.6, opacity: 0.97, color: "#0C324A", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
+  { z: -1.5, x: -0.5, y: 0.2, opacity: 0.99, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
+  { z: -0.5, x: -0.1, y: 0.0, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
 ];
 
 export function HeroChip3D({
@@ -98,7 +97,7 @@ export function HeroChip3D({
 
     const masterTl = gsap.timeline({ repeat: -1 });
 
-    // 1. Flotación física y respiración volumétrica en el eje Z
+    // 1. Flotación física y respiración volumétrica en Z
     if (logoElevatedRef.current) {
       gsap.to(logoElevatedRef.current, {
         z: 32,
@@ -121,7 +120,7 @@ export function HeroChip3D({
       });
     }
 
-    // 3. Rebote de luz volumétrico en el suelo (Ray Tracing Ground Bounce)
+    // 3. Rebote de luz volumétrico en el suelo
     if (groundBounceRef.current) {
       gsap.to(groundBounceRef.current, {
         scale: 1.25,
@@ -133,7 +132,7 @@ export function HeroChip3D({
       });
     }
 
-    // 4. ANIMACIÓN DE CONEXIONES DE PLASMA CON DOBLE HAZ Y SHOCKWAVES
+    // 4. ANIMACIÓN DE CONEXIONES DE PLASMA
     activeTraces.forEach((trace, index) => {
       const glowPathEl = pathRefs.current[index];
       const corePathEl = corePathRefs.current[index];
@@ -174,7 +173,6 @@ export function HeroChip3D({
       });
 
       lineTl
-        // 1. Viaje del cometa de plasma
         .fromTo(
           glowPathEl,
           { strokeDashoffset: laserLength, opacity: 0.6 },
@@ -197,7 +195,6 @@ export function HeroChip3D({
           },
           0
         )
-        // 2. Impacto cinético en la vía terminal
         .to(
           viaEl,
           {
@@ -209,7 +206,6 @@ export function HeroChip3D({
           `-=${trace.duration * 0.18}`
         );
 
-      // 3. Onda expansiva concéntrica en las vías activas
       if (shockwaveEl && trace.isFilledVia) {
         lineTl.fromTo(
           shockwaveEl,
@@ -224,7 +220,6 @@ export function HeroChip3D({
         );
       }
 
-      // 4. Disipación suave de energía
       lineTl
         .to(
           viaEl,
@@ -263,16 +258,17 @@ export function HeroChip3D({
         }}
       />
 
-      {/* 2. Escenario 3D Isométrico (Perspectiva Isométrica 3/4 Equilibrada) */}
+      {/* 2. Escenario 3D con Proyección Geométrica Balanceada (Pitch: 32°, Yaw: -35°, Roll: -12°) */}
       <div
         className="relative flex h-[480px] w-[680px] sm:w-[760px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateX(42deg) rotateY(-28deg) rotateZ(12deg)",
+          // Inclinación técnica balanceada: máxima legibilidad frontal con perspectiva de fuga y grosor lateral visible
+          transform: "rotateX(32deg) rotateY(-35deg) rotateZ(-12deg)",
         }}
       >
         {/* =============================================================
-            SUELO DEL CIRCUITO PCB: ATMÓSFERA CON ILUMINACIÓN RADIAL Y GRANO
+            SUELO DEL CIRCUITO PCB: ILUMINACIÓN RADIAL Y GRANO EN Z = 0px
             ============================================================= */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -284,7 +280,7 @@ export function HeroChip3D({
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              {/* Degradado de Iluminación Global en el Suelo (Ground Bounce Radial) */}
+              {/* Iluminación Global Radial en el Suelo */}
               <radialGradient id="groundIlluminationFade" cx="50%" cy="50%" r="56%">
                 <stop offset="0%" stopColor="#00F0FF" stopOpacity="0.28" />
                 <stop offset="25%" stopColor="var(--accent-connection)" stopOpacity="0.16" />
@@ -292,7 +288,7 @@ export function HeroChip3D({
                 <stop offset="85%" stopColor="#000000" stopOpacity="0" />
               </radialGradient>
 
-              {/* Máscara radial de viñeteado en bordes */}
+              {/* Máscara de atenuación en bordes */}
               <radialGradient id="pcbDepthFadeHero" cx="50%" cy="50%" r="58%">
                 <stop offset="0%" stopColor="#fff" stopOpacity="1" />
                 <stop offset="70%" stopColor="#fff" stopOpacity="0.85" />
@@ -302,13 +298,13 @@ export function HeroChip3D({
                 <rect width="900" height="600" fill="url(#pcbDepthFadeHero)" />
               </mask>
 
-              {/* Micro-Textura Arenada de Sustrato Epoxi (Frosted Slate Grain) */}
+              {/* Micro-Retícula de Sustrato Epoxi */}
               <pattern id="pcbMicroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
                 <circle cx="12" cy="12" r="0.9" fill="var(--accent-connection)" opacity="0.25" />
                 <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.08" />
               </pattern>
 
-              {/* Filtro de Resplandor Neón */}
+              {/* Filtro Neón */}
               <filter id="pcbLaserGlowHero" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
@@ -320,27 +316,25 @@ export function HeroChip3D({
               </filter>
             </defs>
 
-            {/* Capa A: Iluminación Global Radial sobre el Suelo (Ray Traced Ground Glow) */}
+            {/* Suelo Iluminado con Ground Bounce */}
             <rect width="900" height="600" fill="url(#groundIlluminationFade)" />
-
-            {/* Capa B: Micro-Retícula de Fondo */}
             <rect width="900" height="600" fill="url(#pcbMicroGrid)" mask={`url(#${maskId})`} />
 
-            {/* Capa C: Pistas secundarias de fondo grabadas en el sustrato epoxi oscuro */}
+            {/* Pistas secundarias de fondo */}
             <g mask={`url(#${maskId})`} fill="none" stroke="#0B1A24" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
                 <path key={`sec-${i}`} d={path} />
               ))}
             </g>
 
-            {/* Capa D: Pistas base grabadas */}
+            {/* Pistas base grabadas */}
             <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/25" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace) => (
                 <path key={`guide-${trace.id}`} d={trace.path} />
               ))}
             </g>
 
-            {/* CAPA 1 LÁSER: Corona Exterior de Plasma Turquesa */}
+            {/* Corona Exterior de Plasma Turquesa */}
             <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHero)">
               {activeTraces.map((trace, i) => (
                 <path
@@ -356,7 +350,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            {/* CAPA 2 LÁSER: Núcleo Blanco Incandescente */}
+            {/* Núcleo Blanco Incandescente */}
             <g fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace, i) => (
                 <path
@@ -382,7 +376,6 @@ export function HeroChip3D({
                   }}
                   transform={`translate(${trace.endX}, ${trace.endY})`}
                 >
-                  {/* Anillo de Onda Expansiva Reactiva */}
                   {trace.isFilledVia && (
                     <circle
                       ref={(el) => {
@@ -431,7 +424,7 @@ export function HeroChip3D({
         />
 
         {/* =============================================================
-            ISOTIPO 3D: TITANIO MACIZO, BISEL METÁLICO Y NÚCLEO GLOW
+            ISOTIPO 3D: PRISMAS MACIZOS EN FORMA DE CAJAS BISELADAS
             ============================================================= */}
         <div
           ref={logoElevatedRef}
@@ -441,27 +434,27 @@ export function HeroChip3D({
             transform: "translateZ(26px)",
           }}
         >
-          {/* Capas de Extrusión Sólida de Titanio (8 capas) */}
-          {extrusionSlices.map((slice, i) => (
+          {/* Capas de Extrusión para Formar las Paredes de las Cajas 3D */}
+          {boxExtrusionLayers.map((layer, i) => (
             <div
-              key={`slice-${i}`}
+              key={`box-layer-${i}`}
               aria-hidden="true"
               className="absolute inset-0 flex items-center justify-center"
               style={{
-                transform: `translateZ(${slice.z}px) translateX(${slice.x}px)`,
-                opacity: slice.opacity,
-                filter: slice.filter,
+                transform: `translateZ(${layer.z}px) translateX(${layer.x}px) translateY(${layer.y}px)`,
+                opacity: layer.opacity,
+                filter: layer.filter,
               }}
             >
               <BrandIsotipo
-                size={124}
-                className="sm:w-[138px] sm:h-[138px]"
-                style={{ color: slice.color }}
+                size={126}
+                className="sm:w-[140px] sm:h-[140px]"
+                style={{ color: layer.color }}
               />
             </div>
           ))}
 
-          {/* Bisel Perimetral Posterior con Resplandor de Cantos */}
+          {/* Bisel Neón Perimetral en la Base Superior de las Cajas (Z = -0.5px) */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center"
@@ -471,56 +464,56 @@ export function HeroChip3D({
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
               style={{ color: "var(--accent-connection)" }}
             />
           </div>
 
-          {/* Bisel Metálico Superior Especular / Aristas Fresnel */}
+          {/* Bisel Metálico Superior Especular / Aristas Chaflán en las Cajas (Z = 0.5px) */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-90"
+            className="absolute inset-0 flex items-center justify-center opacity-95"
             style={{
-              transform: "translateZ(0.5px) translateX(-0.6px) translateY(-0.6px)",
-              filter: "brightness(1.65) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.9))",
+              transform: "translateZ(0.5px) translateX(-0.8px) translateY(-0.8px)",
+              filter: "brightness(1.7) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.95))",
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
               style={{ color: "#E0FFFF" }}
             />
           </div>
 
-          {/* Cara Frontal en Titanio Oscuro Pulido */}
+          {/* Tapa Superior de las Cajas en Titanio / Obsidiana Oscura (Z = 0.8px) */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center opacity-85"
+            className="absolute inset-0 flex items-center justify-center opacity-90"
             style={{
               transform: "translateZ(0.8px)",
-              filter: "brightness(0.9) contrast(1.25)",
+              filter: "brightness(0.92) contrast(1.3)",
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
-              style={{ color: "#0F2636" }}
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
+              style={{ color: "#0B2130" }}
             />
           </div>
 
-          {/* Trazos de Luz Incandescente Central con Triple Bloom */}
+          {/* Canales Incandescentes de Luz en la Tapa de las Cajas (Z = 1.4px) */}
           <div
             className="relative flex items-center justify-center"
             style={{
-              transform: "translateZ(1.2px)",
+              transform: "translateZ(1.4px)",
               filter:
                 "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 22px var(--accent-connection)) drop-shadow(0 0 48px #00F0FF)",
             }}
           >
             <BrandIsotipo
-              size={124}
-              className="sm:w-[138px] sm:h-[138px]"
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
               style={{
                 color: "#FFFFFF",
                 filter: "brightness(1.45)",
