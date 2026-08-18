@@ -14,35 +14,28 @@ interface ActiveTrace {
   duration: number;
 }
 
-// PISTAS DE CONEXIÓN HOLOGRÁFICAS CON RUTEO A 45°
+// PISTAS DE CONEXIÓN HOLOGRÁFICAS: SE EXTIENDEN HACIA LA IZQUIERDA PARA CONECTAR EL TEXTO DEL HERO
 const hudTraces: ActiveTrace[] = [
-  // Conexión principal hacia el Radar Satélite Superior Derecho
-  { id: "sat-main", path: "M 440 220 L 490 170 L 560 170 L 610 130", endX: 610, endY: 130, isFilledVia: true, delay: 0.1, duration: 1.2 },
-  { id: "sat-sub", path: "M 450 250 L 510 250 L 550 210 L 600 210", endX: 600, endY: 210, isFilledVia: false, delay: 0.6, duration: 1.35 },
+  // --- HACES DE CONEXIÓN QUE INVADEN LA COLUMNA DE TEXTO (IZQUIERDA) ---
+  // Pista Larga 1: Hacia el titular principal
+  { id: "text-head-1", path: "M 460 270 L 360 210 L 220 210 L 140 140 L 40 140", endX: 40, endY: 140, isFilledVia: true, delay: 0.1, duration: 1.6 },
+  // Pista Larga 2: Hacia la bajada de promesa
+  { id: "text-head-2", path: "M 480 290 L 390 290 L 290 350 L 180 350 L 80 410 L 20 410", endX: 20, endY: 410, isFilledVia: true, delay: 0.45, duration: 1.8 },
+  // Pista Larga 3: Hacia la categoría / pill superior
+  { id: "text-pill", path: "M 520 220 L 460 140 L 320 140 L 240 60 L 120 60", endX: 120, endY: 60, isFilledVia: false, delay: 0.8, duration: 1.5 },
+  // Pista Larga 4: Hacia los botones de acción (inferior izquierda)
+  { id: "text-cta", path: "M 540 370 L 470 440 L 340 440 L 260 520 L 100 520", endX: 100, endY: 520, isFilledVia: true, delay: 0.3, duration: 1.7 },
 
-  // Cuadrante Superior Izquierdo
-  { id: "tl1", path: "M 320 220 L 270 170 L 190 170 L 140 120", endX: 140, endY: 120, isFilledVia: true, delay: 0.2, duration: 1.45 },
-  { id: "tl2", path: "M 340 195 L 300 135 L 240 135 L 190 85", endX: 190, endY: 85, isFilledVia: false, delay: 0.75, duration: 1.3 },
-  { id: "tl3", path: "M 365 180 L 340 115 L 290 65", endX: 290, endY: 65, isFilledVia: true, delay: 0.35, duration: 1.35 },
+  // --- CONEXIONES AL RADAR SATÉLITE SUPERIOR DERECHO ---
+  { id: "sat-main", path: "M 620 230 L 680 170 L 760 170 L 820 120", endX: 820, endY: 120, isFilledVia: true, delay: 0.2, duration: 1.25 },
+  { id: "sat-sub", path: "M 640 260 L 710 260 L 760 210 L 830 210", endX: 830, endY: 210, isFilledVia: false, delay: 0.7, duration: 1.35 },
 
-  // Superior Central
-  { id: "tc1", path: "M 390 170 L 390 100 L 420 70 L 420 30", endX: 420, endY: 30, isFilledVia: true, delay: 0.85, duration: 1.25 },
-
-  // Lateral Izquierdo
-  { id: "l-mid", path: "M 290 280 L 200 280 L 150 245 L 90 245", endX: 90, endY: 245, isFilledVia: true, delay: 0.15, duration: 1.4 },
-  { id: "l-low", path: "M 300 320 L 220 370 L 140 370 L 90 410", endX: 90, endY: 410, isFilledVia: false, delay: 0.65, duration: 1.45 },
-
-  // Inferior Izquierdo
-  { id: "bl1", path: "M 330 360 L 290 420 L 220 470 L 150 470", endX: 150, endY: 470, isFilledVia: true, delay: 0.4, duration: 1.35 },
-  { id: "bl2", path: "M 360 380 L 340 450 L 280 510 L 280 560", endX: 280, endY: 560, isFilledVia: true, delay: 0.9, duration: 1.3 },
-
-  // Inferior Central
-  { id: "bc1", path: "M 400 385 L 400 465 L 430 505 L 430 560", endX: 430, endY: 560, isFilledVia: true, delay: 0.3, duration: 1.35 },
-
-  // Lateral / Inferior Derecho
-  { id: "r-mid", path: "M 470 300 L 550 300 L 610 350 L 680 350", endX: 680, endY: 350, isFilledVia: true, delay: 0.25, duration: 1.45 },
-  { id: "br1", path: "M 450 340 L 510 390 L 570 390 L 630 440", endX: 630, endY: 440, isFilledVia: false, delay: 0.8, duration: 1.35 },
-  { id: "br2", path: "M 430 370 L 470 430 L 530 480 L 580 480", endX: 580, endY: 480, isFilledVia: true, delay: 0.5, duration: 1.4 },
+  // --- CUADRANTES LOCALES DEL ISOTIPO ---
+  { id: "tl-local", path: "M 500 240 L 440 180 L 370 180 L 320 130", endX: 320, endY: 130, isFilledVia: true, delay: 0.35, duration: 1.3 },
+  { id: "tc-local", path: "M 560 200 L 560 120 L 590 80", endX: 590, endY: 80, isFilledVia: true, delay: 0.9, duration: 1.2 },
+  { id: "br-local", path: "M 630 350 L 700 410 L 780 410 L 840 460", endX: 840, endY: 460, isFilledVia: true, delay: 0.5, duration: 1.4 },
+  { id: "bc-local", path: "M 570 390 L 570 470 L 610 520 L 610 570", endX: 610, endY: 570, isFilledVia: false, delay: 0.6, duration: 1.35 },
+  { id: "r-mid", path: "M 660 300 L 750 300 L 820 350 L 900 350", endX: 900, endY: 350, isFilledVia: true, delay: 0.15, duration: 1.5 },
 ];
 
 export function HeroChip3D({
@@ -73,11 +66,11 @@ export function HeroChip3D({
 
     const masterTl = gsap.timeline({ repeat: -1 });
 
-    // 1. ROTACIÓN CONTINUA DE ANILLOS HOLOGRÁFICOS DEL ISOTIPO (Centro: 380, 280)
+    // 1. ROTACIÓN CONTINUA DE ANILLOS HOLOGRÁFICOS DEL ISOTIPO (Centro: 560, 300)
     if (outerHudRingRef.current) {
       gsap.to(outerHudRingRef.current, {
         rotation: 360,
-        transformOrigin: "380px 280px",
+        transformOrigin: "560px 300px",
         duration: 24,
         repeat: -1,
         ease: "none",
@@ -87,7 +80,7 @@ export function HeroChip3D({
     if (midHudRingRef.current) {
       gsap.to(midHudRingRef.current, {
         rotation: -360,
-        transformOrigin: "380px 280px",
+        transformOrigin: "560px 300px",
         duration: 15,
         repeat: -1,
         ease: "none",
@@ -97,18 +90,18 @@ export function HeroChip3D({
     if (innerHudRingRef.current) {
       gsap.to(innerHudRingRef.current, {
         rotation: 360,
-        transformOrigin: "380px 280px",
+        transformOrigin: "560px 300px",
         duration: 9,
         repeat: -1,
         ease: "none",
       });
     }
 
-    // 2. ROTACIÓN DEL RADAR SATÉLITE SUPERIOR DERECHO (Centro: 630, 140)
+    // 2. ROTACIÓN DEL RADAR SATÉLITE SUPERIOR DERECHO (Centro: 830, 140)
     if (satOuterRingRef.current) {
       gsap.to(satOuterRingRef.current, {
         rotation: 360,
-        transformOrigin: "630px 140px",
+        transformOrigin: "830px 140px",
         duration: 18,
         repeat: -1,
         ease: "none",
@@ -118,7 +111,7 @@ export function HeroChip3D({
     if (satInnerRingRef.current) {
       gsap.to(satInnerRingRef.current, {
         rotation: -360,
-        transformOrigin: "630px 140px",
+        transformOrigin: "830px 140px",
         duration: 11,
         repeat: -1,
         ease: "none",
@@ -137,7 +130,7 @@ export function HeroChip3D({
       });
     }
 
-    // 4. ANIMACIÓN DE CONEXIONES LÁSER
+    // 4. ANIMACIÓN DE FLUJO LÁSER ENTRE HERO Y EL ISOTIPO
     hudTraces.forEach((trace, index) => {
       const glowPathEl = pathRefs.current[index];
       const corePathEl = corePathRefs.current[index];
@@ -146,23 +139,23 @@ export function HeroChip3D({
       if (!glowPathEl || !corePathEl || !viaEl) return;
 
       const pathLength = glowPathEl.getTotalLength();
-      const laserLength = 110;
-      const coreLaserLength = 70;
+      const laserLength = 120;
+      const coreLaserLength = 75;
 
       gsap.set(glowPathEl, {
-        strokeDasharray: `${laserLength} ${pathLength + 40}`,
+        strokeDasharray: `${laserLength} ${pathLength + 50}`,
         strokeDashoffset: laserLength,
         opacity: 0,
       });
 
       gsap.set(corePathEl, {
-        strokeDasharray: `${coreLaserLength} ${pathLength + 40}`,
+        strokeDasharray: `${coreLaserLength} ${pathLength + 50}`,
         strokeDashoffset: coreLaserLength,
         opacity: 0,
       });
 
       gsap.set(viaEl, {
-        opacity: trace.isFilledVia ? 0.55 : 0.3,
+        opacity: trace.isFilledVia ? 0.6 : 0.3,
         scale: 1,
         transformOrigin: "center",
       });
@@ -229,7 +222,7 @@ export function HeroChip3D({
         .to(
           viaEl,
           {
-            opacity: trace.isFilledVia ? 0.55 : 0.3,
+            opacity: trace.isFilledVia ? 0.6 : 0.3,
             scale: 1,
             duration: 0.45,
             ease: "power2.out",
@@ -249,52 +242,60 @@ export function HeroChip3D({
   return (
     <div
       aria-label="Prototipo Holográfico HUD de Metodología Promarketing"
-      className={`relative flex h-[480px] sm:h-[560px] lg:h-[620px] w-full max-w-full select-none items-center justify-center overflow-visible ${className}`}
+      className={`relative flex h-[480px] sm:h-[560px] lg:h-[640px] w-full max-w-full select-none items-center justify-center overflow-visible ${className}`}
+      style={{ perspective: "1200px" }}
     >
-      {/* 1. Resplandor Ambiental Global Esmeralda que se funde en la página */}
+      {/* 1. Resplandor Ambiental Global Esmeralda */}
       <div
         ref={coreGlowPulseRef}
         aria-hidden="true"
-        className="pointer-events-none absolute size-[360px] sm:size-[460px] lg:size-[560px] rounded-full blur-[120px] sm:blur-[160px] transition-all"
+        className="pointer-events-none absolute size-[380px] sm:size-[500px] lg:size-[620px] rounded-full blur-[130px] sm:blur-[170px] transition-all"
         style={{
           backgroundColor: glowColor,
-          opacity: 0.22,
+          opacity: 0.24,
         }}
       />
 
-      {/* 2. Escenario SVG Holográfico Abierto */}
-      <div className="relative flex h-full w-full max-w-[860px] items-center justify-center">
+      {/* 2. Escenario 3D Inclinado en el Eje X (Profundidad Isométrica HUD) */}
+      <div
+        className="relative flex h-full w-full max-w-[1020px] items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.02]"
+        style={{
+          transformStyle: "preserve-3d",
+          // Inclinación en el eje X para dar perspectiva volumétrica y conectar visualmente con el texto
+          transform: "rotateX(36deg) rotateY(-18deg) rotateZ(6deg)",
+        }}
+      >
         <svg
-          viewBox="0 0 800 580"
-          className="h-full w-full overflow-visible"
+          viewBox="0 0 1020 620"
+          className="h-full w-full overflow-visible pointer-events-none"
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
             {/* Trama Hexagonal (Honeycomb Grid) */}
-            <pattern id={hexPatternId} width="28" height="48.497" patternUnits="userSpaceOnUse">
+            <pattern id={hexPatternId} width="32" height="55.425" patternUnits="userSpaceOnUse">
               <path
-                d="M 28 0 L 14 8.083 L 0 0 L 0 16.166 L 14 24.249 L 28 16.166 Z M 0 24.249 L 14 32.332 L 28 24.249 L 28 40.415 L 14 48.498 L 0 40.415 Z"
+                d="M 32 0 L 16 9.237 L 0 0 L 0 18.475 L 16 27.712 L 32 18.475 Z M 0 27.712 L 16 36.95 L 32 27.712 L 32 46.187 L 16 55.425 L 0 46.187 Z"
                 fill="none"
                 stroke="var(--accent-connection)"
-                strokeWidth="0.5"
+                strokeWidth="0.45"
                 opacity="0.1"
               />
             </pattern>
 
-            {/* Máscara de viñeteado radial suave hacia la transparencia total */}
-            <radialGradient id="hudVignette" cx="50%" cy="50%" r="55%">
+            {/* Máscara de viñeteado radial suave hacia los márgenes exteriores */}
+            <radialGradient id="hudVignette" cx="55%" cy="50%" r="58%">
               <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-              <stop offset="65%" stopColor="#fff" stopOpacity="0.8" />
+              <stop offset="70%" stopColor="#fff" stopOpacity="0.85" />
               <stop offset="100%" stopColor="#fff" stopOpacity="0" />
             </radialGradient>
             <mask id={maskId}>
-              <rect width="800" height="580" fill="url(#hudVignette)" />
+              <rect width="1020" height="620" fill="url(#hudVignette)" />
             </mask>
 
-            {/* Filtro Neón Nítido */}
+            {/* Filtro Neón Holográfico Nítido */}
             <filter id="hudNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="blur1" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5.5" result="blur2" />
               <feMerge>
                 <feMergeNode in="blur2" />
                 <feMergeNode in="blur1" />
@@ -303,11 +304,11 @@ export function HeroChip3D({
             </filter>
           </defs>
 
-          {/* FONDO: Trama Hexagonal que se difumina naturalmente en el fondo negro */}
-          <rect width="800" height="580" fill={`url(#${hexPatternId})`} mask={`url(#${maskId})`} />
+          {/* FONDO: Trama Hexagonal integrada */}
+          <rect width="1020" height="620" fill={`url(#${hexPatternId})`} mask={`url(#${maskId})`} />
 
           {/* =========================================================
-              1. PISTAS PCB & GUÍAS DE CONEXIÓN
+              1. PISTAS PCB & GUÍAS DE CONEXIÓN QUE SE EXTIENDEN AL TEXTO
               ========================================================= */}
           <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/25" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             {hudTraces.map((trace) => (
@@ -362,7 +363,7 @@ export function HeroChip3D({
                     ref={(el) => {
                       shockwaveRefs.current[i] = el;
                     }}
-                    r="7"
+                    r="7.5"
                     fill="none"
                     stroke="#00F0FF"
                     strokeWidth="1.5"
@@ -372,14 +373,14 @@ export function HeroChip3D({
 
                 {trace.isFilledVia ? (
                   <>
-                    <circle r="8" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1" />
-                    <circle r="5.5" fill={glowColor} opacity="0.4" />
-                    <circle r="3.8" fill={glowColor} />
+                    <circle r="8.5" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1" />
+                    <circle r="6" fill={glowColor} opacity="0.4" />
+                    <circle r="4" fill={glowColor} />
                     <circle r="1.8" fill="#FFFFFF" />
                   </>
                 ) : (
                   <>
-                    <circle r="5.5" fill="none" stroke={glowColor} strokeWidth="1.6" />
+                    <circle r="5.8" fill="none" stroke={glowColor} strokeWidth="1.6" />
                     <circle r="1.8" fill="var(--background)" />
                   </>
                 )}
@@ -388,10 +389,9 @@ export function HeroChip3D({
           </g>
 
           {/* =========================================================
-              2. RADAR SATÉLITE SUPERIOR DERECHO (Centro: 630, 140)
+              2. RADAR SATÉLITE SUPERIOR DERECHO (Centro: 830, 140)
               ========================================================= */}
-          <g transform="translate(630, 140)" filter="url(#hudNeonGlow)">
-            {/* Halo difuso */}
+          <g transform="translate(830, 140)" filter="url(#hudNeonGlow)">
             <circle r="55" fill="var(--accent-connection)" opacity="0.08" />
 
             {/* Anillo exterior satélite (giratorio horario) */}
@@ -420,120 +420,115 @@ export function HeroChip3D({
           </g>
 
           {/* =========================================================
-              3. NÚCLEO HOLOGRÁFICO CENTRAL CON EL ISOTIPO (Centro: 380, 280)
+              3. NÚCLEO HOLOGRÁFICO CENTRAL CON EL ISOTIPO (Centro: 560, 300)
               ========================================================= */}
-          <g transform="translate(380, 280)">
-            {/* Halo de luz central */}
-            <circle r="95" fill="var(--accent-connection)" opacity="0.14" filter="url(#hudNeonGlow)" />
+          <g transform="translate(560, 300)">
+            <circle r="105" fill="var(--accent-connection)" opacity="0.14" filter="url(#hudNeonGlow)" />
 
             {/* Anillo HUD Exterior (Giratorio Horario) */}
             <g ref={outerHudRingRef}>
-              <circle r="78" fill="none" stroke="var(--accent-connection)" strokeWidth="1.4" strokeDasharray="30 12 70 8 15 15" opacity="0.8" />
-              <circle r="70" fill="none" stroke="#00F0FF" strokeWidth="0.9" strokeDasharray="6 6" opacity="0.6" />
+              <circle r="86" fill="none" stroke="var(--accent-connection)" strokeWidth="1.4" strokeDasharray="30 12 70 8 15 15" opacity="0.8" />
+              <circle r="78" fill="none" stroke="#00F0FF" strokeWidth="0.9" strokeDasharray="6 6" opacity="0.6" />
             </g>
 
             {/* Anillo HUD Medio (Giratorio Antihorario) */}
             <g ref={midHudRingRef}>
-              <circle r="60" fill="none" stroke="var(--accent-connection)" strokeWidth="2.2" strokeDasharray="60 20 30 15" opacity="0.9" />
-              <circle r="48" fill="none" stroke="#00F0FF" strokeWidth="1.4" strokeDasharray="12 4 4 4" opacity="0.8" />
-              {/* Arcos de mira */}
-              <path d="M -48 0 A 48 48 0 0 1 0 -48" fill="none" stroke="#FFFFFF" strokeWidth="2.4" opacity="0.95" />
-              <path d="M 48 0 A 48 48 0 0 1 0 48" fill="none" stroke="#FFFFFF" strokeWidth="2.4" opacity="0.95" />
+              <circle r="68" fill="none" stroke="var(--accent-connection)" strokeWidth="2.2" strokeDasharray="60 20 30 15" opacity="0.9" />
+              <circle r="54" fill="none" stroke="#00F0FF" strokeWidth="1.4" strokeDasharray="12 4 4 4" opacity="0.8" />
+              <path d="M -54 0 A 54 54 0 0 1 0 -54" fill="none" stroke="#FFFFFF" strokeWidth="2.4" opacity="0.95" />
+              <path d="M 54 0 A 54 54 0 0 1 0 54" fill="none" stroke="#FFFFFF" strokeWidth="2.4" opacity="0.95" />
             </g>
 
             {/* Anillo HUD Interior (Giratorio Horario Rápido) */}
             <g ref={innerHudRingRef}>
-              <circle r="36" fill="none" stroke="var(--accent-connection)" strokeWidth="1.8" strokeDasharray="25 10 10 10" opacity="0.95" />
-              <circle r="26" fill="none" stroke="#00F0FF" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.8" />
+              <circle r="40" fill="none" stroke="var(--accent-connection)" strokeWidth="1.8" strokeDasharray="25 10 10 10" opacity="0.95" />
+              <circle r="28" fill="none" stroke="#00F0FF" strokeWidth="1.2" strokeDasharray="4 4" opacity="0.8" />
             </g>
 
             {/* Marcadores de punto de mira central */}
-            <circle r="15" fill="none" stroke="#00F0FF" strokeWidth="1.4" opacity="0.9" />
-            <rect x="-6" y="-6" width="12" height="12" fill="#FFFFFF" opacity="1" filter="url(#hudNeonGlow)" />
+            <circle r="16" fill="none" stroke="#00F0FF" strokeWidth="1.4" opacity="0.9" />
+            <rect x="-6.5" y="-6.5" width="13" height="13" fill="#FFFFFF" opacity="1" filter="url(#hudNeonGlow)" />
 
             {/* =========================================================
                 LOS 4 CORCHETES DEL ISOTIPO DE PROMARKETING (ENMARCANDO EL HUD)
-                Dimensiones: Caja de 170x170px centrada
+                Dimensiones: Caja de 186x186px centrada
                 ========================================================= */}
             <g filter="url(#hudNeonGlow)">
-              {/* Corchete Superior Izquierdo */}
               <path
-                d="M -85 -40 L -85 -85 L -40 -85 L -40 -64 L -64 -64 L -64 -40 Z"
+                d="M -93 -44 L -93 -93 L -44 -93 L -44 -70 L -70 -70 L -70 -44 Z"
                 fill="#FFFFFF"
-                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 24px #00F0FF)" }}
+                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 26px #00F0FF)" }}
               />
 
-              {/* Corchete Superior Derecho */}
               <path
-                d="M 40 -85 L 85 -85 L 85 -40 L 64 -40 L 64 -64 L 40 -64 Z"
+                d="M 44 -93 L 93 -93 L 93 -44 L 70 -44 L 70 -70 L 44 -70 Z"
                 fill="#FFFFFF"
-                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 24px #00F0FF)" }}
+                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 26px #00F0FF)" }}
               />
 
-              {/* Corchete Inferior Derecho */}
               <path
-                d="M 85 40 L 85 85 L 40 85 L 40 64 L 64 64 L 64 40 Z"
+                d="M 93 44 L 93 93 L 44 93 L 44 70 L 70 70 L 70 44 Z"
                 fill="#FFFFFF"
-                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 24px #00F0FF)" }}
+                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 26px #00F0FF)" }}
               />
 
-              {/* Corchete Inferior Izquierdo */}
               <path
-                d="M -40 85 L -85 85 L -85 40 L -64 40 L -64 64 L -40 64 Z"
+                d="M -44 93 L -93 93 L -93 44 L -70 44 L -70 70 L -44 70 Z"
                 fill="#FFFFFF"
-                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 24px #00F0FF)" }}
+                style={{ filter: "drop-shadow(0 0 10px var(--accent-connection)) drop-shadow(0 0 26px #00F0FF)" }}
               />
             </g>
           </g>
 
           {/* =========================================================
-              4. BALIZAS Y MICRO-NODOS DE DATOS PERIFÉRICOS
+              4. BALIZAS Y MICRO-NODOS DE DATOS CONECTANDO LA COLUMNA IZQUIERDA
               ========================================================= */}
-          {/* Nodo Izquierdo (90, 245) */}
-          <g transform="translate(90, 245)" filter="url(#hudNeonGlow)">
-            <circle r="14" fill="none" stroke="var(--accent-connection)" strokeWidth="1.2" strokeDasharray="8 4" opacity="0.85" />
-            <circle r="7" fill="var(--accent-connection)" opacity="0.4" />
-            <circle r="3.5" fill="#FFFFFF" />
-            <text x="-35" y="-18" fill="var(--accent-connection)" fontSize="6.5" fontFamily="monospace" opacity="0.8">NODE_01</text>
+          {/* Nodo Izquierdo Superior (40, 140) */}
+          <g transform="translate(40, 140)" filter="url(#hudNeonGlow)">
+            <circle r="12" fill="none" stroke="var(--accent-connection)" strokeWidth="1.2" strokeDasharray="8 4" opacity="0.85" />
+            <circle r="5.5" fill="var(--accent-connection)" opacity="0.4" />
+            <circle r="2.8" fill="#FFFFFF" />
+            <text x="-4" y="-16" fill="var(--accent-connection)" fontSize="6.5" fontFamily="monospace" opacity="0.8">CAPACIDADES</text>
           </g>
 
-          {/* Nodo Inferior Izquierdo (150, 470) */}
-          <g transform="translate(150, 470)" filter="url(#hudNeonGlow)">
-            <circle r="12" fill="none" stroke="var(--accent-connection)" strokeWidth="1.2" opacity="0.8" />
-            <circle r="6" fill="var(--accent-connection)" opacity="0.35" />
+          {/* Nodo Izquierdo Medio (20, 410) */}
+          <g transform="translate(20, 410)" filter="url(#hudNeonGlow)">
+            <circle r="10" fill="none" stroke="var(--accent-connection)" strokeWidth="1.2" opacity="0.8" />
+            <circle r="5" fill="var(--accent-connection)" opacity="0.35" />
+            <circle r="2.5" fill="#FFFFFF" />
+            <path d="M -12 12 L 0 4 L 12 12 M 0 4 L 0 -4" fill="none" stroke="#00F0FF" strokeWidth="0.8" opacity="0.6" />
+          </g>
+
+          {/* Nodo Inferior Izquierdo (100, 520) */}
+          <g transform="translate(100, 520)" filter="url(#hudNeonGlow)">
+            <circle r="14" fill="none" stroke="var(--accent-connection)" strokeWidth="1.4" strokeDasharray="12 4" opacity="0.85" />
+            <circle r="6" fill="var(--accent-connection)" opacity="0.4" />
             <circle r="3" fill="#FFFFFF" />
-            <path d="M -15 15 L 0 5 L 15 15 M 0 5 L 0 -5" fill="none" stroke="#00F0FF" strokeWidth="0.8" opacity="0.6" />
+            <text x="18" y="3" fill="#00F0FF" fontSize="6.5" fontFamily="monospace" opacity="0.75">ACTION_NODE</text>
           </g>
 
-          {/* Nodo Inferior Central (430, 560) */}
-          <g transform="translate(430, 560)" filter="url(#hudNeonGlow)">
-            <circle r="15" fill="none" stroke="var(--accent-connection)" strokeWidth="1.4" strokeDasharray="12 4" opacity="0.85" />
-            <circle r="7" fill="var(--accent-connection)" opacity="0.4" />
-            <circle r="3.5" fill="#FFFFFF" />
-          </g>
-
-          {/* Nodo Lateral Derecho (680, 350) */}
-          <g transform="translate(680, 350)" filter="url(#hudNeonGlow)">
+          {/* Nodo Lateral Derecho (900, 350) */}
+          <g transform="translate(900, 350)" filter="url(#hudNeonGlow)">
             <circle r="14" fill="none" stroke="var(--accent-connection)" strokeWidth="1.2" strokeDasharray="6 3" opacity="0.85" />
             <circle r="6" fill="var(--accent-connection)" opacity="0.35" />
             <circle r="3" fill="#FFFFFF" />
-            <text x="20" y="3" fill="#00F0FF" fontSize="6.5" fontFamily="monospace" opacity="0.75">DATA_BUS</text>
+            <text x="18" y="3" fill="#00F0FF" fontSize="6.5" fontFamily="monospace" opacity="0.75">DATA_BUS</text>
           </g>
 
-          {/* Micro-partículas flotantes (Constelaciones de datos) */}
+          {/* Micro-partículas flotantes (Constelaciones de datos interconectadas) */}
           <g fill="var(--accent-connection)" opacity="0.45" filter="url(#hudNeonGlow)">
-            <circle cx="120" cy="160" r="1.5" />
-            <circle cx="160" cy="200" r="1" />
-            <circle cx="240" cy="100" r="1.8" />
-            <circle cx="310" cy="60" r="1.2" />
-            <circle cx="480" cy="70" r="1.5" />
-            <circle cx="550" cy="90" r="1" />
-            <circle cx="700" cy="240" r="1.6" />
-            <circle cx="730" cy="280" r="1.2" />
-            <circle cx="650" cy="460" r="1.5" />
-            <circle cx="550" cy="500" r="1.2" />
-            <circle cx="250" cy="440" r="1.6" />
-            <circle cx="130" cy="330" r="1.2" />
+            <circle cx="80" cy="180" r="1.5" />
+            <circle cx="160" cy="240" r="1" />
+            <circle cx="280" cy="110" r="1.8" />
+            <circle cx="360" cy="70" r="1.2" />
+            <circle cx="680" cy="80" r="1.5" />
+            <circle cx="760" cy="100" r="1" />
+            <circle cx="890" cy="240" r="1.6" />
+            <circle cx="940" cy="290" r="1.2" />
+            <circle cx="860" cy="480" r="1.5" />
+            <circle cx="750" cy="520" r="1.2" />
+            <circle cx="340" cy="460" r="1.6" />
+            <circle cx="190" cy="380" r="1.2" />
           </g>
         </svg>
       </div>

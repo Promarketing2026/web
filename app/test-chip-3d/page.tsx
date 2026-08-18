@@ -39,9 +39,9 @@ export default function TestChip3DPage() {
         />
 
         <div className="mx-auto max-w-6xl">
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            {/* Columna Izquierda: Copy Estratégico Oficial */}
-            <div className="max-w-2xl space-y-6">
+          <div className="relative grid w-full items-center gap-8 lg:grid-cols-[1fr_1fr]">
+            {/* Columna Izquierda: Copy Estratégico Oficial con Z-index superior */}
+            <div className="relative z-10 max-w-2xl space-y-6">
               {/* Pill de Categoría de Marca */}
               <div className="inline-flex items-center gap-2.5 rounded-full border border-accent-connection/40 bg-secondary/80 px-4 py-1.5 text-xs font-semibold text-accent-connection shadow-xs backdrop-blur-md">
                 <span className="relative flex size-2">
@@ -94,8 +94,8 @@ export default function TestChip3DPage() {
               </div>
             </div>
 
-            {/* Columna Derecha: Isotipo 3D orientado al texto con Stroke Line Animation */}
-            <div className="w-full flex items-center justify-center">
+            {/* Columna Derecha / Fondo Interconectado: Animación HUD 3D que invade y unifica el Hero */}
+            <div className="relative w-full flex items-center justify-center lg:-ml-28 lg:w-[135%] pointer-events-none">
               <HeroChip3D />
             </div>
           </div>
