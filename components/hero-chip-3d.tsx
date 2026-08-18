@@ -15,7 +15,7 @@ interface ActiveTrace {
   duration: number;
 }
 
-// 1. PISTAS DE CIRCUITO DE ALTA PRECISIÓN (Ruteo ortogonal y a 45°)
+// 1. PISTAS PCB DE ALTA PRECISIÓN (15 caminos con ruteo a 45°)
 const activeTraces: ActiveTrace[] = [
   // Cuadrante Superior Izquierdo (Fondo en fuga)
   { id: "tl1", path: "M 400 240 L 330 170 L 250 170 L 190 110 L 130 110", endX: 130, endY: 110, isFilledVia: true, delay: 0.1, duration: 1.5 },
@@ -41,7 +41,7 @@ const activeTraces: ActiveTrace[] = [
   { id: "l3", path: "M 385 270 L 310 220 L 220 220 L 160 160 L 90 160", endX: 90, endY: 160, isFilledVia: true, delay: 0.6, duration: 1.6 },
 ];
 
-// Pistas secundarias de fondo grabadas en el sustrato epoxi
+// Pistas secundarias en el sustrato epoxi
 const secondaryTraces = [
   "M 260 140 L 190 70 L 100 70",
   "M 310 110 L 250 50 L 170 50",
@@ -53,16 +53,16 @@ const secondaryTraces = [
   "M 260 460 L 190 530 L 100 530",
 ];
 
-// 2. ESTRUCTURA DE EXTRUSIÓN MACIZA DE TITANIO (8 capas con oclusión profunda)
+// Capas de extrusión densa para volumen sólido de titanio (8 capas)
 const extrusionSlices = [
-  { z: -16, x: -6, opacity: 0.35, color: "#010508", filter: "drop-shadow(-6px 6px 16px rgba(0,0,0,0.98))" },
-  { z: -13, x: -5, opacity: 0.52, color: "#020A10", filter: "drop-shadow(-5px 5px 12px rgba(0,0,0,0.92))" },
-  { z: -10, x: -4, opacity: 0.7, color: "#04111B", filter: "drop-shadow(-4px 4px 9px rgba(0,0,0,0.85))" },
-  { z: -7, x: -3, opacity: 0.84, color: "#061825", filter: "drop-shadow(-3px 3px 6px rgba(0,0,0,0.8))" },
-  { z: -5, x: -2, opacity: 0.92, color: "#092233", filter: "drop-shadow(-2px 2px 4px rgba(0,0,0,0.75))" },
-  { z: -3, x: -1.2, opacity: 0.96, color: "#0D2E44", filter: "drop-shadow(0 0 10px rgba(0,240,255,0.25))" },
-  { z: -1.5, x: -0.6, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 18px var(--accent-connection))" },
-  { z: -0.5, x: -0.2, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 28px #00F0FF)" },
+  { z: -18, x: -7, opacity: 0.4, color: "#010508", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
+  { z: -14, x: -5.5, opacity: 0.55, color: "#020B12", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
+  { z: -11, x: -4.2, opacity: 0.72, color: "#04131F", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
+  { z: -8, x: -3, opacity: 0.86, color: "#061A28", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
+  { z: -5, x: -1.9, opacity: 0.93, color: "#092437", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
+  { z: -3, x: -1.1, opacity: 0.96, color: "#0D3048", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
+  { z: -1.5, x: -0.5, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
+  { z: -0.5, x: -0.1, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
 ];
 
 export function HeroChip3D({
@@ -90,7 +90,7 @@ export function HeroChip3D({
     // 1. Flotación física y respiración volumétrica en el eje Z
     if (logoElevatedRef.current) {
       gsap.to(logoElevatedRef.current, {
-        z: 30,
+        z: 32,
         duration: 3.2,
         repeat: -1,
         yoyo: true,
@@ -101,8 +101,8 @@ export function HeroChip3D({
     // 2. Respiración de la luz ambiental del núcleo
     if (coreAmbientPulseRef.current) {
       gsap.to(coreAmbientPulseRef.current, {
-        scale: 1.14,
-        opacity: 0.3,
+        scale: 1.15,
+        opacity: 0.32,
         duration: 2.6,
         repeat: -1,
         yoyo: true,
@@ -110,11 +110,11 @@ export function HeroChip3D({
       });
     }
 
-    // 3. Rebote de luz volumétrico en el suelo (Ground Bounce Pulse)
+    // 3. Rebote de luz volumétrico en el suelo
     if (groundBounceRef.current) {
       gsap.to(groundBounceRef.current, {
-        scale: 1.22,
-        opacity: 0.45,
+        scale: 1.25,
+        opacity: 0.48,
         duration: 1.8,
         repeat: -1,
         yoyo: true,
@@ -122,7 +122,7 @@ export function HeroChip3D({
       });
     }
 
-    // 4. ANIMACIÓN CINEMÁTICA DE CONEXIONES (Láser Dual + Destello Óptico + Shockwave)
+    // 4. ANIMACIÓN DE CONEXIONES (Láser Dual con Plasma + Shockwaves)
     activeTraces.forEach((trace, index) => {
       const glowPathEl = pathRefs.current[index];
       const corePathEl = corePathRefs.current[index];
@@ -131,8 +131,8 @@ export function HeroChip3D({
       if (!glowPathEl || !corePathEl || !viaEl) return;
 
       const pathLength = glowPathEl.getTotalLength();
-      const laserLength = 115;
-      const coreLaserLength = 75;
+      const laserLength = 120;
+      const coreLaserLength = 80;
 
       gsap.set(glowPathEl, {
         strokeDasharray: `${laserLength} ${pathLength + 50}`,
@@ -163,7 +163,6 @@ export function HeroChip3D({
       });
 
       lineTl
-        // 1. Viaje del cometa de plasma (Corona + Núcleo Blanco)
         .fromTo(
           glowPathEl,
           { strokeDashoffset: laserLength, opacity: 0.6 },
@@ -186,25 +185,23 @@ export function HeroChip3D({
           },
           0
         )
-        // 2. Impacto cinético en el nodo terminal
         .to(
           viaEl,
           {
             opacity: 1,
-            scale: trace.isFilledVia ? 1.75 : 1.4,
+            scale: trace.isFilledVia ? 1.8 : 1.45,
             duration: 0.2,
             ease: "back.out(2.5)",
           },
           `-=${trace.duration * 0.18}`
         );
 
-      // 3. Onda expansiva concéntrica en las vías activas
       if (shockwaveEl && trace.isFilledVia) {
         lineTl.fromTo(
           shockwaveEl,
           { scale: 0.5, opacity: 0.95 },
           {
-            scale: 2.9,
+            scale: 3.0,
             opacity: 0,
             duration: 0.55,
             ease: "power2.out",
@@ -213,7 +210,6 @@ export function HeroChip3D({
         );
       }
 
-      // 4. Disipación suave de energía
       lineTl
         .to(
           viaEl,
@@ -238,30 +234,31 @@ export function HeroChip3D({
   return (
     <div
       aria-label="Isotipo 3D y Ecosistema de Metodología Promarketing"
-      className={`relative flex h-[340px] sm:h-[420px] lg:h-[500px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
+      className={`relative flex h-[360px] sm:h-[440px] lg:h-[520px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
       style={{ perspective: "1200px" }}
     >
-      {/* 1. Resplandor Ambiental Global de Fondo */}
+      {/* 1. Resplandor Ambiental Global */}
       <div
         ref={coreAmbientPulseRef}
         aria-hidden="true"
-        className="pointer-events-none absolute size-[280px] sm:size-[380px] lg:size-[460px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
+        className="pointer-events-none absolute size-[300px] sm:size-[400px] lg:size-[480px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
         style={{
           backgroundColor: glowColor,
-          opacity: 0.22,
+          opacity: 0.24,
         }}
       />
 
-      {/* 2. Escenario 3D Nivelado en X (0°) con Giro en Y (-34°) */}
+      {/* 2. Escenario 3D Isométrico (Perspectiva Unificada de Alto Impacto) */}
       <div
-        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[460px] w-[660px] sm:w-[720px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateX(0deg) rotateY(-34deg) rotateZ(0deg)",
+          // Perspectiva isométrica de 3 cuartos: Inclinación equilibrada para máxima tridimensionalidad y legibilidad
+          transform: "rotateX(42deg) rotateY(-28deg) rotateZ(12deg)",
         }}
       >
         {/* =============================================================
-            SUELO DEL CIRCUITO PCB CON MICRO-RETÍCULA Y PISTAS EN Z = 0px
+            SUELO DEL CIRCUITO PCB EN Z = 0px
             ============================================================= */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -273,7 +270,6 @@ export function HeroChip3D({
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              {/* Máscara radial de atenuación en bordes */}
               <radialGradient id="pcbDepthFadeHero" cx="50%" cy="50%" r="58%">
                 <stop offset="0%" stopColor="#fff" stopOpacity="1" />
                 <stop offset="70%" stopColor="#fff" stopOpacity="0.85" />
@@ -283,13 +279,12 @@ export function HeroChip3D({
                 <rect width="900" height="600" fill="url(#pcbDepthFadeHero)" />
               </mask>
 
-              {/* Patrón de Micro-Retícula de Sustrato PCB */}
+              {/* Micro-Retícula de Sustrato PCB */}
               <pattern id="pcbMicroGrid" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="12" cy="12" r="0.8" fill="var(--accent-connection)" opacity="0.18" />
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.3" opacity="0.05" />
+                <circle cx="12" cy="12" r="0.85" fill="var(--accent-connection)" opacity="0.22" />
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.07" />
               </pattern>
 
-              {/* Filtro de Resplandor Neón */}
               <filter id="pcbLaserGlowHero" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
@@ -301,25 +296,25 @@ export function HeroChip3D({
               </filter>
             </defs>
 
-            {/* Micro-Retícula de Fondo (Textura de Placa de Circuito Impreso) */}
+            {/* Micro-Retícula de Fondo */}
             <rect width="900" height="600" fill="url(#pcbMicroGrid)" mask={`url(#${maskId})`} />
 
             {/* Pistas secundarias de fondo (Sustrato epoxi) */}
-            <g mask={`url(#${maskId})`} fill="none" stroke="#09121B" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+            <g mask={`url(#${maskId})`} fill="none" stroke="#0A141E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
                 <path key={`sec-${i}`} d={path} />
               ))}
             </g>
 
-            {/* Pistas base grabadas en cobre oscuro */}
-            <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/20" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            {/* Pistas base grabadas */}
+            <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/25" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace) => (
                 <path key={`guide-${trace.id}`} d={trace.path} />
               ))}
             </g>
 
             {/* CAPA 1 LÁSER: Corona Exterior de Plasma Turquesa */}
-            <g fill="none" stroke={glowColor} strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHero)">
+            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlowHero)">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-glow-${trace.id}`}
@@ -334,8 +329,8 @@ export function HeroChip3D({
               ))}
             </g>
 
-            {/* CAPA 2 LÁSER: Núcleo Blanco Incandescente Ultrarrápido */}
-            <g fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            {/* CAPA 2 LÁSER: Núcleo Blanco Incandescente */}
+            <g fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-core-${trace.id}`}
@@ -350,7 +345,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            {/* Vías y Nodos Terminales con Ondas Expansivas */}
+            {/* Vías y Nodos Terminales con Shockwaves */}
             <g filter="url(#pcbLaserGlowHero)">
               {activeTraces.map((trace, i) => (
                 <g
@@ -360,7 +355,6 @@ export function HeroChip3D({
                   }}
                   transform={`translate(${trace.endX}, ${trace.endY})`}
                 >
-                  {/* Anillo de Onda Expansiva Reactiva */}
                   {trace.isFilledVia && (
                     <circle
                       ref={(el) => {
@@ -369,22 +363,21 @@ export function HeroChip3D({
                       r="6.5"
                       fill="none"
                       stroke="#00F0FF"
-                      strokeWidth="1.4"
+                      strokeWidth="1.5"
                       opacity="0"
                     />
                   )}
 
-                  {/* Estructura del Nodo Terminal */}
                   {trace.isFilledVia ? (
                     <>
-                      <circle r="7.5" fill="none" stroke="rgba(0, 240, 255, 0.4)" strokeWidth="1" />
+                      <circle r="8" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1" />
                       <circle r="6" fill={glowColor} opacity="0.35" />
                       <circle r="4.2" fill={glowColor} />
                       <circle r="2" fill="#FFFFFF" />
                     </>
                   ) : (
                     <>
-                      <circle r="5.5" fill="none" stroke={glowColor} strokeWidth="1.6" />
+                      <circle r="5.8" fill="none" stroke={glowColor} strokeWidth="1.6" />
                       <circle r="1.8" fill="var(--background)" />
                     </>
                   )}
@@ -397,30 +390,30 @@ export function HeroChip3D({
         {/* Sombra de Oclusión Volumétrica Densa en el Suelo */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute size-44 rounded-full bg-black/95 blur-2xl transition-all"
+          className="pointer-events-none absolute size-48 rounded-full bg-black/95 blur-2xl transition-all"
           style={{ transform: "translateZ(2px)" }}
         />
 
-        {/* Rebote de Luz Volumétrico en el Suelo (Ground Bounce) */}
+        {/* Rebote de Luz Volumétrico en el Suelo */}
         <div
           ref={groundBounceRef}
           aria-hidden="true"
-          className="pointer-events-none absolute size-40 rounded-full bg-accent-connection/30 blur-xl transition-all"
+          className="pointer-events-none absolute size-44 rounded-full bg-accent-connection/30 blur-xl transition-all"
           style={{ transform: "translateZ(6px)" }}
         />
 
         {/* =============================================================
-            ISOTIPO 3D: TITANIO SATINADO, BISEL FRESNEL Y NÚCLEO GLOW
+            ISOTIPO 3D: TITANIO MACIZO, BISEL METÁLICO Y NÚCLEO GLOW
             ============================================================= */}
         <div
           ref={logoElevatedRef}
           className="relative flex items-center justify-center select-none"
           style={{
             transformStyle: "preserve-3d",
-            transform: "translateZ(24px)",
+            transform: "translateZ(26px)",
           }}
         >
-          {/* Capas de Extrusión Sólida (Bloque Macizo de Titanio Cepillado) */}
+          {/* Capas de Extrusión Sólida de Titanio (8 capas) */}
           {extrusionSlices.map((slice, i) => (
             <div
               key={`slice-${i}`}
@@ -433,73 +426,73 @@ export function HeroChip3D({
               }}
             >
               <BrandIsotipo
-                size={120}
-                className="sm:w-[136px] sm:h-[136px]"
+                size={124}
+                className="sm:w-[138px] sm:h-[138px]"
                 style={{ color: slice.color }}
               />
             </div>
           ))}
 
-          {/* Bisel Perimetral Lateral (Luz de Canto Neón, Z = -0.5px) */}
+          {/* Bisel Perimetral Posterior con Resplandor de Cantos */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center"
             style={{
               transform: "translateZ(-0.5px)",
-              filter: "drop-shadow(0 0 14px #00F0FF) drop-shadow(0 0 26px var(--accent-connection))",
+              filter: "drop-shadow(0 0 14px #00F0FF) drop-shadow(0 0 28px var(--accent-connection))",
             }}
           >
             <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "var(--accent-connection)" }}
             />
           </div>
 
-          {/* Bisel Metálico Superior Especular / Aristas Fresnel (Z = 0.5px) */}
+          {/* Bisel Metálico Superior Especular / Aristas Fresnel */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-90"
             style={{
-              transform: "translateZ(0.5px) translateX(-0.5px) translateY(-0.5px)",
-              filter: "brightness(1.6) drop-shadow(-1px -1px 2px rgba(224,255,255,0.85))",
+              transform: "translateZ(0.5px) translateX(-0.6px) translateY(-0.6px)",
+              filter: "brightness(1.65) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.9))",
             }}
           >
             <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "#E0FFFF" }}
             />
           </div>
 
-          {/* Cara Frontal en Titanio Oscuro Pulido (Z = 0.8px) */}
+          {/* Cara Frontal en Titanio Oscuro Pulido */}
           <div
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-85"
             style={{
               transform: "translateZ(0.8px)",
-              filter: "brightness(0.9) contrast(1.2)",
+              filter: "brightness(0.9) contrast(1.25)",
             }}
           >
             <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{ color: "#0F2636" }}
             />
           </div>
 
-          {/* Trazos de Luz Incandescente Central (Z = 1.2px) con Triple Bloom */}
+          {/* Trazos de Luz Incandescente Central con Triple Bloom */}
           <div
             className="relative flex items-center justify-center"
             style={{
               transform: "translateZ(1.2px)",
               filter:
-                "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 20px var(--accent-connection)) drop-shadow(0 0 45px #00F0FF)",
+                "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 22px var(--accent-connection)) drop-shadow(0 0 48px #00F0FF)",
             }}
           >
             <BrandIsotipo
-              size={120}
-              className="sm:w-[136px] sm:h-[136px]"
+              size={124}
+              className="sm:w-[138px] sm:h-[138px]"
               style={{
                 color: "#FFFFFF",
                 filter: "brightness(1.45)",

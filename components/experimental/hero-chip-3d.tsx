@@ -45,14 +45,14 @@ const secondaryTraces = [
 ];
 
 const extrusionSlices = [
-  { z: -16, x: -6, opacity: 0.35, color: "#010508", filter: "drop-shadow(-6px 6px 16px rgba(0,0,0,0.98))" },
-  { z: -13, x: -5, opacity: 0.52, color: "#020A10", filter: "drop-shadow(-5px 5px 12px rgba(0,0,0,0.92))" },
-  { z: -10, x: -4, opacity: 0.7, color: "#04111B", filter: "drop-shadow(-4px 4px 9px rgba(0,0,0,0.85))" },
-  { z: -7, x: -3, opacity: 0.84, color: "#061825", filter: "drop-shadow(-3px 3px 6px rgba(0,0,0,0.8))" },
-  { z: -5, x: -2, opacity: 0.92, color: "#092233", filter: "drop-shadow(-2px 2px 4px rgba(0,0,0,0.75))" },
-  { z: -3, x: -1.2, opacity: 0.96, color: "#0D2E44", filter: "drop-shadow(0 0 10px rgba(0,240,255,0.25))" },
-  { z: -1.5, x: -0.6, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 18px var(--accent-connection))" },
-  { z: -0.5, x: -0.2, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 28px #00F0FF)" },
+  { z: -18, x: -7, opacity: 0.4, color: "#010508", filter: "drop-shadow(-8px 8px 18px rgba(0,0,0,0.98))" },
+  { z: -14, x: -5.5, opacity: 0.55, color: "#020B12", filter: "drop-shadow(-6px 6px 14px rgba(0,0,0,0.92))" },
+  { z: -11, x: -4.2, opacity: 0.72, color: "#04131F", filter: "drop-shadow(-4px 4px 10px rgba(0,0,0,0.85))" },
+  { z: -8, x: -3, opacity: 0.86, color: "#061A28", filter: "drop-shadow(-3px 3px 7px rgba(0,0,0,0.8))" },
+  { z: -5, x: -1.9, opacity: 0.93, color: "#092437", filter: "drop-shadow(-2px 2px 5px rgba(0,0,0,0.75))" },
+  { z: -3, x: -1.1, opacity: 0.96, color: "#0D3048", filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
+  { z: -1.5, x: -0.5, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 20px var(--accent-connection))" },
+  { z: -0.5, x: -0.1, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 30px #00F0FF)" },
 ];
 
 export function HeroChip3D({
@@ -79,7 +79,7 @@ export function HeroChip3D({
 
     if (logoElevatedRef.current) {
       gsap.to(logoElevatedRef.current, {
-        z: 30,
+        z: 32,
         duration: 3.2,
         repeat: -1,
         yoyo: true,
@@ -89,8 +89,8 @@ export function HeroChip3D({
 
     if (coreAmbientPulseRef.current) {
       gsap.to(coreAmbientPulseRef.current, {
-        scale: 1.14,
-        opacity: 0.3,
+        scale: 1.15,
+        opacity: 0.32,
         duration: 2.6,
         repeat: -1,
         yoyo: true,
@@ -100,8 +100,8 @@ export function HeroChip3D({
 
     if (groundBounceRef.current) {
       gsap.to(groundBounceRef.current, {
-        scale: 1.22,
-        opacity: 0.45,
+        scale: 1.25,
+        opacity: 0.48,
         duration: 1.8,
         repeat: -1,
         yoyo: true,
@@ -117,8 +117,8 @@ export function HeroChip3D({
       if (!glowPathEl || !corePathEl || !viaEl) return;
 
       const pathLength = glowPathEl.getTotalLength();
-      const laserLength = 115;
-      const coreLaserLength = 75;
+      const laserLength = 120;
+      const coreLaserLength = 80;
 
       gsap.set(glowPathEl, {
         strokeDasharray: `${laserLength} ${pathLength + 50}`,
@@ -175,7 +175,7 @@ export function HeroChip3D({
           viaEl,
           {
             opacity: 1,
-            scale: trace.isFilledVia ? 1.75 : 1.4,
+            scale: trace.isFilledVia ? 1.8 : 1.45,
             duration: 0.2,
             ease: "back.out(2.5)",
           },
@@ -187,7 +187,7 @@ export function HeroChip3D({
           shockwaveEl,
           { scale: 0.5, opacity: 0.95 },
           {
-            scale: 2.9,
+            scale: 3.0,
             opacity: 0,
             duration: 0.55,
             ease: "power2.out",
@@ -220,13 +220,13 @@ export function HeroChip3D({
   return (
     <div
       aria-label="Isotipo 3D y Ecosistema de Metodología Promarketing"
-      className={`relative flex h-[340px] sm:h-[420px] lg:h-[500px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
+      className={`relative flex h-[360px] sm:h-[440px] lg:h-[520px] w-full max-w-full select-none items-center justify-center overflow-hidden lg:overflow-visible ${className}`}
       style={{ perspective: "1200px" }}
     >
       <div
         ref={coreAmbientPulseRef}
         aria-hidden="true"
-        className="pointer-events-none absolute size-[280px] sm:size-[380px] lg:size-[460px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
+        className="pointer-events-none absolute size-[300px] sm:size-[400px] lg:size-[480px] rounded-full blur-[100px] sm:blur-[140px] transition-all"
         style={{
           backgroundColor: glowColor,
           opacity: 0.24,
@@ -234,10 +234,10 @@ export function HeroChip3D({
       />
 
       <div
-        className="relative flex h-[440px] w-[640px] sm:w-[700px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
+        className="relative flex h-[460px] w-[660px] sm:w-[720px] max-w-full scale-[0.74] sm:scale-[0.88] lg:scale-100 items-center justify-center origin-center transition-transform duration-700 hover:scale-[1.03]"
         style={{
           transformStyle: "preserve-3d",
-          transform: "rotateX(0deg) rotateY(-34deg) rotateZ(0deg)",
+          transform: "rotateX(42deg) rotateY(-28deg) rotateZ(12deg)",
         }}
       >
         <div
@@ -260,8 +260,8 @@ export function HeroChip3D({
               </mask>
 
               <pattern id="pcbMicroGridExp" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="12" cy="12" r="0.8" fill="var(--accent-connection)" opacity="0.18" />
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.3" opacity="0.05" />
+                <circle cx="12" cy="12" r="0.85" fill="var(--accent-connection)" opacity="0.22" />
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.35" opacity="0.07" />
               </pattern>
 
               <filter id="pcbLaserGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -277,19 +277,19 @@ export function HeroChip3D({
 
             <rect width="900" height="600" fill="url(#pcbMicroGridExp)" mask={`url(#${maskId})`} />
 
-            <g mask={`url(#${maskId})`} fill="none" stroke="#09121B" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+            <g mask={`url(#${maskId})`} fill="none" stroke="#0A141E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
                 <path key={`sec-${i}`} d={path} />
               ))}
             </g>
 
-            <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/20" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <g mask={`url(#${maskId})`} fill="none" stroke="currentColor" className="text-accent-connection/25" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace) => (
                 <path key={`guide-${trace.id}`} d={trace.path} />
               ))}
             </g>
 
-            <g fill="none" stroke={glowColor} strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlow)">
+            <g fill="none" stroke={glowColor} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#pcbLaserGlow)">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-glow-${trace.id}`}
@@ -304,7 +304,7 @@ export function HeroChip3D({
               ))}
             </g>
 
-            <g fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <g fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {activeTraces.map((trace, i) => (
                 <path
                   key={`laser-core-${trace.id}`}
@@ -336,21 +336,21 @@ export function HeroChip3D({
                       r="6.5"
                       fill="none"
                       stroke="#00F0FF"
-                      strokeWidth="1.4"
+                      strokeWidth="1.5"
                       opacity="0"
                     />
                   )}
 
                   {trace.isFilledVia ? (
                     <>
-                      <circle r="7.5" fill="none" stroke="rgba(0, 240, 255, 0.4)" strokeWidth="1" />
+                      <circle r="8" fill="none" stroke="rgba(0, 240, 255, 0.45)" strokeWidth="1" />
                       <circle r="6" fill={glowColor} opacity="0.35" />
                       <circle r="4.2" fill={glowColor} />
                       <circle r="2" fill="#FFFFFF" />
                     </>
                   ) : (
                     <>
-                      <circle r="5.5" fill="none" stroke={glowColor} strokeWidth="1.6" />
+                      <circle r="5.8" fill="none" stroke={glowColor} strokeWidth="1.6" />
                       <circle r="1.8" fill="var(--background)" />
                     </>
                   )}
@@ -362,14 +362,14 @@ export function HeroChip3D({
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute size-44 rounded-full bg-black/95 blur-2xl transition-all"
+          className="pointer-events-none absolute size-48 rounded-full bg-black/95 blur-2xl transition-all"
           style={{ transform: "translateZ(2px)" }}
         />
 
         <div
           ref={groundBounceRef}
           aria-hidden="true"
-          className="pointer-events-none absolute size-40 rounded-full bg-accent-connection/30 blur-xl transition-all"
+          className="pointer-events-none absolute size-44 rounded-full bg-accent-connection/30 blur-xl transition-all"
           style={{ transform: "translateZ(6px)" }}
         />
 
@@ -378,7 +378,7 @@ export function HeroChip3D({
           className="relative flex items-center justify-center select-none"
           style={{
             transformStyle: "preserve-3d",
-            transform: "translateZ(24px)",
+            transform: "translateZ(26px)",
           }}
         >
           {extrusionSlices.map((slice, i) => (
@@ -405,7 +405,7 @@ export function HeroChip3D({
             className="absolute inset-0 flex items-center justify-center"
             style={{
               transform: "translateZ(-0.5px)",
-              filter: "drop-shadow(0 0 14px #00F0FF) drop-shadow(0 0 26px var(--accent-connection))",
+              filter: "drop-shadow(0 0 14px #00F0FF) drop-shadow(0 0 28px var(--accent-connection))",
             }}
           >
             <BrandIsotipo
@@ -419,8 +419,8 @@ export function HeroChip3D({
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center opacity-90"
             style={{
-              transform: "translateZ(0.5px) translateX(-0.5px) translateY(-0.5px)",
-              filter: "brightness(1.6) drop-shadow(-1px -1px 2px rgba(224,255,255,0.85))",
+              transform: "translateZ(0.5px) translateX(-0.6px) translateY(-0.6px)",
+              filter: "brightness(1.65) drop-shadow(-1.5px -1.5px 2px rgba(224,255,255,0.9))",
             }}
           >
             <BrandIsotipo
@@ -435,7 +435,7 @@ export function HeroChip3D({
             className="absolute inset-0 flex items-center justify-center opacity-85"
             style={{
               transform: "translateZ(0.8px)",
-              filter: "brightness(0.9) contrast(1.2)",
+              filter: "brightness(0.9) contrast(1.25)",
             }}
           >
             <BrandIsotipo
@@ -450,7 +450,7 @@ export function HeroChip3D({
             style={{
               transform: "translateZ(1.2px)",
               filter:
-                "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 20px var(--accent-connection)) drop-shadow(0 0 45px #00F0FF)",
+                "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 22px var(--accent-connection)) drop-shadow(0 0 48px #00F0FF)",
             }}
           >
             <BrandIsotipo
