@@ -45,13 +45,13 @@ const secondaryTraces = [
 ];
 
 const extrusionSlices = [
-  { z: -16, x: -6, opacity: 0.35, color: "#01060A", filter: "drop-shadow(-6px 6px 16px rgba(0,0,0,0.98))" },
-  { z: -13, x: -5, opacity: 0.5, color: "#020B12", filter: "drop-shadow(-5px 5px 12px rgba(0,0,0,0.92))" },
-  { z: -10, x: -4, opacity: 0.68, color: "#04121D", filter: "drop-shadow(-4px 4px 9px rgba(0,0,0,0.85))" },
-  { z: -7, x: -3, opacity: 0.82, color: "#061A28", filter: "drop-shadow(-3px 3px 6px rgba(0,0,0,0.8))" },
-  { z: -5, x: -2, opacity: 0.92, color: "#092538", filter: "drop-shadow(-2px 2px 4px rgba(0,0,0,0.75))" },
-  { z: -3, x: -1.2, opacity: 0.96, color: "#0D3349", filter: "drop-shadow(0 0 10px rgba(0,240,255,0.25))" },
-  { z: -1.5, x: -0.6, opacity: 0.98, color: "#00A2BD", filter: "drop-shadow(0 0 18px var(--accent-connection))" },
+  { z: -16, x: -6, opacity: 0.35, color: "#010508", filter: "drop-shadow(-6px 6px 16px rgba(0,0,0,0.98))" },
+  { z: -13, x: -5, opacity: 0.52, color: "#020A10", filter: "drop-shadow(-5px 5px 12px rgba(0,0,0,0.92))" },
+  { z: -10, x: -4, opacity: 0.7, color: "#04111B", filter: "drop-shadow(-4px 4px 9px rgba(0,0,0,0.85))" },
+  { z: -7, x: -3, opacity: 0.84, color: "#061825", filter: "drop-shadow(-3px 3px 6px rgba(0,0,0,0.8))" },
+  { z: -5, x: -2, opacity: 0.92, color: "#092233", filter: "drop-shadow(-2px 2px 4px rgba(0,0,0,0.75))" },
+  { z: -3, x: -1.2, opacity: 0.96, color: "#0D2E44", filter: "drop-shadow(0 0 10px rgba(0,240,255,0.25))" },
+  { z: -1.5, x: -0.6, opacity: 0.98, color: "#009BB5", filter: "drop-shadow(0 0 18px var(--accent-connection))" },
   { z: -0.5, x: -0.2, opacity: 1, color: "var(--accent-connection)", filter: "drop-shadow(0 0 28px #00F0FF)" },
 ];
 
@@ -70,6 +70,7 @@ export function HeroChip3D({
   const shockwaveRefs = useRef<(SVGCircleElement | null)[]>([]);
   const logoElevatedRef = useRef<HTMLDivElement>(null);
   const coreAmbientPulseRef = useRef<HTMLDivElement>(null);
+  const groundBounceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -88,9 +89,20 @@ export function HeroChip3D({
 
     if (coreAmbientPulseRef.current) {
       gsap.to(coreAmbientPulseRef.current, {
-        scale: 1.15,
-        opacity: 0.32,
+        scale: 1.14,
+        opacity: 0.3,
         duration: 2.6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
+
+    if (groundBounceRef.current) {
+      gsap.to(groundBounceRef.current, {
+        scale: 1.22,
+        opacity: 0.45,
+        duration: 1.8,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
@@ -105,8 +117,8 @@ export function HeroChip3D({
       if (!glowPathEl || !corePathEl || !viaEl) return;
 
       const pathLength = glowPathEl.getTotalLength();
-      const laserLength = 110;
-      const coreLaserLength = 70;
+      const laserLength = 115;
+      const coreLaserLength = 75;
 
       gsap.set(glowPathEl, {
         strokeDasharray: `${laserLength} ${pathLength + 50}`,
@@ -132,7 +144,7 @@ export function HeroChip3D({
 
       const lineTl = gsap.timeline({
         repeat: -1,
-        repeatDelay: 0.5 + (index % 5) * 0.2,
+        repeatDelay: 0.5 + (index % 5) * 0.22,
         delay: trace.delay,
       });
 
@@ -150,7 +162,7 @@ export function HeroChip3D({
         )
         .fromTo(
           corePathEl,
-          { strokeDashoffset: coreLaserLength, opacity: 0.9 },
+          { strokeDashoffset: coreLaserLength, opacity: 0.95 },
           {
             strokeDashoffset: -pathLength,
             opacity: 1,
@@ -163,24 +175,24 @@ export function HeroChip3D({
           viaEl,
           {
             opacity: 1,
-            scale: trace.isFilledVia ? 1.7 : 1.4,
-            duration: 0.22,
+            scale: trace.isFilledVia ? 1.75 : 1.4,
+            duration: 0.2,
             ease: "back.out(2.5)",
           },
-          `-=${trace.duration * 0.2}`
+          `-=${trace.duration * 0.18}`
         );
 
       if (shockwaveEl && trace.isFilledVia) {
         lineTl.fromTo(
           shockwaveEl,
-          { scale: 0.6, opacity: 0.9 },
+          { scale: 0.5, opacity: 0.95 },
           {
-            scale: 2.8,
+            scale: 2.9,
             opacity: 0,
             duration: 0.55,
             ease: "power2.out",
           },
-          `-=${trace.duration * 0.18}`
+          `-=${trace.duration * 0.16}`
         );
       }
 
@@ -247,6 +259,11 @@ export function HeroChip3D({
                 <rect width="900" height="600" fill="url(#pcbDepthFade)" />
               </mask>
 
+              <pattern id="pcbMicroGridExp" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="0.8" fill="var(--accent-connection)" opacity="0.18" />
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--accent-connection)" strokeWidth="0.3" opacity="0.05" />
+              </pattern>
+
               <filter id="pcbLaserGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
@@ -257,6 +274,8 @@ export function HeroChip3D({
                 </feMerge>
               </filter>
             </defs>
+
+            <rect width="900" height="600" fill="url(#pcbMicroGridExp)" mask={`url(#${maskId})`} />
 
             <g mask={`url(#${maskId})`} fill="none" stroke="#09121B" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
               {secondaryTraces.map((path, i) => (
@@ -324,8 +343,9 @@ export function HeroChip3D({
 
                   {trace.isFilledVia ? (
                     <>
-                      <circle r="7" fill={glowColor} opacity="0.3" />
-                      <circle r="4.5" fill={glowColor} />
+                      <circle r="7.5" fill="none" stroke="rgba(0, 240, 255, 0.4)" strokeWidth="1" />
+                      <circle r="6" fill={glowColor} opacity="0.35" />
+                      <circle r="4.2" fill={glowColor} />
                       <circle r="2" fill="#FFFFFF" />
                     </>
                   ) : (
@@ -347,8 +367,9 @@ export function HeroChip3D({
         />
 
         <div
+          ref={groundBounceRef}
           aria-hidden="true"
-          className="pointer-events-none absolute size-40 rounded-full bg-accent-connection/30 blur-xl"
+          className="pointer-events-none absolute size-40 rounded-full bg-accent-connection/30 blur-xl transition-all"
           style={{ transform: "translateZ(6px)" }}
         />
 
@@ -399,7 +420,7 @@ export function HeroChip3D({
             className="absolute inset-0 flex items-center justify-center opacity-90"
             style={{
               transform: "translateZ(0.5px) translateX(-0.5px) translateY(-0.5px)",
-              filter: "brightness(1.6) drop-shadow(-1px -1px 2px rgba(224,255,255,0.8))",
+              filter: "brightness(1.6) drop-shadow(-1px -1px 2px rgba(224,255,255,0.85))",
             }}
           >
             <BrandIsotipo
@@ -410,9 +431,24 @@ export function HeroChip3D({
           </div>
 
           <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center opacity-85"
+            style={{
+              transform: "translateZ(0.8px)",
+              filter: "brightness(0.9) contrast(1.2)",
+            }}
+          >
+            <BrandIsotipo
+              size={126}
+              className="sm:w-[140px] sm:h-[140px]"
+              style={{ color: "#0F2636" }}
+            />
+          </div>
+
+          <div
             className="relative flex items-center justify-center"
             style={{
-              transform: "translateZ(1px)",
+              transform: "translateZ(1.2px)",
               filter:
                 "drop-shadow(0 0 8px #FFFFFF) drop-shadow(0 0 20px var(--accent-connection)) drop-shadow(0 0 45px #00F0FF)",
             }}
