@@ -648,5 +648,7 @@ páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 
 2026-08-17 — Integración de HeroChip3D en el Home: Implementado el componente visual `HeroChip3D` (`components/hero-chip-3d.tsx`) en el Hero principal (`components/hero.tsx`). Reemplaza el diagrama anterior con una escena en perspectiva isométrica 3D compuesta por el Isotipo de marca (`BrandIsotipo`) en relieve y 15 pistas PCB con animación stroke line láser en loop desfasado y destellos reactivos en las vías terminales. Corregida advertencia de script en App Router (`components/consent-defaults.tsx`). Verificados: ESLint (0 errores), `pnpm build` (23 páginas estáticas) y 54/54 pruebas E2E de Playwright aprobadas.
 
+2026-08-19 — Integración de ScrollToTop con Indicador de Progreso Circular: Creado el componente interactivo `ScrollToTop` (`components/scroll-to-top.tsx`) y montado en el layout raíz (`app/layout.tsx`). Presenta un anillo SVG con cálculo dinámico del porcentaje de scroll (`--accent-connection`), entrada/salida fluida con `motion/react` (`AnimatePresence`) a partir de 250px de scroll, micro-interacciones hover en el icono `ArrowUp` y soporte para `prefers-reduced-motion`. Verificados: ESLint (0 errores), `pnpm build` (23 páginas estáticas) y 54/54 pruebas E2E de Playwright aprobadas.
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

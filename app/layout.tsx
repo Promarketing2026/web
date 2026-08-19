@@ -8,6 +8,7 @@ import { GoogleTagManager } from "@/components/google-tag-manager";
 import { MicrosoftClarity } from "@/components/microsoft-clarity";
 import { Navbar } from "@/components/navbar";
 import { OrganizationJsonLd } from "@/components/organization-jsonld";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { MotionProvider } from "@/components/motion-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { UtmCapture } from "@/components/utm-capture";
@@ -86,6 +87,7 @@ export default function RootLayout({
           </SmoothScrollProvider>
         </MotionProvider>
         <Footer />
+        <ScrollToTop />
         <ConsentBanner />
       </body>
     </html>
