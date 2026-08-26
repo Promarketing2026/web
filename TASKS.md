@@ -2,7 +2,7 @@ TASKS — Promarketing Perú
 
 Regla: trabajar SOLO en la tarea marcada [SIGUIENTE]. No adelantar tareas futuras. Al terminar, mover el check a [hecho] y actualizar STATE.md. Una tarea = un componente o una configuración, nunca "la página completa".
 
-IMPORTANTE al escribir prompts para Codex: nunca referenciar "el párrafo de arriba" o "el copy que definimos" — Codex no tiene el historial del chat. Copiar siempre el texto exacto y completo en el prompt.
+IMPORTANTE al escribir prompts largos para un agente sin memoria de esta conversación (Antigravity, Claude Code, u otro): nunca referenciar "el párrafo de arriba" o "el copy que definimos" — ese agente no tiene el historial de este chat. Copiar siempre el texto exacto y completo en el prompt.
 
 NOTA SOBRE "[hecho]": significa que el componente existe y funciona a nivel básico, NO que esté perfecto. Los defectos conocidos de tareas ya hechas viven en la sección "PENDIENTES DE RETOQUE" más abajo — no se pierden, solo se pausan hasta que el usuario los priorice.
 
@@ -99,7 +99,7 @@ en la primera impresión al compartir el link; accesibilidad y límites de plan 
  [hecho] ACCESS-2d. Implementada una política global de movimiento reducido: Motion muestra estados finales sin desplazamiento, Lenis no inicia, GSAP deja diagramas estáticos y CSS reduce animaciones/transiciones. Chrome y Lighthouse verificaron modo normal y reducido localmente y en producción; Accessibility 100. [código + configuración]
  [PENDIENTE — BLOQUEADA] ACCESS-VERIFY. Repetir Lighthouse y verificar navegación por teclado/foco visible después de corregir los hallazgos. BLOCKED hasta restablecer la comunicación de la extensión de Chrome. [auditoría]
  [hecho — RESULTADO FAIL/HIGH] LIMITS-1. Límites oficiales de Sanity Free, HubSpot Free Tools y Vercel Hobby documentados en `docs/infrastructure/free-tier-limits.md`, con umbrales y consecuencias. El consumo privado actual no fue leído. Hallazgo: Vercel Hobby prohíbe uso comercial y no es elegible para este sitio. [investigación]
- [PENDIENTE — DIFERIDA HASTA CIERRE FUNCIONAL] HOSTING-1. Migrar desde Vercel Hobby a un hosting que permita uso comercial con costo de plataforma USD 0. Vercel Pro queda descartado por el requisito económico. No iniciar la migración hasta cerrar y verificar frontend, backend e integraciones, ni cambiar producción sin aprobación explícita. [infraestructura + decisión]
+ [PENDIENTE — DIFERIDA HASTA CIERRE FUNCIONAL] HOSTING-1. Migrar desde Vercel Hobby a un hosting que permita uso comercial con costo de plataforma USD 0. Vercel Pro queda descartado por el requisito económico. Destino confirmado (2026-08-26): VPS Oracle Cloud "Always Free" ya creado, + dominio propio del usuario. Riesgo anotado: el tier gratuito no trae backups automáticos y Oracle tiene antecedentes de reclamar instancias inactivas — configurar backups propios desde el inicio de esta migración. No iniciar la migración hasta cerrar y verificar frontend, backend e integraciones, ni cambiar producción sin aprobación explícita. Implica reconfigurar integraciones atadas a Vercel (Upstash vía Marketplace, build serverless) hacia un servidor propio (Docker/Nginx/SSL). [infraestructura + decisión]
 
 FASE D — SANEO DEL PROYECTO E INTEGRACIONES
 

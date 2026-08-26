@@ -1,23 +1,28 @@
 # STATE — Promarketing Perú (sitio web)
 
 > Este archivo se actualiza al final de cada sesión de trabajo, en 2-5 líneas.
-> Cualquier modelo (Claude Code, Codex, ChatGPT, Gemini, etc.) debe leer este
-> archivo ANTES de escribir código. No se necesita historial de chat previo.
+> Cualquier modelo o agente compatible (Claude Code, Antigravity, Gemini, etc.)
+> debe leer este archivo ANTES de escribir código. No se necesita historial de
+> chat previo.
 
 ## Fase actual
 Sitio desplegado en https://web-orcin-sigma-57.vercel.app/ con Home V1,
 contenido Sanity, Auditoría C.L.A.R.O. conectada a HubSpot y rate limiting con
-Upstash. Newsletter solo registra un contacto CRM y Resend está implementado en
-código pero inactivo por falta de configuración. Consent Mode v2 y GTM están
-publicados.
+Upstash. Consent Mode v2 y GTM están publicados.
 El build de producción, ESLint y TypeScript pasan; 54/54 E2E pasan en Chromium,
 Firefox y WebKit con un trabajador. Navegación, entradas, correo, semántica,
-tokens, QA y dependencias ya fueron saneados. La auditoría externa terminó con
-resultado FAIL/HIGH: Resend está sin configurar, newsletter no gestiona una
-lista/suscripción y el Studio de producción carece de registro/CORS. La revisión
-jurídica continúa pendiente. HOSTING-1 sigue diferida hasta cerrar esta fase y
-debe conservar costo de plataforma USD 0. Próximo paso: SANEO-8, bloqueado hasta
-autorizar la remediación externa de HubSpot.
+tokens, QA y dependencias ya fueron saneados. La auditoría externa (SANEO-7)
+terminó con resultado FAIL/HIGH; de sus 3 remediaciones, SANEO-8 (contrato del
+newsletter en HubSpot) y SANEO-9 (Resend configurado y probado con éxito) ya
+están completadas, igual que SANEO-12 (CSP en modo enforcement). Queda un solo
+punto de esa auditoría sin resolver: el Studio de producción en Sanity carece
+de registro/CORS aprobado — es exactamente lo que cubre SANEO-10, la tarea
+`[SIGUIENTE]` en TASKS.md, bloqueada hasta autorización específica. SANEO-11
+(decisión sobre Clarity) sigue pendiente y no bloquea SANEO-10. La revisión
+jurídica de la Política de Privacidad continúa pendiente. HOSTING-1 sigue
+diferida hasta cerrar esta fase — ver sección "Flujo de trabajo con IA" más
+abajo para el destino confirmado y el orden de esa migración. Debe conservarse
+costo de plataforma USD 0 en todo momento.
 
 ## Stack decidido (congelado, no cambiar sin discutirlo)
 - Framework: Next.js 16 (App Router, Turbopack)
@@ -28,7 +33,14 @@ autorizar la remediación externa de HubSpot.
 - Animación de scroll: GSAP + ScrollTrigger + SplitText + Lenis
 - CMS de contenido: Sanity.io (free tier)
 - CRM de leads: HubSpot (free tier) — vía Server Action con HUBSPOT_SERVICE_KEY
-- Hosting: Vercel (free/Hobby) — desplegado en producción
+- Hosting: Vercel (free/Hobby) — desplegado en producción **por ahora**. La
+  migración a un VPS propio + dominio propio está **confirmada** (destino:
+  Oracle Cloud "Always Free", ya creado) pero es intencionalmente la ÚLTIMA
+  fase del proyecto (ver `HOSTING-1` en `TASKS.md`) — no se toca hasta cerrar
+  el resto. Riesgo anotado: el tier gratuito de Oracle no trae backups
+  automáticos (deben configurarse a mano) y Oracle tiene antecedentes
+  reportados de reclamar instancias "inactivas" — mitigar con backups propios
+  desde el inicio de esa fase.
 - Anti-spam/rate limiting: Upstash Redis (free tier, vía integración de Vercel)
 
 ## Decisiones de diseño
@@ -38,6 +50,28 @@ autorizar la remediación externa de HubSpot.
 - Paleta de color: aprobada en DOC 08. Debe implementarse mediante tokens
   semánticos y mantenerse sincronizada entre código y Figma; Figma todavía
   requiere la actualización correspondiente.
+
+## Flujo de trabajo con IA (agentes, IDE y modelos) — actualizado 2026-08-26
+- IDE: **Google Antigravity** (gratuito, agente múltiple, lee `AGENTS.md`
+  nativamente). Modelos usados DENTRO de Antigravity para programar: Gemini y
+  Claude, en su nivel gratuito.
+- Modelos usados APARTE, en el chat web gratuito de cada uno (no conectados a
+  Antigravity): **Qwen, Kimi y DeepSeek**, solo para estrategia de marca y
+  copys en español — **no** para escribir código del sitio.
+- Ya NO se usa Codex en este proyecto. Cualquier mención vieja a Codex en
+  otros documentos queda obsoleta.
+- Skills identificadas como referencia para fases futuras (no instaladas
+  todavía; evaluar cuando corresponda):
+  - Diseño / "taste" anti-genérico (para la fase de rediseño, ver backlog en
+    TASKS.md): `pbakaus/impeccable`, `Leonxlnx/taste-skill`,
+    `emilkowalski/skills`.
+  - Seguridad, relevante para el hardening del VPS en HOSTING-1:
+    `nobrainer-tech/nobrainer-claude-skills` (incluye `/safety-audit`, pensado
+    para auditar postura de OS, credenciales, red y procesos de un servidor).
+  - QA visual: Playwright vía MCP, para autocapturas/autocrítica visual antes
+    de publicar.
+- Presupuesto total del proyecto: **$0**, sin excepciones, en cualquier
+  herramienta o modelo.
 
 ## Narrativa vigente del Home V1
 1. Header: Soluciones vs. Cómo ayudamos
@@ -649,6 +683,21 @@ páginas y 54/54 pruebas cross-browser pasan. Próximo: SANEO-7.
 2026-08-17 — Integración de HeroChip3D en el Home: Implementado el componente visual `HeroChip3D` (`components/hero-chip-3d.tsx`) en el Hero principal (`components/hero.tsx`). Reemplaza el diagrama anterior con una escena en perspectiva isométrica 3D compuesta por el Isotipo de marca (`BrandIsotipo`) en relieve y 15 pistas PCB con animación stroke line láser en loop desfasado y destellos reactivos en las vías terminales. Corregida advertencia de script en App Router (`components/consent-defaults.tsx`). Verificados: ESLint (0 errores), `pnpm build` (23 páginas estáticas) y 54/54 pruebas E2E de Playwright aprobadas.
 
 2026-08-19 — Integración de ScrollToTop con Indicador de Progreso Circular: Creado el componente interactivo `ScrollToTop` (`components/scroll-to-top.tsx`) y montado en el layout raíz (`app/layout.tsx`). Presenta un anillo SVG con cálculo dinámico del porcentaje de scroll (`--accent-connection`), entrada/salida fluida con `motion/react` (`AnimatePresence`) a partir de 250px de scroll, micro-interacciones hover en el icono `ArrowUp` y soporte para `prefers-reduced-motion`. Verificados: ESLint (0 errores), `pnpm build` (23 páginas estáticas) y 54/54 pruebas E2E de Playwright aprobadas.
+
+2026-08-26 — Consolidación de documentos de proyecto: se corrigió una
+contradicción interna en "Fase actual" (mencionaba SANEO-8 bloqueado como
+próximo paso cuando el propio historial de este archivo y `TASKS.md` ya
+mostraban SANEO-8/9/12 hechos y SANEO-10 como `[SIGUIENTE]`). Se unificó la
+regla de autonomía entre `AGENTS.md` y `CLAUDE.md` (ambos usan ahora la misma
+REGLA DE AUTONOMÍA; antes `CLAUDE.md` tenía una regla distinta y más
+restrictiva). Se retiraron las menciones obsoletas a Codex. Se agregó la
+sección "Flujo de trabajo con IA" documentando que Claude Code/Antigravity+
+Gemini programan el sitio, mientras Qwen/Kimi/DeepSeek se usan aparte solo
+para estrategia y copys. Se confirmó Oracle Cloud VPS "Always Free" (ya
+creado) como destino de `HOSTING-1`, con nota de riesgo sobre backups
+manuales. Pendiente sin resolver todavía: si se incorpora también el backlog
+de expansión de marca (Lima → Perú → Sudamérica) y las tareas sueltas
+`GITIGNORE-1`/`CLEANUP-1` — ver nota del agente al entregar esta versión.
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

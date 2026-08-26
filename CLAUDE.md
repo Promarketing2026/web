@@ -1,4 +1,4 @@
-# Instrucciones para cualquier agente (Codex, Claude Code, u otro)
+# Instrucciones para cualquier agente de código (Claude Code, Antigravity, u otro compatible con AGENTS.md)
 
 Antes de escribir una sola línea de código:
 
@@ -16,14 +16,16 @@ Antes de escribir una sola línea de código:
   incluso los placeholders neutros temporales.
 - No inventar ni sugerir una paleta de marca final — está pendiente a propósito.
 - pnpm como gestor de paquetes, no npm ni yarn.
-- REGLA DE COSTO: todo lo que sea un comando conocido (instalar dependencias,
-  correr build/dev, git commit/push), una verificación visual (revisar que
-  una sección cargó bien, comparar TASKS.md contra components/), o una
-  edición de texto simple en STATE.md/TASKS.md, lo hace el usuario
-  MANUALMENTE en la terminal o el editor — no se le pide a un modelo de IA.
-  La IA se usa solo para escribir o modificar componentes de código real.
-  Si una tarea es ambigua, el agente debe indicar qué parte requiere código
-  y cuál puede hacerse a mano, en vez de asumir que todo pasa por él.
+- REGLA DE AUTONOMÍA: el agente puede ejecutar comandos conocidos,
+  verificaciones técnicas o visuales y ediciones simples en STATE.md/TASKS.md
+  cuando el alcance sea inequívoco, disponga de evidencia suficiente y esté
+  convencido de que el resultado es correcto. Debe conservar la trazabilidad
+  de lo comprobado y no presentar una verificación parcial como aprobación.
+  Debe solicitar autorización antes de acciones destructivas, publicar,
+  hacer push, modificar servicios externos, usar credenciales o resolver una
+  decisión ambigua. Un commit local puede realizarse al cerrar una tarea si
+  su alcance y su Definition of Done están comprobados.
+- Presupuesto de herramientas y modelos: **$0 siempre, sin excepciones.**
 
 ## Al terminar una tarea
 1. Verifica que el proyecto sigue corriendo (`pnpm dev` sin errores).

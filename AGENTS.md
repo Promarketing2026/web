@@ -1,4 +1,4 @@
-# Instrucciones para cualquier agente (Codex, Claude Code, u otro)
+# Instrucciones para cualquier agente de código (Claude Code, Antigravity, u otro compatible con AGENTS.md)
 
 Antes de escribir una sola línea de código:
 
@@ -25,6 +25,7 @@ Antes de escribir una sola línea de código:
   hacer push, modificar servicios externos, usar credenciales o resolver una
   decisión ambigua. Un commit local puede realizarse al cerrar una tarea si
   su alcance y su Definition of Done están comprobados.
+- Presupuesto de herramientas y modelos: **$0 siempre, sin excepciones.**
 
 ## Al terminar una tarea
 1. Verifica que el proyecto sigue corriendo (`pnpm dev` sin errores).
