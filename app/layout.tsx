@@ -63,9 +63,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const solutionItems = SERVICES.map(({ slug, title }) => ({
+  const solutionItems = SERVICES.map(({ slug, title, subtitle, iconName }) => ({
     label: title,
     href: `/servicios/${slug}`,
+    subtitle,
+    iconName,
   }));
 
   return (
