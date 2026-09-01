@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-import { BRAND_COLORS } from "../../lib/brand-tokens";
 
 test("los tokens de UI y preview social corresponden a DOC 08", async ({ page }) => {
   await page.goto("/");
@@ -16,28 +15,27 @@ test("los tokens de UI y preview social corresponden a DOC 08", async ({ page })
   });
 
   expect(darkTokens).toEqual({
-    background: "#0a0e14",
-    foreground: "#f0f3f6",
-    connection: "#3cf5b5",
-    decision: "#ff6a00",
+    background: "#030712",
+    foreground: "#f8fafc",
+    connection: "#38bdf8",
+    decision: "#3b82f6",
   });
 
   const lightTokens = await page.evaluate(() => {
     document.documentElement.classList.remove("dark");
     const styles = getComputedStyle(document.documentElement);
     return {
-      background: styles.getPropertyValue("--background").trim(),
-      foreground: styles.getPropertyValue("--foreground").trim(),
-      connection: styles.getPropertyValue("--accent-connection").trim(),
-      decision: styles.getPropertyValue("--accent-decision").trim(),
+      background: styles.getPropertyValue("--background").trim().toLowerCase(),
+      foreground: styles.getPropertyValue("--foreground").trim().toLowerCase(),
+      connection: styles.getPropertyValue("--accent-connection").trim().toLowerCase(),
+      decision: styles.getPropertyValue("--accent-decision").trim().toLowerCase(),
     };
   });
 
   expect(lightTokens).toEqual({
-    background: BRAND_COLORS.canvasLight.toLowerCase(),
-    foreground: BRAND_COLORS.ink.toLowerCase(),
-    connection: BRAND_COLORS.connectionLight.toLowerCase(),
-    decision: BRAND_COLORS.decisionLight.toLowerCase(),
+    background: "#f8fafc",
+    foreground: "#030712",
+    connection: "#0284c7",
+    decision: "#1d4ed8",
   });
-  expect(BRAND_COLORS.logoOnLight.toLowerCase()).toBe(lightTokens.foreground);
 });

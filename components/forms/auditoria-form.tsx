@@ -246,9 +246,9 @@ export function AuditoriaForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="w-full rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60 cursor-pointer"
       >
-        {isPending ? "Enviando..." : "Cuéntanos tu situación"}
+        {isPending ? "Enviando..." : "Iniciar evaluación preliminar"}
       </button>
     </form>
   );

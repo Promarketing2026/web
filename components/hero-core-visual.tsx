@@ -77,7 +77,7 @@ export function HeroCoreVisual() {
 
     const resize = () => {
       const parent = canvas.parentElement;
-      if (!parent) return;
+      if (!parent || parent.clientWidth === 0 || parent.clientHeight === 0) return;
       const rect = parent.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
@@ -92,7 +92,7 @@ export function HeroCoreVisual() {
 
     const render = () => {
       const parent = canvas.parentElement;
-      if (!parent) return;
+      if (!parent || parent.clientWidth === 0 || parent.clientHeight === 0) return;
       const width = parent.clientWidth;
       const height = parent.clientHeight;
       const cx = width / 2;
@@ -104,7 +104,6 @@ export function HeroCoreVisual() {
         angle += 0.012;
       }
 
-      // Rayos volumétricos de luz
       const radius = Math.min(width * 0.12, width < 640 ? 55 : 70);
       const rayCount = width < 640 ? 12 : 18;
       for (let i = 0; i < rayCount; i++) {
@@ -116,27 +115,29 @@ export function HeroCoreVisual() {
         const x2 = cx + Math.cos(rayAngle) * length;
         const y2 = cy + Math.sin(rayAngle) * length;
 
-        const rayGrad = ctx.createLinearGradient(x1, y1, x2, y2);
-        rayGrad.addColorStop(0, "rgba(0, 229, 255, 0.6)");
-        rayGrad.addColorStop(0.4, "rgba(56, 189, 248, 0.25)");
-        rayGrad.addColorStop(1, "rgba(0, 229, 255, 0)");
+        const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+        grad.addColorStop(0, "rgba(56, 189, 248, 0.45)");
+        grad.addColorStop(0.4, "rgba(0, 229, 255, 0.22)");
+        grad.addColorStop(1, "rgba(56, 189, 248, 0)");
 
-        ctx.strokeStyle = rayGrad;
-        ctx.lineWidth = width < 640 ? 1.6 : 2.2;
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = i % 3 === 0 ? 2 : 1.2;
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         ctx.stroke();
       }
 
-      // Renderizar la Mano Real y el Orbe con Canal Alfa Puro
+      // Renderizar imagen procesada
       if (isImageLoaded && processedCanvas) {
-        const drawWidth = Math.min(width * 0.95, width < 640 ? 420 : 780);
-        const drawHeight = (drawWidth * processedCanvas.height) / processedCanvas.width;
-        const drawX = (width - drawWidth) / 2;
-        const drawY = cy - drawHeight * 0.38;
+        const targetWidth = Math.min(width * 0.88, 720);
+        const scale = targetWidth / processedCanvas.width;
+        const targetHeight = processedCanvas.height * scale;
 
-        ctx.drawImage(processedCanvas, drawX, drawY, drawWidth, drawHeight);
+        const imgX = (width - targetWidth) / 2;
+        const imgY = cy - targetHeight * 0.42;
+
+        ctx.drawImage(processedCanvas, imgX, imgY, targetWidth, targetHeight);
       }
 
       if (!shouldReduceMotion) {
@@ -175,7 +176,7 @@ export function HeroCoreVisual() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative left-1/2 -translate-x-1/2 mt-2 flex w-screen max-w-none flex-col items-center justify-center overflow-visible select-none"
+      className="hidden sm:flex relative left-1/2 -translate-x-1/2 mt-2 w-screen max-w-none flex-col items-center justify-center overflow-visible select-none"
     >
       {/* Contenedor con Paralaje Interactivo */}
       <div className="relative mx-auto flex w-full max-w-5xl items-center justify-center">

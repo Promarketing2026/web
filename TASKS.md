@@ -140,6 +140,7 @@ REMEDIACIONES DE SANEO-7
  [hecho] SANEO-12. Cambiada la cabecera CSP de Content-Security-Policy-Report-Only a Content-Security-Policy en next.config.ts para enforcement activo de seguridad. [seguridad + código]
 
 Backlog (no empezar aún)
+[hecho] Reestructuración Narrativa del Home (6 Secciones) — Implementada la nueva arquitectura y copys finales: Hero (rentabilidad y encaje), TensionGrid (3 síntomas y causa raíz), Categoría y Posicionamiento (firma integrada, estrategia vs ejecución), Enrutamiento Operativo (3 puertas hacia los 7 servicios), Compromiso de Autonomía (no vendor lock-in) y La Mesa del Arquitecto (calificación bilateral con formulario HubSpot). Retiradas secciones excedentes del scroll principal. [código]
 [hecho] Páginas de servicio individuales — los 7 sistemas de la oferta (Diseño y Gestión de Marca, Infraestructura Web, Ecommerce y Conversión, SEO/GEO/AEO, Ads/Paid Media, Automatización Comercial, Tracking y Trazabilidad), implementados en las rutas `/servicios` y `/servicios/[slug]` con prerenderizado estático (SSG), metadata SEO, JSON-LD y formulario preseleccionado. [código]
 [hecho] Glosario y Casos de Éxito — creadas las rutas dinámicas de detalle `/glosario/[slug]` y `/casos-de-exito/[slug]` integradas con Sanity.io (GROQ), PortableText, metadata SEO, esquemas JSON-LD (DefinedTerm / Article) y sitemap dinámico XML. [código]
 Animación tipo "paint stroke" SVG en secciones por definir (pendiente: usuario debe especificar en qué secciones exactamente)

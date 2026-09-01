@@ -73,17 +73,13 @@ costo de plataforma USD 0 en todo momento.
 - Presupuesto total del proyecto: **$0**, sin excepciones, en cualquier
   herramienta o modelo.
 
-## Narrativa vigente del Home V1
-1. Header: Soluciones vs. Cómo ayudamos
-2. Hero: capacidades comerciales conectadas
-3. Necesidades: Bento Grid
-4. Tensión: relaciones interdependientes
-5. Cómo ayudamos: cinco macro-sistemas
-6. Demostración interactiva
-7. Cómo pensamos
-8. Evidencia
-9. Conocimiento
-10. Contacto
+## Narrativa vigente del Home (Estructura de 6 Secciones)
+1. Hero: Tu rentabilidad no depende de sumar más piezas. Depende de que encajen.
+2. TensionGrid: No son 3 problemas distintos. Es la misma fuga en 3 lugares distintos.
+3. Categoría y Posicionamiento: No consultora teórica ni agencia de tareas sueltas; estrategia vs. ejecución.
+4. Enrutamiento Operativo: 3 Puertas hacia servicios (Atrae y Convierte, Organiza y Escala, Mide y Controla).
+5. Compromiso de Autonomía: No dependencia; entrega de planos, credenciales y gobernanza de datos.
+6. La Mesa del Arquitecto (Contacto): Conversación de diagnóstico bilateral e investigación previa.
 
 ## Pendiente de configuración de herramientas y datos del usuario
 
@@ -698,6 +694,8 @@ creado) como destino de `HOSTING-1`, con nota de riesgo sobre backups
 manuales. Pendiente sin resolver todavía: si se incorpora también el backlog
 de expansión de marca (Lima → Perú → Sudamérica) y las tareas sueltas
 `GITIGNORE-1`/`CLEANUP-1` — ver nota del agente al entregar esta versión.
+
+2026-09-01 — Reestructuración Narrativa del Home en 6 Secciones completada: Se implementó la nueva arquitectura compacta y copys finales aprobados (Hero, TensionGrid con 3 tarjetas de síntomas y efecto final, Categoría y Posicionamiento, Enrutamiento Operativo en 3 puertas mapeadas a los 7 servicios, Compromiso de Autonomía y La Mesa del Arquitecto con formulario de evaluación preliminar conectado a HubSpot). Retiradas del scroll principal las secciones excedentes. Verificados `pnpm lint` (0 errores), `pnpm build` (23 páginas estáticas SSG) y Playwright E2E (`54/54 PASS` en Chromium, Firefox y WebKit).
 
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.

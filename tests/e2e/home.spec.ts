@@ -14,25 +14,33 @@ test.describe("Página Principal (Home)", () => {
     // Verificar el encabezado principal (H1)
     const mainHeading = page.getByRole("heading", { level: 1 });
     await expect(mainHeading).toBeVisible();
-    await expect(mainHeading).toContainText(/capacidades comerciales/i);
+    await expect(mainHeading).toContainText(/rentabilidad no depende de sumar más piezas/i);
   });
 
   test("debe renderizar las secciones clave del Home", async ({ page }) => {
     await page.goto("/");
 
-    // Sección Hero
+    // Sección 1: Hero
     const heroSection = page.locator("#inicio");
     await expect(heroSection).toBeVisible();
 
-    // Sección Necesidades
-    const needsSection = page.locator("#necesidades");
-    await expect(needsSection).toBeVisible();
+    // Sección 2: TensionGrid
+    const tensionSection = page.locator("#tension");
+    await expect(tensionSection).toBeVisible();
 
-    // Sección Cómo ayudamos
-    const howWeHelpSection = page.locator("#como-ayudamos");
-    await expect(howWeHelpSection).toBeVisible();
+    // Sección 3: Categoría y Posicionamiento
+    const categorySection = page.locator("#como-pensamos");
+    await expect(categorySection).toBeVisible();
 
-    // Sección Contacto / Formulario
+    // Sección 4: Enrutamiento Operativo
+    const routingSection = page.locator("#como-ayudamos");
+    await expect(routingSection).toBeVisible();
+
+    // Sección 5: Autonomía
+    const autonomySection = page.locator("#autonomia");
+    await expect(autonomySection).toBeVisible();
+
+    // Sección 6: Contacto / La Mesa del Arquitecto
     const contactSection = page.locator("#contacto");
     await expect(contactSection).toBeVisible();
   });
