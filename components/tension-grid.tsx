@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { fadeUpVariant } from "@/lib/animations";
-import { Split, Unplug, TrendingDown, ArrowUpRight } from "lucide-react";
+import { Split, Unplug, TrendingDown, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /* Gráfico 01: Identidad — Esfera de órbitas divergentes */
@@ -37,17 +37,14 @@ function WireframeMatrix({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      {/* Cubo exterior isométrico */}
       <polygon points="80,18 138,52 138,118 80,152 22,118 22,52" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
       <line x1="80" y1="18" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
       <line x1="22" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
       <line x1="138" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-      {/* Cubo interior suspendido */}
       <polygon points="80,48 110,65 110,98 80,115 50,98 50,65" stroke="currentColor" strokeWidth="1" opacity="0.75" />
       <line x1="80" y1="48" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
       <line x1="50" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
       <line x1="110" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
-      {/* Conexiones axiales entre silos */}
       <line x1="80" y1="18" x2="80" y2="48" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
       <line x1="138" y1="52" x2="110" y2="65" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
       <line x1="138" y1="118" x2="110" y2="98" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
@@ -111,10 +108,10 @@ export function TensionGrid() {
   const shouldReduceMotion = useReducedMotion();
   const itemVariant = fadeUpVariant({ reducedMotion: shouldReduceMotion ?? false });
 
-  // Estado para desktop: hover sobre columna (null | 0 | 1 | 2)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  // Estado para desktop: La primera card (0) inicia desplegada por defecto
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
 
-  // Estado para mobile: índice de la card activa (0 por defecto, o -1 si todas colapsadas)
+  // Estado para mobile: La primera card (0) inicia desplegada por defecto
   const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
 
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
@@ -165,14 +162,14 @@ export function TensionGrid() {
       isManualTouch.current = false;
     }, 1200);
 
-    setActiveMobileIndex((prev) => (prev === idx ? -1 : idx));
+    setActiveMobileIndex(idx);
+    setHoveredIndex(idx);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent, idx: number) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleCardClick(idx);
-      setHoveredIndex(idx);
     }
   };
 
@@ -218,22 +215,22 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Grid de 2 Estados: Sin desplegar sólo título; desplegado revela contenido completo */}
+        {/* Grid de 2 Estados: Primera card desplegada por defecto e interacción intuitiva */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           custom={0.3}
-          onMouseLeave={() => setHoveredIndex(null)}
-          data-hovered={hoveredIndex !== null ? hoveredIndex : undefined}
+          data-hovered={hoveredIndex}
           className="tension-cards-grid"
         >
           {tensionCards.map((card, idx) => {
             const Icon = card.icon;
             const Wireframe = card.wireframe;
-            const isDesktopHovered = hoveredIndex === idx;
+            const isDesktopActive = hoveredIndex === idx;
             const isMobileActive = activeMobileIndex === idx;
+            const isExpanded = isDesktopActive || isMobileActive;
 
             return (
               <article
@@ -244,15 +241,15 @@ export function TensionGrid() {
                 data-card={idx}
                 data-index={idx}
                 tabIndex={0}
+                aria-label={`Síntoma de ${card.category}: ${card.title}`}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onFocus={() => setHoveredIndex(idx)}
-                onBlur={() => setHoveredIndex(null)}
                 onClick={() => handleCardClick(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
                 className={`tension-card group relative flex flex-col justify-start overflow-hidden rounded-2xl border p-6 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
-                  isDesktopHovered
+                  isDesktopActive
                     ? "border-accent-connection/50 bg-card shadow-2xl shadow-accent-connection/10 md:-translate-y-1"
-                    : "border-border/70 bg-card/60 hover:border-border/90"
+                    : "border-border/70 bg-card/60 hover:border-accent-connection/40 hover:bg-card/80"
                 } ${
                   isMobileActive ? "is-active border-accent-connection/40 shadow-lg" : ""
                 }`}
@@ -261,32 +258,51 @@ export function TensionGrid() {
                 <div
                   aria-hidden="true"
                   className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-connection/10 via-transparent to-transparent transition-opacity duration-500 ease-in-out ${
-                    isDesktopHovered || isMobileActive ? "opacity-100" : "opacity-0"
+                    isExpanded ? "opacity-100" : "opacity-0"
                   }`}
                 />
 
-                {/* 1. Encabezado Superior (Sin numeración): Ícono Conceptual + Categoría */}
-                <div className="relative z-10 flex items-center gap-3 border-b border-border/40 pb-4">
-                  <span
-                    className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
-                      isDesktopHovered || isMobileActive
-                        ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
-                        : "border-border/70 bg-secondary/80 text-foreground"
-                    }`}
-                  >
-                    <Icon className="size-5.5" />
-                  </span>
-                  <span className="text-sm font-bold tracking-widest uppercase text-foreground">
-                    {card.category}
-                  </span>
+                {/* 1. Encabezado Superior: Ícono + Categoría (Izquierda) vs Indicador Intuitivo de Apertura (Derecha) */}
+                <div className="relative z-10 flex items-center justify-between border-b border-border/40 pb-4">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
+                        isExpanded
+                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
+                          : "border-border/70 bg-secondary/80 text-foreground group-hover:border-accent-connection/40 group-hover:text-accent-connection"
+                      }`}
+                    >
+                      <Icon className="size-5.5" />
+                    </span>
+                    <span className="text-sm font-bold tracking-widest uppercase text-foreground">
+                      {card.category}
+                    </span>
+                  </div>
+
+                  {/* Trigger Intuitivo: Hace evidente la interactividad */}
+                  <div className="inline-flex items-center gap-2">
+                    <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 group-hover:text-accent-connection transition-colors duration-300">
+                      {isExpanded ? "Activo" : "Abrir"}
+                    </span>
+                    <span
+                      className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-in-out ${
+                        isExpanded
+                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection rotate-180 shadow-xs"
+                          : "border-border/70 bg-secondary/70 text-muted-foreground group-hover:border-accent-connection/50 group-hover:bg-accent-connection/10 group-hover:text-accent-connection group-hover:scale-105"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <ChevronDown className="size-4 transition-transform duration-300" />
+                    </span>
+                  </div>
                 </div>
 
-                {/* 2. Titular Principal (Siempre Visible en estado colapsado y desplegado) */}
+                {/* 2. Titular Principal (Siempre Visible) */}
                 <h3 className="relative z-10 text-xl sm:text-2xl lg:text-[26px] font-bold text-foreground leading-[1.2] tracking-tight pt-4">
                   {card.title}
                 </h3>
 
-                {/* 3. Contenedor Desplegable (Oculto en estado colapsado, revelado con hover/touch) */}
+                {/* 3. Contenedor Desplegable */}
                 <div className={`relative z-10 tension-card-expandable ${isMobileActive ? "is-expanded" : ""}`}>
                   <div className="overflow-hidden">
                     {/* Micro-línea divisoria */}
@@ -297,9 +313,9 @@ export function TensionGrid() {
                       {card.body}
                     </p>
 
-                    {/* Bloque Inferior: CTA + Texto de Síntesis Limpio (Izquierda) y Gráfico Alámbrico Único (Derecha) */}
+                    {/* Bloque Inferior: CTA + Texto de Síntesis Limpio y Gráfico Alámbrico Único */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-3 border-t border-border/40">
-                      {/* Acciones e Información (Sin recuadro contenedor) */}
+                      {/* Acciones e Información */}
                       <div className="flex flex-col items-start gap-3 max-w-sm">
                         <Button
                           asChild
@@ -315,13 +331,12 @@ export function TensionGrid() {
                           </a>
                         </Button>
 
-                        {/* Texto de Síntesis Directo y Limpio (Sin recuadro) */}
                         <p className="text-xs sm:text-[13px] text-muted-foreground/85 leading-relaxed">
                           <strong className="text-foreground font-semibold">Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
                         </p>
                       </div>
 
-                      {/* Gráfico Alámbrico Conceptual Único para cada Card */}
+                      {/* Gráfico Alámbrico Conceptual Único */}
                       <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/45">
                         <Wireframe className="size-full animate-pulse-subtle" />
                       </div>
@@ -336,10 +351,10 @@ export function TensionGrid() {
         {/* Micro-guía de interacción sutil */}
         <div className="text-center text-xs text-muted-foreground/60">
           <span className="hidden md:inline">
-            Pasa el cursor sobre cada síntoma para enfocar el diagnóstico
+            Pasa el cursor o haz clic sobre cualquier tarjeta para desplegar el diagnóstico
           </span>
           <span className="md:hidden">
-            Toca una tarjeta o desliza para desplegar el diagnóstico
+            Toca cualquier tarjeta para desplegar el diagnóstico
           </span>
         </div>
       </div>
