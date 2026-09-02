@@ -108,11 +108,24 @@ export function TensionGrid() {
   const shouldReduceMotion = useReducedMotion();
   const itemVariant = fadeUpVariant({ reducedMotion: shouldReduceMotion ?? false });
 
-  // Estado para desktop: La primera card (0) inicia desplegada por defecto
-  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+  // Estado para desktop: Inicia en null (todas las tarjetas colapsadas en desktop al cargar)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Estado para mobile: La primera card (0) inicia desplegada por defecto
+  // Estado para mobile: La primera card (0) inicia desplegada por defecto en móvil
   const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
+
+  // Detección reactiva de viewport móvil para desacoplar comportamiento desktop vs mobile
+  const [isMobileViewport, setIsMobileViewport] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkViewport = () => {
+      setIsMobileViewport(window.matchMedia("(max-width: 767px)").matches);
+    };
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
 
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
   const isManualTouch = useRef<boolean>(false);
@@ -162,8 +175,11 @@ export function TensionGrid() {
       isManualTouch.current = false;
     }, 1200);
 
-    setActiveMobileIndex(idx);
-    setHoveredIndex(idx);
+    if (isMobileViewport) {
+      setActiveMobileIndex((prev) => (prev === idx ? -1 : idx));
+    } else {
+      setHoveredIndex((prev) => (prev === idx ? null : idx));
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent, idx: number) => {
@@ -215,21 +231,22 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Grid de 2 Estados: Sin desbordamiento en Desktop y 100% Mobile First */}
+        {/* Grid de 2 Estados: En desktop inicia colapsada y abre con hover; en móvil mantiene lógica táctil */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           custom={0.3}
-          data-hovered={hoveredIndex}
+          onMouseLeave={() => setHoveredIndex(null)}
+          data-hovered={hoveredIndex !== null ? hoveredIndex : undefined}
           className="tension-cards-grid"
         >
           {tensionCards.map((card, idx) => {
             const Icon = card.icon;
             const Wireframe = card.wireframe;
-            const isDesktopActive = hoveredIndex === idx;
-            const isMobileActive = activeMobileIndex === idx;
+            const isDesktopActive = !isMobileViewport && hoveredIndex === idx;
+            const isMobileActive = isMobileViewport && activeMobileIndex === idx;
             const isExpanded = isDesktopActive || isMobileActive;
 
             return (
@@ -309,7 +326,7 @@ export function TensionGrid() {
                 </h3>
 
                 {/* 3. Contenedor Desplegable */}
-                <div className={`relative z-10 tension-card-expandable ${isMobileActive ? "is-expanded" : ""}`}>
+                <div className={`relative z-10 tension-card-expandable ${isExpanded ? "is-expanded" : ""}`}>
                   <div className="overflow-hidden">
                     {/* Micro-línea divisoria */}
                     <div className="h-[1.5px] w-full bg-accent-connection/60 my-4 origin-left" />
@@ -357,7 +374,7 @@ export function TensionGrid() {
         {/* Micro-guía de interacción sutil */}
         <div className="text-center text-xs text-muted-foreground/60">
           <span className="hidden md:inline">
-            Pasa el cursor o haz clic sobre cualquier tarjeta para desplegar el diagnóstico
+            Pasa el cursor sobre cualquier tarjeta para desplegar el diagnóstico
           </span>
           <span className="md:hidden">
             Toca cualquier tarjeta para desplegar el diagnóstico
