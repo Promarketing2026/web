@@ -227,13 +227,13 @@
     }
 
     .tension-cards-grid[data-hovered="0"] {
-      grid-template-columns: 2.25fr 0.72fr 0.72fr;
+      grid-template-columns: 2.15fr 0.78fr 0.78fr;
     }
     .tension-cards-grid[data-hovered="1"] {
-      grid-template-columns: 0.72fr 2.25fr 0.72fr;
+      grid-template-columns: 0.78fr 2.15fr 0.78fr;
     }
     .tension-cards-grid[data-hovered="2"] {
-      grid-template-columns: 0.72fr 0.72fr 2.25fr;
+      grid-template-columns: 0.78fr 0.78fr 2.15fr;
     }
   }
 
@@ -259,5 +259,36 @@
       grid-template-rows: 1fr;
       opacity: 1;
     }
+  }
+
+  /* Animaciones de Stroke Asíncronas (desfasadas en inicio, fin y duración) */
+  @keyframes tensionStrokeFlow {
+    0% {
+      stroke-dashoffset: 260;
+      opacity: 0.35;
+    }
+    50% {
+      stroke-dashoffset: 0;
+      opacity: 0.85;
+    }
+    100% {
+      stroke-dashoffset: -260;
+      opacity: 0.35;
+    }
+  }
+
+  .animate-stroke-sphere {
+    stroke-dasharray: 130 45;
+    animation: tensionStrokeFlow 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .animate-stroke-matrix {
+    stroke-dasharray: 100 35;
+    animation: tensionStrokeFlow 8.4s cubic-bezier(0.4, 0, 0.2, 1) 2.2s infinite;
+  }
+
+  .animate-stroke-vortex {
+    stroke-dasharray: 110 40;
+    animation: tensionStrokeFlow 7.2s cubic-bezier(0.4, 0, 0.2, 1) 4.1s infinite;
   }
 }

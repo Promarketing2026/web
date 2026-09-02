@@ -6,7 +6,7 @@ import { fadeUpVariant } from "@/lib/animations";
 import { Split, Unplug, TrendingDown, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-/* Gráfico 01: Identidad — Esfera de órbitas divergentes */
+/* Gráfico 01: Identidad — Esfera de órbitas divergentes con stroke animado continuo (Ciclo 6.5s, delay 0s) */
 function WireframeSphere({ className }: { className?: string }) {
   return (
     <svg
@@ -16,10 +16,10 @@ function WireframeSphere({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <circle cx="80" cy="80" r="70" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-      <ellipse cx="80" cy="80" rx="70" ry="36" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(-28 80 80)" />
+      <circle cx="80" cy="80" r="70" stroke="currentColor" strokeWidth="1.2" opacity="0.6" className="animate-stroke-sphere" />
+      <ellipse cx="80" cy="80" rx="70" ry="36" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(-28 80 80)" className="animate-stroke-sphere" />
       <ellipse cx="80" cy="80" rx="70" ry="16" stroke="currentColor" strokeWidth="0.8" opacity="0.35" transform="rotate(-28 80 80)" />
-      <ellipse cx="80" cy="80" rx="36" ry="70" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(22 80 80)" />
+      <ellipse cx="80" cy="80" rx="36" ry="70" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(22 80 80)" className="animate-stroke-sphere" />
       <ellipse cx="80" cy="80" rx="16" ry="70" stroke="currentColor" strokeWidth="0.8" opacity="0.35" transform="rotate(22 80 80)" />
       <line x1="10" y1="80" x2="150" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-28 80 80)" />
       <line x1="80" y1="10" x2="80" y2="150" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(22 80 80)" />
@@ -27,7 +27,7 @@ function WireframeSphere({ className }: { className?: string }) {
   );
 }
 
-/* Gráfico 02: Tecnología — Matriz isométrica de silos e hipercubo */
+/* Gráfico 02: Tecnología — Tesseract / hipercubo isométrico con stroke animado desfasado (Ciclo 8.4s, delay 2.2s) */
 function WireframeMatrix({ className }: { className?: string }) {
   return (
     <svg
@@ -37,11 +37,11 @@ function WireframeMatrix({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <polygon points="80,18 138,52 138,118 80,152 22,118 22,52" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      <polygon points="80,18 138,52 138,118 80,152 22,118 22,52" stroke="currentColor" strokeWidth="1.2" opacity="0.6" className="animate-stroke-matrix" />
       <line x1="80" y1="18" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
       <line x1="22" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
       <line x1="138" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-      <polygon points="80,48 110,65 110,98 80,115 50,98 50,65" stroke="currentColor" strokeWidth="1" opacity="0.75" />
+      <polygon points="80,48 110,65 110,98 80,115 50,98 50,65" stroke="currentColor" strokeWidth="1" opacity="0.75" className="animate-stroke-matrix" />
       <line x1="80" y1="48" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
       <line x1="50" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
       <line x1="110" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
@@ -55,7 +55,7 @@ function WireframeMatrix({ className }: { className?: string }) {
   );
 }
 
-/* Gráfico 03: Precio y Posicionamiento — Vórtice cónico de compresión */
+/* Gráfico 03: Precio y Posicionamiento — Vórtice cónico con stroke animado desfasado (Ciclo 7.2s, delay 4.1s) */
 function WireframeVortex({ className }: { className?: string }) {
   return (
     <svg
@@ -65,10 +65,10 @@ function WireframeVortex({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <ellipse cx="80" cy="30" rx="68" ry="18" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
-      <ellipse cx="80" cy="56" rx="54" ry="14" stroke="currentColor" strokeWidth="1.1" opacity="0.55" />
+      <ellipse cx="80" cy="30" rx="68" ry="18" stroke="currentColor" strokeWidth="1.2" opacity="0.6" className="animate-stroke-vortex" />
+      <ellipse cx="80" cy="56" rx="54" ry="14" stroke="currentColor" strokeWidth="1.1" opacity="0.55" className="animate-stroke-vortex" />
       <ellipse cx="80" cy="82" rx="40" ry="11" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-      <ellipse cx="80" cy="106" rx="28" ry="8" stroke="currentColor" strokeWidth="0.9" opacity="0.45" />
+      <ellipse cx="80" cy="106" rx="28" ry="8" stroke="currentColor" strokeWidth="0.9" opacity="0.45" className="animate-stroke-vortex" />
       <ellipse cx="80" cy="126" rx="16" ry="5" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
       <ellipse cx="80" cy="142" rx="6" ry="2.5" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
       <line x1="12" y1="30" x2="74" y2="142" stroke="currentColor" strokeWidth="0.9" opacity="0.4" />
@@ -215,7 +215,7 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Grid de 2 Estados: Primera card desplegada por defecto e interacción intuitiva */}
+        {/* Grid de 2 Estados: Sin desbordamiento en Desktop y 100% Mobile First */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
@@ -246,7 +246,7 @@ export function TensionGrid() {
                 onFocus={() => setHoveredIndex(idx)}
                 onClick={() => handleCardClick(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`tension-card group relative flex flex-col justify-start overflow-hidden rounded-2xl border p-6 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
+                className={`tension-card group relative flex flex-col justify-start overflow-hidden rounded-2xl border p-5 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out min-w-0 ${
                   isDesktopActive
                     ? "border-accent-connection/50 bg-card shadow-2xl shadow-accent-connection/10 md:-translate-y-1"
                     : "border-border/70 bg-card/60 hover:border-accent-connection/40 hover:bg-card/80"
@@ -262,30 +262,30 @@ export function TensionGrid() {
                   }`}
                 />
 
-                {/* 1. Encabezado Superior: Ícono + Categoría (Izquierda) vs Indicador Intuitivo de Apertura (Derecha) */}
-                <div className="relative z-10 flex items-center justify-between border-b border-border/40 pb-4">
-                  <div className="flex items-center gap-3">
+                {/* 1. Encabezado Superior: Con min-w-0 y truncate para evitar desbordes en desktop colapsado */}
+                <div className="relative z-10 flex items-center justify-between gap-2 border-b border-border/40 pb-4 min-w-0">
+                  <div className="flex items-center gap-2.5 min-w-0 overflow-hidden">
                     <span
-                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
+                      className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
                         isExpanded
                           ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
                           : "border-border/70 bg-secondary/80 text-foreground group-hover:border-accent-connection/40 group-hover:text-accent-connection"
                       }`}
                     >
-                      <Icon className="size-5.5" />
+                      <Icon className="size-5 sm:size-5.5" />
                     </span>
-                    <span className="text-sm font-bold tracking-widest uppercase text-foreground">
+                    <span className="text-xs sm:text-sm font-bold tracking-widest uppercase text-foreground truncate min-w-0">
                       {card.category}
                     </span>
                   </div>
 
-                  {/* Trigger Intuitivo: Hace evidente la interactividad */}
-                  <div className="inline-flex items-center gap-2">
-                    <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 group-hover:text-accent-connection transition-colors duration-300">
+                  {/* Trigger Intuitivo: Hace evidente la interactividad sin desbordar */}
+                  <div className="inline-flex items-center gap-1.5 shrink-0">
+                    <span className="hidden xl:inline text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70 group-hover:text-accent-connection transition-colors duration-300">
                       {isExpanded ? "Activo" : "Abrir"}
                     </span>
                     <span
-                      className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-in-out ${
+                      className={`flex size-7.5 sm:size-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-in-out ${
                         isExpanded
                           ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection rotate-180 shadow-xs"
                           : "border-border/70 bg-secondary/70 text-muted-foreground group-hover:border-accent-connection/50 group-hover:bg-accent-connection/10 group-hover:text-accent-connection group-hover:scale-105"
@@ -297,8 +297,14 @@ export function TensionGrid() {
                   </div>
                 </div>
 
-                {/* 2. Titular Principal (Siempre Visible) */}
-                <h3 className="relative z-10 text-xl sm:text-2xl lg:text-[26px] font-bold text-foreground leading-[1.2] tracking-tight pt-4">
+                {/* 2. Titular Principal (Condicionado para desktop colapsado con line-clamp-3, libre en mobile) */}
+                <h3
+                  className={`relative z-10 font-bold text-foreground leading-[1.2] tracking-tight pt-3.5 sm:pt-4 transition-all duration-300 ${
+                    isExpanded
+                      ? "text-xl sm:text-2xl lg:text-[26px]"
+                      : "text-base sm:text-lg md:text-base lg:text-lg md:line-clamp-3"
+                  }`}
+                >
                   {card.title}
                 </h3>
 
@@ -313,10 +319,10 @@ export function TensionGrid() {
                       {card.body}
                     </p>
 
-                    {/* Bloque Inferior: CTA + Texto de Síntesis Limpio y Gráfico Alámbrico Único */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-3 border-t border-border/40">
+                    {/* Bloque Inferior: CTA + Texto Limpio y Gráfico Alámbrico con Stroke Asíncrono */}
+                    <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 pt-3 border-t border-border/40 min-w-0">
                       {/* Acciones e Información */}
-                      <div className="flex flex-col items-start gap-3 max-w-sm">
+                      <div className="flex flex-col items-start gap-3 max-w-sm min-w-0">
                         <Button
                           asChild
                           size="default"
@@ -336,9 +342,9 @@ export function TensionGrid() {
                         </p>
                       </div>
 
-                      {/* Gráfico Alámbrico Conceptual Único */}
-                      <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/45">
-                        <Wireframe className="size-full animate-pulse-subtle" />
+                      {/* Gráfico Alámbrico Conceptual Único con animación stroke asíncrona */}
+                      <div className="hidden sm:flex size-20 md:size-24 lg:size-28 xl:size-32 shrink-0 items-center justify-center text-accent-connection/50">
+                        <Wireframe className="size-full" />
                       </div>
                     </div>
                   </div>
