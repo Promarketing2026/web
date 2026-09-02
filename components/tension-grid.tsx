@@ -6,31 +6,8 @@ import { fadeUpVariant } from "@/lib/animations";
 import { Split, Unplug, TrendingDown, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const tensionCards = [
-  {
-    number: "01",
-    category: "Identidad",
-    icon: Split,
-    title: "Lo que anuncias no es lo que tu equipo dice, ni lo que el cliente recibe.",
-    body: "El anuncio promete una cosa, el vendedor explica otra, y el servicio entrega algo distinto. El cliente no se siente engañado — solo confundido. Y la confusión no cierra ventas.",
-  },
-  {
-    number: "02",
-    category: "Tecnología",
-    icon: Unplug,
-    title: "Pagas por herramientas que ni siquiera se hablan entre sí.",
-    body: "CRM, WhatsApp, hojas de cálculo, un dashboard más. Cada una prometía ordenar algo, pero hoy nadie sabe cuál tiene el dato correcto — y sigues pagando las licencias de todas.",
-  },
-  {
-    number: "03",
-    category: "Precio y posicionamiento",
-    icon: TrendingDown,
-    title: "Terminas compitiendo solo por precio.",
-    body: "Cuando tu marca no logra explicar por qué vale lo que cuesta, la única palanca que te queda es bajarlo. Y ahí, tarde o temprano, pierdes.",
-  },
-];
-
-function SphereWireframe({ className }: { className?: string }) {
+/* Gráfico 01: Identidad — Esfera de órbitas divergentes */
+function WireframeSphere({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 160 160"
@@ -39,19 +16,96 @@ function SphereWireframe({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      {/* Círculo perimetral */}
-      <circle cx="80" cy="80" r="72" stroke="currentColor" strokeWidth="1.3" opacity="0.65" />
-      {/* Elipses longitudinales */}
-      <ellipse cx="80" cy="80" rx="72" ry="38" stroke="currentColor" strokeWidth="1.1" opacity="0.5" transform="rotate(-28 80 80)" />
-      <ellipse cx="80" cy="80" rx="72" ry="18" stroke="currentColor" strokeWidth="0.9" opacity="0.4" transform="rotate(-28 80 80)" />
-      <ellipse cx="80" cy="80" rx="38" ry="72" stroke="currentColor" strokeWidth="1.1" opacity="0.5" transform="rotate(22 80 80)" />
-      <ellipse cx="80" cy="80" rx="18" ry="72" stroke="currentColor" strokeWidth="0.9" opacity="0.4" transform="rotate(22 80 80)" />
-      {/* Ejes centrales */}
-      <line x1="8" y1="80" x2="152" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-28 80 80)" />
-      <line x1="80" y1="8" x2="80" y2="152" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(22 80 80)" />
+      <circle cx="80" cy="80" r="70" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      <ellipse cx="80" cy="80" rx="70" ry="36" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(-28 80 80)" />
+      <ellipse cx="80" cy="80" rx="70" ry="16" stroke="currentColor" strokeWidth="0.8" opacity="0.35" transform="rotate(-28 80 80)" />
+      <ellipse cx="80" cy="80" rx="36" ry="70" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(22 80 80)" />
+      <ellipse cx="80" cy="80" rx="16" ry="70" stroke="currentColor" strokeWidth="0.8" opacity="0.35" transform="rotate(22 80 80)" />
+      <line x1="10" y1="80" x2="150" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-28 80 80)" />
+      <line x1="80" y1="10" x2="80" y2="150" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(22 80 80)" />
     </svg>
   );
 }
+
+/* Gráfico 02: Tecnología — Matriz isométrica de silos e hipercubo */
+function WireframeMatrix({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 160"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Cubo exterior isométrico */}
+      <polygon points="80,18 138,52 138,118 80,152 22,118 22,52" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      <line x1="80" y1="18" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+      <line x1="22" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+      <line x1="138" y1="52" x2="80" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+      {/* Cubo interior suspendido */}
+      <polygon points="80,48 110,65 110,98 80,115 50,98 50,65" stroke="currentColor" strokeWidth="1" opacity="0.75" />
+      <line x1="80" y1="48" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
+      <line x1="50" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
+      <line x1="110" y1="65" x2="80" y2="82" stroke="currentColor" strokeWidth="0.9" opacity="0.6" />
+      {/* Conexiones axiales entre silos */}
+      <line x1="80" y1="18" x2="80" y2="48" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+      <line x1="138" y1="52" x2="110" y2="65" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+      <line x1="138" y1="118" x2="110" y2="98" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+      <line x1="80" y1="152" x2="80" y2="115" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+      <line x1="22" y1="118" x2="50" y2="98" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+      <line x1="22" y1="52" x2="50" y2="65" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+    </svg>
+  );
+}
+
+/* Gráfico 03: Precio y Posicionamiento — Vórtice cónico de compresión */
+function WireframeVortex({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 160"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      <ellipse cx="80" cy="30" rx="68" ry="18" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      <ellipse cx="80" cy="56" rx="54" ry="14" stroke="currentColor" strokeWidth="1.1" opacity="0.55" />
+      <ellipse cx="80" cy="82" rx="40" ry="11" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+      <ellipse cx="80" cy="106" rx="28" ry="8" stroke="currentColor" strokeWidth="0.9" opacity="0.45" />
+      <ellipse cx="80" cy="126" rx="16" ry="5" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+      <ellipse cx="80" cy="142" rx="6" ry="2.5" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
+      <line x1="12" y1="30" x2="74" y2="142" stroke="currentColor" strokeWidth="0.9" opacity="0.4" />
+      <line x1="148" y1="30" x2="86" y2="142" stroke="currentColor" strokeWidth="0.9" opacity="0.4" />
+      <line x1="45" y1="44" x2="77" y2="142" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" opacity="0.3" />
+      <line x1="115" y1="44" x2="83" y2="142" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 3" opacity="0.3" />
+      <line x1="80" y1="12" x2="80" y2="142" stroke="currentColor" strokeWidth="0.9" opacity="0.35" />
+    </svg>
+  );
+}
+
+const tensionCards = [
+  {
+    category: "Identidad",
+    icon: Split,
+    wireframe: WireframeSphere,
+    title: "Lo que anuncias no es lo que tu equipo dice, ni lo que el cliente recibe.",
+    body: "El anuncio promete una cosa, el vendedor explica otra, y el servicio entrega algo distinto. El cliente no se siente engañado — solo confundido. Y la confusión no cierra ventas.",
+  },
+  {
+    category: "Tecnología",
+    icon: Unplug,
+    wireframe: WireframeMatrix,
+    title: "Pagas por herramientas que ni siquiera se hablan entre sí.",
+    body: "CRM, WhatsApp, hojas de cálculo, un dashboard más. Cada una prometía ordenar algo, pero hoy nadie sabe cuál tiene el dato correcto — y sigues pagando las licencias de todas.",
+  },
+  {
+    category: "Precio y posicionamiento",
+    icon: TrendingDown,
+    wireframe: WireframeVortex,
+    title: "Terminas compitiendo solo por precio.",
+    body: "Cuando tu marca no logra explicar por qué vale lo que cuesta, la única palanca que te queda es bajarlo. Y ahí, tarde o temprano, pierdes.",
+  },
+];
 
 export function TensionGrid() {
   const shouldReduceMotion = useReducedMotion();
@@ -177,6 +231,7 @@ export function TensionGrid() {
         >
           {tensionCards.map((card, idx) => {
             const Icon = card.icon;
+            const Wireframe = card.wireframe;
             const isDesktopHovered = hoveredIndex === idx;
             const isMobileActive = activeMobileIndex === idx;
 
@@ -210,31 +265,19 @@ export function TensionGrid() {
                   }`}
                 />
 
-                {/* 1. Encabezado Superior (Siempre Visible) */}
-                <div className="relative z-10 flex items-center justify-between gap-3 border-b border-border/40 pb-4">
-                  <div className="inline-flex items-center gap-3">
-                    <span
-                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
-                        isDesktopHovered || isMobileActive
-                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
-                          : "border-border/70 bg-secondary/80 text-foreground"
-                      }`}
-                    >
-                      <Icon className="size-5.5" />
-                    </span>
-                    <span className="text-sm font-bold tracking-widest uppercase text-foreground">
-                      {card.category}
-                    </span>
-                  </div>
-
+                {/* 1. Encabezado Superior (Sin numeración): Ícono Conceptual + Categoría */}
+                <div className="relative z-10 flex items-center gap-3 border-b border-border/40 pb-4">
                   <span
-                    className={`inline-grid place-items-center h-7.5 w-11 shrink-0 rounded-full border text-xs font-mono font-bold transition-all duration-500 ease-in-out ${
+                    className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
                       isDesktopHovered || isMobileActive
-                        ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-6 scale-110 shadow-xs"
-                        : "border-border/60 text-muted-foreground/80"
+                        ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
+                        : "border-border/70 bg-secondary/80 text-foreground"
                     }`}
                   >
-                    {card.number}
+                    <Icon className="size-5.5" />
+                  </span>
+                  <span className="text-sm font-bold tracking-widest uppercase text-foreground">
+                    {card.category}
                   </span>
                 </div>
 
@@ -254,9 +297,9 @@ export function TensionGrid() {
                       {card.body}
                     </p>
 
-                    {/* Bloque Inferior: CTA + Pill de Diagnóstico (Izquierda) y Gráfico Alámbrico Calibrado (Derecha) */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-3 border-t border-border/40">
-                      {/* Acciones e Información */}
+                    {/* Bloque Inferior: CTA + Texto de Síntesis Limpio (Izquierda) y Gráfico Alámbrico Único (Derecha) */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pt-3 border-t border-border/40">
+                      {/* Acciones e Información (Sin recuadro contenedor) */}
                       <div className="flex flex-col items-start gap-3 max-w-sm">
                         <Button
                           asChild
@@ -272,15 +315,15 @@ export function TensionGrid() {
                           </a>
                         </Button>
 
-                        <div className="rounded-xl border border-border/70 bg-secondary/50 p-2.5 sm:p-3 text-[11px] sm:text-xs text-muted-foreground leading-relaxed shadow-xs">
-                          <span className="text-accent-connection font-bold mr-1.5">→</span>
-                          <strong>Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
-                        </div>
+                        {/* Texto de Síntesis Directo y Limpio (Sin recuadro) */}
+                        <p className="text-xs sm:text-[13px] text-muted-foreground/85 leading-relaxed">
+                          <strong className="text-foreground font-semibold">Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
+                        </p>
                       </div>
 
-                      {/* Gráfico Alámbrico de Soporte (Esfera calibrada para rellenar armónicamente el espacio) */}
+                      {/* Gráfico Alámbrico Conceptual Único para cada Card */}
                       <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/45">
-                        <SphereWireframe className="size-full animate-pulse-subtle" />
+                        <Wireframe className="size-full animate-pulse-subtle" />
                       </div>
                     </div>
                   </div>
