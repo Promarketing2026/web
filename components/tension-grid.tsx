@@ -1,25 +1,29 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { fadeUpVariant } from "@/lib/animations";
-import { MessageSquareOff, Layers, DollarSign, ArrowRight } from "lucide-react";
+import { Split, Unplug, TrendingDown, ArrowRight } from "lucide-react";
 
 const tensionCards = [
   {
+    number: "01",
     category: "Identidad",
-    icon: MessageSquareOff,
+    icon: Split,
     title: "Lo que anuncias no es lo que tu equipo dice, ni lo que el cliente recibe.",
     body: "El anuncio promete una cosa, el vendedor explica otra, y el servicio entrega algo distinto. El cliente no se siente engañado — solo confundido. Y la confusión no cierra ventas.",
   },
   {
+    number: "02",
     category: "Tecnología",
-    icon: Layers,
+    icon: Unplug,
     title: "Pagas por herramientas que ni siquiera se hablan entre sí.",
     body: "CRM, WhatsApp, hojas de cálculo, un dashboard más. Cada una prometía ordenar algo, pero hoy nadie sabe cuál tiene el dato correcto — y sigues pagando las licencias de todas.",
   },
   {
+    number: "03",
     category: "Precio y posicionamiento",
-    icon: DollarSign,
+    icon: TrendingDown,
     title: "Terminas compitiendo solo por precio.",
     body: "Cuando tu marca no logra explicar por qué vale lo que cuesta, la única palanca que te queda es bajarlo. Y ahí, tarde o temprano, pierdes.",
   },
@@ -29,13 +33,62 @@ export function TensionGrid() {
   const shouldReduceMotion = useReducedMotion();
   const itemVariant = fadeUpVariant({ reducedMotion: shouldReduceMotion ?? false });
 
+  // Estado para desktop: hover sobre una columna (null = todas en ancho equilibrado)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  // Estado para mobile: índice de la card activa en acordeón
+  const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
+
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  // IntersectionObserver para activar automáticamente la card en mobile al hacer scroll
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible && visible.intersectionRatio > 0.5) {
+          const idx = cardRefs.current.indexOf(visible.target as HTMLElement);
+          if (idx !== -1) {
+            setActiveMobileIndex(idx);
+          }
+        }
+      },
+      { threshold: [0.5, 0.7, 0.85] },
+    );
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleCardClick = (idx: number) => {
+    setActiveMobileIndex((prev) => (prev === idx ? -1 : idx));
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, idx: number) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleCardClick(idx);
+      setHoveredIndex(idx);
+    }
+  };
+
   return (
     <section
       id="tension"
       aria-labelledby="tension-title"
-      className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border/60 bg-background"
+      className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border/60 bg-background overflow-hidden"
     >
-      <div className="mx-auto max-w-5xl space-y-12">
+      <div className="mx-auto max-w-6xl space-y-12">
         {/* Cabecera */}
         <div className="max-w-3xl space-y-4">
           <motion.span
@@ -55,7 +108,7 @@ export function TensionGrid() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={0.1}
-            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
           >
             No son 3 problemas distintos. Es la misma fuga, en 3 lugares distintos.
           </motion.h2>
@@ -71,35 +124,138 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Rejilla de 3 Tarjetas */}
-        <div className="grid gap-6 md:grid-cols-3">
+        {/* Cards Expansibles con Comportamiento Diferenciado (Desktop: Expansión horizontal / Mobile: Acordeón táctil) */}
+        <motion.div
+          variants={itemVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={0.3}
+          onMouseLeave={() => setHoveredIndex(null)}
+          className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4.5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={
+            hoveredIndex !== null
+              ? {
+                  gridTemplateColumns:
+                    hoveredIndex === 0
+                      ? "2.25fr 0.72fr 0.72fr"
+                      : hoveredIndex === 1
+                      ? "0.72fr 2.25fr 0.72fr"
+                      : "0.72fr 0.72fr 2.25fr",
+                }
+              : undefined
+          }
+        >
           {tensionCards.map((card, idx) => {
             const Icon = card.icon;
+            const isDesktopActive = hoveredIndex === null || hoveredIndex === idx;
+            const isDesktopHovered = hoveredIndex === idx;
+            const isMobileActive = activeMobileIndex === idx;
+
             return (
-              <motion.article
+              <article
                 key={card.category}
-                variants={itemVariant}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={0.2 + idx * 0.1}
-                className="flex flex-col justify-between rounded-xl border border-border/60 bg-secondary/30 p-6 sm:p-7 shadow-xs hover:border-accent-connection/40 transition-colors"
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                tabIndex={0}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onFocus={() => setHoveredIndex(idx)}
+                onBlur={() => setHoveredIndex(null)}
+                onClick={() => handleCardClick(idx)}
+                onKeyDown={(e) => handleKeyDown(e, idx)}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer select-none ${
+                  isDesktopHovered
+                    ? "border-accent-connection/50 bg-card shadow-xl shadow-accent-connection/5 md:-translate-y-1"
+                    : "border-border/70 bg-card/60 hover:border-border/90"
+                } ${
+                  isMobileActive
+                    ? "min-h-[380px] sm:min-h-[340px] border-accent-connection/40 shadow-lg"
+                    : "min-h-[136px] sm:min-h-[148px]"
+                } md:min-h-[520px] p-5 sm:p-7 backdrop-blur-md`}
               >
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent-connection">
-                    <Icon className="size-4" />
-                    <span>{card.category}</span>
+                {/* Resplandor ambiental de fondo */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-connection/10 via-transparent to-transparent transition-opacity duration-700 ${
+                    isDesktopHovered || isMobileActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                {/* Encabezado Superior: Ícono Conceptual + Categoría (Izquierda) vs Índice Numérico (Derecha) */}
+                <div className="relative z-10 flex items-center justify-between gap-3 border-b border-border/40 pb-3">
+                  <div className="inline-flex items-center gap-2.5">
+                    <span
+                      className={`flex size-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 ${
+                        isDesktopHovered || isMobileActive
+                          ? "border-accent-connection/50 bg-accent-connection/20 text-accent-connection scale-105"
+                          : "border-border/60 bg-secondary/80 text-muted-foreground"
+                      }`}
+                    >
+                      <Icon className="size-4.5" />
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">
+                      {card.category}
+                    </span>
                   </div>
-                  <h3 className="text-lg font-bold text-foreground leading-snug">
+
+                  <span
+                    className={`inline-grid place-items-center size-7.5 shrink-0 rounded-full border text-[11px] font-mono font-bold transition-all duration-500 ${
+                      isDesktopHovered || isMobileActive
+                        ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-8 scale-110 shadow-xs"
+                        : "border-border/60 text-muted-foreground/70"
+                    }`}
+                  >
+                    {card.number}
+                  </span>
+                </div>
+
+                {/* Cuerpo de la Card: Micro-línea + Titular + Texto Explicativo */}
+                <div className="relative z-10 mt-auto pt-6 flex flex-col justify-end gap-3.5">
+                  {/* Micro-línea reactiva */}
+                  <div
+                    className={`h-[1.5px] w-full bg-accent-connection/60 origin-left transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      isDesktopHovered || isMobileActive
+                        ? "scale-x-100 opacity-100"
+                        : "scale-x-25 opacity-30 md:opacity-40"
+                    }`}
+                  />
+
+                  {/* Titular */}
+                  <h3 className="text-xl sm:text-2xl md:text-[22px] lg:text-[26px] font-bold text-foreground leading-snug tracking-tight">
                     {card.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {card.body}
-                  </p>
+
+                  {/* Texto explicativo revelado progresivamente */}
+                  <div
+                    className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      isMobileActive
+                        ? "max-h-[500px] opacity-100 translate-y-0"
+                        : "max-h-0 opacity-0 translate-y-3 md:max-h-none"
+                    } ${
+                      isDesktopActive
+                        ? "md:opacity-100 md:translate-y-0"
+                        : "md:opacity-20 md:translate-y-2"
+                    }`}
+                  >
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1">
+                      {card.body}
+                    </p>
+                  </div>
                 </div>
-              </motion.article>
+              </article>
             );
           })}
+        </motion.div>
+
+        {/* Micro-guía de interacción sutil */}
+        <div className="text-center text-xs text-muted-foreground/60">
+          <span className="hidden md:inline">
+            Pasa el cursor sobre cada síntoma para enfocar el diagnóstico
+          </span>
+          <span className="md:hidden">
+            Toca una tarjeta o desliza para desplegar el diagnóstico
+          </span>
         </div>
 
         {/* Cierre - Efecto Final */}
