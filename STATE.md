@@ -50,6 +50,12 @@ costo de plataforma USD 0 en todo momento.
 - Paleta de color: aprobada en DOC 08. Debe implementarse mediante tokens
   semánticos y mantenerse sincronizada entre código y Figma; Figma todavía
   requiere la actualización correspondiente.
+- Principio UI Mobile-First obligatorio: toda pantalla, sección o componente
+  debe pensarse, diseñarse y validarse primero en viewports móviles (360px–390px).
+  No se reservan alturas que consuman pantallas completas en mobile para widgets
+  puramente decorativos. Gráficos avanzados, canvas pesados o interacciones
+  basadas en puntero de mouse son mejoras progresivas para escritorio (`sm:`,
+  `md:`, `lg:`), nunca bloqueos para la experiencia táctil.
 
 ## Flujo de trabajo con IA (agentes, IDE y modelos) — actualizado 2026-08-26
 - IDE: **Google Antigravity** (gratuito, agente múltiple, lee `AGENTS.md`

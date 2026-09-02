@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { HeroParticlesCanvas } from "@/components/hero-particles-canvas";
-import { HeroCoreVisual } from "@/components/hero-core-visual";
 import { fadeUpVariant } from "@/lib/animations";
 
 export function Hero() {
@@ -98,17 +97,6 @@ export function Hero() {
           <span className="text-xs text-muted-foreground">
             Es una conversación real con nosotros, no un reporte automático.
           </span>
-        </motion.div>
-
-        {/* Núcleo Procedural Directo en Canvas (Visible a partir de pantallas sm/desktop, oculto en mobile) */}
-        <motion.div
-          variants={heroItem}
-          initial="hidden"
-          animate="visible"
-          custom={0.5}
-          className="hidden w-full sm:block"
-        >
-          <HeroCoreVisual />
         </motion.div>
       </div>
     </section>

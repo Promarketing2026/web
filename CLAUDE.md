@@ -25,6 +25,7 @@ Antes de escribir una sola línea de código:
   hacer push, modificar servicios externos, usar credenciales o resolver una
   decisión ambigua. Un commit local puede realizarse al cerrar una tarea si
   su alcance y su Definition of Done están comprobados.
+- DISEÑO Y UI MOBILE-FIRST OBLIGATORIO: Todo layout, componente, sección o ajuste visual debe pensarse, estructurarse y comprobarse primero para pantallas móviles táctiles (360px–390px viewport). No reservar alturas desmedidas en mobile (>1 viewport para elementos decorativos). Los efectos pesados, gráficos complejos de escritorio o interactividad basada exclusivamente en puntero de ratón deben condicionarse como mejora progresiva (`sm:`, `md:` o `lg:`), nunca bloquear ni degradar la experiencia táctil móvil.
 - Presupuesto de herramientas y modelos: **$0 siempre, sin excepciones.**
 
 ## Al terminar una tarea
