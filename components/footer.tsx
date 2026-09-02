@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
 import { BrandIsotipo } from "@/components/brand-logo";
 import { NewsletterForm } from "@/components/newsletter-form";
 import { CookiePreferencesButton } from "@/components/cookie-preferences-button";
+import { SERVICES } from "@/lib/services";
 
 const socialLinks = [
   {
@@ -23,29 +25,10 @@ const socialLinks = [
   },
 ];
 
-const solucionesLinks = [
-  { label: "Web y experiencia digital", href: "/servicios/infraestructura-web" },
-  { label: "Marca y posicionamiento", href: "/servicios/diseno-de-marca" },
-  { label: "Generación de demanda", href: "/servicios/ads-paid-media" },
-  { label: "Conversión", href: "/servicios/seo-geo-aeo" },
-  { label: "Gestión comercial y CRM", href: "/servicios/ecommerce" },
-  { label: "Automatización", href: "/servicios/automatizacion-comercial" },
-  { label: "Información y analítica", href: "/servicios/tracking-trazabilidad" },
-];
-
-const comoAyudamosLinks = [
-  { label: "Sistema de Marca", href: "/#como-ayudamos" },
-  { label: "Sistema de Demanda", href: "/#como-ayudamos" },
-  { label: "Sistema de Conversión", href: "/#como-ayudamos" },
-  { label: "Sistema de Gestión Comercial", href: "/#como-ayudamos" },
-  { label: "Sistema de Información y Decisión", href: "/#como-ayudamos" },
-];
-
-const conocimientoLinks = [
+const recursosLinks = [
   { label: "Cómo pensamos", href: "/#como-pensamos" },
-  { label: "Blog", href: "/blog" },
-  { label: "Glosario", href: "/glosario" },
-  { label: "Casos de Éxito", href: "/casos-de-exito" },
+  { label: "Blog de Estrategia", href: "/blog" },
+  { label: "Glosario Comercial", href: "/glosario" },
 ];
 
 export function Footer() {
@@ -53,7 +36,7 @@ export function Footer() {
     <footer className="border-t border-border bg-muted/40 px-6 py-12 sm:px-10">
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {/* Col 1: Marca */}
+          {/* Col 1: Marca (2 Cols en Desktop) */}
           <div className="space-y-4 lg:col-span-2">
             <div className="group inline-flex items-center gap-2.5">
               <BrandIsotipo size={22} className="text-foreground" />
@@ -62,7 +45,7 @@ export function Footer() {
               </p>
             </div>
             <p className="max-w-sm text-xs leading-5 text-muted-foreground">
-              Firma de sistemas comerciales integrados. Diseñamos las capacidades comerciales que tu negocio necesita para funcionar mejor.
+              Firma de sistemas comerciales integrados. Diseñamos la conexión entre marca, demanda, conversión, procesos y equipo para proteger tu rentabilidad.
             </p>
             <div className="flex items-center gap-3 pt-2">
               {socialLinks.map((link) => {
@@ -84,46 +67,49 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Soluciones */}
+          {/* Col 2: Soluciones (7 Servicios Reales) */}
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
               Soluciones
             </h3>
             <ul className="space-y-2 text-xs text-muted-foreground">
-              {solucionesLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="transition-colors hover:text-foreground">
-                    {link.label}
+              {SERVICES.map((service) => (
+                <li key={service.slug}>
+                  <Link href={`/servicios/${service.slug}`} className="transition-colors hover:text-foreground">
+                    {service.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 3: Cómo ayudamos */}
+          {/* Col 3: Casos de Éxito (Destacado) */}
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
-              Cómo ayudamos
+              Casos de Éxito
             </h3>
-            <ul className="space-y-2 text-xs text-muted-foreground">
-              {comoAyudamosLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="transition-colors hover:text-foreground">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              Evidencia real de transformaciones comerciales y resultados medibles en distintas organizaciones.
+            </p>
+            <div className="pt-1">
+              <Link
+                href="/casos-de-exito"
+                className="group inline-flex items-center gap-1.5 text-xs font-semibold text-accent-connection hover:underline underline-offset-4"
+              >
+                <span>Ver casos y evidencia</span>
+                <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
 
-          {/* Col 4: Conocimiento & Newsletter */}
+          {/* Col 4: Recursos & Newsletter */}
           <div className="space-y-4">
             <div className="space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
-                Conocimiento
+                Recursos
               </h3>
               <ul className="space-y-2 text-xs text-muted-foreground">
-                {conocimientoLinks.map((link) => (
+                {recursosLinks.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className="transition-colors hover:text-foreground">
                       {link.label}

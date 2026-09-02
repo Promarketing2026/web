@@ -248,7 +248,7 @@ export function AuditoriaForm() {
         disabled={isPending}
         className="w-full rounded-md bg-foreground px-4 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60 cursor-pointer"
       >
-        {isPending ? "Enviando..." : "Iniciar evaluación preliminar"}
+        {isPending ? "Enviando..." : "Agenda tu diagnóstico"}
       </button>
     </form>
   );

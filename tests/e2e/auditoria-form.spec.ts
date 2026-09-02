@@ -6,7 +6,7 @@ test.describe("Formulario de Auditoría C.L.A.R.O.", () => {
   });
 
   test("debe mostrar errores de validación si se envía el formulario vacío", async ({ page }) => {
-    const submitButton = page.getByRole("button", { name: /Iniciar evaluación preliminar|Cuéntanos tu situación|Solicitar Auditoria/i });
+    const submitButton = page.getByRole("button", { name: /Agenda tu diagnóstico|Iniciar evaluación preliminar|Cuéntanos tu situación|Solicitar Auditoria/i });
     await expect(submitButton).toBeVisible();
 
     await submitButton.click();

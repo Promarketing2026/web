@@ -697,5 +697,7 @@ de expansión de marca (Lima → Perú → Sudamérica) y las tareas sueltas
 
 2026-09-01 — Reestructuración Narrativa del Home en 6 Secciones completada: Se implementó la nueva arquitectura compacta y copys finales aprobados (Hero, TensionGrid con 3 tarjetas de síntomas y efecto final, Categoría y Posicionamiento, Enrutamiento Operativo en 3 puertas mapeadas a los 7 servicios, Compromiso de Autonomía y La Mesa del Arquitecto con formulario de evaluación preliminar conectado a HubSpot). Retiradas del scroll principal las secciones excedentes. Verificados `pnpm lint` (0 errores), `pnpm build` (23 páginas estáticas SSG) y Playwright E2E (`54/54 PASS` en Chromium, Firefox y WebKit).
 
+2026-09-02 — Navegación y Taxonomía de 2 Niveles (3 Puertas / 7 Servicios): Retirados los 5 Macro-Sistemas obsoletos de Navbar y Footer. En Navbar se agruparon los 7 servicios bajo las 3 Puertas operativas (Atrae y Convierte, Organiza y Escala, Mide y Controla), se habilitó enlace directo a Casos de Éxito, se simplificó el menú hamburguesa a 4 bloques limpios y se unificó el CTA en todo el sitio como "Agenda tu diagnóstico" (incluyendo el botón de submit del formulario en Home y header). En Footer se destacó Casos de Éxito con llamada a evidencia y se sincronizaron los 7 servicios directamente desde `lib/services.ts`. Verificados: `pnpm lint` (0 errores), `tsc --noEmit` (0 errores), Playwright E2E (`54/54 PASS`) y `pnpm build` (23 páginas estáticas SSG generadas).
+
 ## Dependencias de Fase B
 Instaladas manualmente el 26-07-2026: motion, gsap, @gsap/react, lenis. pnpm build OK.
