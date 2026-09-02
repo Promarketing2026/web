@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { fadeUpVariant } from "@/lib/animations";
-import { Split, Unplug, TrendingDown, ArrowRight } from "lucide-react";
+import { Split, Unplug, TrendingDown, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const tensionCards = [
   {
@@ -28,6 +29,29 @@ const tensionCards = [
     body: "Cuando tu marca no logra explicar por qué vale lo que cuesta, la única palanca que te queda es bajarlo. Y ahí, tarde o temprano, pierdes.",
   },
 ];
+
+function SphereWireframe({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 160"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={className}
+    >
+      {/* Círculo perimetral */}
+      <circle cx="80" cy="80" r="70" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      {/* Elipses longitudinales */}
+      <ellipse cx="80" cy="80" rx="70" ry="35" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(-25 80 80)" />
+      <ellipse cx="80" cy="80" rx="70" ry="16" stroke="currentColor" strokeWidth="0.9" opacity="0.35" transform="rotate(-25 80 80)" />
+      <ellipse cx="80" cy="80" rx="35" ry="70" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(20 80 80)" />
+      <ellipse cx="80" cy="80" rx="16" ry="70" stroke="currentColor" strokeWidth="0.9" opacity="0.35" transform="rotate(20 80 80)" />
+      {/* Ejes centrales */}
+      <line x1="10" y1="80" x2="150" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-25 80 80)" />
+      <line x1="80" y1="10" x2="80" y2="150" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(20 80 80)" />
+    </svg>
+  );
+}
 
 export function TensionGrid() {
   const shouldReduceMotion = useReducedMotion();
@@ -140,7 +164,7 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Cards Expansibles con Animación Fluida Ease In/Out */}
+        {/* Cards Expansibles con CTA y Gráfico Wireframe integrado */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
@@ -216,9 +240,9 @@ export function TensionGrid() {
                   </span>
                 </div>
 
-                {/* Cuerpo de la Card: Micro-línea + Titular + Texto Explicativo con grid row transition */}
+                {/* Cuerpo de la Card: Micro-línea + Titular + Texto Explicativo + CTA y Esfera */}
                 <div className="relative z-10 mt-auto pt-6 flex flex-col justify-end gap-3.5">
-                  {/* Micro-línea reactiva con transición suave */}
+                  {/* Micro-línea reactiva */}
                   <div
                     className={`h-[1.5px] w-full bg-accent-connection/60 origin-left transition-transform duration-500 ease-in-out ${
                       isDesktopHovered || isMobileActive
@@ -232,12 +256,34 @@ export function TensionGrid() {
                     {card.title}
                   </h3>
 
-                  {/* Texto explicativo animado con CSS Grid rows (animación natural in/out sin saltos) */}
+                  {/* Bloque expandible: texto + CTA + Esfera wireframe */}
                   <div className={`tension-card-reveal ${isMobileActive ? "is-active" : ""}`}>
                     <div className="overflow-hidden">
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1.5 pb-1">
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1.5 pb-4">
                         {card.body}
                       </p>
+
+                      {/* CTA y Gráfico Wireframe alineados */}
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-3 border-t border-border/40">
+                        <Button
+                          asChild
+                          size="default"
+                          className="group/btn relative h-10 px-5 text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
+                        >
+                          <a href="#">
+                            <span>Agenda tu diagnóstico</span>
+                            <ArrowUpRight
+                              aria-hidden="true"
+                              className="ml-1.5 size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                            />
+                          </a>
+                        </Button>
+
+                        {/* Esfera alámbrica geométrica */}
+                        <div className="hidden sm:flex size-16 md:size-20 shrink-0 items-center justify-center text-accent-connection/45">
+                          <SphereWireframe className="size-full" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -255,23 +301,6 @@ export function TensionGrid() {
             Toca una tarjeta o desliza para desplegar el diagnóstico
           </span>
         </div>
-
-        {/* Cierre - Efecto Final */}
-        <motion.div
-          variants={itemVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={0.5}
-          className="rounded-xl border border-accent-connection/30 bg-accent-connection/5 p-6 sm:p-8"
-        >
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <ArrowRight className="size-5 text-accent-connection shrink-0 mt-1 hidden sm:block" />
-            <p className="text-sm sm:text-base text-foreground/90 leading-relaxed">
-              <strong>Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas. Y esa desconexión es exactamente lo que se te escapa en rentabilidad cada mes.
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
