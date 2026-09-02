@@ -6,7 +6,7 @@ import { fadeUpVariant } from "@/lib/animations";
 import { Split, Unplug, TrendingDown, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-/* Gráfico 01: Identidad — Esfera de órbitas divergentes con stroke animado continuo (Ciclo 6.5s, delay 0s) */
+/* Gráfico 01: Identidad — Esfera de órbitas divergentes con stroke animado continuo */
 function WireframeSphere({ className }: { className?: string }) {
   return (
     <svg
@@ -27,7 +27,7 @@ function WireframeSphere({ className }: { className?: string }) {
   );
 }
 
-/* Gráfico 02: Tecnología — Tesseract / hipercubo isométrico con stroke animado desfasado (Ciclo 8.4s, delay 2.2s) */
+/* Gráfico 02: Tecnología — Tesseract / hipercubo isométrico con stroke animado desfasado */
 function WireframeMatrix({ className }: { className?: string }) {
   return (
     <svg
@@ -55,7 +55,7 @@ function WireframeMatrix({ className }: { className?: string }) {
   );
 }
 
-/* Gráfico 03: Precio y Posicionamiento — Vórtice cónico con stroke animado desfasado (Ciclo 7.2s, delay 4.1s) */
+/* Gráfico 03: Precio y Posicionamiento — Vórtice cónico con stroke animado desfasado */
 function WireframeVortex({ className }: { className?: string }) {
   return (
     <svg
@@ -85,6 +85,12 @@ const tensionCards = [
     category: "Identidad",
     icon: Split,
     wireframe: WireframeSphere,
+    themeClass: "tension-card-amber",
+    accentText: "text-amber-400",
+    accentBorder: "border-amber-500/40",
+    accentBg: "bg-amber-500/15",
+    accentLine: "bg-amber-400/60",
+    wireframeColor: "text-amber-400/70",
     title: "Lo que anuncias no es lo que tu equipo dice, ni lo que el cliente recibe.",
     body: "El anuncio promete una cosa, el vendedor explica otra, y el servicio entrega algo distinto. El cliente no se siente engañado — solo confundido. Y la confusión no cierra ventas.",
   },
@@ -92,6 +98,12 @@ const tensionCards = [
     category: "Tecnología",
     icon: Unplug,
     wireframe: WireframeMatrix,
+    themeClass: "tension-card-cyan",
+    accentText: "text-sky-400",
+    accentBorder: "border-sky-500/40",
+    accentBg: "bg-sky-500/15",
+    accentLine: "bg-sky-400/60",
+    wireframeColor: "text-sky-400/70",
     title: "Pagas por herramientas que ni siquiera se hablan entre sí.",
     body: "CRM, WhatsApp, hojas de cálculo, un dashboard más. Cada una prometía ordenar algo, pero hoy nadie sabe cuál tiene el dato correcto — y sigues pagando las licencias de todas.",
   },
@@ -99,6 +111,12 @@ const tensionCards = [
     category: "Precio y posicionamiento",
     icon: TrendingDown,
     wireframe: WireframeVortex,
+    themeClass: "tension-card-emerald",
+    accentText: "text-emerald-400",
+    accentBorder: "border-emerald-500/40",
+    accentBg: "bg-emerald-500/15",
+    accentLine: "bg-emerald-400/60",
+    wireframeColor: "text-emerald-400/70",
     title: "Terminas compitiendo solo por precio.",
     body: "Cuando tu marca no logra explicar por qué vale lo que cuesta, la única palanca que te queda es bajarlo. Y ahí, tarde o temprano, pierdes.",
   },
@@ -231,7 +249,7 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Grid de 2 Estados: En desktop inicia colapsada y abre con hover; en móvil mantiene lógica táctil */}
+        {/* Grid de 3 Auras Atmosféricas (Ámbar, Cyan, Esmeralda) con Efecto Rim-Light */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
@@ -263,30 +281,18 @@ export function TensionGrid() {
                 onFocus={() => setHoveredIndex(idx)}
                 onClick={() => handleCardClick(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`tension-card group relative flex flex-col justify-start overflow-hidden rounded-2xl border p-5 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out min-w-0 ${
-                  isDesktopActive
-                    ? "border-accent-connection/50 bg-card shadow-2xl shadow-accent-connection/10 md:-translate-y-1"
-                    : "border-border/70 bg-card/60 hover:border-accent-connection/40 hover:bg-card/80"
-                } ${
-                  isMobileActive ? "is-active border-accent-connection/40 shadow-lg" : ""
-                }`}
+                className={`tension-card ${card.themeClass} group relative flex flex-col justify-start overflow-hidden rounded-3xl border p-5 sm:p-7 backdrop-blur-xl cursor-pointer select-none transition-all duration-500 ease-in-out min-w-0 ${
+                  isDesktopActive ? "is-active md:-translate-y-1" : ""
+                } ${isMobileActive ? "is-active" : ""}`}
               >
-                {/* Resplandor ambiental de fondo */}
-                <div
-                  aria-hidden="true"
-                  className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-connection/10 via-transparent to-transparent transition-opacity duration-500 ease-in-out ${
-                    isExpanded ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-
-                {/* 1. Encabezado Superior: Con min-w-0 y truncate para evitar desbordes en desktop colapsado */}
+                {/* 1. Encabezado Superior: Ícono Conceptual con acento temático + Categoría vs Trigger */}
                 <div className="relative z-10 flex items-center justify-between gap-2 border-b border-border/40 pb-4 min-w-0">
                   <div className="flex items-center gap-2.5 min-w-0 overflow-hidden">
                     <span
-                      className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
+                      className={`flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-2xl border transition-all duration-500 ease-in-out ${
                         isExpanded
-                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
-                          : "border-border/70 bg-secondary/80 text-foreground group-hover:border-accent-connection/40 group-hover:text-accent-connection"
+                          ? `${card.accentBorder} ${card.accentBg} ${card.accentText} shadow-sm scale-105`
+                          : "border-border/70 bg-secondary/80 text-foreground group-hover:border-border/90"
                       }`}
                     >
                       <Icon className="size-5 sm:size-5.5" />
@@ -296,16 +302,20 @@ export function TensionGrid() {
                     </span>
                   </div>
 
-                  {/* Trigger Intuitivo: Hace evidente la interactividad sin desbordar */}
+                  {/* Trigger de Interacción con acento cromático */}
                   <div className="inline-flex items-center gap-1.5 shrink-0">
-                    <span className="hidden xl:inline text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70 group-hover:text-accent-connection transition-colors duration-300">
+                    <span
+                      className={`hidden xl:inline text-[11px] font-semibold uppercase tracking-wider transition-colors duration-300 ${
+                        isExpanded ? card.accentText : "text-muted-foreground/70 group-hover:text-foreground"
+                      }`}
+                    >
                       {isExpanded ? "Activo" : "Abrir"}
                     </span>
                     <span
                       className={`flex size-7.5 sm:size-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-in-out ${
                         isExpanded
-                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection rotate-180 shadow-xs"
-                          : "border-border/70 bg-secondary/70 text-muted-foreground group-hover:border-accent-connection/50 group-hover:bg-accent-connection/10 group-hover:text-accent-connection group-hover:scale-105"
+                          ? `${card.accentBorder} ${card.accentBg} ${card.accentText} rotate-180 shadow-xs`
+                          : "border-border/70 bg-secondary/70 text-muted-foreground group-hover:border-border/90 group-hover:text-foreground group-hover:scale-105"
                       }`}
                       aria-hidden="true"
                     >
@@ -314,7 +324,7 @@ export function TensionGrid() {
                   </div>
                 </div>
 
-                {/* 2. Titular Principal (Condicionado para desktop colapsado con line-clamp-3, libre en mobile) */}
+                {/* 2. Titular Principal */}
                 <h3
                   className={`relative z-10 font-bold text-foreground leading-[1.2] tracking-tight pt-3.5 sm:pt-4 transition-all duration-300 ${
                     isExpanded
@@ -325,18 +335,18 @@ export function TensionGrid() {
                   {card.title}
                 </h3>
 
-                {/* 3. Contenedor Desplegable */}
+                {/* 3. Contenedor Desplegable con Efecto Temático */}
                 <div className={`relative z-10 tension-card-expandable ${isExpanded ? "is-expanded" : ""}`}>
                   <div className="overflow-hidden">
-                    {/* Micro-línea divisoria */}
-                    <div className="h-[1.5px] w-full bg-accent-connection/60 my-4 origin-left" />
+                    {/* Micro-línea divisoria con color de acento de la tarjeta */}
+                    <div className={`h-[1.5px] w-full ${card.accentLine} my-4 origin-left`} />
 
                     {/* Bajada Descriptiva */}
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pb-4">
                       {card.body}
                     </p>
 
-                    {/* Bloque Inferior: CTA + Texto Limpio y Gráfico Alámbrico con Stroke Asíncrono */}
+                    {/* Bloque Inferior: CTA + Texto Limpio y Gráfico Alámbrico con Color de Tema */}
                     <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 pt-3 border-t border-border/40 min-w-0">
                       {/* Acciones e Información */}
                       <div className="flex flex-col items-start gap-3 max-w-sm min-w-0">
@@ -359,8 +369,8 @@ export function TensionGrid() {
                         </p>
                       </div>
 
-                      {/* Gráfico Alámbrico Conceptual Único con animación stroke asíncrona */}
-                      <div className="hidden sm:flex size-20 md:size-24 lg:size-28 xl:size-32 shrink-0 items-center justify-center text-accent-connection/50">
+                      {/* Gráfico Alámbrico Conceptual con Stroke Asíncrono en Color de Tema */}
+                      <div className={`hidden sm:flex size-20 md:size-24 lg:size-28 xl:size-32 shrink-0 items-center justify-center ${card.wireframeColor}`}>
                         <Wireframe className="size-full" />
                       </div>
                     </div>

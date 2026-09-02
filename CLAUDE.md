@@ -10,6 +10,7 @@ Antes de escribir una sola línea de código:
    está cubierto, pregunta específicamente eso, no pidas "el contexto completo".
 
 ## Reglas fijas del proyecto (no negociables sin aprobación explícita)
+- PRIMERO SIEMPRE PLANIFICAR: Antes de realizar cualquier cambio visual, de layout o de código, presentar siempre un plan estructurado y esperar la aprobación explícita del usuario.
 - No usar daisyUI (ya se decidió shadcn/ui + Radix, son sistemas incompatibles).
 - No usar el paquete `framer-motion` — usar `motion/react`.
 - No usar colores hardcodeados. Todo color va en variables CSS/Tailwind config,
