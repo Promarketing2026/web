@@ -40,15 +40,15 @@ function SphereWireframe({ className }: { className?: string }) {
       className={className}
     >
       {/* Círculo perimetral */}
-      <circle cx="80" cy="80" r="70" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+      <circle cx="80" cy="80" r="72" stroke="currentColor" strokeWidth="1.3" opacity="0.65" />
       {/* Elipses longitudinales */}
-      <ellipse cx="80" cy="80" rx="70" ry="35" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(-25 80 80)" />
-      <ellipse cx="80" cy="80" rx="70" ry="16" stroke="currentColor" strokeWidth="0.9" opacity="0.35" transform="rotate(-25 80 80)" />
-      <ellipse cx="80" cy="80" rx="35" ry="70" stroke="currentColor" strokeWidth="1" opacity="0.45" transform="rotate(20 80 80)" />
-      <ellipse cx="80" cy="80" rx="16" ry="70" stroke="currentColor" strokeWidth="0.9" opacity="0.35" transform="rotate(20 80 80)" />
+      <ellipse cx="80" cy="80" rx="72" ry="38" stroke="currentColor" strokeWidth="1.1" opacity="0.5" transform="rotate(-28 80 80)" />
+      <ellipse cx="80" cy="80" rx="72" ry="18" stroke="currentColor" strokeWidth="0.9" opacity="0.4" transform="rotate(-28 80 80)" />
+      <ellipse cx="80" cy="80" rx="38" ry="72" stroke="currentColor" strokeWidth="1.1" opacity="0.5" transform="rotate(22 80 80)" />
+      <ellipse cx="80" cy="80" rx="18" ry="72" stroke="currentColor" strokeWidth="0.9" opacity="0.4" transform="rotate(22 80 80)" />
       {/* Ejes centrales */}
-      <line x1="10" y1="80" x2="150" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-25 80 80)" />
-      <line x1="80" y1="10" x2="80" y2="150" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(20 80 80)" />
+      <line x1="8" y1="80" x2="152" y2="80" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(-28 80 80)" />
+      <line x1="80" y1="8" x2="80" y2="152" stroke="currentColor" strokeWidth="1" opacity="0.4" transform="rotate(22 80 80)" />
     </svg>
   );
 }
@@ -164,7 +164,7 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Cards Expansibles con CTA y Gráfico Wireframe integrado */}
+        {/* Cards Expansibles con Jerarquía Superior Anclada */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
@@ -194,14 +194,12 @@ export function TensionGrid() {
                 onBlur={() => setHoveredIndex(null)}
                 onClick={() => handleCardClick(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`tension-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-5 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
+                className={`tension-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-6 sm:p-8 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
                   isDesktopHovered
-                    ? "border-accent-connection/50 bg-card shadow-xl shadow-accent-connection/5 md:-translate-y-1"
+                    ? "border-accent-connection/50 bg-card shadow-2xl shadow-accent-connection/10 md:-translate-y-1"
                     : "border-border/70 bg-card/60 hover:border-border/90"
                 } ${
-                  isMobileActive
-                    ? "border-accent-connection/40 shadow-lg"
-                    : ""
+                  isMobileActive ? "is-active border-accent-connection/40 shadow-lg" : ""
                 }`}
               >
                 {/* Resplandor ambiental de fondo */}
@@ -212,37 +210,42 @@ export function TensionGrid() {
                   }`}
                 />
 
-                {/* Encabezado Superior: Ícono Conceptual + Categoría (Izquierda) vs Índice Numérico (Derecha) */}
-                <div className="relative z-10 flex items-center justify-between gap-3 border-b border-border/40 pb-3">
-                  <div className="inline-flex items-center gap-2.5">
+                {/* BLOQUE SUPERIOR ANCLADO (Sin desplazamiento hacia abajo): Encabezado + Titular + Bajada */}
+                <div className="relative z-10 flex flex-col gap-4">
+                  {/* Encabezado: Ícono con alto peso visual + Categoría vs Badge Numérico */}
+                  <div className="flex items-center justify-between gap-3 border-b border-border/40 pb-4">
+                    <div className="inline-flex items-center gap-3">
+                      <span
+                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
+                          isDesktopHovered || isMobileActive
+                            ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
+                            : "border-border/70 bg-secondary/80 text-foreground"
+                        }`}
+                      >
+                        <Icon className="size-5.5" />
+                      </span>
+                      <span className="text-sm font-bold tracking-widest uppercase text-foreground">
+                        {card.category}
+                      </span>
+                    </div>
+
                     <span
-                      className={`flex size-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-500 ease-in-out ${
+                      className={`inline-grid place-items-center h-7.5 w-11 shrink-0 rounded-full border text-xs font-mono font-bold transition-all duration-500 ease-in-out ${
                         isDesktopHovered || isMobileActive
-                          ? "border-accent-connection/50 bg-accent-connection/20 text-accent-connection scale-105"
-                          : "border-border/60 bg-secondary/80 text-muted-foreground"
+                          ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-6 scale-110 shadow-xs"
+                          : "border-border/60 text-muted-foreground/80"
                       }`}
                     >
-                      <Icon className="size-4.5" />
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                      {card.category}
+                      {card.number}
                     </span>
                   </div>
 
-                  <span
-                    className={`inline-grid place-items-center size-7.5 shrink-0 rounded-full border text-[11px] font-mono font-bold transition-all duration-500 ease-in-out ${
-                      isDesktopHovered || isMobileActive
-                        ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-8 scale-110 shadow-xs"
-                        : "border-border/60 text-muted-foreground/70"
-                    }`}
-                  >
-                    {card.number}
-                  </span>
-                </div>
+                  {/* Titular Principal en la parte superior */}
+                  <h3 className="text-2xl sm:text-3xl md:text-2xl lg:text-[28px] font-bold text-foreground leading-[1.18] tracking-tight pt-1">
+                    {card.title}
+                  </h3>
 
-                {/* Cuerpo de la Card: Micro-línea + Titular + Texto Explicativo + CTA y Esfera */}
-                <div className="relative z-10 mt-auto pt-6 flex flex-col justify-end gap-3.5">
-                  {/* Micro-línea reactiva */}
+                  {/* Micro-línea reactiva debajo del titular */}
                   <div
                     className={`h-[1.5px] w-full bg-accent-connection/60 origin-left transition-transform duration-500 ease-in-out ${
                       isDesktopHovered || isMobileActive
@@ -251,40 +254,44 @@ export function TensionGrid() {
                     }`}
                   />
 
-                  {/* Titular */}
-                  <h3 className="text-xl sm:text-2xl md:text-[22px] lg:text-[26px] font-bold text-foreground leading-snug tracking-tight">
-                    {card.title}
-                  </h3>
-
-                  {/* Bloque expandible: texto + CTA + Esfera wireframe */}
+                  {/* Bajada Descriptiva */}
                   <div className={`tension-card-reveal ${isMobileActive ? "is-active" : ""}`}>
                     <div className="overflow-hidden">
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1.5 pb-4">
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1">
                         {card.body}
                       </p>
-
-                      {/* CTA y Gráfico Wireframe alineados */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-3 border-t border-border/40">
-                        <Button
-                          asChild
-                          size="default"
-                          className="group/btn relative h-10 px-5 text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
-                        >
-                          <a href="#">
-                            <span>Agenda tu diagnóstico</span>
-                            <ArrowUpRight
-                              aria-hidden="true"
-                              className="ml-1.5 size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                            />
-                          </a>
-                        </Button>
-
-                        {/* Esfera alámbrica geométrica */}
-                        <div className="hidden sm:flex size-16 md:size-20 shrink-0 items-center justify-center text-accent-connection/45">
-                          <SphereWireframe className="size-full" />
-                        </div>
-                      </div>
                     </div>
+                  </div>
+                </div>
+
+                {/* BLOQUE INFERIOR EXPANDIDO: CTA + Pill de Diagnóstico (Izquierda) y Esfera Wireframe (Derecha) */}
+                <div className="relative z-10 mt-6 pt-4 border-t border-border/30 tension-card-bottom-expanded items-center justify-between gap-5">
+                  {/* Columna Izquierda: Botón CTA + Pill de Diagnóstico */}
+                  <div className="flex flex-col items-start gap-3 max-w-sm">
+                    <Button
+                      asChild
+                      size="default"
+                      className="group/btn relative h-11 px-6 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
+                    >
+                      <a href="#">
+                        <span>Agenda tu diagnóstico</span>
+                        <ArrowUpRight
+                          aria-hidden="true"
+                          className="ml-1.5 size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        />
+                      </a>
+                    </Button>
+
+                    {/* Pill de Diagnóstico Sintetizado */}
+                    <div className="rounded-xl border border-border/70 bg-secondary/50 p-2.5 sm:p-3 text-[11px] sm:text-xs text-muted-foreground leading-relaxed shadow-xs">
+                      <span className="text-accent-connection font-bold mr-1.5">→</span>
+                      <strong>Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
+                    </div>
+                  </div>
+
+                  {/* Columna Derecha: Gráfico Alámbrico de Esfera Proporcional */}
+                  <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/50">
+                    <SphereWireframe className="size-full animate-pulse-subtle" />
                   </div>
                 </div>
               </article>

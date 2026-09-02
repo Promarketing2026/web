@@ -275,4 +275,37 @@
       transform: translateY(0);
     }
   }
+
+  /* Área Expandida (Botón, Pill y Esfera) */
+  .tension-card-bottom-expanded {
+    display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tension-card.is-active .tension-card-bottom-expanded {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    .tension-card-bottom-expanded {
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+    }
+
+    .tension-cards-grid[data-hovered="0"] .tension-card[data-index="0"] .tension-card-bottom-expanded,
+    .tension-cards-grid[data-hovered="1"] .tension-card[data-index="1"] .tension-card-bottom-expanded,
+    .tension-cards-grid[data-hovered="2"] .tension-card[data-index="2"] .tension-card-bottom-expanded {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
 }
