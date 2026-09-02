@@ -60,7 +60,7 @@ export function TensionGrid() {
   // Estado para desktop: hover sobre columna (null | 0 | 1 | 2)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Estado para mobile: índice de la card activa (0 por defecto)
+  // Estado para mobile: índice de la card activa (0 por defecto, o -1 si todas colapsadas)
   const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
 
   const cardRefs = useRef<(HTMLElement | null)[]>([]);
@@ -81,7 +81,7 @@ export function TensionGrid() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        if (visible && visible.intersectionRatio > 0.4) {
+        if (visible && visible.intersectionRatio > 0.45) {
           const idx = cardRefs.current.indexOf(visible.target as HTMLElement);
           if (idx !== -1) {
             setActiveMobileIndex(idx);
@@ -90,7 +90,7 @@ export function TensionGrid() {
       },
       {
         rootMargin: "-15% 0px -20% 0px",
-        threshold: [0.4, 0.65, 0.85],
+        threshold: [0.45, 0.7],
       },
     );
 
@@ -164,7 +164,7 @@ export function TensionGrid() {
           </motion.p>
         </div>
 
-        {/* Cards Expansibles con Jerarquía Superior Anclada */}
+        {/* Grid de 2 Estados: Sin desplegar sólo título; desplegado revela contenido completo */}
         <motion.div
           variants={itemVariant}
           initial="hidden"
@@ -194,7 +194,7 @@ export function TensionGrid() {
                 onBlur={() => setHoveredIndex(null)}
                 onClick={() => handleCardClick(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`tension-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-6 sm:p-8 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
+                className={`tension-card group relative flex flex-col justify-start overflow-hidden rounded-2xl border p-6 sm:p-7 backdrop-blur-md cursor-pointer select-none transition-all duration-500 ease-in-out ${
                   isDesktopHovered
                     ? "border-accent-connection/50 bg-card shadow-2xl shadow-accent-connection/10 md:-translate-y-1"
                     : "border-border/70 bg-card/60 hover:border-border/90"
@@ -210,88 +210,79 @@ export function TensionGrid() {
                   }`}
                 />
 
-                {/* BLOQUE SUPERIOR ANCLADO (Sin desplazamiento hacia abajo): Encabezado + Titular + Bajada */}
-                <div className="relative z-10 flex flex-col gap-4">
-                  {/* Encabezado: Ícono con alto peso visual + Categoría vs Badge Numérico */}
-                  <div className="flex items-center justify-between gap-3 border-b border-border/40 pb-4">
-                    <div className="inline-flex items-center gap-3">
-                      <span
-                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
-                          isDesktopHovered || isMobileActive
-                            ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
-                            : "border-border/70 bg-secondary/80 text-foreground"
-                        }`}
-                      >
-                        <Icon className="size-5.5" />
-                      </span>
-                      <span className="text-sm font-bold tracking-widest uppercase text-foreground">
-                        {card.category}
-                      </span>
-                    </div>
-
+                {/* 1. Encabezado Superior (Siempre Visible) */}
+                <div className="relative z-10 flex items-center justify-between gap-3 border-b border-border/40 pb-4">
+                  <div className="inline-flex items-center gap-3">
                     <span
-                      className={`inline-grid place-items-center h-7.5 w-11 shrink-0 rounded-full border text-xs font-mono font-bold transition-all duration-500 ease-in-out ${
+                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ease-in-out ${
                         isDesktopHovered || isMobileActive
-                          ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-6 scale-110 shadow-xs"
-                          : "border-border/60 text-muted-foreground/80"
+                          ? "border-accent-connection/60 bg-accent-connection/20 text-accent-connection shadow-sm shadow-accent-connection/25 scale-105"
+                          : "border-border/70 bg-secondary/80 text-foreground"
                       }`}
                     >
-                      {card.number}
+                      <Icon className="size-5.5" />
+                    </span>
+                    <span className="text-sm font-bold tracking-widest uppercase text-foreground">
+                      {card.category}
                     </span>
                   </div>
 
-                  {/* Titular Principal en la parte superior */}
-                  <h3 className="text-2xl sm:text-3xl md:text-2xl lg:text-[28px] font-bold text-foreground leading-[1.18] tracking-tight pt-1">
-                    {card.title}
-                  </h3>
-
-                  {/* Micro-línea reactiva debajo del titular */}
-                  <div
-                    className={`h-[1.5px] w-full bg-accent-connection/60 origin-left transition-transform duration-500 ease-in-out ${
+                  <span
+                    className={`inline-grid place-items-center h-7.5 w-11 shrink-0 rounded-full border text-xs font-mono font-bold transition-all duration-500 ease-in-out ${
                       isDesktopHovered || isMobileActive
-                        ? "scale-x-100 opacity-100"
-                        : "scale-x-25 opacity-30 md:opacity-40"
+                        ? "border-accent-connection/60 bg-accent-connection/15 text-accent-connection -rotate-6 scale-110 shadow-xs"
+                        : "border-border/60 text-muted-foreground/80"
                     }`}
-                  />
-
-                  {/* Bajada Descriptiva */}
-                  <div className={`tension-card-reveal ${isMobileActive ? "is-active" : ""}`}>
-                    <div className="overflow-hidden">
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pt-1">
-                        {card.body}
-                      </p>
-                    </div>
-                  </div>
+                  >
+                    {card.number}
+                  </span>
                 </div>
 
-                {/* BLOQUE INFERIOR EXPANDIDO: CTA + Pill de Diagnóstico (Izquierda) y Esfera Wireframe (Derecha) */}
-                <div className="relative z-10 mt-6 pt-4 border-t border-border/30 tension-card-bottom-expanded items-center justify-between gap-5">
-                  {/* Columna Izquierda: Botón CTA + Pill de Diagnóstico */}
-                  <div className="flex flex-col items-start gap-3 max-w-sm">
-                    <Button
-                      asChild
-                      size="default"
-                      className="group/btn relative h-11 px-6 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
-                    >
-                      <a href="#">
-                        <span>Agenda tu diagnóstico</span>
-                        <ArrowUpRight
-                          aria-hidden="true"
-                          className="ml-1.5 size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                        />
-                      </a>
-                    </Button>
+                {/* 2. Titular Principal (Siempre Visible en estado colapsado y desplegado) */}
+                <h3 className="relative z-10 text-xl sm:text-2xl lg:text-[26px] font-bold text-foreground leading-[1.2] tracking-tight pt-4">
+                  {card.title}
+                </h3>
 
-                    {/* Pill de Diagnóstico Sintetizado */}
-                    <div className="rounded-xl border border-border/70 bg-secondary/50 p-2.5 sm:p-3 text-[11px] sm:text-xs text-muted-foreground leading-relaxed shadow-xs">
-                      <span className="text-accent-connection font-bold mr-1.5">→</span>
-                      <strong>Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
+                {/* 3. Contenedor Desplegable (Oculto en estado colapsado, revelado con hover/touch) */}
+                <div className={`relative z-10 tension-card-expandable ${isMobileActive ? "is-expanded" : ""}`}>
+                  <div className="overflow-hidden">
+                    {/* Micro-línea divisoria */}
+                    <div className="h-[1.5px] w-full bg-accent-connection/60 my-4 origin-left" />
+
+                    {/* Bajada Descriptiva */}
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed pb-4">
+                      {card.body}
+                    </p>
+
+                    {/* Bloque Inferior: CTA + Pill de Diagnóstico (Izquierda) y Gráfico Alámbrico Calibrado (Derecha) */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-3 border-t border-border/40">
+                      {/* Acciones e Información */}
+                      <div className="flex flex-col items-start gap-3 max-w-sm">
+                        <Button
+                          asChild
+                          size="default"
+                          className="group/btn relative h-11 px-6 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
+                        >
+                          <a href="#">
+                            <span>Agenda tu diagnóstico</span>
+                            <ArrowUpRight
+                              aria-hidden="true"
+                              className="ml-1.5 size-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                            />
+                          </a>
+                        </Button>
+
+                        <div className="rounded-xl border border-border/70 bg-secondary/50 p-2.5 sm:p-3 text-[11px] sm:text-xs text-muted-foreground leading-relaxed shadow-xs">
+                          <span className="text-accent-connection font-bold mr-1.5">→</span>
+                          <strong>Ninguna de las tres es el problema real.</strong> Las tres son el mismo problema visto desde ángulos distintos: partes que no están conectadas.
+                        </div>
+                      </div>
+
+                      {/* Gráfico Alámbrico de Soporte (Esfera calibrada para rellenar armónicamente el espacio) */}
+                      <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/45">
+                        <SphereWireframe className="size-full animate-pulse-subtle" />
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Columna Derecha: Gráfico Alámbrico de Esfera Proporcional */}
-                  <div className="hidden sm:flex size-24 md:size-28 lg:size-32 shrink-0 items-center justify-center text-accent-connection/50">
-                    <SphereWireframe className="size-full animate-pulse-subtle" />
                   </div>
                 </div>
               </article>

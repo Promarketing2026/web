@@ -209,103 +209,55 @@
     color: var(--foreground);
   }
 
-  /* Tension Grid — Animación Fluida Ease In/Out para Desktop y Mobile */
+  /* Tension Grid — Sistema de 2 Estados (Colapsado solo Título / Desplegado Completo) */
   .tension-cards-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.875rem;
+    gap: 1rem;
+    align-items: start;
   }
 
   @media (min-width: 768px) {
     .tension-cards-grid {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1.25rem;
-      min-height: 520px;
+      align-items: start;
       transition: grid-template-columns 650ms cubic-bezier(0.4, 0, 0.2, 1);
       will-change: grid-template-columns;
     }
 
     .tension-cards-grid[data-hovered="0"] {
-      grid-template-columns: 2.15fr 0.72fr 0.72fr;
+      grid-template-columns: 2.25fr 0.72fr 0.72fr;
     }
     .tension-cards-grid[data-hovered="1"] {
-      grid-template-columns: 0.72fr 2.15fr 0.72fr;
+      grid-template-columns: 0.72fr 2.25fr 0.72fr;
     }
     .tension-cards-grid[data-hovered="2"] {
-      grid-template-columns: 0.72fr 0.72fr 2.15fr;
+      grid-template-columns: 0.72fr 0.72fr 2.25fr;
     }
   }
 
-  .tension-card-reveal {
+  /* Contenedor Expandible (En estado colapsado sólo se muestra título; al expandirse revela párrafo, CTA, pill y esfera) */
+  .tension-card-expandable {
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
-    transform: translateY(12px);
     transition:
-      grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
-      transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      grid-template-rows 550ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 450ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .tension-card-reveal.is-active {
+  .tension-card-expandable.is-expanded {
     grid-template-rows: 1fr;
     opacity: 1;
-    transform: translateY(0);
   }
 
   @media (min-width: 768px) {
-    .tension-card-reveal {
+    .tension-cards-grid[data-hovered="0"] .tension-card[data-index="0"] .tension-card-expandable,
+    .tension-cards-grid[data-hovered="1"] .tension-card[data-index="1"] .tension-card-expandable,
+    .tension-cards-grid[data-hovered="2"] .tension-card[data-index="2"] .tension-card-expandable {
       grid-template-rows: 1fr;
-      opacity: 0.85;
-      transform: translateY(0);
-      transition:
-        opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
-        transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .tension-cards-grid[data-hovered] .tension-card-reveal {
-      opacity: 0.18;
-      transform: translateY(8px);
-    }
-
-    .tension-cards-grid[data-hovered="0"] .tension-card[data-index="0"] .tension-card-reveal,
-    .tension-cards-grid[data-hovered="1"] .tension-card[data-index="1"] .tension-card-reveal,
-    .tension-cards-grid[data-hovered="2"] .tension-card[data-index="2"] .tension-card-reveal {
       opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Área Expandida (Botón, Pill y Esfera) */
-  .tension-card-bottom-expanded {
-    display: none;
-    opacity: 0;
-    transform: translateY(8px);
-    transition:
-      opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
-      transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .tension-card.is-active .tension-card-bottom-expanded {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (min-width: 768px) {
-    .tension-card-bottom-expanded {
-      display: flex;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-    }
-
-    .tension-cards-grid[data-hovered="0"] .tension-card[data-index="0"] .tension-card-bottom-expanded,
-    .tension-cards-grid[data-hovered="1"] .tension-card[data-index="1"] .tension-card-bottom-expanded,
-    .tension-cards-grid[data-hovered="2"] .tension-card[data-index="2"] .tension-card-bottom-expanded {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
     }
   }
 }
